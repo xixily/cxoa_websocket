@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>审核</title>
+    <!-- Bootstrap Core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .editable-click, a.editable-click, a.editable-click:hover {
+            text-decoration: none;
+            border-bottom: dashed 0px #0088cc;
+        }
+    </style>
+</head>
+<body>
+<div class="col-xs-4 col-md-3">
+    <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal2">
+        dialog2
+    </button>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-md-4"></div>
+        <div class="col-md-6">
+            <h2>财务出票信息</h2>
+        </div>
+    </div>
+    <br/>
+    <!--<div class="row">-->
+        <!--<div class="col-xs-5 col-md-4">报销人：<span app-data="username">邓雪锋</span></div>-->
+        <!--<div class="col-xs-7 div-md-6">审核时间：<span app-data="app_now_date">2016-12-27</span></div>-->
+    <!--</div>-->
+
+    <div class="row">
+        <div class="col-xs-12 col-md-10">
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th rowspan="2">序号</th>
+                        <th colspan="3" style="text-align: center">扣除借款情况</th>
+                    </tr>
+                    <tr>
+                        <th>项目</th>
+                        <th>金额/元</th>
+                        <th>说明</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr class="add" align="center">
+                        <td colspan="4">
+                            <a href="javascript:void(0)" onclick="add($(this))">
+                                <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
+                            </a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row" colspan="2">合计：</th>
+                        <th scope="row"  colspan="2"><span app-data="sh_total">0.00</span> 元</th></th>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12 col-md-10">
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th rowspan="2">序号</th>
+                        <th colspan="3" style="text-align: center">退票总额</th>
+                    </tr>
+                    <tr>
+                        <th>项目</th>
+                        <th>金额/元</th>
+                        <th>说明</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr class="add" align="center">
+                        <td colspan="4">
+                            <a href="javascript:void(0)" onclick="add($(this))">
+                                <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
+                            </a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row" colspan="2">合计：</th>
+                        <th scope="row"  colspan="2"><span app-data="sh_total">0.00</span> 元</th></th>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div id="myModal2" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLabel" style="display: none;">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                <h4 class="modal-title" id="myLabel" style="text-align: center">财务出票信息</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-xs-12 col-md-12">
+                        <div class="table-responsive">
+                            <table class="table table-bordered">
+                                <thead>
+                                <tr>
+                                    <th rowspan="2">序号</th>
+                                    <th colspan="3">无效票情况</th>
+                                </tr>
+                                <tr>
+                                    <th>报销项目</th>
+                                    <th>金额/元</th>
+                                    <th>说明</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr class="add" align="center">
+                                    <td colspan="4">
+                                        <a href="javascript:void(0)" onclick="add($(this))">
+                                            <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
+                                        </a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope="row" colspan="2">合计（元）：</th>
+                                    <th scope="row" colspan="2"><span app-data="sh_total">0.00</span></th></th>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-primary">保存</button>
+            </div>
+
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div>
+    <!-- jQuery -->
+    <script src="vendor/jquery/jquery.min.js"></script>
+
+    <!--Bootstrap Core JavaScript-->
+    <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+
+    <!-- Bootstrap editable-->
+    <link rel="stylesheet" href="vendor/bootstrap-editable/css/bootstrap-editable.css"/>
+    <script src="vendor/bootstrap-editable/js/bootstrap-editable.min.js"></script>
+    <!--<script src="vendor/bootstrap-editable/bootstrap-editable.js"></script>-->
+<script type="text/javascript">
+    function add(e){
+        var dom = e ? e.closest('tr'):$('#add_tr');
+        var lastRow = Number($(dom.prev().find('span')[0]).text());
+        var row = $('<tr class="item">' +
+                '<th scope="row"><span>' + (lastRow+1) + '</span><a href="javascript:void(0)" onclick="remove($(this))"  style="margin-left: 12px;"><span class="glyphicon glyphicon-minus-sign" aria-hidden="true"></span></a></th>' +
+                '<td><a href="javascript:void (0)" data-type="text" app-data="sh_name" data-pk="1" data-title="报销项目" class="e-text"></a></td>' +
+                '<td><a href="javascript:void (0)" data-type="text" app-data="sh_money" data-pk="1" data-title="金额" data-name="fp_money"  class="e-money"></a></td>' +
+                '<td><a href="javascript:void (0)" data-type="textarea" app-data="sh_remarks" data-name="sh_remarks" data-title="审核说明"  class="e-text"></a></td>' +
+                '</tr>');
+        dom.before(row);/** after before append prepend  appendTo */
+        initEdit(dom.prev());
+    }
+    function remove(e){
+        var row = e.closest('tr');
+        row.remove();
+        var moneylist = $('[app-data="sh_money"]');
+        var total = 0;
+        var temp = 0;
+        $.each(moneylist,function(i,obj){
+            try{
+                temp = Number($(obj).html()) != NaN ? Number($(obj).html()): 0;
+            }catch(e){
+                temp = 0;
+            }
+            total += temp
+        })
+        $('[app-data="sh_total"]').html(total);
+    }
+    function initEdit(dom){
+        dom ? dom : $(this);
+        dom.find('a.e-text').editable({
+//            mode: "inline",              //编辑框的模式：支持popup和inline两种模式，默认是popup
+            validate: function (value) { //字段验证
+                if (!$.trim(value)) {
+                    return '不能为空';
+                }
+            }
+        })
+        dom.find('a.e-money').editable({
+//            mode: "inline",              //编辑框的模式：支持popup和inline两种模式，默认是popup
+            validate: function (value) { //字段验证
+                if(!/^-?([1-9]\d*\.\d{0,2}|[1-9]\d*|0\.[1-9]\d|0?\.0[1-9]|0)$/.test(value)){
+                    return '请输入正确的金额（两位小数点内）。';
+                }
+            }
+        })
+        dom.find('a.e-money').on('save',function(e,params){
+//            console.log("e:%o,params:%o",e,params);
+//            var nowTotal = Number($('[app-data="sh_total"]')[0].html());
+            var moneylist = $('[app-data="sh_money"]');
+            var total = Number(params.newValue)!=NaN ? Number(params.newValue):0;
+            var click_a = this;
+            var temp = 0;
+            $.each(moneylist,function(i,obj){
+                if(obj !== click_a){
+                    try{
+                        temp = Number($(obj).html()) != NaN ? Number($(obj).html()): 0;
+                    }catch(e){
+                        temp = 0;
+                    }
+                    total += temp;
+                }
+            })
+            $('[app-data="sh_total"]').html(total);
+        })
+    }
+//    $(document).ready(function(){
+//        $.fn.editable.defaults.emptytext = '空';
+//        $('a.editable').editable({
+////            mode: "inline",              //编辑框的模式：支持popup和inline两种模式，默认是popup
+//            clear: true,
+//            validate: function (value) { //字段验证
+//                if (!$.trim(value)) {
+//                    return '不能为空';
+//                }
+//            }
+//        })
+//    })
+
+   function getList(){
+       var table = $('table.table-bordered')[0];
+       var trs = $(table).find('tr.item');
+       var trList = [];
+       var trInfo = {};
+       var temp = undefined;
+       var name = '';
+       var value = '';
+       $.each(trs,function(i,obj){
+           temp = $(obj).find('[app-data]');
+           $.each(temp,function(j,oo){
+               name = $(oo).attr('app-data');
+               value = $(oo).html();
+               if(name){
+                   trInfo[name] = value;
+               }
+           })
+           trList.push($.extend({},trInfo));
+       })
+       alert(trList);
+   }
+
+
+
+
+</script>
+</body>
+</html>

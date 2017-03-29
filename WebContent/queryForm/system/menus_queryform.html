@@ -1,0 +1,26 @@
+<script type="text/javascript">
+$(document).ready(function() {
+	$('#menus_query_form').keydown(function(e){
+		if(e.keyCode==13){
+		   $('#jiagou_serach').trigger('click');
+		}
+		});
+})
+</script>
+<form id="menus_query_form" method="post" enctype="multipart/form-data">
+	<table>
+		<tr>
+			<td>菜单名称:</td>
+			<td>
+				<input name="name" class="easyui-textbox" style="width:100px;" />
+			</td>
+			<td>
+				<input id="jiagou_serach" class="easyui-linkbutton do_action" appaction="system.menus.queryMenus"  type="button" value="查找"
+					   style="width:46px;height:26px;" />
+			</td>
+			<td>
+				<input class="easyui-linkbutton"  type="button" value="重置" onclick="clearForm($(this))" style="width:46px;height:26px;" />
+			</td>
+		</tr>
+	</table>
+</form>

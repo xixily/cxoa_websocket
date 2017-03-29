@@ -1,0 +1,107 @@
+<div id="jiagou" title="架构管理" style="padding: 10px;" data-options="iconCls:'icon-man',closable:true">
+    <div class="easyui-panel" id="jiagou_form_panel" title="架构查询" style="width:98%;padding: 10px;margin-bottom: 10px;"
+            data-options="margin:'10px 0px',iconCls:'icon-search',collapsible:true,href:'queryForm/employee/jiagou_queryform.html',tools:[
+				{iconCls:'icon-reload',handler:function(){$('#jiagou_form_panel').panel('open').panel('refresh')}}]">
+
+    </div>
+    <table id="treegrid_jiagou" class="easyui-treegrid" title="架构表" style="width:98%;height:400px;"
+           data-options="
+				iconCls: 'icon-ok',
+				rownumbers: true,
+				animate: true,
+				collapsible: true,
+				fitColumns: true,
+				url: 'employee/getAllJiagou.action',
+				method: 'get',
+				idField: 'id',
+				treeField: 'fourthLevel',
+				pagination: true,
+				pageSize: 15,
+                pageList: [10,15,30],
+                onClickRow:function(){
+                if(jiagouEdit){
+                confirmDialog.createDialog('您确定要更新吗？',function(confirmId){
+							confirmDialog.destoryDialog(confirmId);
+							employee.jiagou.save()
+							},function(){employee.jiagou.cancel();});
+                }
+                },
+                onDblClickRow : employee.jiagou.edit,
+                toolbar: [{
+                    iconCls: 'icon-add',
+                    text:'新增',
+                    handler: function(){employee.jiagou.add()}
+                },'-',{
+                    iconCls: 'icon-edit',
+                    text:'编辑',
+                    handler: function(){employee.jiagou.edit()}
+                },'-',{
+                    iconCls: 'icon-remove',
+                    text:'删除',
+                    handler: function(){
+                    confirmDialog.createDialog('您确定要删除吗？',function(confirmId){
+							confirmDialog.destoryDialog(confirmId);
+							employee.jiagou.remove()});
+                    }
+                },'-',{
+                    iconCls: 'icon-excel',
+                    text:'导出架构表',
+                    handler: function(){employee.jiagou.exportExcel();}
+                },'-',{
+                    iconCls: 'icon-excel',
+                    text:'导出组织结构表',
+                    handler: function(){employee.jiagou.exportExcel(true);}
+                },'-',{
+                    iconCls: 'icon-collapse',
+                    text:'全部折叠',
+                    handler: function(){$('#treegrid_jiagou').treegrid('collapseAll');}
+                }],
+				loadFilter:function(data,parentId){
+				if(data.rows){
+				$.each(data.rows,function(n,obj){
+				    session.jiagou.push(obj.fourthLevel+'_'+obj.id + '_'+ obj.level);
+				    if(obj.level == 4){
+				        obj.iconCls = 'icon-man';
+				    }else{
+				    obj.iconCls = 'icon-organisation';
+				    }
+				})
+				}else if(data.level){
+				    if(data.level == 4){
+				        data.iconCls = 'icon-man';
+				    }else{
+				    data.iconCls = 'icon-organisation';
+				    }
+				}
+				return data;
+				}
+			">
+        <thead>
+        <tr>
+            <th data-options="field:'id',width:60">id</th>
+            <th data-options="field:'fourthLevel',width:140,iconCls:'icon-man',editor:{type:'textbox',required:true}">四级</th>
+            <th data-options="field:'cellCore',width:80,editor:{type:'textbox', required:true}">细胞核</th>
+            <th data-options="field:'cellCoreEmail',width:120,editor:{type:'validatebox',options:{validType:'email', required:true}}">细胞核邮箱</th>
+            <th data-options="field:'guidance',width:80,editor:{type:'textbox', required:true}">指导</th>
+            <th data-options="field:'guidanceEmail',width:120,editor:{type:'validatebox',options:{validType:'email', required:true}}">指导邮箱</th>
+            <th data-options="field:'sortCode',width:80,editor:{type:'textbox', required:true}">排序代码</th>
+            <th data-options="field:'taxStructure',width:80,editor:{type:'textbox', required:true}">报税架构</th>
+            <th data-options="field:'level',width:40,align:'right'">级别</th>
+            <th data-options="field:'total',width:60">总人数</th>
+            <th data-options="field:'onJob',width:60,styler:function(value,row,index){
+        if(value==0){
+        return ;
+        }
+        if(value<50){
+        return 'background-color:#3af33a;';
+        }
+        if(value<100){
+        return 'background-color:yellow;';
+        }
+        return 'background-color:red;';
+
+        }">在职人数</th>
+        </tr>
+        </thead>
+    </table>
+</div>

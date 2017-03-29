@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding">
+    <file url="file://$PROJECT_DIR$/app/data/data_ht.json" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/views/hetong/cells.html" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/views/hetong/contracts.html" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/views/hetong/users.html" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/error/app_nosession.jsp" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/jslib/jquery-barcode.js" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/jslib/jquery-barcode.min.js" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/tabs/hetong/datagrid.json" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/test/treegrid_data0.json" charset="UTF-8" />
+  </component>
+</project>

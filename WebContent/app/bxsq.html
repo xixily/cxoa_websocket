@@ -1,0 +1,928 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>超星OA财务报销申请单</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+<div class="container">
+    <div class="row">
+        <div class="col-xs-6 col-md-3">
+            <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal">
+                Launch demo modal
+            </button>
+        </div>
+        <div class="col-xs-4 col-md-3">
+            <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal2">
+                dialog2
+            </button>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12 col-md-10">
+            <h3 class="text-center">报销申请单</h3>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-4 col-md-3">报销申请人：<span>邓雪锋</span></div>
+        <div class="col-xs-4 col-md-3">执行人：<span>邓雪锋</span></div>
+        <div class="col-xs-4 col-md-3">职位：<span>研发</span></div>
+    </div>
+    <div class="row">
+        <div class="col-xs-6 div-md-4">填报时间：<span>2016-12-27</span></div>
+        <div class="col-xs-6 div-md-4">批次号：<span>0001</span></div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12 col-md-10">
+            <div class="table-responsive">
+                <table class="table table-bordered">
+                    <thead>
+                    <tr>
+                        <th rowspan="2">序号</th>
+                        <th colspan="4">报销人填表情况</th>
+                        <th colspan="3">财务审核情况</th>
+                    </tr>
+                    <tr>
+                        <th>报销项目</th>
+                        <th>票据张数</th>
+                        <th>票据金额/元</th>
+                        <th>备注</th>
+                        <th>票据张数</th>
+                        <th>核报金额/元</th>
+                        <th>备注</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <th scope="row"><span>1</span><a href="javascript:void(0)" onclick="remove($(this))" style="margin-left: 12px;"><span class="glyphicon glyphicon-minus-sign" aria-hidden="true"></span></a></th>
+                        <td>交通费用</td>
+                        <td>3</td>
+                        <td>120</td>
+                        <td>打车费用</td>
+                        <!-- 财务允报金额 -->
+                        <td>3</td>
+                        <td>120</td>
+                        <td>允许报销</td>
+                    </tr>
+                    <tr>
+                        <th scope="row"><span>2</span><a href="javascript:void(0)" onclick="remove($(this))"  style="margin-left: 12px;"><span class="glyphicon glyphicon-minus-sign" aria-hidden="true"></span></a></th>
+                        <td>餐费</td>
+                        <td>3</td>
+                        <td>120</td>
+                        <td>餐费</td>
+                        <!-- 财务允报金额 -->
+                        <td>3</td>
+                        <td>120</td>
+                        <td>允许报销</td>
+                    </tr>
+                    <tr id="add_tr" align="center">
+                        <td colspan="8">
+                            <a href="javascript:void(0)" onclick="add($(this))">
+                                <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
+                            </a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row" colspan="2">合计：（大写）</th>
+                        <td>陆</td>
+                        <td>贰佰肆拾圆整</td>
+                        <td>打车费，餐费</td>
+                        <!-- 财务允报金额 -->
+                        <td>陆</td>
+                        <td>贰佰肆拾圆整</td>
+                        <td>打车费，餐费</td>
+                    </tr>
+                    <tr>
+                        <th scope="row" colspan="2">公司总（副）经理</th>
+                        <td colspan="3">史昊</td>
+                        <!-- 财务允报金额 -->
+                        <td>审核人</td>
+                        <td colspan="2">李晓娟</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12 col-md-10">
+            <div class="table-responsive">
+                <table class="table table-bordered">
+                    <thead>
+                    <tr>
+                        <th rowspan="2" width="48">序号</th>
+                        <th colspan="6">报销人填表情况</th>
+                    </tr>
+                    <tr>
+                        <th width="120px;">报销项目</th>
+                        <th width="48px;">票据张数</th>
+                        <th width="80px;">票据金额</th>
+                        <th width="80px;">邮寄时间</th>
+                        <th width="80px;">还借款情况</th>
+<!--                        <th width="120px;">报销项目</th>
+                        <th width="48px;">票据张数</th>
+                        <th width="100px;">票据金额</th>-->
+                        <th>备注</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <th scope="row"><span>1</span><a href="javascript:void(0)" onclick="remove()" style="margin-left: 12px;"><span class="glyphicon glyphicon-minus-sign" aria-hidden="true"></span></a></th>
+                        <td>交通费用asfasfasfasf是打发打阿斯蒂as啊阿斯蒂发生的发斯蒂芬微风</td>
+                        <td>3</td>
+                        <td>120</td>
+                        <td></td>
+                        <td></td>
+                        <td>打车费用</td>
+                    </tr>
+                    <tr>
+                        <th scope="row"><span>2</span><a href="javascript:void(0)" onclick="remove($(this))"  style="margin-left: 12px;"><span class="glyphicon glyphicon-minus-sign" aria-hidden="true"></span></a></th>
+                        <td>餐费</td>
+                        <td>3</td>
+                        <td>120</td>
+                        <td></td>
+                        <td></td>
+                        <td>餐费</td>
+                    </tr>
+                    <tr id="add_tr2" align="center">
+                        <td colspan="7">
+                            <a href="javascript:void(0)" onclick="add($(this))">
+                                <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
+                            </a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row" colspan="2">合计：（大写）</th>
+                        <td>陆</td>
+                        <td>贰佰肆拾圆整</td>
+                        <td></td>
+                        <td></td>
+                        <td>打车费，餐费</td>
+                    </tr>
+                    <tr>
+                        <th scope="row" colspan="2">公司总（副）经理</th>
+                        <td colspan="5">史昊</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <!-- 对比-->
+    <div class="row">
+        <div class="col-xs-12 col-md-10">
+            <form class="form-horizontal" role="form">
+                <fieldset>
+                    <legend>配置数据源</legend>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" for="ds_host">主机名</label>
+                        <div class="col-sm-4">
+                            <input class="form-control" id="ds_host" type="text" placeholder="192.168.1.161"/>
+                        </div>
+                        <label class="col-sm-2 control-label" for="ds_name">数据库名</label>
+                        <div class="col-sm-4">
+                            <input class="form-control" id="ds_name" type="text" placeholder="msh"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" for="ds_username">用户名</label>
+                        <div class="col-sm-4">
+                            <input class="form-control" id="ds_username" type="text" placeholder="root"/>
+                        </div>
+                        <label class="col-sm-2 control-label" for="ds_password">密码</label>
+                        <div class="col-sm-4">
+                            <input class="form-control" id="ds_password" type="password" placeholder="123456"/>
+                        </div>
+                    </div>
+                </fieldset>
+                <fieldset>
+                    <legend>选择相关表</legend>
+                    <div class="form-group">
+                        <label for="disabledSelect"  class="col-sm-2 control-label">表名</label>
+                        <div class="col-sm-10">
+                            <select id="disabledSelect" class="form-control">
+                                <option>禁止选择</option>
+                                <option>禁止选择</option>
+                            </select>
+                        </div>
+                    </div>
+                </fieldset>
+
+                <fieldset>
+                    <legend>字段名</legend>
+                    <div class="form-group">
+                        <label for="disabledSelect"  class="col-sm-2 control-label">表名</label>
+                        <div class="col-sm-10">
+                            <select id="disabledSelect" class="form-control">
+                                <option>禁止选择</option>
+                                <option>禁止选择</option>
+                            </select>
+                        </div>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+    <!-- 修改-->
+    <div class="row">
+        <div class="col-xs-12 col-md-10">
+            <form class="form-horizontal" role="form">
+                <fieldset>
+                    <legend>报销信息</legend>
+                    <div class="form-group">
+                        <label class="col-xs-3 col-sm-2 control-label" for="id">批次号:</label>
+                        <div class="col-xs-8 col-sm-4">
+                            <input type="number" class="form-control input-sm" name="id" placeholder="批次号..." disabled>
+                        </div>
+                        <label class="col-xs-3 col-sm-2 control-label" for="username">报销人:</label>
+                        <div class="col-xs-8 col-sm-4">
+                            <input type="text" class="form-control input-sm" id="username" name="username" placeholder="报销人...">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-xs-3 col-sm-2 control-label">邮寄时间:</label>
+                        <div class="col-xs-8 col-sm-4">
+                            <input type="date" class="form-control input-sm" name="jTime" placeholder="邮寄时间...">
+                        </div>
+                        <label class="col-xs-3 col-sm-2 control-label" for="email">报销人邮箱:</label>
+                        <div class="col-xs-8 col-sm-4">
+                            <input type="email" class="form-control input-sm" id="email" name="email" placeholder="报销人...">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-xs-3 col-sm-2 control-label" for="number">报销张数:</label>
+                        <div class="col-xs-8 col-sm-4">
+                            <input type="number" max="30" min="0" id="number" class="form-control input-sm" name="number" placeholder="报销张数...">
+                        </div>
+                        <label class="col-xs-3 col-sm-2 control-label" for="money">报销金额:</label>
+                        <div class="col-xs-8 col-sm-4">
+                            <input type="number"  class="form-control input-sm" id="money" name="money" placeholder="报销金额...">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-xs-3 col-sm-2  control-label">还借款金额:</label>
+                        <div class="col-xs-8 col-sm-4">
+                            <input type="number" class="form-control input-sm" name="huankuan" placeholder="还款金额...">
+                        </div>
+                        <label class="col-xs-3 col-sm-2  control-label" for="bx_bank2">银行:</label>
+                        <div class="col-xs-7 col-sm-4">
+                            <select name="bank" id="bx_bank2" class="form-control input-sm">
+                                <option value="jtyh">交通银行</option>
+                                <option value="gs">工商银行</option>
+                                <option value="gd">光大银行</option>
+                                <option value="js">建设银行</option>
+                                <option value="zs">招商银行</option>
+                                <option value="nh">农业银行</option>
+                            </select>
+                            <!--<input type="text" class="form-control input-sm" placeholder="银行...">-->
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-xs-3 col-sm-2 control-label">卡号:</label>
+                        <div class="col-xs-8 col-sm-4">
+                            <input type="text" class="form-control input-sm" name="account" placeholder="卡号...">
+                        </div>
+                        <label class="col-xs-3 col-sm-2 control-label" for="explain">说明:</label>
+                        <div class="col-xs-8 col-sm-4">
+                            <textarea name="explain" id="explain" cols="30" rows="3" class="form-control"></textarea>
+                            <!--<input type="text" class="form-control input-sm" name="account" placeholder="说明...">-->
+                        </div>
+                    </div>
+                </fieldset>
+
+                <fieldset>
+                    <legend>批准人信息</legend>
+                    <div class="form-group">
+                        <label class="col-xs-3 col-sm-2 control-label" for="approver">批准人:</label>
+                        <div class="col-xs-8 col-sm-4">
+                            <input type="text" class="form-control input-sm" id="approver" name="approver" placeholder="批准人...">
+                        </div>
+                        <label class="col-xs-4 col-sm-3 control-label" for="aproEmail">批准人邮箱:</label>
+                        <div class="col-xs-8 col-sm-4">
+                            <input type="email" class="form-control input-sm" id="aproEmail" name="aproEmail" placeholder="批准人邮箱...">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-xs-3 col-sm-2 control-label" for="approTime">批准时间:</label>
+                        <div class="col-xs-8 col-sm-4">
+                            <input type="date" class="form-control input-sm" id="approTime" placeholder="批准时间...">
+                        </div>
+                    </div>
+                </fieldset>
+
+                <fieldset>
+                    <legend>财务信息</legend>
+                    <div class="form-group">
+                        <label class="col-xs-3 col-sm-2 control-label" for="receiveTime">收票时间:</label>
+                        <div class="col-xs-8 col-sm-4">
+                            <input type="date" class="form-control input-sm" id="receiveTime" name="" placeholder="收票时间...">
+                        </div>
+                        <label class="col-xs-3 col-sm-2 control-label" for="bxTime">报销时间:</label>
+                        <div class="col-xs-8 col-sm-4">
+                            <input type="date" class="form-control input-sm" id="bxTime" placeholder="报销时间...">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-xs-3 col-sm-2 control-label" for="baoxMoney">报销金额:</label>
+                        <div class="col-xs-8 col-sm-4">
+                            <input type="text" class="form-control input-sm" id="baoxMoney" name="baoxMoney" placeholder="报销情况...">
+                        </div>
+                        <label class="col-xs-3 col-sm-2 control-label" for="tuipiao"><a>退票金额:</a></label>
+                        <div class="col-xs-8 col-sm-4">
+                            <input type="number" class="form-control input-sm" id="tuipiao" name="tuipiao" placeholder="退票金额...">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-xs-3 col-sm-2 control-label" for="baoxMoney"><a>扣除借款金额:</a></label>
+                        <div class="col-xs-8 col-sm-4">
+                            <input type="text" class="form-control input-sm" id="bxkk" name="bxkk" placeholder="扣款金额...">
+                        </div>
+                        <label class="col-xs-3 col-sm-2 control-label" for="caiwuRemarks">财务备注:</label>
+                        <div class="col-xs-8 col-sm-4">
+                            <textarea name="caiwuRemarks" id="caiwuRemarks" cols="30" rows="3" class="form-control" placeholder="财务备注..."></textarea>
+                        </div>
+                    </div>
+                </fieldset>
+                <fieldset>
+                    <legend>出票信息</legend>
+                    <div class="row">
+                        <div class="col-xs-12 col-md-10">
+                            <div class="table-responsive">
+                                <table class="table table-bordered">
+                                    <thead>
+                                    <tr>
+                                        <th rowspan="2">序号</th>
+                                        <th colspan="3">无效票情况</th>
+                                    </tr>
+                                    <tr>
+                                        <th>报销项目</th>
+                                        <th>发票金额/元</th>
+                                        <th>财务说明</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr class="add" align="center">
+                                        <td colspan="4">
+                                            <a href="javascript:void(0)" onclick="add($(this))">
+                                                <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row" colspan="2">合计：</th>
+                                        <th scope="row"><span app-data="sh_total">0.00</span></th></th>
+                                        <th scope="row">元</th>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+                <div class="form-group">
+                    <div class="col-xs-2 col-lg-3"></div>
+                    <div class="col-xs-6 col-lg-4">
+                        <button onclick="caiwu.baoxiao.showInfo()" class="btn btn-default pull-left" type="button">确认修改</button>
+                    </div>
+                    <div class="col-xs-4 col-lg-2">
+                        <button onclick="caiwu.baoxiao.showInfo()" class="btn btn-default pull-left" type="button">返回</button>
+                    </div>
+                </div>
+                <div class="row">
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- 审核信息 -->
+    <!--<center>-->
+        <!--<br/>-->
+        <!--<h4>财务审核信息</h4>-->
+    <!--</center>-->
+    <div class="row">
+        <div class="col-md-4"></div>
+        <div class="col-md-6">
+            <h2>财务审核信息</h2>
+        </div>
+    </div>
+    <br/>
+    <div class="row">
+        <div class="col-xs-5 col-md-4">报销人：<span app-data="username">邓雪锋</span></div>
+        <div class="col-xs-7 div-md-6">审核时间：<span app-data="app_now_date">2016-12-27</span></div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12 col-md-10">
+            <div class="table-responsive">
+                <table class="table table-bordered">
+                    <thead>
+                    <tr>
+                        <th rowspan="2">序号</th>
+                        <th colspan="3">无效票情况</th>
+                    </tr>
+                    <tr>
+                        <th>报销项目</th>
+                        <th>发票金额/元</th>
+                        <th>财务说明</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <th scope="row"><span>1</span><a href="javascript:void(0)" onclick="remove($(this))" style="margin-left: 12px;"><span class="glyphicon glyphicon-minus-sign" aria-hidden="true"></span></a></th>
+                        <td>加油费</td>
+                        <td>1000</td>
+                        <td>1000元加油费，个人抬头的发票不给予报销</td>
+                    </tr>
+                    <tr>
+                        <th scope="row"><span>2</span><a href="javascript:void(0)" onclick="remove($(this))"  style="margin-left: 12px;"><span class="glyphicon glyphicon-minus-sign" aria-hidden="true"></span></a></th>
+                        <td>礼盒、包</td>
+                        <td>40</td>
+                        <td>3857元礼盒、包，实际发票金额为3817元，您多算了40元</td>
+                    </tr>
+                    <tr>
+                        <th scope="row"><span>2</span><a href="javascript:void(0)" onclick="remove($(this))"  style="margin-left: 12px;"><span class="glyphicon glyphicon-minus-sign" aria-hidden="true"></span></a></th>
+                        <td>标书费</td>
+                        <td>500</td>
+                        <td>500元标书费，需要换开公司抬头的发票后，给予报销</td>
+                    </tr>
+                    <tr>
+                        <th scope="row"><span>2</span><a href="javascript:void(0)" onclick="remove($(this))"  style="margin-left: 12px;"><span class="glyphicon glyphicon-minus-sign" aria-hidden="true"></span></a></th>
+                        <td>标书费</td>
+                        <td>500 </td>
+                        <td>500元标书费，需要换开公司抬头的发票后，给予报销</td>
+                    </tr>
+                    <tr>
+                        <th scope="row"><span>2</span><a href="javascript:void(0)" onclick="remove($(this))"  style="margin-left: 12px;"><span class="glyphicon glyphicon-minus-sign" aria-hidden="true"></span></a></th>
+                        <td><a id="fp_name">无</a></td>
+                        <td><a id="fp_money">0.00</a> </td>
+                        <td>
+                            <a id="fp_comments" class="myeditable editable editable-pre-wrapped editable-click editable-empty" data-type="textarea" data-name="comments" data-original-title="Enter comments" style="background-color: rgba(0, 0, 0, 0);" id="ttt">
+                                Empty
+                            </a>
+                        </td>
+                    </tr>
+                    <tr align="center">
+                        <td colspan="4">
+                            <a href="javascript:void(0)" onclick="add($(this))">
+                                <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
+                            </a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row" colspan="2">合计：（大写）</th>
+                        <th scope="row" colspan="2">移仟伍佰肆拾圆整</th>
+                    </tr>
+                    <tr>
+                        <th scope="row">公司总（副）经理</th>
+                        <td>史昊</td>
+                        <td>审核人</td>
+                        <td>李晓娟</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+     <!-- end 审核信息-->
+
+    <div id="myModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="display: none;">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                    <h4 class="modal-title" id="myModalLabel">报销申请表</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-xs-12 col-md-10">
+                            <div class="table-responsive">
+                                <table class="table table-bordered">
+                                    <thead>
+                                    <tr>
+                                        <th rowspan="2" width="48">序号</th>
+                                        <th colspan="6">报销人填表情况</th>
+                                    </tr>
+                                    <tr>
+                                        <th width="120px;">报销项目</th>
+                                        <th width="48px;">票据张数</th>
+                                        <th width="80px;">票据金额</th>
+                                        <th width="80px;">邮寄时间</th>
+                                        <th width="80px;">还借款情况</th>
+                                        <!--                        <th width="120px;">报销项目</th>
+                                                                <th width="48px;">票据张数</th>
+                                                                <th width="100px;">票据金额</th>-->
+                                        <th>备注</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <th scope="row"><span>1</span><a href="javascript:void(0)" onclick="remove()" style="margin-left: 12px;"><span class="glyphicon glyphicon-minus-sign" aria-hidden="true"></span></a></th>
+                                        <td>交通费用asfasfasfasf是打发打阿斯蒂as啊阿斯蒂发生的发斯蒂芬微风</td>
+                                        <td>3</td>
+                                        <td>120</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td>打车费用</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row"><span>2</span><a href="javascript:void(0)" onclick="remove($(this))"  style="margin-left: 12px;"><span class="glyphicon glyphicon-minus-sign" aria-hidden="true"></span></a></th>
+                                        <td>餐费</td>
+                                        <td>3</td>
+                                        <td>120</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td>餐费</td>
+                                    </tr>
+                                    <tr id="add_tr3" align="center">
+                                        <td colspan="7">
+                                            <a href="javascript:void(0)" onclick="add($(this))">
+                                                <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row" colspan="2">合计：（大写）</th>
+                                        <td>陆</td>
+                                        <td>贰佰肆拾圆整</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td>打车费，餐费</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row" colspan="2">公司总（副）经理</th>
+                                        <td colspan="5">史昊</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+              <!--      <table class="table table-bordered">
+                        <tr>
+                            <td>报销人：</td>
+                            <td>邓雪锋</td>
+                            <td>职位：</td>
+                            <td>研发</td>
+                        </tr>
+                        <tr>
+                            <td>邮箱：</td>
+                            <td>dengxuefeng@chaoxing.com</td>
+                            <td>时间：</td>
+                            <td>2016-12-27</td>
+                        </tr>
+                    </table>
+                    <form class="form-horizontal" role="form" style="margin: 10px 0 0 20px;">
+                        <div class="input-group">
+                            <span class="input-group-addon" id="basic-addon1">批次号</span>
+                            <input type="text" class="form-control" placeholder="批次号..." aria-describedby="basic-addon1">
+                        </div>
+                        <div class="input-group">
+                            <span class="input-group-addon" id="bb1">申请人</span>
+                            <input type="text" class="form-control" placeholder="申请人..." aria-describedby="bb1"/>
+                        </div>
+                        <div class="input-group">
+                            <span class="input-group-addon" id="bb2">申请人邮箱</span>
+                            <input type="text" class="form-control" placeholder="申请人邮箱..." aria-describedby="bb2"/>
+                        </div>
+                        <div class="input-group">
+                            <span class="input-group-addon" id="bb3">邮寄时间</span>
+                            <input type="text" class="form-control" placeholder="邮寄时间..." aria-describedby="bb3"/>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-xs-4 col-sm-3 control-label">批次号:</label>
+                            <div class="col-xs-8 col-sm-6">
+                                <input type="number" class="form-control input-sm" name="id" placeholder="批次号..." disabled>
+                            </div>
+                        </div>
+                        &lt;!&ndash; 报销人 &ndash;&gt;
+                        <fieldset id="cw_bx_user">
+                            <div class="form-group">
+                                <label class="col-xs-4 col-sm-3 control-label">报销人:</label>
+                                <div class="col-xs-8 col-sm-6">
+                                    <input type="text" class="form-control input-sm" name="username" placeholder="报销人..." disabled>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-xs-4 col-sm-3 control-label">报销人邮箱:</label>
+                                <div class="col-xs-8 col-sm-6">
+                                    <input type="email" class="form-control input-sm" name="email" placeholder="报销人邮箱..." disabled>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-xs-4 col-sm-3 control-label">邮寄时间:</label>
+                                <div class="col-xs-8 col-sm-6">
+                                    <input type="date" class="form-control input-sm" name="jTime" placeholder="邮寄时间...">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-xs-4 col-sm-3 control-label">报销张数:</label>
+                                <div class="col-xs-8 col-sm-6">
+                                    <input type="number" max="30" min="0" class="form-control input-sm" name="number" placeholder="报销张数...">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-xs-4 col-sm-3 control-label">报销金额:</label>
+                                <div class="col-xs-8 col-sm-6">
+                                    <input type="number"  class="form-control input-sm" name="money" placeholder="报销金额...">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-xs-4 col-sm-3 control-label">还借款金额:</label>
+                                <div class="col-xs-8 col-sm-6">
+                                    <input type="number" class="form-control input-sm" name="huankuan" placeholder="还款金额...">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-xs-4 col-sm-3 control-label">银行:</label>
+                                <div class="col-xs-8 col-sm-6">
+                                    <select name="bank" id="bx_bank" class="form-control input-sm">
+                                        <option value="jtyh">交通银行</option>
+                                        <option value="gs">工商银行</option>
+                                        <option value="gd">光大银行</option>
+                                        <option value="js">建设银行</option>
+                                        <option value="zs">招商银行</option>
+                                        <option value="nh">农业银行</option>
+                                    </select>
+                                    &lt;!&ndash;<input type="text" class="form-control input-sm" placeholder="银行...">&ndash;&gt;
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-xs-4 col-sm-3 control-label">卡号:</label>
+                                <div class="col-xs-8 col-sm-6">
+                                    <input type="text" class="form-control input-sm" name="account" placeholder="卡号...">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-xs-4 col-sm-3 control-label">说明:</label>
+                                <div class="col-xs-8 col-sm-6">
+                                    <textarea name="explain" id="" cols="30" rows="3" class="form-control"></textarea>
+                                    &lt;!&ndash;<input type="text" class="form-control input-sm" name="account" placeholder="说明...">&ndash;&gt;
+                                </div>
+                            </div>
+                        </fieldset>
+                        &lt;!&ndash; 批准人 &ndash;&gt;
+                        <fieldset id="cw_bx_approver" disabled>
+                            <div class="form-group">
+                                <label class="col-xs-4 col-sm-3 control-label">批准人:</label>
+                                <div class="col-xs-8 col-sm-6">
+                                    <input type="text" class="form-control input-sm" name="approver" placeholder="批准人...">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-xs-4 col-sm-3 control-label">批准人邮箱:</label>
+                                <div class="col-xs-8 col-sm-6">
+                                    <input type="email" class="form-control input-sm" name="aproEmail" placeholder="批准人邮箱...">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-xs-4 col-sm-3 control-label">批准时间:</label>
+                                <div class="col-xs-8 col-sm-6">
+                                    <input type="date" class="form-control input-sm" placeholder="批准时间...">
+                                </div>
+                            </div>
+                        </fieldset>
+                        &lt;!&ndash; 财务 &ndash;&gt;
+                        <fieldset id="cw_bx_cn" disabled>
+                            <div class="form-group">
+                                <label class="col-xs-4 col-sm-3 control-label">收票时间:</label>
+                                <div class="col-xs-8 col-sm-6">
+                                    <input type="date" class="form-control input-sm" name="" placeholder="收票时间...">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-xs-4 col-sm-3 control-label">报销时间:</label>
+                                <div class="col-xs-8 col-sm-6">
+                                    <input type="date" class="form-control input-sm" placeholder="报销时间...">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-xs-4 col-sm-3 control-label">报销金额:</label>
+                                <div class="col-xs-8 col-sm-6">
+                                    <input type="text" class="form-control input-sm" name="baoxMoney" placeholder="报销情况...">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-xs-4 col-sm-3 control-label">退票金额:</label>
+                                <div class="col-xs-8 col-sm-6">
+                                    <input type="number" class="form-control input-sm" name="tuipiao" placeholder="退票金额...">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-xs-4 col-sm-3 control-label">财务备注:</label>
+                                <div class="col-xs-8 col-sm-6">
+                                    <textarea name="caiwuRemarks" cols="30" rows="3" class="form-control" placeholder="财务备注..."></textarea>
+                                    &lt;!&ndash;<input type="text" class="form-control input-sm" name="caiwuRemarks" placeholder="退票金额...">&ndash;&gt;
+                                </div>
+                            </div>
+                        </fieldset>
+                        <div class="row">
+                        </div>
+                    </form>-->
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                    <button type="button" class="btn btn-primary">保存</button>
+                </div>
+
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div>
+
+    <div id="myModal2" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLabel" style="display: none;">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                    <h4 class="modal-title" id="myLabel" style="text-align: center">报销申请表</h4>
+                </div>
+                <div class="modal-body">
+                    <form class="form-horizontal" role="form" style="margin: 10px 0 0 20px;">
+                        <div class="form-group">
+                            <label class="col-xs-4 col-sm-3 control-label">批次号:</label>
+                            <div class="col-xs-8 col-sm-6">
+                                <input type="number" class="form-control input-sm" name="id" placeholder="批次号..." disabled>
+                            </div>
+                        </div>
+                        <!-- 报销人 -->
+                        <fieldset id="cw_bx_user">
+                            <div class="form-group">
+                                <label class="col-xs-4 col-sm-3 control-label">报销人:</label>
+                                <div class="col-xs-8 col-sm-6">
+                                    <input type="text" class="form-control input-sm" name="username" placeholder="报销人..." disabled>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-xs-4 col-sm-3 control-label">报销人邮箱:</label>
+                                <div class="col-xs-8 col-sm-6">
+                                    <input type="email" class="form-control input-sm" name="email" placeholder="报销人邮箱..." disabled>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-xs-4 col-sm-3 control-label">邮寄时间:</label>
+                                <div class="col-xs-8 col-sm-6">
+                                    <input type="date" class="form-control input-sm" name="jTime" placeholder="邮寄时间...">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-xs-4 col-sm-3 control-label">报销张数:</label>
+                                <div class="col-xs-8 col-sm-6">
+                                    <input type="number" max="30" min="0" class="form-control input-sm" name="number" placeholder="报销张数...">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-xs-4 col-sm-3 control-label">报销金额:</label>
+                                <div class="col-xs-8 col-sm-6">
+                                    <input type="number"  class="form-control input-sm" name="money" placeholder="报销金额...">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-xs-4 col-sm-3 control-label">还借款金额:</label>
+                                <div class="col-xs-8 col-sm-6">
+                                    <input type="number" class="form-control input-sm" name="huankuan" placeholder="还款金额...">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-xs-4 col-sm-3 control-label">银行:</label>
+                                <div class="col-xs-8 col-sm-6">
+                                    <select name="bank" id="bx_bank" class="form-control input-sm">
+                                        <option value="jtyh">交通银行</option>
+                                        <option value="gs">工商银行</option>
+                                        <option value="gd">光大银行</option>
+                                        <option value="js">建设银行</option>
+                                        <option value="zs">招商银行</option>
+                                        <option value="nh">农业银行</option>
+                                    </select>
+                                    <!--<input type="text" class="form-control input-sm" placeholder="银行...">-->
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-xs-4 col-sm-3 control-label">卡号:</label>
+                                <div class="col-xs-8 col-sm-6">
+                                    <input type="text" class="form-control input-sm" name="account" placeholder="卡号...">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-xs-4 col-sm-3 control-label">说明:</label>
+                                <div class="col-xs-8 col-sm-6">
+                                    <textarea name="explain" id="" cols="30" rows="3" class="form-control"></textarea>
+                                    <!--<input type="text" class="form-control input-sm" name="account" placeholder="说明...">-->
+                                </div>
+                            </div>
+                        </fieldset>
+                        <!-- 批准人 -->
+                        <fieldset id="cw_bx_approver" disabled>
+                            <div class="form-group">
+                                <label class="col-xs-4 col-sm-3 control-label">批准人:</label>
+                                <div class="col-xs-8 col-sm-6">
+                                    <input type="text" class="form-control input-sm" name="approver" placeholder="批准人...">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-xs-4 col-sm-3 control-label">批准人邮箱:</label>
+                                <div class="col-xs-8 col-sm-6">
+                                    <input type="email" class="form-control input-sm" name="aproEmail" placeholder="批准人邮箱...">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-xs-4 col-sm-3 control-label">批准时间:</label>
+                                <div class="col-xs-8 col-sm-6">
+                                    <input type="date" class="form-control input-sm" placeholder="批准时间...">
+                                </div>
+                            </div>
+                        </fieldset>
+                        <!-- 财务 -->
+                        <fieldset id="cw_bx_cn" disabled>
+                            <div class="form-group">
+                                <label class="col-xs-4 col-sm-3 control-label">收票时间:</label>
+                                <div class="col-xs-8 col-sm-6">
+                                    <input type="date" class="form-control input-sm" name="" placeholder="收票时间...">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-xs-4 col-sm-3 control-label">报销时间:</label>
+                                <div class="col-xs-8 col-sm-6">
+                                    <input type="date" class="form-control input-sm" placeholder="报销时间...">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-xs-4 col-sm-3 control-label">报销金额:</label>
+                                <div class="col-xs-8 col-sm-6">
+                                    <input type="text" class="form-control input-sm" name="baoxMoney" placeholder="报销情况...">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-xs-4 col-sm-3 control-label">退票金额:</label>
+                                <div class="col-xs-8 col-sm-6">
+                                    <input type="number" class="form-control input-sm" name="tuipiao" placeholder="退票金额...">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-xs-4 col-sm-3 control-label">财务备注:</label>
+                                <div class="col-xs-8 col-sm-6">
+                                    <textarea name="caiwuRemarks" cols="30" rows="3" class="form-control" placeholder="财务备注..."></textarea>
+                                    <!--<input type="text" class="form-control input-sm" name="caiwuRemarks" placeholder="退票金额...">-->
+                                </div>
+                            </div>
+                        </fieldset>
+                        <div class="row">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                    <button type="button" class="btn btn-primary">保存</button>
+                </div>
+
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div>
+
+
+</div>
+</div>
+<!-- jQuery -->
+<script src="vendor/jquery/jquery.min.js"></script>
+
+ <!--Bootstrap Core JavaScript-->
+<script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+
+<!-- Bootstrap editable-->
+<link rel="stylesheet" href="vendor/bootstrap-editable/css/bootstrap-editable.css"/>
+<script src="vendor/bootstrap-editable/js/bootstrap-editable.min.js"></script>
+
+<script type="text/javascript">
+    function add(e){
+        var dom = e ? e.closest('tr'):$('#add_tr');
+        var lastRow = Number($(dom.prev().find('span')[0]).text());
+        var row = $('<tr>' +
+                '<th scope="row"><span>' + (lastRow+1) + '</span><a href="javascript:void(0)" onclick="remove($(this))"  style="margin-left: 12px;"><span class="glyphicon glyphicon-minus-sign" aria-hidden="true"></span></a></th></tr>');
+        try{
+            var colnum = Number(e.closest('td').attr('colspan'));
+            var i = 1 ;
+            while(i++<colnum){
+                row.append('<td></td>');
+            }
+        }catch(e){
+            alert("添加失败。");
+        }
+
+        dom.before(row);/** after before append prepend  appendTo */
+    }
+    function remove(e){
+        var row = e.closest('tr');
+        row.remove();
+    }
+//    $(document).ready(function(){
+//
+//    })
+</script>
+</body>
+</html>

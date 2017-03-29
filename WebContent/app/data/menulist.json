@@ -1,0 +1,66 @@
+[
+  {
+    "userId": 500,
+    "menuId": 67,
+    "menuName": "财务",
+    "uls": [
+      {
+        "text": "财务管理",
+        "url": "app/views/caiwu/baoxiaoManager.html",
+        "iconCls": null,
+        "preMenuId": 0,
+        "domId": 72,
+        "sortCode": "B821"
+      },
+      {
+        "text": "报销申请",
+        "url": "app/views/caiwu/application.html",
+        "iconCls": null,
+        "preMenuId": 0,
+        "domId": 73,
+        "sortCode": "B822"
+      }
+    ],
+    "sortCode": null
+  },
+  {
+    "userId": 500,
+    "menuId": 66,
+    "menuName": "合同",
+    "uls": [
+      {
+        "text": "合同管理",
+        "url": "app/views/hetong/guidanceview.html",
+        "iconCls": null,
+        "preMenuId": 0,
+        "domId": 68,
+        "sortCode": "B811"
+      },
+      {
+        "text": "合同管理",
+        "url": "app/views/hetong/cellcoreview.html",
+        "iconCls": null,
+        "preMenuId": 0,
+        "domId": 69,
+        "sortCode": "B812"
+      },
+      {
+        "text": "合同管理",
+        "url": "app/views/hetong/cellview.html",
+        "iconCls": null,
+        "preMenuId": 0,
+        "domId": 70,
+        "sortCode": "B813"
+      },
+      {
+        "text": "合同申请",
+        "url": "app/views/hetong/application.html",
+        "iconCls": null,
+        "preMenuId": 0,
+        "domId": 71,
+        "sortCode": "B814"
+      }
+    ],
+    "sortCode": null
+  }
+]

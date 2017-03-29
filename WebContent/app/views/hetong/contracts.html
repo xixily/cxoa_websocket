@@ -1,0 +1,95 @@
+<div id="ht_contracts_detail">
+    <ul class="nav nav-tabs" role="tablist" style="margin-top: 16px;">
+        <li role="presentation" class="active"><a href="#contracts_detail_sk" data-toggle="tab">收款</a></li>
+        <li role="presentation"><a href="#contracts_detail_ys" data-toggle="tab">应收</a></li>
+        <div id="ht_contracts_toggle" class="btn-group pull-right">
+            <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">
+                <span id="ht_contract_find_text" target="text">
+                </span>
+                <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" role="menu">
+            </ul>
+            <button app-back="ht_contracts" type="button" class="btn btn-default pull-right" onclick=" $('#ht_detail').hide();$('#user_list_view').show();"><i class="fa fa-arrow-circle-left"> </i> 返回</button>
+        </div>
+    </ul>
+    <div id="ht_customer" class="tab-content">
+        <!-- 已收款 -->
+        <div class="tab-pane fade in active" id="contracts_detail_sk">
+            <table id="ht_sk_table"
+                   data-height="526"
+                   data-show-header="true"
+                   data-show-columns="true"
+                   data-search="true"
+                   data-striped="true"
+                   data-buttons-align="left"
+                   data-search-align="left"
+                   data-query-params-type=""
+                   data-show-toggle="true"
+                   data-show-refresh="true"
+                   data-response-handler="responseHandler"
+                   data-pagination="true"
+                   data-side-pagination="client"
+                   data-cache="false"
+                   data-page-size="50"
+                   data-page-list="[15,30,50,100]"
+                   >
+                <thead>
+                <tr>
+                    <th data-field="remittanceDate" data-sortable="true">时间</th>
+                    <th data-field="type" data-sortable="true" data-visible="false">发票类型</th>
+                    <th data-field="name" data-sortable="true">发票品名</th>
+                    <th data-field="huiKuan" data-sortable="true">收款金额</th>
+                    <th data-field="remark" data-sortable="true" data-visible="false">备注</th>
+                </tr>
+                </thead>
+            </table>
+        </div>
+        <!-- 应收款 -->
+        <div class="tab-pane fade" id="contracts_detail_ys">
+            <table id="ht_ys_table"
+                   data-height="526"
+                   data-show-header="true"
+                   data-show-columns="true"
+                   data-search="true"
+                   data-striped="true"
+                   data-buttons-align="left"
+                   data-search-align="left"
+                   data-query-params="queryParams"
+                   data-query-params-type=""
+                   data-show-toggle="true"
+                   data-show-refresh="true"
+                   data-response-handler="responseHandler"
+                   data-pagination="true"
+                   data-side-pagination="client"
+                   data-cache="false"
+                   data-page-size="50"
+                   data-page-list="[15,30,50,100]"
+                   >
+                <thead>
+                <tr>
+                    <th data-field="cid" data-visible="false" data-sortable="true">合同编号</th>
+                    <th data-field="signedTime" data-sortable="true">签定时间</th>
+                    <th data-field="pinming" data-sortable="true">品名</th>
+                    <th data-field="htmoney" data-visible="false" data-sortable="true">合同金额</th>
+                    <th data-field="huikuan" data-visible="false" data-sortable="true">回款</th>
+                    <th data-field="yingshou" data-sortable="true">应收款</th>
+                    <th data-field="kaipiao" data-visible="false" data-sortable="true">开票金额</th>
+                </tr>
+                </thead>
+            </table>
+        </div>
+    </div>
+    <script>
+        $(document).ready(function(){
+            $('#ht_contracts_toggle .dropdown-menu a').bind('click',function(event){
+                var data =$(this).parent().data('data');
+                var text = $(this).html();
+                var closest = $('#ht_contract_find_text');
+                closest.html(text);
+                hetong.htManager.zhidao.toggleContracts(data);
+            })
+            session.app_back = 'ht_contracts';
+        })
+    </script>
+</div>

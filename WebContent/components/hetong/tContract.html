@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="../../jslib/jquery-easyui-1.5/themes/default/easyui.css">
+    <link rel="stylesheet" type="text/css" href="../../jslib/jquery-easyui-1.5/themes/icon.css">
+    <script type="text/javascript" src="../../jslib/jquery-easyui-1.5/jquery.min.js"></script>
+    <script type="text/javascript" src="../../jslib/jquery-easyui-1.5/jquery.easyui.min.js"></script>
+</head>
+<body>
+<div class="easyui-panel"style="height: 560px;width: 1300px;">
+    <div title="合同情况" style="width:780px;height:280px;float:left">
+        <div>
+        <form>
+        <table>
+            <tr>
+                <td><input type="text" class="easyui-textbox" data-options="label:'登记时间',labelPosition:'top'"/></td>
+                <td><input type="text" class="easyui-textbox" data-options="label:'归档时间',labelPosition:'top'"/></td>
+                <td><input type="text" class="easyui-textbox" data-options="label:'合同份数',labelPosition:'top'"/></td>
+                <td><input type="text" class="easyui-textbox" data-options="label:'归档份数',labelPosition:'top'"/></td>
+                <td><input type="text" class="easyui-textbox" data-options="label:'用户ID',labelPosition:'top'"/></td>
+                <td><input type="text" class="easyui-textbox" data-options="label:'单位ID',labelPosition:'top'"/></td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <input class="easyui-combobox" name="language" style="width:100%;" data-options="
+					url:'combobox_data1.json',
+					method:'get',
+					valueField:'id',
+					textField:'text',
+					panelHeight:'auto',
+					label: '所属公司:',
+					labelPosition:'top'
+					">
+                </td>
+                <td colspan="3">
+                    <input type="text" class="easyui-textbox" data-options="label:'单位',labelPosition:'top'"/>
+                </td>
+                <td>
+                    <input type="text" class="easyui-textbox" data-options="label:'合同编号',labelPosition:'top',icons: [{
+						iconCls:'icon-search',
+						handler: function(e){
+							var v = $(e.data.target).textbox('getValue');
+							alert('The inputed value is ' + (v ? v : 'empty'));
+						}
+					}]"/>
+                </td>
+            </tr>
+            <tr>
+                <td><input type="text" class="easyui-textbox" name="firstLevel" data-options="label:'公司',labelPosition:'top',readonly:true"/></td>
+                <td><input type="text" class="easyui-textbox" name="secondLevel" data-options="label:'部门',labelPosition:'top',readonly:true"/></td>
+                <td><input type="text" class="easyui-textbox" name="thirdLevel" data-options="label:'岗位',labelPosition:'top',readonly:true"/></td>
+                <td>
+                    <input id="ht_hidden_departmentId" type="hidden" name="departmentId" />
+                    <input id="ht_manage_fourthLevel" class="easyui-combobox" name="fourthLevel" data-options="
+                    label: '小组',
+                    url: 'employee/getOStruct.action',
+                    valueField:'fourthLevel',
+                    textField:'fourthLevel',
+                    labelPosition:'top',
+                    onSelect: function(rec){
+                        var id = rec.id;
+                        $('#updateUsesrname_form').form('load',{
+                        firstLevel : session.ostructure[id].firstLevel,
+                        secondLevel : session.ostructure[id].secondLevel,
+                        thirdLevel : session.ostructure[id].thirdLevel,
+                        cellCore : session.ostructure[id].cellCore,
+                        departmentId : session.ostructure[id].departmentId,
+                        txStruct : session.ostructure[id].taxStructure
+                        });
+		            },
+			        onLoadSuccess: function(res){
+                        session.ostructure = {};
+                        $.each(res, function(i, obj){
+                            session.ostructure[obj.id] = obj;
+                        })
+			        }
+                    ">
+                </td>
+                <td>
+                    <input class="easyui-combobox" name="operator" data-options="
+                    label: '经办人',
+                    url:'employee/getUsername.action',
+                    valueField:'operator',
+                    textField:'operator',
+                    labelPosition:'top',
+                    ">
+                    <!-- queryForm得动态加载  -->
+                <!--    <input id="th_manage_operator" class="easyui-combobox" name="operator" style="width:100%;" data-options="
+					url:'employee/getUsername.action',
+					method:'get',
+					valueField:'username',
+					textField:'username',
+					label: '经办人:',
+					labelPosition:'top',
+					onChange : hetong.htManage.getOperator
+					">-->
+                </td>
+                <td></td>
+            </tr>
+            <tr>
+                <td><input type="text" class="easyui-textbox" data-options="label:'合同金额',labelPosition:'top'"/></td>
+                <td>
+                    <input class="easyui-combobox" name="language" style="width:100%;" data-options="
+					url:'combobox_data1.json',
+					method:'get',
+					valueField:'id',
+					textField:'text',
+					panelHeight:'auto',
+					label: '印花税情况:',
+					labelPosition:'top'
+					">
+                </td>
+                <td>
+                    <input class="easyui-combobox" name="language" style="width:100%;" data-options="
+					url:'combobox_data1.json',
+					method:'get',
+					valueField:'id',
+					textField:'text',
+					panelHeight:'auto',
+					label: '会计分类:',
+					labelPosition:'top'
+					">
+                </td>
+                <td><input type="text" class="easyui-textbox" data-options="label:'坏账金额',labelPosition:'top'"/></td>
+                <td><input type="text" class="easyui-textbox" data-options="label:'催债时间(20161031)',labelPosition:'top'"/></td>
+                <td></td>
+            </tr>
+        </table>
+        </form>
+        </div>
+        <div>
+            <table class="easyui-datagrid" title="Basic DataGrid" style="width:92%;height:100px"
+                   data-options="
+                   singleSelect:true,
+                   collapsible:true,
+                   method:'get',
+                   url:'datagrid_data1.json',
+                   toolbar: [{
+                        iconCls: 'icon-add',
+                        text: '新增分项',
+                        handler: function(){alert('add')}
+                    },'-',{
+                        iconCls: 'icon-edit',
+                        text: '修改分项',
+                        handler: function(){alert('edit')}
+                    },'-',{
+                        iconCls: 'icon-remove',
+                        text: '删除',
+                        handler: function(){alert('remove')}
+                    }]
+
+                   ">
+                <thead>
+                <tr>
+                    <th data-options="field:'id',width:80">序号</th>
+                    <th data-options="field:'name',width:100">分项名称</th>
+                    <th data-options="field:'money',width:80,align:'right'">分项金额</th>
+                    <th data-options="field:'amount',width:80,align:'right'">数量或年限</th>
+                    <th data-options="field:'begain',width:250">开始时间</th>
+                    <th data-options="field:'end',width:60,align:'center'">截止时间</th>
+                </tr>
+                </thead>
+            </table>
+        </div>
+    </div>
+    <div class="easyui-panel" width="480px;" height="280px;" title="合同内容" style="margin-left: 20px;">
+        <form>
+        <div style="margin-bottom:20px">
+            <input class="easyui-textbox" label=付款内容:" labelPosition="top" multiline="true" value="This TextBox will allow the user to enter multiple lines of text." style="width:98%;height:160px">
+        </div>
+        <div style="margin-bottom:20px">
+            <input class="easyui-textbox" label="合同概要:" labelPosition="top" multiline="true" value="This TextBox will allow the user to enter multiple lines of text." style="width:98%;height:160px">
+        </div>
+        <div>
+            <input class="easyui-textbox" label="备注:" labelPosition="top" multiline="true" value="This TextBox will allow the user to enter multiple lines of text." style="width:98%;height:190px">
+        </div>
+        </form>
+    </div>
+</div>
+</body>
+</html>

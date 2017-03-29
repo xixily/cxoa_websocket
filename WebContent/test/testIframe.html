@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<h3> here is the iframe body;</h3>
+
+<iframe src="about:blank" frameborder="0">
+    <form id="tt_form" action="file/exportEmployeeExcel.action">
+    <input type="text" name="fourthLevel" value="人事"/>
+    </form>
+    <script type="text/javascript">
+        window.onload = function(){
+            var form = document.getElementById("tt_form");
+            form.submit();
+        }
+    </script>
+</iframe>
+
+<iframe src="http://localhost:8080/cxoa/file/exportEmployeeExcel.action" frameborder="0"></iframe>
+<iframe src="file/exportEmployeeExcel.action" frameborder="0"></iframe>
+
+</body>
+</html>

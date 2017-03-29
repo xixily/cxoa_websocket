@@ -1,0 +1,9 @@
+[{"itemid":"EST-12","productid":"RP-SN-01","listprice":"18.50","unitcost":"12.00","status":"P","attr1":"Rattleless"},
+  {"itemid":"EST-13","productid":"RP-LI-02","listprice":"18.50","unitcost":"12.00","status":"P","attr1":"Green Adult"},
+  {"itemid":"EST-16","productid":"FL-DLH-02","listprice":"93.50","unitcost":"12.00","status":"P","attr1":"Adult Female"},
+  {"itemid":"EST-18","productid":"AV-CB-01","listprice":"193.50","unitcost":"92.00","status":"P","attr1":"Adult Male"},
+  {"itemid":"EST-19","productid":"AV-SB-02","listprice":"15.50","unitcost":"2.00","status":"P","attr1":"Adult Male"},
+  {"itemid":"EST-21","productid":"FI-FW-02","listprice":"5.29","unitcost":"1.00","status":"P","attr1":"Adult Female"},
+  {"itemid":"EST-3","productid":"FI-SW-02","listprice":"18.50","unitcost":"12.00","status":"P","attr1":"Toothless"},
+  {"itemid":"EST-6","productid":"K9-BD-01","listprice":"18.50","unitcost":"12.00","status":"P","attr1":"Male Adult"},
+  {"itemid":"EST-7","productid":"K9-BD-01","listprice":"18.50","unitcost":"12.00","status":"P","attr1":"Female Puppy"}]

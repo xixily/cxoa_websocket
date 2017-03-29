@@ -1,0 +1,17 @@
+CACHE MANIFEST
+# 2017-01-11 v1.1.1
+
+
+
+NETWORK:
+js/jsController/app.js
+js/jsController/north.js
+js/jsController/system.js
+js/jsController/wagesCaclculate.js
+js/jsController/west.js
+js/jsController/employee.js
+js/jsController/hetong.js
+*
+
+FALLBACK:
+error/404.jsp

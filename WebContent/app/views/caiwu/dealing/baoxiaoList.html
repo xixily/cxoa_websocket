@@ -1,0 +1,242 @@
+
+<!-- 查找输入组 -->
+<div class="row" style="padding-top: 10px;">
+    <div class="col-lg-12">
+    <form id="bx_find">
+        <div class="input-group">
+            <div id="bx_find_btn" class="input-group-btn">
+                <button class="btn btn-default fropdown-toggle" data-toggle="dropdown" type="button">
+                    <span id="bx_find_type" target="text"><input type="hidden" name="type" value="explain"/>备注</span><span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" role="menu">
+                    <li><a><span class="sr-only">id</span>批次号</a></li>
+                    <li><a><span class="sr-only">jTime</span>邮寄时间</a></li>
+                    <li><a><span class="sr-only">username</span>报销人</a></li>
+                    <li><a><span class="sr-only">number</span>报销张数</a></li>
+                    <li><a><span class="sr-only">money</span>报销金额</a></li>
+                    <li><a><span class="sr-only">huankuan</span>还借款金额</a></li>
+                    <li><a><span class="sr-only">acount</span>卡号</a></li>
+                    <li><a><span class="sr-only">bank</span>银行</a></li>
+                    <li><a><span class="sr-only">explain</span>备注</a></li>
+                    <li><a><span class="sr-only">reciveTime</span>收票时间</a></li>
+                    <li><a><span class="sr-only">baoxTime</span>报销时间</a></li>
+                    <li><a><span class="sr-only">status</span>报销情况</a></li>
+                    <li><a><span class="sr-only">tuipiao</span>退票金额</a></li>
+                    <li><a><span class="sr-only">caiwuRemarks</span>财务备注</a></li>
+                </ul>
+            </div>
+            <input type="text" class="form-control" name="value" placeholder="您想查找什么？"/>
+            <span class="input-group-btn">
+                <button class="btn btn-default do_action" type="button" app-action="caiwu.baoxiao.find"><i class="glyphicon glyphicon-search"></i></button>
+            </span>
+
+        </div>
+        </form>
+    </div>
+</div>
+
+<!--<div class="panel-heading">发票报销</div>-->
+<div class="row" style="padding-top: 10px;">
+    <div class="col-xs-6"><span style="font-size: 12px;color: gray" >去年报销金额：<span app-data="lastYearTotal"></span> 元</span></div>
+    <div class="col-xs-6"><span style="font-size: 12px;color: gray" >今年报销金额：<span app-data="thisYearTotal"></span> 元</span></div>
+</div>
+
+<!-- 报销信息-->
+<div class="row" style="margin-top: 10px;">
+    <!-- 列表信息 -->
+    <div class="col-lg-12" id="bx_list" style="overflow: hidden">
+        <ul class="media-list">
+            <span id="bx_media_li">
+            <li class="media media-bgcolor">
+                <a class="media-left" href="#">
+                    <img src="" alt="响应式图片" width="132" height="132" app-img="img">
+                    <!--<img src="images/113.jpg" class="img-responsive" alt="123" width="132" height="132">-->
+                </a>
+                <a href="javascript:void(0)" onclick="showbxInfo($(this))" class="media-body" style="">
+                    <!--<h4 class="media-heading">发票单</h4>-->
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-xs-12 col-lg-12">
+                                <i class="fa fa-user"></i> 报销批次：
+                                <span class="t-input" app-data="id"></span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-12 col-lg-12">
+                                <i class="fa fa-user"></i> 报销人：
+                                <span class="t-input" app-data="username"></span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-12 col-lg-12">
+                                <i class="fa fa-user"></i> 细胞核：
+                                <span class="t-input" app-data="cellCore"></span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-12 col-lg-12">
+                                <i class="fa fa-user"></i> 金额：
+                                <span class="t-input" app-data="money"></span>元
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-12 col-lg-12">
+                                <i class="fa fa-user"></i> 汇款时间：
+                                <span class="t-input" app-data="baoxTime"></span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-12 col-lg-12">
+                                <i class="fa fa-user"></i> 备注：
+                                <span class="t-input" app-data="explain"></span>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+                <!--<a href="javascript:showbxInfo()">-->
+                </a>
+            </li>
+            </span>
+            <li class="media visible-xs">
+                <a type="button" class="btn btn-default btn-sm btn-block" href="javascript:void(0)">加载更多<i class="fa fa-angle-right"></i><i class="fa fa-angle-right"></i><i class="fa fa-angle-right"></i></a>
+            </li>
+        </ul>
+    </div>
+    <!-- 报销信息-->
+    <!-- 报销信息-->
+    <div id="bx_info" class="col-lg-6" style="height:0;overflow: hidden;">
+        <form class="form-horizontal" role="form" style="margin: 10px 0 0 20px;">
+            <div class="form-group">
+                <label class="col-xs-4 col-sm-3 control-label">批次号:</label>
+                <div class="col-xs-8 col-sm-6">
+                    <input type="number" class="form-control input-sm" placeholder="批次号...">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-xs-4 col-sm-3 control-label">邮寄时间:</label>
+                <div class="col-xs-8 col-sm-6">
+                    <input type="date" class="form-control input-sm" placeholder="邮寄时间...">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-xs-4 col-sm-3 control-label">报销人:</label>
+                <div class="col-xs-8 col-sm-6">
+                    <input type="email" class="form-control input-sm" placeholder="报销人...">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-xs-4 col-sm-3 control-label">报销张数:</label>
+                <div class="col-xs-8 col-sm-6">
+                    <input type="number" max="30" min="0" class="form-control input-sm" placeholder="报销张数...">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-xs-4 col-sm-3 control-label">报销金额:</label>
+                <div class="col-xs-8 col-sm-6">
+                    <input type="number"  class="form-control input-sm" placeholder="报销金额...">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-xs-4 col-sm-3 control-label">还款金额:</label>
+                <div class="col-xs-8 col-sm-6">
+                    <input type="number" class="form-control input-sm" placeholder="还款金额...">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-xs-4 col-sm-3 control-label">银行:</label>
+                <div class="col-xs-8 col-sm-6">
+                    <select name="bank" id="bx_bank" class="form-control input-sm">
+                        <option value="jtyh">交通银行</option>
+                        <option value="gs">工商银行</option>
+                        <option value="gd">光大银行</option>
+                        <option value="js">建设银行</option>
+                        <option value="zs">招商银行</option>
+                        <option value="nh">农业银行</option>
+                    </select>
+                    <!--<input type="text" class="form-control input-sm" placeholder="银行...">-->
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-xs-4 col-sm-3 control-label">卡号:</label>
+                <div class="col-xs-8 col-sm-6">
+                    <input type="text" class="form-control input-sm" placeholder="卡号...">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-xs-4 col-sm-3 control-label">备注:</label>
+                <div class="col-xs-8 col-sm-6">
+                    <input type="text" class="form-control input-sm" placeholder="备注...">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-xs-4 col-sm-3 control-label">收票时间:</label>
+                <div class="col-xs-8 col-sm-6">
+                    <input type="date" class="form-control input-sm" placeholder="收票时间...">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-xs-4 col-sm-3 control-label">报销时间:</label>
+                <div class="col-xs-8 col-sm-6">
+                    <input type="date" class="form-control input-sm" placeholder="报销时间...">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-xs-4 col-sm-3 control-label">报销情况:</label>
+                <div class="col-xs-8 col-sm-6">
+                    <input type="text" class="form-control input-sm" placeholder="报销情况...">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-xs-4 col-sm-3 control-label">退票金额:</label>
+                <div class="col-xs-8 col-sm-6">
+                    <input type="number" class="form-control input-sm" placeholder="退票金额...">
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-xs-2 col-lg-3"></div>
+                <div class="col-xs-6 col-lg-4">
+                    <button class="btn btn-default pull-left" type="button">确认修改</button>
+                </div>
+                <div class="col-xs-4 col-lg-2">
+                    <button onclick="showbxInfo()" class="btn btn-default pull-left" type="button">返回</button>
+                </div>
+            </div>
+            <div class="row">
+            </div>
+        </form>
+        <!--<div class="panel panel-default">-->
+        <!--</div>-->
+    </div>
+
+</div>
+
+<script type="text/javascript">
+    function showbxInfo(dom){
+        if(dom){
+            console.log(dom);
+            var piciNum = dom.find('[app-data="id"]').html();
+            alert(piciNum);
+        }
+        if($('#bx_list')[0].className == ""){
+            $('#bx_list').addClass('col-lg-12');
+            $('#bx_list').css('height','auto');
+            $('#bx_info').css('height','0')
+        }else{
+            $('#bx_list').removeClass('col-lg-12');
+            $('#bx_list').css('height','0')
+            $('#bx_info').css('height','auto')
+        }
+    }
+
+    $(document).ready(function() {
+        $('#bx_find_btn a').bind('click',function(event){
+            var text = $(this).html();
+            var type = $(this).find('.sr-only').html();
+            var hidden = $('<input type="hidden" name="type" value="' + type +'"/>');
+            var closest = $($(this).closest("div")).find('[target="text"]');
+            closest.html(text);
+            closest.append(hidden[0]);
+            event.stopImmediatePropagation();
+        })
+    });
+</script>

@@ -1,0 +1,42 @@
+DELIMITER $$
+
+USE `cxoa`$$
+
+DROP PROCEDURE IF EXISTS `update_monthWages_pr`$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `update_monthWages_pr`()
+BEGIN
+	DECLARE t_error INTEGER DEFAULT 0;
+	DECLARE CONTINUE HANDLER FOR SQLEXCEPTION SET t_error=1 ;
+	SET t_error = 0;
+	START TRANSACTION;
+	/*根据当前考勤表删除并重新创建当前工资表*/
+	TRUNCATE 当月工资表;
+	INSERT INTO 当月工资表(职工编号,部门ID,公司,部门,岗位,小组,姓名,身份证号,开户行,工资总额,帐号,出勤天数,转正差额天数,迟到应扣天数,通讯补贴,保密补贴,午餐补贴,
+	事假小时数,病假小时数,旷工小时数,病假累计,年假累计,累计带薪病假,基本工资,代扣养老保险,代扣住房保险,代扣医疗保险,代扣失业保险,公司生育保险,公司养老保险,公司住房保险,
+	公司工伤保险,公司医疗保险,公司失业保险,丧家天数,婚假天数,年假天数,产假天数,公司名称,户口性质,内部编号,基数,绩效工资,岗位工资,工资分布表备注,工资编号,办公电话,入保时间,入职时间,
+	入职报表,离职时间,离职报表,转正时间,转正报表,考勤备注,历史工资)
+	SELECT *  FROM 职工工资表;
+	/*计算考勤总额 + 转正差额扣款*/
+	UPDATE 当月工资表 SET 考勤总额 = (工资总额*事假小时数/168 + IF(病假小时数<=0,0,IF((IFNULL(病假累计,0) + 病假小时数)<24,0,IF(病假累计>24,病假小时数*工资总额/336,(病假累计+病假小时数-24)*工资总额/336))) + 旷工小时数*工资总额/56 
+	+ IF(迟到应扣天数<=3,迟到应扣天数*20,迟到应扣天数*50 - 150) + IF(转正差额天数>0, ((工资总额-历史工资)/21)*(21-转正差额天数),0));
+	UPDATE 当月工资表 SET 代扣五险总额 =  IFNULL(代扣养老保险,0) + IFNULL(代扣住房保险,0) + IFNULL(代扣医疗保险,0) + IFNULL(代扣失业保险,0);
+	/*计算应发总额*/
+	/*UPDATE 当月工资表 SET 应发总额 = (工资总额*出勤天数/21 - 考勤总额 - 代扣五险总额 + IFNULL(保密补贴,0) + IFNULL(午餐补贴,0) + IFNULL(通讯补贴,0) + IFNULL(奖金,0) + IFNULL(补发工资,0) - IFNULL(罚款,0)) - ifnull(其他扣款,0);*/	
+	UPDATE 当月工资表 SET 应发总额 = (IF(LEFT(转正报表,6)>=after_date AND 历史工资>0,IFNULL(历史工资,0)*出勤天数/21,工资总额*出勤天数/21) - 考勤总额 - 代扣五险总额 + IFNULL(保密补贴,0) + IFNULL(午餐补贴,0) + IFNULL(通讯补贴,0) + IFNULL(奖金,0) + IFNULL(补发工资,0) - IFNULL(罚款,0)) - IFNULL(其他扣款,0);	
+	/*计算个人所得税*/
+	UPDATE 当月工资表 SET 个人所得税 = IF((应发总额 - 3500)<=0,0,
+	IF((应发总额 - 3500) BETWEEN 0 AND 1500,(应发总额 - 3500)*0.03,
+	IF((应发总额 - 3500) BETWEEN 1500 AND 4500,(应发总额 - 3500)*0.1-105,
+	IF((应发总额 - 3500) BETWEEN 4500 AND 9000,(应发总额 - 3500)*0.2-555,
+	IF((应发总额 - 3500) BETWEEN 9000 AND 35000,(应发总额 - 3500)*0.25-1005,
+	IF((应发总额 - 3500) BETWEEN 35000 AND 55000,(应发总额 - 3500)*0.30-2755,
+	IF((应发总额 - 3500) BETWEEN 55000 AND 80000,(应发总额 - 3500)*0.35-5505,
+	(应发总额 - 3500)*0.45-13505)))))));
+	UPDATE 当月工资表 SET 实发总额 = 应发总额 - 个人所得税;
+	IF t_error = 1 THEN ROLLBACK;
+	ELSE COMMIT;
+	END IF;
+END$$
+
+DELIMITER ;

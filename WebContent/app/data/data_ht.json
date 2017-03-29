@@ -1,0 +1,127 @@
+{
+  "total": 200,
+  "rows": [
+    {
+      "id": 0,
+      "signedTime":"2015-12-10",
+      "customerName": "北京市图书馆",
+      "pingming":"平台建设费",
+      "contractMoney":"200000",
+      "lastYear":"350000",
+      "thisYear":"210000",
+      "yingshou":"140000",
+      "contractId": "43470"
+    },{
+      "id": 0,
+      "signedTime":"2015-11-10",
+      "customerName": "江西省图书馆",
+      "pingming":"平台建设费",
+      "contractMoney":"200000",
+      "lastYear":"350000",
+      "thisYear":"210000",
+      "yingshou":"140000",
+      "contractId": "43470"
+    },{
+      "id": 0,
+      "signedTime":"2016-11-10",
+      "customerName": "上饶图书馆",
+      "pingming":"平台建设费",
+      "contractMoney":"200000",
+      "lastYear":"350000",
+      "thisYear":"210000",
+      "yingshou":"140000",
+      "contractId": "43470"
+    },{
+      "id": 0,
+      "signedTime":"2016-06-10",
+      "customerName": "丰台图书馆",
+      "pingming":"平台建设费",
+      "contractMoney":"200000",
+      "lastYear":"350000",
+      "thisYear":"210000",
+      "yingshou":"140000",
+      "contractId": "43470"
+    },{
+      "id": 0,
+      "signedTime":"2013-06-10",
+      "customerName": "昌平图书馆",
+      "pingming":"平台建设费",
+      "contractMoney":"200000",
+      "lastYear":"350000",
+      "thisYear":"210000",
+      "yingshou":"140000",
+      "contractId": "43470"
+    },{
+      "id": 0,
+      "signedTime":"2013-06-18",
+      "customerName": "海淀图书馆",
+      "pingming":"平台建设费",
+      "contractMoney":"200000",
+      "lastYear":"350000",
+      "thisYear":"210000",
+      "yingshou":"140000",
+      "contractId": "43470"
+    },{
+      "id": 0,
+      "signedTime":"2013-09-18",
+      "customerName": "福建图书馆",
+      "pingming":"平台建设费",
+      "contractMoney":"200000",
+      "lastYear":"350000",
+      "thisYear":"210000",
+      "yingshou":"140000",
+      "contractId": "43470"
+    },{
+      "id": 0,
+      "signedTime":"2013-09-12",
+      "customerName": "三明图书馆",
+      "pingming":"平台建设费",
+      "contractMoney":"200000",
+      "lastYear":"350000",
+      "thisYear":"210000",
+      "yingshou":"140000",
+      "contractId": "43470"
+    },{
+      "id": 0,
+      "signedTime":"2013-11-12",
+      "customerName": "厦门图书馆",
+      "pingming":"平台建设费",
+      "contractMoney":"200000",
+      "lastYear":"350000",
+      "thisYear":"210000",
+      "yingshou":"140000",
+      "contractId": "43470"
+    },{
+      "id": 0,
+      "signedTime":"2014-11-12",
+      "customerName": "杭州图书馆",
+      "pingming":"网络服务费",
+      "contractMoney":"200000",
+      "lastYear":"350000",
+      "thisYear":"210000",
+      "yingshou":"140000",
+      "contractId": "43470"
+    },{
+      "id": 0,
+      "signedTime":"2013-11-12",
+      "customerName": "大连图书馆",
+      "pingming":"网络资源务费",
+      "contractMoney":"200000",
+      "lastYear":"350000",
+      "thisYear":"210000",
+      "yingshou":"140000",
+      "contractId": "43470"
+    }
+  ],
+  "footer":{
+    "id": "",
+    "signedTime":"",
+    "customerName": "",
+    "pingming":"",
+    "contractMoney":"123456",
+    "lastYear":"234567",
+    "thisYear":"345678",
+    "yingshou":"456789",
+    "contractId": "567890"
+  }
+}

@@ -1,0 +1,42 @@
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#renshi_form').keydown(function(e){
+            if(e.keyCode==13){
+                $('#fapiao_search').trigger('click');
+            }
+        });
+    })
+</script>
+<form action="" id="ht_manage_form">
+    <table>
+        <tr>
+            <td>用户名称</td>
+            <td><input class="easyui-textbox" name="customerName"/></td>
+            <td>曾用名</td>
+            <td><input class="easyui-textbox" name="oldName"/></td>
+            <td>代理公司</td>
+            <td><input class="easyui-textbox" name="oldName"/></td>
+            <td>性质</td>
+            <td><input class="easyui-textbox" name="oldName"/></td>
+        </tr>
+        <tr>
+            <td>省份</td>
+            <td><input class="easyui-textbox" name="customerName"/></td>
+            <td>城市</td>
+            <td><input class="easyui-textbox" name="oldName"/></td>
+            <td>备注</td>
+            <td><input class="easyui-textbox" name="oldName"/></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td>
+                <input id="employee_search" class="easyui-linkbutton do_action" appaction="hetong.customer.queryCustomers" type="button" value="查询" onclick="" style="width:46px;height:26px;" />
+            </td>
+            <td></td>
+            <td>
+                <input class="easyui-linkbutton" id="btn_reset" type="button" value="重置" onclick="clearForm($(this))" style="width:46px;height:26px;" />
+            </td>
+        </tr>
+    </table>
+</form>

@@ -1,0 +1,54 @@
+<div id="ht_manager_guidance">
+    <div id="cellsview">
+        <h4 style="text-align:center">销售列表</h4>
+        <table id="ht_cellsView_table"
+               data-height="568"
+               data-show-header="true"
+               data-show-columns="true"
+               data-toolbar="#ht_cells_toolbar"
+               data-search="true"
+               data-striped="true"
+               data-id-field="email"
+               data-show-footer="true"
+               data-detail-view="true"
+               data-detail-formatter="hetong.htManager.zhidao.detailFormatter"
+               data-query-params="queryParams"
+               data-query-params-type=""
+               data-show-toggle="true"
+               data-page-size="50"
+               data-page-list="[15,30,50,100]"
+               data-show-refresh="true"
+               data-response-handler="responseHandler"
+               data-pagination="true"
+               data-side-pagination="client"
+               data-cache="false"
+                >
+            <thead>
+            <tr>
+                <th data-field="dId" data-sortable="true" data-visible="false">自动编号</th>
+                <th data-field="charger" data-sortable="true">负责人</th>
+                <th data-field="email" data-sortable="true" data-visible="false">负责人邮箱</th>
+                <th data-field="cemail" data-sortable="true" data-visible="false">细胞核邮箱</th>
+                <th data-field="lastYear" data-visible="true" data-sortable="true"  data-footer-formatter="hetong.htManager.zhidao.footerFormatter_2015"><span app-text="lastYear">2015</span>收款（元）</th>
+                <th data-field="thisYear" data-visible="true" data-sortable="true" data-footer-formatter="hetong.htManager.zhidao.footerFormatter_2016"><span app-text="thisYear">2016</span>收款（元）</th>
+                <th data-field="yingshou" data-sortable="true" data-footer-formatter="hetong.htManager.zhidao.footerFormatter_yingshou">应收</th>
+            </tr>
+            </thead>
+        </table>
+    </div>
+
+    <div id="user_list_view" style="display:none">
+    </div>
+
+    <div id="ht_detail" style="display:none">
+
+    </div>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $('#ht_cellsView_table').bootstrapTable({
+                url:'public/hetong/getCoreCells.action',
+                onClickRow: hetong.htManager.zhidao.onCellsClickRow
+            });
+        })
+    </script>
+</div>

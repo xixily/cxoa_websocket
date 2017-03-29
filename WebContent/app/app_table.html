@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>超星OA办公平台</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- MetisMenu CSS -->
+    <link href="vendor/metisMenu/metisMenu.min.css" rel="stylesheet">
+
+    <!--&lt;!&ndash; DataTables CSS &ndash;&gt;-->
+    <!--<link rel="stylesheet" href="vendor/datatables-plugins/dataTables.bootstrap.css"/>-->
+    <link rel="stylesheet" href="vendor/bt-table/dist/bootstrap-table.min.css"/>
+    <!--<link rel="stylesheet" href="vendor/bt-table/bootsrap-editable.css"/>-->
+    <!--<link href="../../vendor/datatables-plugins/dataTables.bootstrap.css" rel="stylesheet">-->
+
+    <!-- DataTables Responsive CSS -->
+    <!--<link href="vendor/datatables-responsive/dataTables.responsive.css" rel="stylesheet">-->
+
+    <!-- Custom CSS -->
+    <link href="dist/css/cxoa_public.css" rel="stylesheet">
+
+    <!-- nomodal -->
+    <!--<link href="style/noModal.css" rel="stylesheet">-->
+
+    <!-- Custom Fonts -->
+    <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <style type="text/css">
+        .media-list a{
+            text-decoration: none;
+        }
+
+        #bx_list,#bx_info{
+            transition: width 1s;
+            -moz-transition: width 1s;	/* Firefox 4 */
+            -webkit-transition: width 1s;	/* Safari 和 Chrome */
+            -o-transition: width 1s;	/* Opera */
+        }
+    </style>
+</head>
+
+<body>
+<div id="wrapper">
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-default navbar-fixed-top" role="navigation" style="margin-bottom: 0">
+        <!--<div class="container">-->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle " data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">导航切换</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="index.html"><img src="images/logo.png" alt="超星OA" style="display: inline-block;height: 130%"/>超星OA办公平台</a>
+            </div>
+            <!-- /.navbar-header -->
+
+            <ul class="nav navbar-top-links navbar-right">
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        <i class="fa fa-envelope fa-fw"></i> <i class="fa fa-caret-down"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-messages">
+                        <li>
+                            <a href="#">
+                                <div>
+                                    <strong>邓</strong>
+                                    <span class="pull-right text-muted">
+                                        <em>2016.11.29</em>
+                                    </span>
+                                </div>
+                                <div class="mail-font">这里是邮件区域，您在这里可以看到您当前的邮件列表信息...</div>
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="#">
+                                <div>
+                                    <strong>邓</strong>
+                                    <span class="pull-right text-muted">
+                                        <em>2016.11.29</em>
+                                    </span>
+                                </div>
+                                <div class="mail-font">这里是邮件区域，您在这里可以看到您当前的邮件列表信息...</div>
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="#">
+                                <div>
+                                    <strong>邓</strong>
+                                    <span class="pull-right text-muted">
+                                        <em>2016.11.29</em>
+                                    </span>
+                                </div>
+                                <div class="mail-font">这里是邮件区域，您在这里可以看到您当前的邮件列表信息...</div>
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a class="text-center" href="#">
+                                <strong>查看所有邮件</strong>
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        </li>
+                    </ul>
+                    <!-- /.dropdown-messages -->
+                </li>
+                <!-- /.dropdown -->
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        <i class="fa fa-tasks fa-fw"></i> <i class="fa fa-caret-down"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-tasks">
+                        <li>
+                            <a href="#">
+                                <div>
+                                    <p>
+                                        <strong>任务 1</strong>
+                                        <span class="pull-right text-muted">99% 完成</span>
+                                    </p>
+                                    <div class="progress progress-striped active">
+                                        <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="99" aria-valuemin="0" aria-valuemax="100" style="width: 99%">
+                                            <span class="sr-only">99% 完成</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="#">
+                                <div>
+                                    <p>
+                                        <strong>任务 2</strong>
+                                        <span class="pull-right text-muted">98% 完成</span>
+                                    </p>
+                                    <div class="progress progress-striped active">
+                                        <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="98" aria-valuemin="0" aria-valuemax="100" style="width: 98%">
+                                            <span class="sr-only">98% 完成</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="#">
+                                <div>
+                                    <p>
+                                        <strong>任务 3</strong>
+                                        <span class="pull-right text-muted">88% 完成</span>
+                                    </p>
+                                    <div class="progress progress-striped active">
+                                        <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="88" aria-valuemin="0" aria-valuemax="100" style="width: 88%">
+                                            <span class="sr-only">88% 完成</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="#">
+                                <div>
+                                    <p>
+                                        <strong>任务 4</strong>
+                                        <span class="pull-right text-muted">80% 完成</span>
+                                    </p>
+                                    <div class="progress progress-striped active">
+                                        <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 80%">
+                                            <span class="sr-only">80% 完成</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a class="text-center" href="#">
+                                <strong>查看所有任务</strong>
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        </li>
+                    </ul>
+                    <!-- /.dropdown-tasks -->
+                </li>
+                <!-- /.dropdown -->
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        <i class="fa fa-bell fa-fw"></i> <i class="fa fa-caret-down"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-alerts">
+                        <li>
+                            <a href="#">
+                                <div>
+                                    <i class="fa fa-comment fa-fw"></i> 新的评论
+                                    <span class="pull-right text-muted small">4 分钟前</span>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="#">
+                                <div>
+                                    <i class="fa fa-twitter fa-fw"></i> 3 新消息
+                                    <span class="pull-right text-muted small">12 分钟前</span>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="#">
+                                <div>
+                                    <i class="fa fa-envelope fa-fw"></i> 信息发送
+                                    <span class="pull-right text-muted small">4 分钟前</span>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="#">
+                                <div>
+                                    <i class="fa fa-tasks fa-fw"></i> 新任务
+                                    <span class="pull-right text-muted small">4 分钟前</span>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="#">
+                                <div>
+                                    <i class="fa fa-upload fa-fw"></i> 服务器重启
+                                    <span class="pull-right text-muted small">4 分钟前</span>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a class="text-center" href="#">
+                                <strong>查看所有通知</strong>
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        </li>
+                    </ul>
+                    <!-- /.dropdown-alerts -->
+                </li>
+                <!-- /.dropdown -->
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-user">
+                        <li><a href="#"><i class="fa fa-user fa-fw"></i> 用户信息</a>
+                        </li>
+                        <li><a href="#"><i class="fa fa-gear fa-fw"></i> 设置</a>
+                        </li>
+                        <li class="divider"></li>
+                        <li><a href="login.html"><i class="fa fa-sign-out fa-fw"></i> 退出登录</a>
+                        </li>
+                    </ul>
+                    <!-- /.dropdown-user -->
+                </li>
+                <!-- /.dropdown -->
+            </ul>
+            <!-- /.navbar-top-links -->
+
+            <div id="app_sidebar" class="navbar-default sidebar" role="navigation">
+                <div class="sidebar-nav navbar-collapse collapse">
+                    <ul class="nav" id="side-menu">
+                        <li>
+                            <a href="index.html"><i class="fa fa-home fa-fw"></i> 主页</a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-edit fa-fw"></i> 合同<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="hetong/guidanceview.html">指导合同管理</a>
+                                </li>
+                                <li>
+                                    <a href="hetong/customerList.html">细胞核合同管理</a>
+                                </li>
+                                <li>
+                                    <a href="hetong/concatDetail.html">销售合同管理</a>
+                                </li>
+                                <li>
+                                    <a href="buttons.html">合同申请</a>
+                                </li>
+                            </ul>
+                            <!-- /.nav-second-level -->
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-rmb fa-fw"></i> 财务<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="caiwu/baoxiaoManager.html">财务管理</a>
+                                   <!-- <a href="javascript:$.open('caiwu/baoxiaoManager')">财务管理</a>-->
+                                </li>
+                                <li>
+                                    <a href="caiwu/apply.html">财务申请</a>
+                                </li>
+                            </ul>
+                            <!-- /.nav-second-level -->
+                        </li>
+                    </ul>
+                </div>
+                <!-- /.sidebar-collapse -->
+            </div>
+            <!-- /.navbar-static-side -->
+        <!--</div>-->
+    </nav>
+
+    <div id="page-wrapper" style="overflow: hidden">
+        <div class="row hidden-xs" style="margin-top: 52px;">
+            <div class="col-lg-12">
+            </div>
+        </div>
+        <div class="row visible-xs" style="margin-top: 102px;">
+            <div class="col-lg-12">
+                <!--<h2>I am here ,do you know?</h2>-->
+            </div>
+        </div>
+        <!-- 主div -->
+        <div id="container">
+            <div class="ht_customer">
+                <!--<h4 style="text-align: center">用户单位列表</h4>-->
+                <div id="toolbar">
+                    <!--<div class="row">-->
+                        <!--<div class="col-xs-6 col-md-4">-->
+                            <form action="#" class="form-inline" role="form">
+                                <div class="input-group">
+                                    <div id="ht_customer_find" class="input-group-btn">
+                                        <button class="btn btn-default fropdown-toggle" data-toggle="dropdown" data-target="#ht_find_user_ul" type="button">
+                                            <span id="ht_find_user" target="text"><input type="hidden" name="chargerId" value="黄云"/>黄云</span><span class="caret"></span>
+                                        </button>
+                                        <span id="ht_find_user_ul">
+                                            <ul class="dropdown-menu" role="menu">
+                                                <li><a><span class="sr-only">1313</span>黄云</a></li>
+                                                <li><a><span class="sr-only">2425</span>陆承彬</a></li>
+                                                <li><a><span class="sr-only">331</span>潘阳</a></li>
+                                                <li><a><span class="sr-only">414</span>杨自奎</a></li>
+                                                <li><a><span class="sr-only">214</span>魏燕龙</a></li>
+                                                <li><a><span class="sr-only">114</span>姚元飞</a></li>
+                                                <li><a><span class="sr-only">112</span>曾超</a></li>
+                                            </ul>
+                                        </span>
+                                        <button class="btn btn-default">返回</button>
+                                        <!--<button class="btn btn-default fropdown-toggle" data-toggle="dropdown" data-target="#ht_find_type_ul" type="button">-->
+                                        <!--<span id="ht_find_type" target="text"><input type="hidden" name="type" value="explain"/>单位名称</span><span class="caret"></span>-->
+                                        <!--</button>-->
+                                        <!--<span id="ht_find_type_ul">-->
+                                        <!--<ul class="dropdown-menu" role="menu">-->
+                                        <!--<li><a><span class="sr-only">id</span>编号</a></li>-->
+                                        <!--<li><a><span class="sr-only">customerName</span>单位名称</a></li>-->
+                                        <!--<li><a><span class="sr-only">startDate</span>签定时间</a></li>-->
+                                        <!--<li><a><span class="sr-only">name</span>品名</a></li>-->
+                                        <!--<li><a><span class="sr-only">money</span>合同款</a></li>-->
+                                        <!--<li><a><span class="sr-only">huankuan</span>2015收款</a></li>-->
+                                        <!--<li><a><span class="sr-only">acount</span>2016收款</a></li>-->
+                                        <!--<li><a><span class="sr-only">shoukuan</span>应收款</a></li>-->
+                                        <!--</ul>-->
+                                        <!--</span>-->
+                                    </div>
+                                    <!--<input type="text" class="form-control" name="value" placeholder="您想查找什么？"/>-->
+                                    <!--<span class="input-group-btn">-->
+                                    <!--<button id="search" class="btn btn-default" type="button" app-action="">-->
+                                    <!--<i class="glyphicon glyphicon-search"></i>-->
+                                    <!--</button>-->
+                                    <!--</span>-->
+                                </div>
+                                <!--<span style="margin-left: 60px;">2015收款总额： </span>-->
+                                <!--<span style="margin-left: 60px;">2016收款总额： </span>-->
+                            </form>
+                        <!--</div>-->
+                    <!--</div>-->
+                </div>
+                <table id="table"
+                       data-toggle="table"
+                       data-height="528"
+                       data-toolbar="#toolbar"
+                       data-toolbar-align="left"
+                       data-show-header="true"
+                       data-show-columns="true"
+                       data-search="true"
+                       data-striped="true"
+                       data-buttons-align="right"
+                       data-query-params="queryParams"
+                       data-query-params-type=""
+                       data-show-toggle="true"
+                       data-show-refresh="true"
+                       data-response-handler="responseHandler"
+                       data-pagination="true"
+                       data-side-pagination="client"
+                       data-cache="false"
+                       data-url="data/data_ht.json">
+                    <thead>
+                    <tr>
+                    <th data-field="id" data-visible="false" data-sortable="true">编号</th>
+                        <th data-field="contractId" data-visible="false" data-sortable="true">合同编号</th>
+                        <th data-field="customerName" data-sortable="true">单位名称</th>
+                        <th data-field="pingming" data-sortable="true" data-visible="false">品名</th>
+                        <th data-field="contractMoney" data-visible="false" data-sortable="true">合同款</th>
+                        <th data-field="lastYear" data-sortable="true" width="160px;"><span app-text="lastYear">2015</span>收款</th>
+                        <th data-field="thisYear" data-sortable="true"><span app-text="thisYear">2016</span>收款</th>
+                        <th data-field="yingshou" data-sortable="true">应收款</th>
+                        <th data-field="signedTime" data-visible="false" data-sortable="true">签定时间</th>
+                    </tr>
+                    </thead>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div id="fixed_link" class="fixed-btn">
+        <a href="#" title="返回顶部" style="display: inline-block;"> <i class="glyphicon glyphicon-arrow-up"></i></a>
+        <!--<li class="divider"></li>-->
+        <div style="height: 1px;border: 0px;margin: 0px;background-color:#abb9d3;width: 100%"></div>
+        <a href="#" title="返回顶部" class="" style="display: inline-block;"> <i class="glyphicon glyphicon-pencil" style="margin: 3px 3px;"></i></a>
+        <!--<a href="#" title="返回顶部" style="display: inline-block; margin-bottom: 1px;"> <i class="fa fa-angle-up"></i></a>-->
+        <!--<a class="writer" target="_blank" href="//mail.qq.com/cgi-bin/qm_share?t=qm_mailme&amp;email=ssbDyoOAgfLU3crf09venNHd3w" style="font-size: 12px;" title="Bug 反馈"><i class="fa fa-envelope-o" style="font-size: 20px;"></i></a>-->
+    </div>
+</div>
+<!-- /#wrapper -->
+
+<!-- jQuery -->
+<script src="vendor/jquery/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+
+<!-- Metis Menu Plugin JavaScript -->
+<script src="vendor/metisMenu/metisMenu.js"></script>
+
+<!-- Metis Menu Plugin JavaScript -->
+<!--<script src="vendor/datatables/js/jquery.dataTables.js"></script>-->
+<!--<script src="vendor/datatables-plugins/dataTables.bootstrap.min.js"></script>-->
+<!--<script src="vendor/datatables-responsive/dataTables.responsive.js"></script>-->
+<!--<script src="vendor/bootstrap-table/bootstrap-table-zh-CN.min.js"></script>-->
+<!--<script src="js/jquery.noModal.js"></script>-->
+
+<!-- Custom Theme JavaScript -->
+<!--<script src="../dist/js/app.js"></script>-->
+<script src="js/app.js"></script>
+<script src="js/utils/formHelp.js"></script>
+<script src="js/center/caiwu.js"></script>
+<script src="js/center/hetong.js"></script>
+<script src="vendor/bt-table/dist/bootstrap-table.js"></script>
+<script src="vendor/bt-table/dist/locale/bootstrap-table-zh-CN.min.js"></script>
+
+<script>
+    $(document).ready(function(){
+        $('#ht_find_user_ul a').bind('click',function(event){
+            var text = $(this).html();
+            var value = $(this).find('.sr-only').html();
+            var hidden = $('<input type="hidden" name="chargerId" value="' + value +'"/>');
+            var closest = $('#ht_find_user');
+            closest.html(text);
+            closest.append(hidden[0]);
+            hetong.htManager.findCharger(value);
+            event.stopImmediatePropagation();
+        })
+        $('#ht_find_type_ul a').bind('click',function(event){
+            var text = $(this).html();
+            var type = $(this).find('.sr-only').html();
+            var hidden = $('<input type="hidden" name="type" value="' + type +'"/>');
+            var closest = $('#ht_find_type');
+            closest.html(text);
+            closest.append(hidden[0]);
+            event.stopImmediatePropagation();
+        })
+    })
+    var $table = $('#table'),
+            $ok = $('#search');
+
+    $(function () {
+        $ok.click(function () {
+
+            $table.bootstrapTable('refresh');
+        });
+    });
+
+    function queryParams(params) {
+//        var params = {};
+        $('#toolbar').find('input[name]').each(function () {
+            params[$(this).attr('name')] = $(this).val();
+        });
+        return params;
+    }
+
+    function responseHandler(res) {
+//        return res;
+        return res.rows;
+    }
+</script>
+</body>
+
+</html>

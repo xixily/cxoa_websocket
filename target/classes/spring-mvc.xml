@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:p="http://www.springframework.org/schema/p" 
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx" 
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:websocket="http://www.springframework.org/schema/websocket"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+		http://www.springframework.org/schema/beans/spring-beans-3.0.xsd 
+		http://www.springframework.org/schema/context 
+		http://www.springframework.org/schema/context/spring-context-3.0.xsd 
+		http://www.springframework.org/schema/mvc 
+		http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd
+		http://www.springframework.org/schema/tx 
+		http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+		http://www.springframework.org/schema/aop 
+		http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+		http://www.springframework.org/schema/websocket
+        http://www.springframework.org/schema/websocket/spring-websocket.xsd
+		">
+
+	<!-- 自动扫描controller包下的所有类，使其认为spring mvc的控制器 -->
+	<context:component-scan base-package="com.chaoxing.oa.controller" />
+	<!-- 会自动注册DefaultAnnotationHandlerMapping和AnnotationMethodHandlerAdapter两个bean 
+	AnnotationMethodHandlerAdapter将会初始化7个转换器，S
+	可以通过调用AnnotationMethodHandlerAdapter的getMessageConverts()方法来获取转换器的一个集合 List<HttpMessageConverter> -->
+	<!-- 在使用@RequstBody 接收JSON 数据串的时候发现报 415 数据不匹配错误 -->
+	<mvc:annotation-driven />
+	
+	<!-- 配置websocket初始化 -->
+<!-- 	<websocket:handlers>
+	      <websocket:mapping path="/chat" handler="myHandler"/>
+	      <websocket:handshake-interceptors>
+          <bean class="org.springframework.web.socket.server.support.HttpSessionHandshakeInterceptor"/>
+          </websocket:handshake-interceptors>
+          <websocket:sockjs />
+	</websocket:handlers>
+	<bean id="myHandler" class="com.chaoxing.oa.websocket.MyWebsocketHandller"/> -->
+	<!-- 配置聊天缓冲区 -->
+	<!-- <bean class="org.springframework.web.socket.server.standard.ServletServerContainerFactoryBean">
+        <property name="maxTextMessageBufferSize" value="8192"/>
+        <property name="maxBinaryMessageBufferSize" value="8192"/>
+    </bean> -->
+	
+	<!-- 要配置一个缓存初始化 -->
+<!-- 	<bean id="sysCache" class="com.chaoxing.oa.system.cache.CacheUtil">
+	
+	</bean> -->
+
+	<!-- 避免IE执行AJAX时,返回JSON出现下载文件 -->
+	<!-- 能够将POJO对象自动转换为JSON对象 -->
+	<bean id="mappingJacksonHttpMessageConverter"
+		class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+		<property name="supportedMediaTypes">
+			<list>
+				<value>text/html;charset=UTF-8</value>
+			</list>
+		</property>
+	</bean>
+
+	<!-- 启动Spring MVC的注解功能，完成请求和注解POJO（Plain Ordinary Java Object）简单的Java对象的映射 -->
+	<!-- 例如@ResponseBody的作用是把返回值直接写到HTTP response body里 -->
+	<!-- <bean
+		class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
+		<property name="messageConverters">
+			<list>
+				<ref bean="mappingJacksonHttpMessageConverter" />json转换器
+			</list>
+		</property>
+	</bean> -->
+	<bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
+		<property name="messageConverters">
+			<list>
+				<ref bean="stringHttpMessageConverter" />
+				<ref bean="mappingJacksonHttpMessageConverter" />
+<!-- 				<bean
+					class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+				</bean> -->
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="stringHttpMessageConverter"
+		class="org.springframework.http.converter.StringHttpMessageConverter">
+		<property name="supportedMediaTypes">
+			<list>
+				<value>text/plain;charset=UTF-8</value>
+			</list>
+		</property>
+	</bean>
+
+	<!-- 对模型视图名称String的解析，即在模型视图名称添加前后缀 -->
+	<bean
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver"
+		p:prefix="/" p:suffix=".jsp" />
+		
+	<!-- 文件上传下载 -->
+	<bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<property name="defaultEncoding">
+			<value>UTF-8</value>
+		</property>
+		<property name="maxUploadSize">
+			<value>32505856</value><!-- 上传文件大小限制为31M，31*1024*1024 -->
+		</property>
+		<property name="maxInMemorySize">
+			<value>4096</value>
+		</property>
+	</bean>
+	
+	<!-- <bean id="logService" class="com.chaoxing.oa.service.impl.EmployeeInfoServiceImpl">
+	
+	</bean> -->
+
+
+
+	<!-- 拦截器 -->
+	<mvc:interceptors>
+		<mvc:interceptor>
+			<mvc:mapping path="/**" />
+			<bean class="com.chaoxing.oa.interceptors.SessionInterceptor">
+				<!-- 不需要session验证的地址 -->
+				<property name="excludeUrls">
+					<list>
+						<value>/user/login.action</value>
+						<value>/user/modifyPassword.action</value>
+						<value>/user/logout.action</value>
+						<value>/public/user/applogin.action</value>
+						<!-- <value>/employee/queryOStruct.action</value> -->
+						<!-- <value>/file/codeImage.action</value> -->
+						<!-- <value>/employee/getCompany.action</value> -->
+						<!-- <value>/druidController/druid.action</value> -->
+					</list>
+				</property>
+			</bean>
+		</mvc:interceptor>
+		<mvc:interceptor>
+			<mvc:mapping path="/**" />
+			<bean class="com.chaoxing.oa.interceptors.SecurityInterceptor">
+				<!-- 不需要权限验证的地址 -->
+				<property name="excludeUrls">
+					<list>
+						<value>/user/login.action</value>
+						<value>/user/logout.action</value>
+						<value>/menu/allMenu.action</value>
+						<value>/system/allMenu.action</value>
+						<value>/employee/getFourThLevel.action</value>
+						<value>/employee/getOStruct.action</value>
+						<value>/employee/getCompany.action</value>
+						<value>/employee/getTxs.action</value>
+						<value>/employee/getInsuranceCompany.action</value>
+						<value>/system/queryMenus.action</value>
+						<value>/user/modifyPassword.action</value>
+						<value>/public/user/applogin.action</value>
+						<!-- <value>/file/codeImage.action</value> -->
+					</list>
+				</property>
+			</bean>
+		</mvc:interceptor>
+		<mvc:interceptor>
+			<mvc:mapping path="/**" />
+			<bean class="com.chaoxing.oa.interceptors.LogInterceptor">
+				<!-- 需要记录日志的地址 -->
+				<property name="excludeUrls">
+					<list>
+						<!-- <value>/user/login.action</value>
+						<value>/user/logout.action</value>
+						<value>/menu/allMenu.action</value>
+						<value>/system/allMenu.action</value>
+						<value>/employee/getFourThLevel.action</value>
+						<value>/employee/getOStruct.action</value>
+						<value>/employee/getCompany.action</value>
+						<value>/employee/getInsuranceCompany.action</value>
+						<value>/system/queryMenus.action</value>
+						<value>/user/modifyPassword.action</value>
+						<value>/employee/getHouseholdType.action</value>
+						<value>/employee/getLevel.action</value> -->
+						<value>/user/updateUserName.action</value>
+						<value>/user/deleteUserName.action</value>
+						<value>/user/addUserName.action</value>
+						<value>/test/update.action</value>
+						<value>/hetong/updateFapiao.action</value>
+						<value>/hetong/sendKuaidi.action</value>
+						<value>/hetong/sendKuaidi.action</value>
+						<value>/file/*</value>
+						<value>/file/exportYiDong.action</value>
+						<value>/file/exportShebaoSummary.action</value>
+						<value>/file/exportShebaoDetail.action</value>
+						<value>/file/exportShebaoCompany.action</value>
+						<value>/file/exportOStruct.action</value>
+						<value>/file/exportOS.action</value>
+						<value>/file/exportMonthWagesExcel.action</value>
+						<value>/file/exportKaoqinExcel.action</value>
+						<value>/file/exportEmployeeExcel.action</value>
+						<value>/employee/updateWagesRadix.action</value>
+						<value>/employee/updateWagesDate.action</value>
+						<value>/employee/updateWages.action</value>
+						<value>/employee/updateWages.action</value>
+						<value>/employee/updateShebaoDetail.action</value>
+						<value>/employee/updateShebao.action</value>
+						<value>/employee/updateOrsaveOS.action</value>
+						<value>/employee/updateMonthWages.action</value>
+						<value>/employee/updateKaoqin.action</value>
+						<value>/employee/updateGridWages.action</value>
+						<value>/employee/updateGridShebaoWages.action</value>
+						<value>/employee/unluckeShebaoSummary.action</value>
+						<value>/employee/luckedShebaoSummary.action</value>
+						<value>/employee/lockedKaoqin.action</value>
+						<value>/employee/generateWagesDates.action</value>
+						<value>/employee/generateMonthWages.action</value>
+						<value>/employee/generateKaoqin.action</value>
+						<value>/employee/deleteWagesDate.action</value>
+						<value>/employee/deleteWages.action</value>
+						<value>/employee/deleteShebao.action</value>
+						<value>/employee/deleteOS.action</value>
+						<value>/employee/deleteMonthWages.action</value>
+						<value>/employee/deleteKaoqin.action</value>
+						<value>/employee/addWages.action</value>
+						<value>/employee/addShebao.action</value>
+						<value>/employee/addMonthWages.action</value>
+						<value>/employee/generateCompanyType.action</value>
+					</list>
+				</property>
+			</bean>
+		</mvc:interceptor>
+	</mvc:interceptors>
+</beans>

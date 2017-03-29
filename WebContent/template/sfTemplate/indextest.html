@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>顺丰打印单</title>
+	<link rel="icon" href="">
+	<!--<link rel="stylesheet" href="template/sfTemplate/css/common.css">
+	<link rel="stylesheet" href="template/sfTemplate/css/style.css">
+	<script type="text/javascript" src="jslib/jquery-easyui-1.5/jquery.min.js"></script>
+	<script type="text/javascript" src="jslib/jquery-barcode.min.js"></script>-->
+	<link rel="stylesheet" href="css/common.css"/>
+	<link rel="stylesheet" href="css/style.css"/>
+	<script type="text/javascript" src="../../jslib/jquery-easyui-1.5/jquery.min.js"></script>
+	<script type="text/javascript" src="../../jslib/jquery-barcode.min.js"></script>
+</head>
+<body style="height: 0px;">
+<!--<object id="Web" width="0" classid="CLSID:8856F961-340A-11D0-A96B-00C4FD705A2"></object>-->
+<input id="mailno" type="hidden" value=""/>
+<div id="sf_kuaidi_print_list" class="page" style="margin: 10px auto">
+		<div class="m1 b">
+			<img src="img/logo.jpg" class="img1" target="_value" name="log">
+			<img src="img/tel.png" class="img2" target="_value" name="tel">
+			<p><span class="s1"></span><span class="s2"></span></p>
+		</div>
+		<div class="m2 b">
+			<div class="left">
+				<!--<img src="template/sfTemplate/img/code.jpg" target="_value" name="code_src">-->
+				<!--<img src="img/code.jpg" target="_value" name="code_src">-->
+				<div id="code_src3" name="code_src" style="margin: 10px auto;"></div>
+				<!--<div style="background:"></div>-->
+				<!--<p>运单号&nbsp;&nbsp;<span target="_value" name="mailno"></span></p>-->
+				<!-- <p>母单号<span>444 004 772 115</span></p> -->
+			</div>
+			<div class="right">
+				<div class="r1 b">
+					<p style="text-align: center"><span  target="_value" name="express_type"></span></p>
+				</div>
+				<div class="r2"><!-- 这里应该属于顺丰增值服务,[name、value1、value2] -->
+					<p class="p1"><span target="_value" name="addService_name" ></span></p>
+					<p class="p2"><span target="_value" name="addService_value1"></span></p>
+					<p class="p3"><span target="_value" name="addService_value2"></span></p>
+				</div>
+			</div>
+		</div>
+		<div class="m3 b">
+			<div class="left">
+				<p>目的地</p>
+			</div>
+			<div class="right">
+				<p><span target="_value" name="destcode"></span></p>
+			</div>
+		</div>
+		<div class="m4 b">
+			<div class="left">
+				<p>收件人</p>
+			</div>
+			<div class="right">
+				<p>
+					<span target="_value" name="d_contact"></span>
+					<span target="_value" name="d_tel"></span>
+					<span target="_value" name="d_mobile"></span>
+					<span target="_value" name="d_company"></span></p>
+				<p>
+					<span target="_value" name="d_address"></span>
+				</p>
+			</div>
+		</div>
+		<div class="m5 b">
+			<div class="left">
+				<p>寄件人</p>
+			</div>
+			<div class="right-1">
+				<p>
+					<span target="_value" name="j_contact"></span>
+					<span target="_value" name="j_tel"></span>
+					<span target="_value" name="j_company"></span>
+				</p>
+				<p>
+					<span target="_value" name="j_address"></span>
+				</p>
+			</div>
+			<div class="right-2">
+				<p class="p1"><span target="_value" name="addService_name" ></span></p>
+				<p class="p2"><span target="_value" name="addService_value1"></span></p>
+				<!--<p class="p3"><span target="_value" name="addService_value2"></span></p>-->
+			</div>
+		</div>
+		<div class="m6 b cl">
+			<div class="left">
+				<div class="l1 b">
+					<ul>
+						<li>付款方式：<span target="_value" name="pay_method">寄付 月结</span></li>
+						<li>月结账号：<span target="_value" name="custid"></span></li>
+						<li>件数：<span target="_value" name="parcel_quantity"></span></li>
+					</ul>
+					<ul>
+						<li>备注：<span target="_value" name="remark"></span></li>
+						<li>定时派送：<span target="_value" name="due_send"></span></li>
+					</ul>
+					<ul>
+						<li>运费：<b  target="_value" name="freight"></b></li>
+						<li>费用合计：<b  target="_value" name="fee_total"></b></li>
+					</ul>
+					<p  target="_value" name="mark1">转寄协议客户</p>
+				</div>
+				<div class="l2">
+					<div class="l2-a">
+						<p>托寄物</p>
+					</div>
+					<div class="l2-b">
+						<span  target="_value" name="content"></span>
+					</div>
+					<div class="l2-c">
+						<ul>
+							<li>收件员：<span  target="_value" name="sf_receiver"></span></li>
+							<li>收件日期：<span  target="_value" name="sf_revevie_date"></span></li>
+							<li>派件员：<span  target="_value" name="sf_sender"></span></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<div class="right">
+				<p>签名：</p>
+				<p class="p2">月<span>日</span></p>
+			</div>
+		</div>
+		<div class="item b">
+			<div class="m7 b cl">
+				<div class="left">
+					<img class="img1" src="img/logo.jpg" target="_value" name="logo">
+					<img src="img/tel.png" target="_value" name="tel">
+				</div>
+				<div class="right">
+					<!--<img src="template/sfTemplate/img/code.jpg" target="_value" name="code_src">-->
+					<div id="code_src1" name="code_src" style="margin: 10px auto"></div>
+					<!--<p>运单号&nbsp;&nbsp;<span target="_value"  name="mailno"></span></p>-->
+				</div>
+			</div>
+			<div class="m8 b">
+				<div class="left">
+					<p>寄件人</p>
+				</div>
+				<div class="right">
+					<p>
+						<span target="_value" name="j_contact"></span>
+						<span target="_value" name="j_tel"></span>
+						<span target="_value" name="j_company"></span>
+					</p>
+					<p>
+						<span target="_value" name="j_address"></span>
+					</p>
+				</div>
+			</div>
+			<div class="m8 b">
+				<div class="left">
+					<p>收件人</p>
+				</div>
+				<div class="right">
+					<p>
+						<span target="_value" name="d_contact"></span>
+						<span target="_value" name="d_tel"></span>
+						<span target="_value" name="d_mobile"></span>
+						<span target="_value" name="d_company"></span></p>
+					<p>
+						<span target="_value" name="d_address"></span>
+					</p>
+				</div>
+			</div>
+			<div class="m10"></div>
+		</div>
+		<div class="item b">
+			<div class="m7 b cl">
+				<div class="left">
+					<img class="img1" src="img/logo.jpg" target="_value" name="logo">
+					<img src="img/tel.png" target="_value" name="tel">
+				</div>
+				<div class="right">
+					<!--<img src="template/sfTemplate/img/code.jpg" target="_value" name="code_src">-->
+					<div id="code_src2" name="code_src" style="margin: 10px auto"></div>
+					<!--<p>运单号&nbsp;&nbsp;<span target="_value"  name="mailno"></span></p>-->
+				</div>
+			</div>
+			<div class="m8 b">
+				<div class="left">
+					<p>寄件人</p>
+				</div>
+				<div class="right">
+					<p>
+						<span target="_value" name="j_contact"></span>
+						<span target="_value" name="j_tel"></span>
+						<span target="_value" name="j_company"></span>
+					</p>
+					<p>
+						<span target="_value" name="j_address"></span>
+					</p>
+				</div>
+			</div>
+			<div class="m8 b">
+				<div class="left">
+					<p>收件人</p>
+				</div>
+				<div class="right">
+					<p>
+						<span target="_value" name="d_contact"></span>
+						<span target="_value" name="d_tel"></span>
+						<span target="_value" name="d_mobile"></span>
+						<span target="_value" name="d_company"></span></p>
+					<p>
+						<span target="_value" name="d_address"></span>
+					</p>
+				</div>
+			</div>
+			<div class="m10"></div>
+		</div>
+	</div>
+</body>
+<script type="text/javascript">
+//	var mailno = "444795126804";
+
+	$(document).ready(function(){
+//		var code_src = $('div[name="code_src"]');
+//		if(code_src &&　code_src.length>0){
+//			$.each(code_src,function(n, obj){
+//				$(obj).barcode("444795126804","code128 ",{barWidth:2,barHeight:22})
+//			})
+//		}
+		var mailno = $('#mailno').val();
+		var encode = "code128";
+		var data = {};
+		data = {barWidth:2,barHeight:42,fontSize:12};
+		$("#code_src3").barcode(mailno, encode, data);
+		$("#code_src1").barcode(mailno, encode,data);
+		$("#code_src2").barcode(mailno, encode, data);
+	})
+	/* $.(document).ready(function(){ */
+//	window.onload = window.print;
+//		window.print();
+	/* }) */
+</script>
+</html>

@@ -1,0 +1,15 @@
+CACHE MANIFEST
+# 2017-01-05 v1.1.2
+
+
+
+NETWORK:
+app/js/app.js
+app/js/utils/formHelp.js
+app/js/center/caiwu.js
+app/js/center/hetong.js
+app_index.html
+*
+
+FALLBACK:
+error/404.jsp

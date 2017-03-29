@@ -1,0 +1,22 @@
+[{
+  "id":1,
+  "text":"世纪超星",
+  "desc":"Write once, run anywhere"
+},{
+  "id":2,
+  "text":"独秀",
+  "desc":"One of the programming languages designed for the Common Language Infrastructure"
+},{
+  "id":3,
+  "text":"大医",
+  "selected":true,
+  "desc":"A dynamic, reflective, general-purpose object-oriented programming language"
+},{
+  "id":4,
+  "text":"慕课",
+  "desc":"A high-level, general-purpose, interpreted, dynamic programming language"
+},{
+  "id":5,
+  "text":"博雅",
+  "desc":"A family of general-purpose, high-level programming languages"
+}]

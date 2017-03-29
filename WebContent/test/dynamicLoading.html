@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="../jslib/jquery-easyui-1.5/themes/default/easyui.css">
+    <link rel="stylesheet" type="text/css" href="../jslib/jquery-easyui-1.5/themes/icon.css">
+    <script type="text/javascript" src="../jslib/jquery-easyui-1.5/jquery.min.js"></script>
+    <script type="text/javascript" src="../jslib/jquery-easyui-1.5/jquery.easyui.min.js"></script>
+</head>
+<body>
+<h2>Dynamic Loading in TreeGrid</h2>
+<div class="demo-info" style="margin-bottom:10px">
+    <div class="demo-tip icon-tip">&nbsp;</div>
+    <div>Click the node expand button to load its child nodes.</div>
+</div>
+
+<table id="tg" title="Products" class="easyui-treegrid" style="width:700px;height:300px"
+       url="treegrid3_getdata.json"
+       rownumbers="true"
+       idField="id" treeField="name" data-options="onLoadSuccess:function(row, data){
+            alert('wait...');
+            console.log('row  %o' , row);
+            console.log('data %o' , data);
+            data = data.rows;
+            console.log('data %o' , data);
+       }">
+    <thead>
+    <tr>
+        <th field="name" width="250">Name</th>
+        <th field="quantity" width="100" align="right">Quantity</th>
+        <th field="price" width="150" align="right" >Price</th>
+        <th field="total" width="150" align="right">Total</th>
+    </tr>
+    </thead>
+</table>
+<script>
+    function formatDollar(value){
+        if (value){
+            return '$'+value;
+        } else {
+            return '';
+        }
+    }
+</script>
+</body>
+</html>

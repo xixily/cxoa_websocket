@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>超星OA财务报销申请单</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom Fonts -->
+    <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="dist/css/cxoa_public.min.css" rel="stylesheet" type="text/css">
+    <style>
+        #bx_sq .form-group{
+            margin: 0px;
+        }
+        #bx_sq input,button{
+            margin: 5px 0;
+        }
+    </style>
+</head>
+<body>
+<script type="text/javascript">
+    function test(){
+        var tt = '';
+        tt = "<form><input id=\"combox_c1\" class=\"easyui-combobox\" name=\"company\" data-options=\"url: 'employee/getCompany.action',valueField:'id',textField:'cmopany',\" />" +
+                "<a id=\"btn\" href=\"#\" class=\"easyui-linkbutton do_action\" appaction=\"need_data\" data-options=\"iconCls:'icon-excel'\">下载</a>";
+        $.messager.alert("下载：",tt);
+       // =if(EXACT(D3,"中层及以上管理人员"),1,if(EXACT(D3,"专业技术人员"),2,if(EXACT(D3,"办事人员和有关人员"),3,if(EXACT(D3,"商业、服务业人员")),4,0)))
+
+
+    }
+    function need_data(data){
+        console.log(data);
+    }
+</script>
+
+<div class="container">
+    <!-- 修改-->
+    <div class="row">
+        <div class="col-xs-12 col-md-10">
+            <form id="bx_sq" class="form-horizontal" role="form">
+                <legend>
+                    <span>报销信息</span>
+                    <div class="pull-right">
+                        <span>
+                        <button type="button" class="btn btn-default btn-sm"  style="margin:10px 10px 0px;" onclick="var parent = $(this).parent();parent.toggleClass('hide');parent.siblings().toggleClass('hide')">
+                            <i class="fa fa-edit"></i>
+                            编辑
+                        </button>
+                        </span>
+                        <span class="hide">
+                        <button type="button" class="btn btn-default btn-sm"  style="margin:10px 10px 0px;" onclick="var parent = $(this).parent();parent.toggleClass('hide');parent.siblings().toggleClass('hide')">
+                            <i class="fa fa-check"></i>
+                            保存
+                        </button>
+                        <button type="button" class="btn btn-default btn-sm"  style="margin:10px 10px 0px;" onclick="var parent = $(this).parent();parent.toggleClass('hide');parent.siblings().toggleClass('hide')">
+                            <i class="fa fa-times"></i>
+                            取消
+                        </button>
+                        </span>
+                    </div>
+                </legend>
+                <fieldset disabled>
+                    <div class="form-group">
+                        <label class="col-xs-4 col-sm-2 control-label" for="_id">批次号:</label>
+                        <div class="col-xs-8 col-sm-4">
+                            <input type="number" class="form-control input-sm" id="_id" name="_id" placeholder="批次号..." disabled>
+                        </div>
+                        <label class="col-xs-4 col-sm-2 control-label" for="username">报销人:</label>
+                        <div class="col-xs-8 col-sm-4">
+                            <input type="text" class="form-control input-sm" id="username" name="username" placeholder="报销人...">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-xs-4 col-sm-2 control-label">邮寄时间:</label>
+                        <div class="col-xs-8 col-sm-4">
+                            <input type="date" class="form-control input-sm" name="jTime" placeholder="邮寄时间...">
+                        </div>
+                        <label class="col-xs-4 col-sm-2 control-label" for="email">报销人邮箱:</label>
+                        <div class="col-xs-8 col-sm-4">
+                            <input type="email" class="form-control input-sm" id="email" name="email" placeholder="报销人...">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-xs-4 col-sm-2 control-label" for="number">报销张数:</label>
+                        <div class="col-xs-8 col-sm-4">
+                            <input type="number" max="30" min="0" id="number" class="form-control input-sm" name="number" placeholder="报销张数...">
+                        </div>
+                        <label class="col-xs-4 col-sm-2 control-label" for="money">报销金额:</label>
+                        <div class="col-xs-8 col-sm-4">
+                            <input type="number"  class="form-control input-sm" id="money" name="money" placeholder="报销金额...">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-xs-4 col-sm-2  control-label">还借款金额:</label>
+                        <div class="col-xs-8 col-sm-4">
+                            <input type="number" class="form-control input-sm" name="huankuan" placeholder="还款金额...">
+                        </div>
+                        <label class="col-xs-4 col-sm-2  control-label" for="bx_bank2">银行:</label>
+                        <div class="col-xs-8 col-sm-4">
+                            <select name="bank" id="bx_bank2" class="form-control input-sm">
+                                <option value="jtyh">交通银行</option>
+                                <option value="gs">工商银行</option>
+                                <option value="gd">光大银行</option>
+                                <option value="js">建设银行</option>
+                                <option value="zs">招商银行</option>
+                                <option value="nh">农业银行</option>
+                            </select>
+                            <!--<input type="text" class="form-control input-sm" placeholder="银行...">-->
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-xs-4 col-sm-2 control-label">卡号:</label>
+                        <div class="col-xs-8 col-sm-4">
+                            <input type="text" class="form-control input-sm" name="account" placeholder="卡号...">
+                        </div>
+                        <label class="col-xs-4 col-sm-2 control-label" for="explain">说明:</label>
+                        <div class="col-xs-8 col-sm-4">
+                            <textarea name="explain" id="explain" cols="30" rows="1" class="form-control"></textarea>
+                            <!--<input type="text" class="form-control input-sm" name="account" placeholder="说明...">-->
+                        </div>
+                    </div>
+                    <!--<div class="form-group" style="margin-top: 10px;">-->
+                        <!--<div class="col-xs-2 col-md-2"></div>-->
+                        <!--<div class="col-xs-4 col-md-5">-->
+                            <!--<button class="btn btn-default"><i class="fa fa-check"></i>确认提交</button>-->
+                        <!--</div>-->
+                        <!--<div class="col-xs-4 col-md-5">-->
+                            <!--<button class="btn btn-default"><i class="fa fa-times"></i>取消</button>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                </fieldset>
+                <legend>
+                    <span>批准人信息</span>
+                    <div class="pull-right">
+                        <span>
+                        <button type="button" class="btn btn-default btn-sm"  style="margin:10px 10px 0px;" onclick="var parent = $(this).parent();parent.toggleClass('hide');parent.siblings().toggleClass('hide')">
+                            <i class="fa fa-edit"></i>
+                            编辑
+                        </button>
+                        </span>
+                        <span class="hide">
+                        <button type="button" class="btn btn-default btn-sm"  style="margin:10px 10px 0px;" onclick="var parent = $(this).parent();parent.toggleClass('hide');parent.siblings().toggleClass('hide')">
+                            <i class="fa fa-check"></i>
+                            保存
+                        </button>
+                        <button type="button" class="btn btn-default btn-sm"  style="margin:10px 10px 0px;" onclick="var parent = $(this).parent();parent.toggleClass('hide');parent.siblings().toggleClass('hide')">
+                            <i class="fa fa-times"></i>
+                            取消
+                        </button>
+                        </span>
+                    </div>
+                </legend>
+                <fieldset disabled>
+                    <div class="form-group">
+                        <label class="col-xs-4 col-sm-2 control-label" for="approver">批准人:</label>
+                        <div class="col-xs-8 col-sm-4">
+                            <input type="text" class="form-control input-sm" id="approver" name="approver" placeholder="批准人...">
+                        </div>
+                        <label class="col-xs-4 col-sm-2 control-label" for="aproEmail">批准人邮箱:</label>
+                        <div class="col-xs-8 col-sm-4">
+                            <input type="email" class="form-control input-sm" id="aproEmail" name="aproEmail" placeholder="批准人邮箱...">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-xs-4 col-sm-2 control-label" for="approTime">批准时间:</label>
+                        <div class="col-xs-8 col-sm-4">
+                            <input type="date" class="form-control input-sm" id="approTime" placeholder="批准时间...">
+                        </div>
+                        <label class="col-xs-4 col-sm-2 control-label" for="approRemark">备注:</label>
+                        <div class="col-xs-8 col-sm-4">
+                            <input type="text" class="form-control input-sm" name="approRemark" id="approRemark" placeholder="批准时间...">
+                        </div>
+                    </div>
+                </fieldset>
+                <legend>
+                    <span>财务信息</span>
+                    <div class="pull-right">
+                        <span>
+                        <button type="button" class="btn btn-default btn-sm"  style="margin:10px 10px 0px;" onclick="var parent = $(this).parent();parent.toggleClass('hide');parent.siblings().toggleClass('hide')">
+                            <i class="fa fa-edit"></i>
+                            编辑
+                        </button>
+                        </span>
+                        <span class="hide">
+                        <button type="button" class="btn btn-default btn-sm"  style="margin:10px 10px 0px;" onclick="var parent = $(this).parent();parent.toggleClass('hide');parent.siblings().toggleClass('hide')">
+                            <i class="fa fa-check"></i>
+                            保存
+                        </button>
+                        <button type="button" class="btn btn-default btn-sm"  style="margin:10px 10px 0px;" onclick="var parent = $(this).parent();parent.toggleClass('hide');parent.siblings().toggleClass('hide')">
+                            <i class="fa fa-times"></i>
+                            取消
+                        </button>
+                        </span>
+                    </div>
+                </legend>
+                <fieldset disabled>
+                    <div class="form-group">
+                        <label class="col-xs-4 col-sm-2 control-label" for="receiveTime">收票时间:</label>
+                        <div class="col-xs-8 col-sm-4">
+                            <input type="date" class="form-control input-sm" id="receiveTime" name="" placeholder="收票时间...">
+                        </div>
+                        <label class="col-xs-4 col-sm-2 control-label" for="bxTime">报销时间:</label>
+                        <div class="col-xs-8 col-sm-4">
+                            <input type="date" class="form-control input-sm" id="bxTime" placeholder="报销时间...">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-xs-4 col-sm-2 control-label" for="baoxMoney">报销金额:</label>
+                        <div class="col-xs-8 col-sm-4">
+                            <input type="text" class="form-control input-sm" id="baoxMoney" name="baoxMoney" placeholder="报销情况...">
+                        </div>
+                        <label class="col-xs-4 col-sm-2 control-label" for="tuipiao">退票金额:</label>
+                        <div class="col-xs-8 col-sm-4">
+                            <input type="number" class="form-control input-sm" id="tuipiao" name="tuipiao" placeholder="退票金额...">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-xs-4 col-sm-2 control-label" for="caiwuRemarks">财务备注:</label>
+                        <div class="col-xs-8 col-sm-4">
+                            <textarea name="caiwuRemarks" id="caiwuRemarks" cols="30" rows="1" class="form-control" placeholder="财务备注..."></textarea>
+                        </div>
+                    </div>
+                </fieldset>
+
+                <fieldset>
+                    <legend> &nbsp;&nbsp;&nbsp;&nbsp;</legend>
+                    <div class="chat-panel panel panel-default">
+                        <div class="panel-heading">
+                            <i class="fa fa-comments fa-fw"></i> Chat
+                        </div>
+                        <!-- /.panel-heading -->
+                        <div class="panel-body"  style="height:150px;">
+                            <ul class="chat">
+                                <li class="left clearfix">
+                                    <span class="chat-img pull-left">
+                                        <img src="images/blue_60.png" alt="User Avatar" class="img-circle" />
+                                    </span>
+                                    <div class="chat-body clearfix">
+                                        <div class="header">
+                                            <strong class="primary-font">Jack Sparrow</strong>
+                                            <small class="pull-right text-muted">
+                                                <i class="fa fa-clock-o fa-fw"></i> 12 mins ago
+                                            </small>
+                                        </div>
+                                        <p>
+                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur bibendum ornare dolor, quis ullamcorper ligula sodales.
+                                        </p>
+                                    </div>
+                                </li>
+                                <li class="right clearfix">
+                                    <span class="chat-img pull-right">
+                                        <img src="images/red_60.png" alt="User Avatar" class="img-circle" />
+                                    </span>
+                                    <div class="chat-body clearfix">
+                                        <div class="header">
+                                            <small class=" text-muted">
+                                                <i class="fa fa-clock-o fa-fw"></i> 13 mins ago</small>
+                                            <strong class="pull-right primary-font">Bhaumik Patel</strong>
+                                        </div>
+                                        <p>
+                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur bibendum ornare dolor, quis ullamcorper ligula sodales.
+                                        </p>
+                                    </div>
+                                </li>
+                                <li class="left clearfix">
+                                    <span class="chat-img pull-left">
+                                        <img src="images/blue_60.png" alt="User Avatar" class="img-circle" />
+                                    </span>
+                                    <div class="chat-body clearfix">
+                                        <div class="header">
+                                            <strong class="primary-font">Jack Sparrow</strong>
+                                            <small class="pull-right text-muted">
+                                                <i class="fa fa-clock-o fa-fw"></i> 14 mins ago</small>
+                                        </div>
+                                        <p>
+                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur bibendum ornare dolor, quis ullamcorper ligula sodales.
+                                        </p>
+                                    </div>
+                                </li>
+                                <li class="right clearfix">
+                                    <span class="chat-img pull-right">
+                                        <img src="images/red_60.png" alt="User Avatar" class="img-circle" />
+                                    </span>
+                                    <div class="chat-body clearfix">
+                                        <div class="header">
+                                            <small class=" text-muted">
+                                                <i class="fa fa-clock-o fa-fw"></i> 15 mins ago</small>
+                                            <strong class="pull-right primary-font">Bhaumik Patel</strong>
+                                        </div>
+                                        <p>
+                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur bibendum ornare dolor, quis ullamcorper ligula sodales.
+                                        </p>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <!-- /.panel-body -->
+                        <div class="panel-footer">
+                            <div class="input-group">
+                                <input id="btn-input" type="text" class="form-control input-sm" placeholder="Type your message here..." />
+                                <span class="input-group-btn">
+                                    <button class="btn btn-warning btn-sm" id="btn-chat">
+                                        Send
+                                    </button>
+                                </span>
+                            </div>
+                        </div>
+                        <!-- /.panel-footer -->
+                    </div>
+                </fieldset>
+                <div class="row">
+                </div>
+            </form>
+        </div>
+        <div class="col-md-9" style="background-color:#f3f3f3;display: none" >
+
+        </div>
+        <div class="col-md-3" style="display: none">
+            <!-- /.panel -->
+            <div class="chat-panel panel panel-default">
+                <div class="panel-heading">
+                    <i class="fa fa-comments fa-fw"></i> Chat
+                    <div class="btn-group pull-right">
+                        <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">
+                            <i class="fa fa-chevron-down"></i>
+                        </button>
+                        <ul class="dropdown-menu slidedown">
+                            <li>
+                                <a href="#">
+                                    <i class="fa fa-refresh fa-fw"></i> Refresh
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <i class="fa fa-check-circle fa-fw"></i> Available
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <i class="fa fa-times fa-fw"></i> Busy
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <i class="fa fa-clock-o fa-fw"></i> Away
+                                </a>
+                            </li>
+                            <li class="divider"></li>
+                            <li>
+                                <a href="#">
+                                    <i class="fa fa-sign-out fa-fw"></i> Sign Out
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- /.panel-heading -->
+                <div class="panel-body">
+                    <ul class="chat">
+                        <li class="left clearfix">
+                                    <span class="chat-img pull-left">
+                                        <img src="images/blue_60.png" alt="User Avatar" class="img-circle" />
+                                    </span>
+                            <div class="chat-body clearfix">
+                                <div class="header">
+                                    <strong class="primary-font">Jack Sparrow</strong>
+                                    <small class="pull-right text-muted">
+                                        <i class="fa fa-clock-o fa-fw"></i> 12 mins ago
+                                    </small>
+                                </div>
+                                <p>
+                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur bibendum ornare dolor, quis ullamcorper ligula sodales.
+                                </p>
+                            </div>
+                        </li>
+                        <li class="right clearfix">
+                                    <span class="chat-img pull-right">
+                                        <img src="images/red_60.png" alt="User Avatar" class="img-circle" />
+                                    </span>
+                            <div class="chat-body clearfix">
+                                <div class="header">
+                                    <small class=" text-muted">
+                                        <i class="fa fa-clock-o fa-fw"></i> 13 mins ago</small>
+                                    <strong class="pull-right primary-font">Bhaumik Patel</strong>
+                                </div>
+                                <p>
+                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur bibendum ornare dolor, quis ullamcorper ligula sodales.
+                                </p>
+                            </div>
+                        </li>
+                        <li class="left clearfix">
+                                    <span class="chat-img pull-left">
+                                        <img src="images/blue_60.png" alt="User Avatar" class="img-circle" />
+                                    </span>
+                            <div class="chat-body clearfix">
+                                <div class="header">
+                                    <strong class="primary-font">Jack Sparrow</strong>
+                                    <small class="pull-right text-muted">
+                                        <i class="fa fa-clock-o fa-fw"></i> 14 mins ago</small>
+                                </div>
+                                <p>
+                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur bibendum ornare dolor, quis ullamcorper ligula sodales.
+                                </p>
+                            </div>
+                        </li>
+                        <li class="right clearfix">
+                                    <span class="chat-img pull-right">
+                                        <img src="images/red_60.png" alt="User Avatar" class="img-circle" />
+                                    </span>
+                            <div class="chat-body clearfix">
+                                <div class="header">
+                                    <small class=" text-muted">
+                                        <i class="fa fa-clock-o fa-fw"></i> 15 mins ago</small>
+                                    <strong class="pull-right primary-font">Bhaumik Patel</strong>
+                                </div>
+                                <p>
+                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur bibendum ornare dolor, quis ullamcorper ligula sodales.
+                                </p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <!-- /.panel-body -->
+                <div class="panel-footer">
+                    <div class="input-group">
+                        <input id="btn-input" type="text" class="form-control input-sm" placeholder="Type your message here..." />
+                                <span class="input-group-btn">
+                                    <button class="btn btn-warning btn-sm" id="btn-chat">
+                                        Send
+                                    </button>
+                                </span>
+                    </div>
+                </div>
+                <!-- /.panel-footer -->
+            </div>
+        </div>
+    </div>
+
+</div>
+</div>
+<!-- jQuery -->
+<script src="vendor/jquery/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+    function add(e){
+        var dom = e ? e.closest('tr'):$('#add_tr');
+        var lastRow = Number($(dom.prev().find('span')[0]).text());
+        var row = $('<tr>' +
+                '<th scope="row"><span>' + (lastRow+1) + '</span><a href="javascript:void(0)" onclick="remove($(this))"  style="margin-left: 12px;"><span class="glyphicon glyphicon-minus-sign" aria-hidden="true"></span></a></th></tr>');
+        try{
+            var colnum = Number(e.closest('td').attr('colspan'));
+            var i = 1 ;
+            while(i++<colnum){
+                row.append('<td></td>');
+            }
+        }catch(e){
+            alert("添加失败。");
+        }
+
+        dom.before(row);/** after before append prepend  appendTo */
+    }
+    function remove(e){
+        var row = e.closest('tr');
+        row.remove();
+    }
+//    $(document).ready(function(){
+//
+//    })
+</script>
+</body>
+</html>

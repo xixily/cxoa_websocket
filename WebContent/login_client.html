@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Basic TextBox - jQuery EasyUI Demo</title>
+    <link rel="stylesheet" type="text/css" href="jslib/jquery-easyui-1.5/themes/default/easyui.css">
+    <link rel="stylesheet" type="text/css" href="jslib/jquery-easyui-1.5/themes/icon.css">
+    <script type="text/javascript" src="jslib/jquery-easyui-1.5/jquery.min.js"></script>
+    <script type="text/javascript" src="jslib/jquery-easyui-1.5/jquery.easyui.min.js"></script>
+    <style type="text/css">
+        body {
+            font-family:verdana,helvetica,arial,sans-serif;
+            padding:20px;
+            font-size:12px;
+            margin:0;
+        }
+        h2 {
+            font-size:18px;
+            font-weight:bold;
+            margin:0;
+            margin-bottom:15px;
+        }
+        .demo-info{
+            padding:0 0 12px 0;
+        }
+        .demo-tip{
+            display:none;
+        }
+        .label-top{
+            display: block;
+            height: 22px;
+            line-height: 22px;
+            vertical-align: middle;
+        }
+    </style>
+</head>
+<body>
+<div id="login_dialog" class="easyui-dialog" title="登录窗口" style="width:400px;padding:30px 40px;" >
+    <form id="login_frm" method="post" action="http://192.168.1.232:8080/cxoa/user/login.action">
+        <div style="margin-bottom:20px">
+            <input class="easyui-textbox" name="email" style="width:100%" data-options="label:'邮箱:',required:true,validType:'email'">
+        </div>
+        <div style="margin-bottom:20px">
+            <input id="pass" name="password" class="easyui-passwordbox" prompt="密码..." style="width:100%" data-options="label:'密码:',required:true">
+        </div>
+        <div style="margin-bottom:20px;display: none;" name="new_paasword">
+            <input id="newpass" name="newpassword" class="easyui-passwordbox" prompt="新密码..." style="width:305px;" data-options="label:'新密码:',required:true">
+        </div>
+        <div style="margin-bottom:20px;display: none;" name="new_paasword">
+            <input id="newpass2" name="password2" class="easyui-passwordbox" prompt="确认新密码..." validType="confirmPass['#newpass']" style="width:305px;" data-options="label:'确认新密码:',required:true">
+        </div>
+    </form>
+    <div style="text-align:center;padding:5px 0">
+        <div style="display: inline-block">
+            <input type="checkbox">
+            <!--<span class="l-btn-left" style="color: #7b7272">记住密码</span>-->
+            <div style="display: inline-block;color: #7b7272;font-size: 12px;margin-top: -3px;">:记住密码</div>
+            <!--<span style="color: #7b7272;font-size: 12px;margin-top: -3px;">:记住密码</span>-->
+        </div>
+        <a id="log_btn" href="javascript:void(0)" class="easyui-linkbutton" onclick=" $('#login_frm').form('submit',{
+                onSubmit:function(){
+//                    return $(this).form('enableValidation').form('validate');
+                }
+            });" style="width:60px">登录</a>
+        <a href="javascript:void(0)" class="easyui-linkbutton" onclick="$('#login_frm').form('clear');" style="width:60px">重置</a>
+        <a href="javascript:void(0)" class="easyui-linkbutton" onclick="modifyPassword()" style="width:60px">修改密码</a>
+    </div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function(){
+        $('#login_frm').form({
+            url:'user/login.action',
+            onSubmit:function(){
+                return $(this).form('enableValidation').form('validate');
+            }
+        });
+    })
+function modifyPassword(){
+    var btn_optioins =  $('#log_btn').linkbutton('options');
+    var newpass =  $('[name="new_paasword"]');
+    if(btn_optioins.text == '提交'){
+//        $('#login_frm').form({url:'user/login.action'});
+        $('#login_frm').attr('action','192.168.1.232:8080/cxoa/user/login.action');
+//        $('#login_frm').attr('action','user/login.action');
+        $.each(newpass,function(n, obj){
+            $(obj).css("display","none");
+        })
+        $('#log_btn').linkbutton({text:'登录'});
+    }else{
+//        $('#login_frm').form({url:'user/modifyPassword.action'});
+        $('#login_frm').attr('action','192.168.1.232:8080/cxoa/user/modifyPassword.action');
+//        $('#login_frm').attr('action','user/modifyPassword.action');
+        $.each(newpass,function(n, obj){
+            $(obj).css("display","");
+        })
+        $('#log_btn').linkbutton({text:'提交'});
+    }
+}
+</script>
+</body>
+</html>

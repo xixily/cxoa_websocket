@@ -1,0 +1,89 @@
+<div id="jiagou" title="菜单管理" style="padding: 10px;" data-options="iconCls:'icon-man',closable:true">
+    <div class="easyui-panel" id="menus_query_form_panel" title="菜单查询" style="width:98%;padding: 10px;margin-bottom: 10px;"
+            data-options="margin:'10px 0px',iconCls:'icon-search',collapsible:true,href:'queryForm/system/menus_queryform.html',tools:[
+				{iconCls:'icon-reload',handler:function(){$('#menus_query_form_panel').panel('open').panel('refresh')}}]">
+    </div>
+    <table id="treegrid_menus" class="easyui-treegrid" title="菜单表" style="width:98%;;height:489px;"
+           data-options="
+				iconCls: 'icon-ok',
+				rownumbers: true,
+				animate: true,
+				collapsible: true,
+				fitColumns: true,
+				url: 'system/getAllMenus.action',
+				method: 'get',
+				idField: 'menuId',
+				treeField: 'menuName',
+				pagination: true,
+				pageSize: 15,
+                pageList: [10,15,30],
+                onClickRow:function(){
+                if(menusEdit){
+                confirmDialog.createDialog('您确定要更新吗？',function(confirmId){
+							confirmDialog.destoryDialog(confirmId);
+							system.menus.save()
+							},function(){system.menus.cancel();});
+                }
+                },
+                toolbar: [{
+                    iconCls: 'icon-add',
+                    text:'新增',
+                    handler: function(){system.menus.add()}
+                },'-',{
+                    iconCls: 'icon-edit',
+                    text:'编辑',
+                    handler: function(){system.menus.edit()}
+                },'-',{
+                    iconCls: 'icon-remove',
+                    text:'删除',
+                    handler: function(){
+                    confirmDialog.createDialog('您确定要删除吗？',function(confirmId){
+							confirmDialog.destoryDialog(confirmId);
+							system.menus.remove()});
+                    }
+                },'-',{
+                    iconCls: 'icon-collapse',
+                    text:'全部折叠',
+                    handler: function(){$('#treegrid_menus').treegrid('collapseAll');}
+                }],
+				loadFilter:function(data,parentId){
+				if(data.rows){
+				$.each(data.rows,function(n,obj){
+				    session.menus.push(obj.menuName+'_'+obj.menuId + '_'+ obj.menuLevel);
+				    if(obj.menuLevel == 3){
+				        obj.iconCls = 'icon-action';
+				    }
+				    if(obj.menuLevel == 2){
+				    obj.iconCls = 'icon-page';
+				    }
+				    if(obj.menuLevel == 1){
+				    data.iconCls = 'icon-organisation';
+				    }
+				})
+				}else if(data.menuLevel){
+				   if(obj.menuLevel == 3){
+				        obj.iconCls = 'icon-action';
+				    }
+				    if(obj.menuLevel == 2){
+				    obj.iconCls = 'icon-page';
+				    }
+				    if(obj.menuLevel == 1){
+				    data.iconCls = 'icon-organisation';
+				    }
+				}
+				return data;
+				}
+			">
+        <thead>
+        <tr>
+            <th data-options="field:'menuId',width:60">id</th>
+            <th data-options="field:'menuName',width:140,iconCls:'icon-man',editor:{type:'textbox',required:true}">菜单名</th>
+            <!--<th data-options="field:'menuLevel',width:80,editor:{type:'textbox', required:true}">菜单级别</th>-->
+            <!--<th data-options="field:'_preMenuId',width:120,editor:{type:'validatebox',options:{validType:'email', required:true}}">父级菜单</th>-->
+            <th data-options="field:'url',width:80,editor:{type:'textbox', required:true}">地址（URL）</th>
+            <th data-options="field:'sortCode',width:120,editor:{type:'validatebox',options:{validType:'email', required:true}}">排序编号</th>
+            <th data-options="field:'iconCls',width:80,editor:{type:'textbox', required:true}">图标</th>
+        </tr>
+        </thead>
+    </table>
+</div>

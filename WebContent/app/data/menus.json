@@ -1,0 +1,246 @@
+[
+  {
+    "userId": 0,
+    "menuId": 1,
+    "menuName": "系统管理",
+    "uls": [
+      {
+        "text": "系统管理",
+        "url": "tabs/systemManage.jsp",
+        "iconCls": "icon-man",
+        "preMenuId": 0,
+        "domId": 6,
+        "sortCode": "A06"
+      },
+      {
+        "text": "代码维护",
+        "url": "",
+        "iconCls": "icon-man",
+        "preMenuId": 0,
+        "domId": 18,
+        "sortCode": "A18"
+      },
+      {
+        "text": "菜单管理",
+        "url": "tabs/system/menus.html",
+        "iconCls": "icon-man",
+        "preMenuId": 0,
+        "domId": 19,
+        "sortCode": "B19"
+      },
+      {
+        "text": "部门管理",
+        "url": "tabs/system/departments.jsp",
+        "iconCls": "icon-man",
+        "preMenuId": 0,
+        "domId": 20,
+        "sortCode": "B20"
+      },
+      {
+        "text": "角色管理",
+        "url": "tabs/system/roles.jsp",
+        "iconCls": "icon-man",
+        "preMenuId": 0,
+        "domId": 21,
+        "sortCode": "B21"
+      },
+      {
+        "text": "权限管理",
+        "url": "tabs/system/rights.jsp",
+        "iconCls": "icon-man",
+        "preMenuId": 0,
+        "domId": 22,
+        "sortCode": "B22"
+      },
+      {
+        "text": "数据字典",
+        "url": "tabs/system/dictionary.jsp",
+        "iconCls": "icon-man",
+        "preMenuId": 0,
+        "domId": 23,
+        "sortCode": "B23"
+      }
+    ],
+    "sortCode": "A01"
+  },
+  {
+    "userId": 0,
+    "menuId": 2,
+    "menuName": "人事管理",
+    "uls": [
+      {
+        "text": "职员信息管理",
+        "url": "tabs/employee/renshiUserName.jsp",
+        "iconCls": "icon-man",
+        "preMenuId": 0,
+        "domId": 7,
+        "sortCode": "B07"
+      },
+      {
+        "text": "社保维护",
+        "url": "tabs/employee/shebao.jsp",
+        "iconCls": "icon-man",
+        "preMenuId": 0,
+        "domId": 17,
+        "sortCode": "B17"
+      },
+      {
+        "text": "社保核对",
+        "url": "tabs/employee/shebaoSummary.jsp",
+        "iconCls": "icon-man",
+        "preMenuId": 0,
+        "domId": 24,
+        "sortCode": "B24"
+      },
+      {
+        "text": "考勤管理",
+        "url": "tabs/employee/kaoqin.jsp",
+        "iconCls": "icon-man",
+        "preMenuId": 0,
+        "domId": 25,
+        "sortCode": "B25"
+      },
+      {
+        "text": "工资管理",
+        "url": "tabs/employee/monthWages.jsp",
+        "iconCls": "icon-man",
+        "preMenuId": 0,
+        "domId": 26,
+        "sortCode": "B26"
+      },
+      {
+        "text": "架构管理",
+        "url": "tabs/employee/jiagou.html",
+        "iconCls": "icon-man",
+        "preMenuId": 0,
+        "domId": 59,
+        "sortCode": "B59"
+      },
+      {
+        "text": "工资汇总",
+        "url": "tabs/employee/gongzihuizong.jsp",
+        "iconCls": "icon-man",
+        "preMenuId": 0,
+        "domId": 64,
+        "sortCode": "B64"
+      }
+    ],
+    "sortCode": "A02"
+  },
+  {
+    "userId": 0,
+    "menuId": 61,
+    "menuName": "合同管理",
+    "uls": [
+      {
+        "text": "发货管理",
+        "url": "tabs/hetong/fahuo.jsp",
+        "iconCls": "icon-man",
+        "preMenuId": 0,
+        "domId": 62,
+        "sortCode": "B62"
+      },
+      {
+        "text": "发票管理",
+        "url": "tabs/hetong/fapiao.jsp",
+        "iconCls": "icon-man",
+        "preMenuId": 0,
+        "domId": 63,
+        "sortCode": "B63"
+      }
+    ],
+    "sortCode": "A021"
+  },
+  {
+    "userId": 0,
+    "menuId": 3,
+    "menuName": "财务管理",
+    "uls": [ ],
+    "sortCode": "A03"
+  },
+  {
+    "userId": 0,
+    "menuId": 4,
+    "menuName": "采购管理",
+    "uls": [ ],
+    "sortCode": "A04"
+  },
+  {
+    "userId": 0,
+    "menuId": 5,
+    "menuName": "报表管理",
+    "uls": [ ],
+    "sortCode": "A05"
+  },
+  {
+    "userId": 0,
+    "menuId": 18,
+    "menuName": "代码维护",
+    "uls": [ ],
+    "sortCode": "A18"
+  },
+  {
+    "userId": 0,
+    "menuId": 66,
+    "menuName": "合同",
+    "uls": [
+      {
+        "text": "合同管理",
+        "url": "app/views/hetong/guidanceview.html",
+        "iconCls": null,
+        "preMenuId": 0,
+        "domId": 68,
+        "sortCode": "B811"
+      },
+      {
+        "text": "合同管理",
+        "url": "app/views/hetong/cellcoreview.html",
+        "iconCls": null,
+        "preMenuId": 0,
+        "domId": 69,
+        "sortCode": "B812"
+      },
+      {
+        "text": "合同管理",
+        "url": "app/views/hetong/cellview.html",
+        "iconCls": null,
+        "preMenuId": 0,
+        "domId": 70,
+        "sortCode": "B813"
+      },
+      {
+        "text": "合同申请",
+        "url": "app/views/hetong/application.html",
+        "iconCls": null,
+        "preMenuId": 0,
+        "domId": 71,
+        "sortCode": "B814"
+      }
+    ],
+    "sortCode": "A81"
+  },
+  {
+    "userId": 0,
+    "menuId": 67,
+    "menuName": "财务",
+    "uls": [
+      {
+        "text": "财务管理",
+        "url": "app/views/caiwu/baoxiaoManager.html",
+        "iconCls": null,
+        "preMenuId": 0,
+        "domId": 72,
+        "sortCode": "B821"
+      },
+      {
+        "text": "报销申请",
+        "url": "app/views/caiwu/application.html",
+        "iconCls": null,
+        "preMenuId": 0,
+        "domId": 73,
+        "sortCode": "B822"
+      }
+    ],
+    "sortCode": "A82"
+  }
+]

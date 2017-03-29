@@ -1,0 +1,68 @@
+<div id="user_list_view_">
+    <h4 style="text-align:center">用户单位列表</h4>
+    <div id="ht_ulist_toolbar">
+        <form action="#" class="form-inline" role="form">
+            <div class="input-group">
+                <div id="ht_ulist_find" class="input-group-btn">
+                    <button class="btn btn-default fropdown-toggle" data-toggle="dropdown" type="button">
+                        <span id="ht_find_ulist" target="text"><input type="hidden" name="email" value=""/></span><span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu" role="menu">
+                        <li>
+                        </li>
+                    </ul>
+                    <button app-back="ht_users" type="button" class="btn btn-default" onclick=" $('#user_list_view').hide();$('#cellsview').show();session.app_back = 'ht_cells';"><i class="fa fa-arrow-circle-left"> </i> 返回</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <table id="ht_ulist_table"
+           data-toggle="table"
+           data-height="568"
+           data-show-header="true"
+           data-show-columns="true"
+           data-toolbar="#ht_ulist_toolbar"
+           data-search="true"
+           data-striped="true"
+           data-id-field="email"
+           data-show-footer="true"
+           data-detail-view="true"
+           data-detail-formatter="hetong.htManager.zhidao.detailFormatter"
+           data-query-params="queryParams"
+           data-query-params-type=""
+           data-show-toggle="true"
+           data-show-refresh="true"
+           data-response-handler="responseHandler"
+           data-pagination="true"
+           data-side-pagination="client"
+           data-cache="false"
+           data-page-size="50"
+           data-page-list="[15,30,50,100]"
+           >
+        <thead>
+        <tr>
+            <th data-field="autoCode" data-visible="false" data-sortable="true">编号</th>
+            <th data-field="dname" data-sortable="true">单位名称</th>
+            <th data-field="lastYear" data-sortable="true" width="160px;"><span app-text="lastYear">2015</span>收款</th>
+            <th data-field="thisYear" data-sortable="true"><span app-text="thisYear">2016</span>收款</th>
+            <th data-field="yingshou" data-sortable="true">应收款</th>
+        </tr>
+        </thead>
+    </table>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $('#ht_ulist_find li a').bind('click',function(event){
+                var text = $(this).html();
+                var value = $(this).find('.sr-only').html();
+                var hidden = $('<input type="hidden" name="email" value="' + value +'"/>');
+                var closest = $('#ht_find_ulist');
+                closest.html(text);
+                closest.append(hidden[0]);
+                hetong.htManager.findCharger(value);
+//                event.stopImmediatePropagation();
+                hetong.htManager.zhidao.toggleUserList(value);
+            })
+            session.app_back = 'ht_users';
+        })
+    </script>
+</div>

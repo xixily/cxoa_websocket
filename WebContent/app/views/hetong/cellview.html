@@ -1,0 +1,51 @@
+<div id="ht_manager_guidance">
+
+    <div id="user_list_view">
+        <h4 style="text-align:center">用户单位列表</h4>
+        <table id="ht_ulist_table"
+               data-toggle="table"
+               data-height="568"
+               data-show-header="true"
+               data-show-columns="true"
+               data-toolbar="#ht_ulist_toolbar"
+               data-search="true"
+               data-striped="true"
+               data-id-field="email"
+               data-show-footer="true"
+               data-detail-view="true"
+               data-detail-formatter="hetong.htManager.zhidao.detailFormatter"
+               data-query-params="queryParams"
+               data-query-params-type=""
+               data-show-toggle="true"
+               data-show-refresh="true"
+               data-page-size="50"
+               data-page-list="[15,30,50,100]"
+               data-response-handler="responseHandler"
+               data-pagination="true"
+               data-side-pagination="client"
+               data-cache="false"
+                >
+            <thead>
+            <tr>
+                <th data-field="autoCode" data-visible="false" data-sortable="true">编号</th>
+                <th data-field="dname" data-sortable="true">单位名称</th>
+                <th data-field="lastYear" data-sortable="true" width="160px;"><span app-text="lastYear">2015</span>收款</th>
+                <th data-field="thisYear" data-sortable="true"><span app-text="thisYear">2016</span>收款</th>
+                <th data-field="yingshou" data-sortable="true">应收款</th>
+            </tr>
+            </thead>
+        </table>
+    </div>
+
+    <div id="ht_detail" style="display:none">
+
+    </div>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $('#ht_ulist_table').bootstrapTable({
+                url:'public/hetong/getUserList.action',
+                onClickRow: hetong.htManager.zhidao.onUlistClickRow
+            });
+        })
+    </script>
+</div>

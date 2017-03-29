@@ -1,0 +1,110 @@
+.btn-separator {
+	height: 24px;
+	border-left: 1px solid LightGrey;
+	border-right: 0px solid LightGrey;
+	margin: 1px 1px;  
+}  
+.tableForm {
+	border-collapse: collapse;
+}
+
+.tableForm th {
+	text-align: right;
+	border-bottom: 1px dotted #ccc;
+	padding: 5px;
+}
+
+.tableForm td {
+	text-align: left;
+	border-bottom: 1px dotted #ccc;
+	padding: 5px;
+}
+
+.logo {
+	background: url('images/logo2.png') no-repeat;
+}
+
+.info {
+	background: #FFFEE6;
+	color: #8F5700;
+	padding: 12px;
+}
+
+.tip {
+	width: 24px;
+	height: 16px;
+	float: left;
+}
+
+img {
+	cursor: pointer;
+}
+
+td .comboxy {
+	border: 1px dashed LightGrey;
+	padding-top: 6px;
+	padding-left: 1px;
+}
+
+td .comboxy .combtitle {
+	display: block;
+	float: left;
+	font-size: 12px;
+	margin-top: -18px;
+	color: #999999
+}
+.linked a{text-decoration: none ;color:#ca6969}
+.linked a:hover {
+    text-decoration: none !important; background-color: rgb(222, 228, 237);
+}
+.linked a:focus {
+    text-decoration: none !important; background-color: rgb(222, 228, 237);
+}
+.linked a:active {
+    text-decoration: none !important; background-color: rgb(222, 228, 237);
+}
+a.touched {
+    text-decoration: none !important; background-color: rgb(222, 228, 237);
+}
+.icon-excel{
+	background:url('images/extjs_icons/page/page_white_excel.png') no-repeat center center;
+}
+.icon-databse_set{
+	background:url('images/extjs_icons/database_gear.png') no-repeat center center;
+}
+.icon-databse_refresh{
+	background:url('images/extjs_icons/database_refresh.png') no-repeat center center;
+}
+.icon-databse_edit{
+	background:url('images/extjs_icons/database_edit.png') no-repeat center center;
+}
+.icon-databse_connect{
+	background:url('images/extjs_icons/database_connect.png') no-repeat center center;
+}
+.icon-coins{
+	background:url('images/extjs_icons/coins.png') no-repeat center center;
+}
+.icon-locked{
+	background:url('images/extjs_icons/lock/lock.png') no-repeat center center;
+}
+.icon-unlocke{
+	background:url('images/extjs_icons/lock/lock_open.png') no-repeat center center;
+}
+.icon-email_go{
+	background:url('images/extjs_icons/email/email_go.png') no-repeat center center;
+}
+.icon-printer{
+	background:url('images/extjs_icons/printer/printer.png') no-repeat center center;
+}
+.icon-organisation{
+	background:url('images/extjs_icons/chart/chart_organisation.png') no-repeat center center;
+}
+.icon-collapse{
+	background:url('images/extjs_icons/text_padding_top.png') no-repeat center center;
+}
+.icon-page{
+	 background:url('images/extjs_icons/page/page_white_code.png') no-repeat center center;
+ }
+.icon-action{
+	 background:url('images/extjs_icons/page/page_white_actionscript.png') no-repeat center center;
+ }

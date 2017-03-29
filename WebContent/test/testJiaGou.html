@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>TreeGrid Actions - jQuery EasyUI Demo</title>
+    <link rel="stylesheet" type="text/css" href="../jslib/jquery-easyui-1.5/themes/default/easyui.css">
+    <link rel="stylesheet" type="text/css" href="../jslib/jquery-easyui-1.5/themes/icon.css">
+    <link rel="stylesheet" type="text/css" href="../style/oaCss.css">
+    <!--<link rel="stylesheet" type="text/css" href="../../queryForm/employee/jiagou_queryform.html">-->
+    <script type="text/javascript" src="../jslib/jquery-easyui-1.5/jquery.min.js"></script>
+    <script type="text/javascript" src="../jslib/jquery-easyui-1.5/jquery.easyui.min.js"></script>
+</head>
+<body>
+<h2>TreeGrid Actions</h2>
+<p>Click the buttons below to perform actions.</p>
+<div id="tab_jiagou" title="架构管理" style="padding: 10px;" data-options="iconCls:'icon-man',closable:true">
+    <div class="easyui-panel" id="jiagou_form" title="架构查询" style="width:98%;padding: 10px;"
+         data-options="iconCls:'icon-search',collapsible:true,href:'jiagou_queryform.html',tools:[
+				{iconCls:'icon-reload',handler:function(){$('#tab_jiagou').panel('open').panel('refresh')}}]">
+
+    </div>
+<div style="margin:20px 0;">
+    <a href="javascript:void(0)" class="easyui-linkbutton" onclick="collapseAll()">CollapseAll</a>
+    <a href="javascript:void(0)" class="easyui-linkbutton" onclick="expandAll()">ExpandAll</a>
+    <a href="javascript:void(0)" class="easyui-linkbutton" onclick="expandTo()">ExpandTo</a>
+</div>
+<table id="tg" class="easyui-treegrid" title="架构表" style="width:1280px;"
+       data-options="
+				iconCls: 'icon-ok',
+				rownumbers: true,
+				animate: true,
+				collapsible: true,
+				fitColumns: true,
+				url: 'treegrid_data0.json',
+				method: 'get',
+				idField: 'id',
+				pagination: true,
+				pageSize: 15,
+                pageList: [10,15,30],
+				treeField: 'fourthLevel',
+				loadFilter:function(data,parentId){
+				$.each(data.rows,function(n,obj){
+				    if(obj.level == 4){
+				        obj.iconCls = 'icon-man';
+				    }else{
+				    obj.iconCls = 'icon-organisation';
+				    }
+				})
+				return data;
+				}
+			">
+    <thead>
+    <tr>
+        <th data-options="field:'id',width:60">id</th>
+        <th data-options="field:'fourthLevel',width:140,iconCls:'icon-man'">四级</th>
+        <th data-options="field:'cellCore',width:80">细胞核</th>
+        <th data-options="field:'cellCoreEmail',width:120">细胞核邮箱</th>
+        <th data-options="field:'guidance',width:80">指导</th>
+        <th data-options="field:'guidanceEmail',width:120">指导邮箱</th>
+        <th data-options="field:'sortCode',width:80">排序代码</th>
+        <th data-options="field:'taxStructure',width:80">报税架构</th>
+        <th data-options="field:'level',width:40,align:'right'">级别</th>
+        <th data-options="field:'total',width:60">总人数</th>
+        <th data-options="field:'onJob',width:60,styler:function(value,row,index){
+        if(value==0){
+        return ;
+        }
+        if(value<50){
+        return 'background-color:#3af33a;';
+        }
+        if(value<100){
+        return 'background-color:yellow;';
+        }
+        return 'background-color:red;';
+
+        }">在职人数</th>
+    </tr>
+    </thead>
+</table>
+<script type="text/javascript">
+//    $('#tg').treegrid({
+//        loadFilter:function(data,parentId){
+//            console.log(data);
+//            $.each(data,function(n,obj){
+//                console.log(obj);
+//                if(obj.level == 4){
+//                    obj.iconCls = 'icon-man';
+//                }else{
+//                }
+//            })
+//            return data;
+//        }
+//    })
+    function formatProgress(value){
+        if (value){
+            var s = '<div style="width:100%;border:1px solid #ccc">' +
+                    '<div style="width:' + value + '%;background:#cc0000;color:#fff">' + value + '%' + '</div>'
+            '</div>';
+            return s;
+        } else {
+            return '';
+        }
+    }
+    function collapseAll(){
+        $('#tg').treegrid('collapseAll');
+    }
+    function expandAll(){
+        $('#tg').treegrid('expandAll');
+    }
+    function expandTo(){
+        $('#tg').treegrid('expandTo',21).treegrid('select',21);
+    }
+</script>
+</body>
+</html>
