@@ -22,7 +22,8 @@
 		">
 
 	<!-- 自动扫描controller包下的所有类，使其认为spring mvc的控制器 -->
-	<context:component-scan base-package="com.chaoxing.oa.controller" />
+	<context:component-scan base-package="com.chaoxing.oa.controller,com.chaoxing.oa.websocket" />
+	
 	<!-- 会自动注册DefaultAnnotationHandlerMapping和AnnotationMethodHandlerAdapter两个bean 
 	AnnotationMethodHandlerAdapter将会初始化7个转换器，S
 	可以通过调用AnnotationMethodHandlerAdapter的getMessageConverts()方法来获取转换器的一个集合 List<HttpMessageConverter> -->

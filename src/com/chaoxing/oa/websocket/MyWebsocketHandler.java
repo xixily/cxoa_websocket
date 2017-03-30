@@ -8,6 +8,7 @@ import java.util.Map.Entry;
 import java.util.concurrent.ConcurrentSkipListMap;
 
 import org.apache.log4j.Logger;
+import org.springframework.stereotype.Component;
 import org.springframework.web.socket.CloseStatus;
 import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketHandler;
@@ -19,29 +20,30 @@ import com.chaoxing.oa.entity.page.websocket.Messages;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+@Component
 public class MyWebsocketHandler implements WebSocketHandler {
-	public static final Map<Long, WebSocketSession> userChatSession;
-	private Logger log = Logger.getLogger(this.getClass());
+	public static final Map<Integer, WebSocketSession> userChatSession;
+//	private final static Logger log = Logger.getLogger(MyWebsocketHandler.class);
 	
 	static{
-		userChatSession = new ConcurrentSkipListMap<Long, WebSocketSession>();
+		userChatSession = new ConcurrentSkipListMap<Integer, WebSocketSession>();
 	}
 	
-	private static synchronized void addChatSession(WebSocketSession session, Long uid){
+	private static synchronized void addChatSession(WebSocketSession session, Integer uid){
 		if(null == userChatSession.get("uid")){
 			userChatSession.put(uid, session);
 		}
 	}
 	
-	private static synchronized void removeSession(WebSocketSession session, Long uid){
-		if(null != userChatSession.get("uid")){
+	private static synchronized void removeSession(WebSocketSession session, Integer uid){
+		if(null != userChatSession.get(uid)){
 			userChatSession.remove(uid);
 		}
 	}
 	
 	@Override
 	public void afterConnectionClosed(WebSocketSession webSocketSession, CloseStatus closeStatus) throws Exception {
-		Long uid = (Long) webSocketSession.getAttributes().get("uid");
+		Integer uid = (Integer) webSocketSession.getAttributes().get("uid");
 		removeSession(webSocketSession, uid);
 	}
 
@@ -52,7 +54,7 @@ public class MyWebsocketHandler implements WebSocketHandler {
 	public void afterConnectionEstablished(WebSocketSession webSocketSession) throws Exception {
 		SessionInfo sessionInfo = getSessionInfo(webSocketSession);
 		if(null != sessionInfo){
-			Long uid = (long) sessionInfo.getId();
+			Integer uid = (Integer) sessionInfo.getId();
 			addChatSession(webSocketSession, uid);
 		}
 
@@ -82,10 +84,10 @@ public class MyWebsocketHandler implements WebSocketHandler {
 	 */
 	private void MessageDispatch(Messages msg, WebSocketSession webSocketSession) {
 		SessionInfo sessionInfo = getSessionInfo(webSocketSession);
-		Long to = msg.getTo();
+		Integer to = msg.getTo();
 		if(null == to ){
-			to = (long) sessionInfo.getId();
-			msg = addSystemMsg("没有收信人id", to);
+			to = (Integer) sessionInfo.getId();
+			msg = systemMsg("没有收信人id", to);
 		}else{
 			webSocketSession = userChatSession.get(to);
 		}
@@ -94,7 +96,24 @@ public class MyWebsocketHandler implements WebSocketHandler {
 			try {
 				webSocketSession.sendMessage(textMsg);
 			} catch (IOException e) {
-				log.error("MyWebsocketHandler.MessageDispatch:[" + e);
+//				log.error("MyWebsocketHandler.MessageDispatch:[" + e);
+				System.out.println();
+			}
+		}
+	}
+	
+	/**
+	 * 想某人发送消息
+	 * @param to 收件人id
+	 * @param textMsg
+	 */
+	public static void sendMessages(Integer to, TextMessage textMsg){
+		WebSocketSession webSocketSession = userChatSession.get(to);
+		if(null != webSocketSession){
+			try {
+				webSocketSession.sendMessage(textMsg);
+			} catch (IOException e) {
+//				log.error("MyWebsocketHandler.MessageDispatch:[" + e);
 			}
 		}
 	}
@@ -106,12 +125,12 @@ public class MyWebsocketHandler implements WebSocketHandler {
 	 * @throws IOException
 	 */
 	public void broadcast(final TextMessage message) throws IOException {
-		Iterator<Entry<Long, WebSocketSession>> it = userChatSession
+		Iterator<Entry<Integer, WebSocketSession>> it = userChatSession
 				.entrySet().iterator();
 
 		// 多线程群发
 		while (it.hasNext()) {
-			final Entry<Long, WebSocketSession> entry = it.next();
+			final Entry<Integer, WebSocketSession> entry = it.next();
 
 			if (entry.getValue().isOpen()) {
 				// entry.getValue().sendMessage(message);
@@ -136,13 +155,13 @@ public class MyWebsocketHandler implements WebSocketHandler {
 	/**
 	 * 返回系统消息
 	 */
-	private Messages addSystemMsg(String msg, Long uid) {
+	private Messages systemMsg(String msg, Integer uid) {
 		Messages message = new Messages();
 		message.setMsg(msg);
 		message.setDate(new Date());
 		message.setMsg_type(Messages.SYSTEM_MESSAGES);
 		message.setTo(uid);
-		message.setSid(10000l);
+		message.setSid(10000);
 		return message;
 	}
 

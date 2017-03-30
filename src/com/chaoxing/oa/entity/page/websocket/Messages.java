@@ -8,8 +8,8 @@ public class Messages {
 	public final static int HEART_BEAT = 1;
 	
 	private String sender;
-	private Long sid;
-	private Long to;
+	private Integer sid;
+	private Integer to;
 	private String msg;
 	private Date date;
 	private Integer msg_type;
@@ -17,38 +17,39 @@ public class Messages {
 	public String getSender() {
 		return sender;
 	}
-	public Long getSid() {
+	public void setSender(String sender) {
+		this.sender = sender;
+	}
+	public Integer getSid() {
 		return sid;
 	}
-	public Long getTo() {
+	public void setSid(Integer sid) {
+		this.sid = sid;
+	}
+	public Integer getTo() {
 		return to;
+	}
+	public void setTo(Integer to) {
+		this.to = to;
 	}
 	public String getMsg() {
 		return msg;
 	}
-	public Date getDate() {
-		return date;
-	}
-	public Integer getMsg_type() {
-		return msg_type;
-	}
-	public void setSender(String sender) {
-		this.sender = sender;
-	}
-	public void setSid(Long sid) {
-		this.sid = sid;
-	}
-	public void setTo(Long to) {
-		this.to = to;
-	}
 	public void setMsg(String msg) {
 		this.msg = msg;
+	}
+	public Date getDate() {
+		return date;
 	}
 	public void setDate(Date date) {
 		this.date = date;
 	}
+	public Integer getMsg_type() {
+		return msg_type;
+	}
 	public void setMsg_type(Integer msg_type) {
 		this.msg_type = msg_type;
 	}
+	
 	
 }

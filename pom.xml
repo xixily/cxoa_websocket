@@ -8,6 +8,7 @@
   <spring.version>4.2.3.RELEASE</spring.version>
 <!--   <spring.version>3.1.3.RELEASE</spring.version> -->
   <hibernate.version>4.0.1.Final</hibernate.version>
+  <jackson.version>2.7.9</jackson.version>
   </properties>
   <build>
     <sourceDirectory>src</sourceDirectory>
@@ -71,11 +72,11 @@
 	</dependency>
 	<!-- https://mvnrepository.com/artifact/commons-codec/commons-codec -->
 	<!-- 报错 -->
-	<!-- <dependency>
+	<dependency>
 	    <groupId>commons-codec</groupId>
 	    <artifactId>commons-codec</artifactId>
-	    <version>1.6</version>
-	</dependency> -->
+	    <version>1.8</version>
+	</dependency>
 	<!-- https://mvnrepository.com/artifact/commons-fileupload/commons-fileupload -->
 	<dependency>
 	    <groupId>commons-fileupload</groupId>
@@ -168,16 +169,24 @@
 	  -->
 	     
 	<!-- 更换jackson包 start -->
+	
+	<!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.module/jackson-module-jaxb-annotations -->
+	<!-- <dependency>
+	    <groupId>com.fasterxml.jackson.module</groupId>
+	    <artifactId>jackson-module-jaxb-annotations</artifactId>
+	    <version>${jackson.version}</version>
+	</dependency> -->
 	<dependency>
     <groupId>com.fasterxml.jackson.core</groupId>
     <artifactId>jackson-core</artifactId>
-    <version>2.7.0</version>
+    <version>${jackson.version}</version>
 	</dependency>
 	<dependency>                
 	    <groupId>com.fasterxml.jackson.core</groupId>
 	    <artifactId>jackson-databind</artifactId>
-	    <version>2.7.0</version>
+	    <version>${jackson.version}</version>
 	</dependency>
+	
 	<!-- 更换jackson包 end -->
 	
 	<!-- https://mvnrepository.com/artifact/org.javassist/javassist -->
@@ -376,6 +385,12 @@
 	    <artifactId>xmlbeans</artifactId>
 	    <version>2.6.0</version>
 	</dependency>
-
+	<!-- 添加cglib依赖，CGLIB is required to process @Configuration classes
+	[org.springframework.web.socket.config.annotation.DelegatingWebSocketConfiguration]-->
+	<dependency>
+	<groupId>cglib</groupId>
+	<artifactId>cglib</artifactId>
+	<version>2.2.2</version>
+	</dependency>
   </dependencies>
 </project>
