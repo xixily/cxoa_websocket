@@ -2,6 +2,8 @@
 <project version="4">
   <component name="Encoding">
     <file url="file://$PROJECT_DIR$/app/data/data_ht.json" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/js/utils/BootstrapChat.js" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/js/utils/chat.js" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app/views/hetong/cells.html" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app/views/hetong/contracts.html" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app/views/hetong/users.html" charset="UTF-8" />

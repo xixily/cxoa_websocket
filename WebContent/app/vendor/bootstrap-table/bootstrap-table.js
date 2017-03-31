@@ -281,7 +281,6 @@
         this.$el_ = this.$el.clone();
         this.timeoutId_ = 0;
         this.timeoutFooter_ = 0;
-
         this.init();
     };
 

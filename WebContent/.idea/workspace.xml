@@ -15,6 +15,151 @@
   <component name="CreatePatchCommitExecutor">
     <option name="PATCH_PATH" value="" />
   </component>
+  <component name="DockManager">
+    <window id="1">
+      <content type="file-editors">
+        <state>
+          <leaf>
+            <file leaf-file-name="bootstrap-table.js" pinned="false" current-in-tab="false">
+              <entry file="file://$PROJECT_DIR$/app/vendor/bootstrap-table/bootstrap-table.js">
+                <provider selected="true" editor-type-id="text-editor">
+                  <state vertical-scroll-proportion="0.0">
+                    <caret line="120" column="6" selection-start-line="120" selection-start-column="6" selection-end-line="120" selection-end-column="6" />
+                    <folding>
+                      <element signature="e#346#694#0" expanded="false" />
+                      <element signature="e#761#1014#0" expanded="false" />
+                      <element signature="e#1067#1318#0" expanded="false" />
+                      <element signature="e#1409#2602#0" expanded="false" />
+                      <element signature="e#2645#3242#0" expanded="false" />
+                      <element signature="e#3318#4088#0" expanded="false" />
+                      <element signature="e#4159#5198#0" expanded="false" />
+                      <element signature="e#5238#5582#0" expanded="false" />
+                      <element signature="e#5624#5852#0" expanded="false" />
+                      <element signature="e#5901#6197#0" expanded="false" />
+                      <element signature="e#6254#6612#0" expanded="false" />
+                      <element signature="e#6649#6769#0" expanded="false" />
+                      <element signature="e#8774#13844#0" expanded="false" />
+                      <element signature="e#13947#15050#0" expanded="false" />
+                      <element signature="e#15163#15986#0" expanded="false" />
+                      <element signature="e#16017#17198#0" expanded="false" />
+                      <element signature="e#30765#30940#0" expanded="false" />
+                      <element signature="e#31077#31813#0" expanded="false" />
+                      <element signature="e#31868#34286#0" expanded="false" />
+                      <element signature="e#35374#42178#0" expanded="false" />
+                      <element signature="e#42238#42749#0" expanded="false" />
+                      <element signature="e#42806#45531#0" expanded="false" />
+                      <element signature="e#45592#55068#0" expanded="false" />
+                      <element signature="e#55136#55649#0" expanded="false" />
+                      <element signature="e#55717#56120#0" expanded="false" />
+                      <element signature="e#56183#56265#0" expanded="false" />
+                      <element signature="e#56326#56551#0" expanded="false" />
+                      <element signature="e#56613#56836#0" expanded="false" />
+                      <element signature="e#56898#56994#0" expanded="false" />
+                      <element signature="e#57058#57273#0" expanded="false" />
+                      <element signature="e#71183#74060#0" expanded="false" />
+                      <element signature="e#74121#74415#0" expanded="false" />
+                      <element signature="e#74470#74725#0" expanded="false" />
+                      <element signature="e#74786#75228#0" expanded="false" />
+                      <element signature="e#75285#75470#0" expanded="false" />
+                      <element signature="e#75526#75831#0" expanded="false" />
+                      <element signature="e#75889#76217#0" expanded="false" />
+                      <element signature="e#76275#76550#0" expanded="false" />
+                      <element signature="e#79825#81758#0" expanded="false" />
+                      <element signature="e#81814#82667#0" expanded="false" />
+                      <element signature="e#83496#83769#0" expanded="false" />
+                      <element signature="e#83832#84184#0" expanded="false" />
+                      <element signature="e#84312#85835#0" expanded="false" />
+                      <element signature="e#85903#86233#0" expanded="false" />
+                      <element signature="e#88367#89511#0" expanded="false" />
+                      <element signature="e#91507#91690#0" expanded="false" />
+                      <element signature="e#91750#91934#0" expanded="false" />
+                      <element signature="e#91998#92233#0" expanded="false" />
+                      <element signature="e#92297#93057#0" expanded="false" />
+                      <element signature="e#93120#93484#0" expanded="false" />
+                      <element signature="e#93541#93577#0" expanded="false" />
+                      <element signature="e#93637#93788#0" expanded="false" />
+                      <element signature="e#93851#94002#0" expanded="false" />
+                      <element signature="e#94057#94094#0" expanded="false" />
+                      <element signature="e#94151#94189#0" expanded="false" />
+                      <element signature="e#94741#95151#0" expanded="false" />
+                      <element signature="e#95208#95249#0" expanded="false" />
+                      <element signature="e#95308#95350#0" expanded="false" />
+                      <element signature="e#95417#95696#0" expanded="false" />
+                      <element signature="e#95753#95794#0" expanded="false" />
+                      <element signature="e#95853#95895#0" expanded="false" />
+                      <element signature="e#95962#96778#0" expanded="false" />
+                      <element signature="e#96832#97172#0" expanded="false" />
+                      <element signature="e#97230#97272#0" expanded="false" />
+                      <element signature="e#97330#97372#0" expanded="false" />
+                      <element signature="e#97953#98196#0" expanded="false" />
+                      <element signature="e#98253#98441#0" expanded="false" />
+                      <element signature="e#98503#98585#0" expanded="false" />
+                      <element signature="e#98647#98730#0" expanded="false" />
+                      <element signature="e#98793#98904#0" expanded="false" />
+                      <element signature="e#98968#99078#0" expanded="false" />
+                      <element signature="e#99746#99790#0" expanded="false" />
+                      <element signature="e#99851#99896#0" expanded="false" />
+                      <element signature="e#100192#100527#0" expanded="false" />
+                      <element signature="e#100591#100630#0" expanded="false" />
+                      <element signature="e#101309#101569#0" expanded="false" />
+                      <element signature="e#101637#101975#0" expanded="false" />
+                      <element signature="e#102037#102185#0" expanded="false" />
+                      <element signature="e#102255#102476#0" expanded="false" />
+                      <element signature="e#102537#102582#0" expanded="false" />
+                      <element signature="e#102645#102691#0" expanded="false" />
+                      <element signature="e#102761#104105#0" expanded="false" />
+                      <element signature="e#104177#104451#0" expanded="false" />
+                      <element signature="e#105080#106064#0" expanded="false" />
+                      <marker date="1490840695442" expanded="true" signature="18816:18828" placeholder="..." />
+                    </folding>
+                  </state>
+                </provider>
+              </entry>
+            </file>
+            <file leaf-file-name="baoxiaoShenhe.html" pinned="false" current-in-tab="false">
+              <entry file="file://$PROJECT_DIR$/app/views/caiwu/baoxiaoShenhe.html">
+                <provider selected="true" editor-type-id="text-editor">
+                  <state vertical-scroll-proportion="-11.535714">
+                    <caret line="775" column="54" selection-start-line="775" selection-start-column="50" selection-end-line="775" selection-end-column="54" />
+                    <folding>
+                      <element signature="n#div#0;n#div#1;n#div#1;n#div#0;n#div#0;n#div#0;n#!!top" expanded="false" />
+                      <element signature="n#div#0;n#div#0;n#fieldset#0;n#div#1;n#div#1;n#div#1;n#div#1;n#div#0;n#div#0;n#!!top" expanded="false" />
+                      <element signature="n#li#1;n#ul#0;n#div#1;n#div#0;n#fieldset#0;n#div#1;n#div#1;n#div#1;n#div#1;n#div#0;n#div#0;n#!!top" expanded="false" />
+                      <element signature="n#li#2;n#ul#0;n#div#1;n#div#0;n#fieldset#0;n#div#1;n#div#1;n#div#1;n#div#1;n#div#0;n#div#0;n#!!top" expanded="false" />
+                      <element signature="n#li#3;n#ul#0;n#div#1;n#div#0;n#fieldset#0;n#div#1;n#div#1;n#div#1;n#div#1;n#div#0;n#div#0;n#!!top" expanded="false" />
+                      <element signature="n#li#4;n#ul#0;n#div#1;n#div#0;n#fieldset#0;n#div#1;n#div#1;n#div#1;n#div#1;n#div#0;n#div#0;n#!!top" expanded="false" />
+                      <element signature="n#div#0;n#div#2;n#div#0;n#div#0;n#!!top" expanded="false" />
+                      <element signature="n#legend#0;n#fieldset#0;n#form#0;n#div#1;n#div#1;n#div#1;n#div#2;n#div#0;n#div#0;n#!!top" expanded="false" />
+                      <element signature="n#div#0;n#fieldset#0;n#form#0;n#div#1;n#div#1;n#div#1;n#div#2;n#div#0;n#div#0;n#!!top" expanded="false" />
+                      <element signature="n#div#1;n#fieldset#0;n#form#0;n#div#1;n#div#1;n#div#1;n#div#2;n#div#0;n#div#0;n#!!top" expanded="false" />
+                      <element signature="n#fieldset#1;n#form#0;n#div#1;n#div#1;n#div#1;n#div#2;n#div#0;n#div#0;n#!!top" expanded="false" />
+                      <element signature="n#legend#1;n#form#0;n#div#1;n#div#1;n#div#1;n#div#4;n#div#0;n#div#0;n#!!top" expanded="false" />
+                      <element signature="n#div#0;n#legend#1;n#form#0;n#div#1;n#div#1;n#div#1;n#div#4;n#div#0;n#div#0;n#!!top" expanded="false" />
+                      <element signature="n#legend#2;n#form#0;n#div#1;n#div#1;n#div#1;n#div#4;n#div#0;n#div#0;n#!!top" expanded="false" />
+                      <element signature="n#div#1;n#div#0;n#!!top" expanded="false" />
+                    </folding>
+                  </state>
+                </provider>
+              </entry>
+            </file>
+            <file leaf-file-name="chatModal.html" pinned="false" current-in-tab="true">
+              <entry file="file://$PROJECT_DIR$/app/test/chatModal.html">
+                <provider selected="true" editor-type-id="text-editor">
+                  <state vertical-scroll-proportion="0.46744573">
+                    <caret line="48" column="64" selection-start-line="48" selection-start-column="60" selection-end-line="48" selection-end-column="64" />
+                    <folding>
+                      <element signature="n#style#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                      <element signature="n#style#0;n#span#0;n#strong#0;n#div#0;n#div#0;n#li#0;n#ul#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                    </folding>
+                  </state>
+                </provider>
+              </entry>
+            </file>
+          </leaf>
+        </state>
+      </content>
+    </window>
+  </component>
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FavoritesManager">
     <favorites_list name="WebContent" />
@@ -24,8 +169,8 @@
       <file leaf-file-name="login.jsp" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/login.jsp">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="13" column="23" selection-start-line="13" selection-start-column="23" selection-end-line="13" selection-end-column="23" />
+            <state vertical-scroll-proportion="-9.5">
+              <caret line="36" column="49" selection-start-line="36" selection-start-column="49" selection-end-line="36" selection-end-column="49" />
               <folding />
             </state>
           </provider>
@@ -55,30 +200,34 @@
       <file leaf-file-name="app_index.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app_index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-1.862069">
-              <caret line="358" column="47" selection-start-line="358" selection-start-column="47" selection-end-line="358" selection-end-column="47" />
+            <state vertical-scroll-proportion="-3.4285715">
+              <caret line="344" column="0" selection-start-line="344" selection-start-column="0" selection-end-line="344" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="baoxiaoShenhe.html" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/views/caiwu/baoxiaoShenhe.html">
+      <file leaf-file-name="BootstrapChat.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/js/utils/BootstrapChat.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.075675674">
-              <caret line="2012" column="85" selection-start-line="2012" selection-start-column="85" selection-end-line="2012" selection-end-column="85" />
+            <state vertical-scroll-proportion="0.31907514">
+              <caret line="106" column="34" selection-start-line="106" selection-start-column="34" selection-end-line="106" selection-end-column="34" />
               <folding>
-                <element signature="n#div#0;n#div#1;n#div#1;n#div#0;n#div#0;n#div#0;n#!!top" expanded="false" />
-                <element signature="n#div#0;n#div#2;n#div#0;n#div#0;n#!!top" expanded="false" />
-                <element signature="n#legend#0;n#fieldset#0;n#form#0;n#div#1;n#div#1;n#div#1;n#div#2;n#div#0;n#div#0;n#!!top" expanded="false" />
-                <element signature="n#div#0;n#fieldset#0;n#form#0;n#div#1;n#div#1;n#div#1;n#div#2;n#div#0;n#div#0;n#!!top" expanded="false" />
-                <element signature="n#div#1;n#fieldset#0;n#form#0;n#div#1;n#div#1;n#div#1;n#div#2;n#div#0;n#div#0;n#!!top" expanded="false" />
-                <element signature="n#fieldset#1;n#form#0;n#div#1;n#div#1;n#div#1;n#div#2;n#div#0;n#div#0;n#!!top" expanded="false" />
-                <element signature="n#legend#1;n#form#0;n#div#1;n#div#1;n#div#1;n#div#4;n#div#0;n#div#0;n#!!top" expanded="false" />
-                <element signature="n#div#0;n#legend#1;n#form#0;n#div#1;n#div#1;n#div#1;n#div#4;n#div#0;n#div#0;n#!!top" expanded="false" />
-                <element signature="n#legend#2;n#form#0;n#div#1;n#div#1;n#div#1;n#div#4;n#div#0;n#div#0;n#!!top" expanded="false" />
-                <element signature="n#div#1;n#div#0;n#!!top" expanded="false" />
+                <element signature="e#255#1463#0" expanded="false" />
+                <element signature="e#12836#12940#0" expanded="false" />
+                <element signature="e#16170#17192#0" expanded="false" />
+                <marker date="1490941670388" expanded="true" signature="17553:17562" placeholder="..." />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="app.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/js/app.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="908" column="1" selection-start-line="908" selection-start-column="1" selection-end-line="912" selection-end-column="16" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -124,10 +273,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/app_login.jsp" />
-        <option value="$PROJECT_DIR$/app/views/hetong/chargerView.html" />
-        <option value="$PROJECT_DIR$/app/views/hetong/guidanceview.html" />
-        <option value="$PROJECT_DIR$/app/views/hetong/cellCoreView.html" />
         <option value="$PROJECT_DIR$/app/views/hetong/cellview.html" />
         <option value="$PROJECT_DIR$/cxoa.appcache" />
         <option value="$PROJECT_DIR$/app/cxoa.appcache" />
@@ -150,7 +295,6 @@
         <option value="$PROJECT_DIR$/app/vendor/bootstrap-editable/bootstrap-editable.css" />
         <option value="$PROJECT_DIR$/app/bxsq.html" />
         <option value="$PROJECT_DIR$/app/shenhe.html" />
-        <option value="$PROJECT_DIR$/app_index.html" />
         <option value="$PROJECT_DIR$/jsController/system.js" />
         <option value="$PROJECT_DIR$/jsController/wagesCalculate.js" />
         <option value="$PROJECT_DIR$/jsController/center/hetong.js" />
@@ -164,8 +308,6 @@
         <option value="$PROJECT_DIR$/app/views/caiwu/baoxiaoManager.html" />
         <option value="$PROJECT_DIR$/app/views/caiwu/baoxiaoApprove.html" />
         <option value="$PROJECT_DIR$/test/buy.js" />
-        <option value="$PROJECT_DIR$/app/views/caiwu/baoxiaoShenhe.html" />
-        <option value="$PROJECT_DIR$/app/js/app.js" />
         <option value="$PROJECT_DIR$/components/hetong/tContract.html" />
         <option value="$PROJECT_DIR$/app/js/center/caiwu.js" />
         <option value="$PROJECT_DIR$/components/employee/wages.jsp" />
@@ -175,6 +317,13 @@
         <option value="$PROJECT_DIR$/inc.jsp" />
         <option value="$PROJECT_DIR$/jslib/jquery-easyui-1.5/src/jquery.form.js" />
         <option value="$PROJECT_DIR$/test/testIframe.html" />
+        <option value="$PROJECT_DIR$/app/js/utils/chat.js" />
+        <option value="$PROJECT_DIR$/app/vendor/bootstrap-table/bootstrap-table.js" />
+        <option value="$PROJECT_DIR$/app/js/app.js" />
+        <option value="$PROJECT_DIR$/app_index.html" />
+        <option value="$PROJECT_DIR$/app/views/caiwu/baoxiaoShenhe.html" />
+        <option value="$PROJECT_DIR$/app/test/chatModal.html" />
+        <option value="$PROJECT_DIR$/app/js/utils/BootstrapChat.js" />
       </list>
     </option>
   </component>
@@ -186,10 +335,10 @@
     <order />
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="-8" />
+    <option name="x" value="1358" />
     <option name="y" value="-8" />
-    <option name="width" value="1382" />
-    <option name="height" value="744" />
+    <option name="width" value="1696" />
+    <option name="height" value="1026" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
     <OptionsSetting value="true" id="Add" />
@@ -214,6 +363,18 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="Scope">
+        <subPane subId="Project Files">
+          <PATH>
+            <PATH_ELEMENT USER_OBJECT="Root">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+        <subPane subId="Tests" />
+      </pane>
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -232,40 +393,82 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
-        </subPane>
-      </pane>
-      <pane id="Scratches" />
-      <pane id="Scope">
-        <subPane subId="Project Files">
           <PATH>
-            <PATH_ELEMENT USER_OBJECT="Root">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WebContent" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WebContent" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WebContent" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WebContent" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="images" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WebContent" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WebContent" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="images" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="chat" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
-        <subPane subId="Tests" />
       </pane>
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="D:/yourProjects/cxoa/WebContent" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/app/js/utils/BootstrapChat.js" />
     <property name="HbShouldOpenHtmlAsHb" value="" />
     <property name="FullScreen" value="false" />
     <property name="recentsLimit" value="5" />
     <property name="DefaultHtmlFileTemplate" value="Html5" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="restartRequiresConfirmation" value="true" />
-    <property name="two.files.diff.last.used.file" value="$PROJECT_DIR$/jsController/center/employee.js" />
+    <property name="two.files.diff.last.used.file" value="$PROJECT_DIR$/app/js/utils/BootstrapChat.js" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\working\cxoa\WebContent\app\images\chat" />
+      <recent name="D:\working\cxoa\WebContent\app\images" />
+      <recent name="D:\working\cxoa\WebContent\app\js\utils" />
       <recent name="D:\yourProjects\cxoa\WebContent\app\js\utils" />
       <recent name="D:\yourProjects\cxoa\WebContent\app\images" />
-      <recent name="D:\yourProjects\cxoa\WebContent\app\vendor\bootstrap-editable" />
-      <recent name="D:\yourProjects\cxoa\WebContent\app\vendor\bootstrapvalidator-master" />
-      <recent name="D:\yourProjects\cxoa\WebContent\app\views\caiwu" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\yourProjects\cxoa\WebContent\app\views\hetong\go" />
@@ -275,13 +478,7 @@
       <recent name="D:\yourProjects\cxoa\WebContent\app" />
     </key>
   </component>
-  <component name="RunManager" selected="JavaScript Debug.testIframe.html">
-    <configuration default="false" name="bxsq.html" type="JavascriptDebugType" factoryName="JavaScript Debug" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/WebContent/app/bxsq.html">
-      <method />
-    </configuration>
-    <configuration default="false" name="shenhe.html" type="JavascriptDebugType" factoryName="JavaScript Debug" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/WebContent/app/shenhe.html">
-      <method />
-    </configuration>
+  <component name="RunManager" selected="JavaScript Debug.app_index.html">
     <configuration default="false" name="jiagou_queryform.html" type="JavascriptDebugType" factoryName="JavaScript Debug" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/WebContent/test/jiagou_queryform.html">
       <method />
     </configuration>
@@ -289,6 +486,12 @@
       <method />
     </configuration>
     <configuration default="false" name="testIframe.html" type="JavascriptDebugType" factoryName="JavaScript Debug" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/WebContent/test/testIframe.html">
+      <method />
+    </configuration>
+    <configuration default="false" name="BootstrapChat.js" type="NodeJSConfigurationType" factoryName="Node.js" temporary="true" path-to-node="C:/Program Files/nodejs/node" path-to-js-file="BootstrapChat.js" working-dir="$PROJECT_DIR$/app/js/utils">
+      <method />
+    </configuration>
+    <configuration default="false" name="app_index.html" type="JavascriptDebugType" factoryName="JavaScript Debug" temporary="true" nameIsGenerated="true" uri="http://localhost:6334/WebContent/app_index.html">
       <method />
     </configuration>
     <configuration default="true" type="DartCommandLineRunConfigurationType" factoryName="Dart Command Line Application">
@@ -330,19 +533,19 @@
       <method />
     </configuration>
     <list size="5">
-      <item index="0" class="java.lang.String" itemvalue="JavaScript Debug.bxsq.html" />
-      <item index="1" class="java.lang.String" itemvalue="JavaScript Debug.shenhe.html" />
-      <item index="2" class="java.lang.String" itemvalue="JavaScript Debug.jiagou_queryform.html" />
-      <item index="3" class="java.lang.String" itemvalue="Node.js.buy.js" />
-      <item index="4" class="java.lang.String" itemvalue="JavaScript Debug.testIframe.html" />
+      <item index="0" class="java.lang.String" itemvalue="JavaScript Debug.jiagou_queryform.html" />
+      <item index="1" class="java.lang.String" itemvalue="Node.js.buy.js" />
+      <item index="2" class="java.lang.String" itemvalue="JavaScript Debug.testIframe.html" />
+      <item index="3" class="java.lang.String" itemvalue="Node.js.BootstrapChat.js" />
+      <item index="4" class="java.lang.String" itemvalue="JavaScript Debug.app_index.html" />
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="JavaScript Debug.testIframe.html" />
-        <item index="1" class="java.lang.String" itemvalue="Node.js.buy.js" />
-        <item index="2" class="java.lang.String" itemvalue="JavaScript Debug.jiagou_queryform.html" />
-        <item index="3" class="java.lang.String" itemvalue="JavaScript Debug.shenhe.html" />
-        <item index="4" class="java.lang.String" itemvalue="JavaScript Debug.bxsq.html" />
+        <item index="0" class="java.lang.String" itemvalue="JavaScript Debug.app_index.html" />
+        <item index="1" class="java.lang.String" itemvalue="Node.js.BootstrapChat.js" />
+        <item index="2" class="java.lang.String" itemvalue="JavaScript Debug.testIframe.html" />
+        <item index="3" class="java.lang.String" itemvalue="Node.js.buy.js" />
+        <item index="4" class="java.lang.String" itemvalue="JavaScript Debug.jiagou_queryform.html" />
       </list>
     </recent_temporary>
   </component>
@@ -360,26 +563,26 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
+    <frame x="1358" y="-8" width="1696" height="1026" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.25520834" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.15560916" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39932886" sideWeight="0.50241256" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.061521254" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24969843" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39932886" sideWeight="0.49758744" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32843137" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.30089486" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39932886" sideWeight="0.49758744" order="3" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -456,38 +659,11 @@
           <option name="timeStamp" value="70" />
         </line-breakpoint>
       </breakpoints>
-      <option name="time" value="72" />
+      <option name="time" value="88" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/vendor/bootstrapvalidator-master/demo/collapse.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="196" column="17" selection-start-line="196" selection-start-column="17" selection-end-line="204" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/images/timg.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/images/1_tj_dpz.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/images/timg2.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/images/timg.jpg">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/app_application.html">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.40860215">
@@ -710,13 +886,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/js/app.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="1.2566473">
-          <caret line="850" column="59" selection-start-line="850" selection-start-column="59" selection-end-line="850" selection-end-column="59" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/js/center/caiwu.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -805,14 +974,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/login.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="13" column="23" selection-start-line="13" selection-start-column="23" selection-end-line="13" selection-end-column="23" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/jslib/jquery-easyui-1.5/src/jquery.form.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -832,20 +993,148 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app_index.html">
+    <entry file="file://$PROJECT_DIR$/app/js/utils/chat.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-1.862069">
-          <caret line="358" column="47" selection-start-line="358" selection-start-column="47" selection-end-line="358" selection-end-column="47" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="19" column="12" selection-start-line="19" selection-start-column="9" selection-end-line="19" selection-end-column="12" />
           <folding />
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/js/app.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="908" column="1" selection-start-line="908" selection-start-column="1" selection-end-line="912" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/vendor/bootstrap-table/bootstrap-table.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="120" column="6" selection-start-line="120" selection-start-column="6" selection-end-line="120" selection-end-column="6" />
+          <folding>
+            <element signature="e#346#694#0" expanded="false" />
+            <element signature="e#761#1014#0" expanded="false" />
+            <element signature="e#1067#1318#0" expanded="false" />
+            <element signature="e#1409#2602#0" expanded="false" />
+            <element signature="e#2645#3242#0" expanded="false" />
+            <element signature="e#3318#4088#0" expanded="false" />
+            <element signature="e#4159#5198#0" expanded="false" />
+            <element signature="e#5238#5582#0" expanded="false" />
+            <element signature="e#5624#5852#0" expanded="false" />
+            <element signature="e#5901#6197#0" expanded="false" />
+            <element signature="e#6254#6612#0" expanded="false" />
+            <element signature="e#6649#6769#0" expanded="false" />
+            <element signature="e#8774#13844#0" expanded="false" />
+            <element signature="e#13947#15050#0" expanded="false" />
+            <element signature="e#15163#15986#0" expanded="false" />
+            <element signature="e#16017#17198#0" expanded="false" />
+            <element signature="e#30765#30940#0" expanded="false" />
+            <element signature="e#31077#31813#0" expanded="false" />
+            <element signature="e#31868#34286#0" expanded="false" />
+            <element signature="e#35374#42178#0" expanded="false" />
+            <element signature="e#42238#42749#0" expanded="false" />
+            <element signature="e#42806#45531#0" expanded="false" />
+            <element signature="e#45592#55068#0" expanded="false" />
+            <element signature="e#55136#55649#0" expanded="false" />
+            <element signature="e#55717#56120#0" expanded="false" />
+            <element signature="e#56183#56265#0" expanded="false" />
+            <element signature="e#56326#56551#0" expanded="false" />
+            <element signature="e#56613#56836#0" expanded="false" />
+            <element signature="e#56898#56994#0" expanded="false" />
+            <element signature="e#57058#57273#0" expanded="false" />
+            <element signature="e#71183#74060#0" expanded="false" />
+            <element signature="e#74121#74415#0" expanded="false" />
+            <element signature="e#74470#74725#0" expanded="false" />
+            <element signature="e#74786#75228#0" expanded="false" />
+            <element signature="e#75285#75470#0" expanded="false" />
+            <element signature="e#75526#75831#0" expanded="false" />
+            <element signature="e#75889#76217#0" expanded="false" />
+            <element signature="e#76275#76550#0" expanded="false" />
+            <element signature="e#79825#81758#0" expanded="false" />
+            <element signature="e#81814#82667#0" expanded="false" />
+            <element signature="e#83496#83769#0" expanded="false" />
+            <element signature="e#83832#84184#0" expanded="false" />
+            <element signature="e#84312#85835#0" expanded="false" />
+            <element signature="e#85903#86233#0" expanded="false" />
+            <element signature="e#88367#89511#0" expanded="false" />
+            <element signature="e#91507#91690#0" expanded="false" />
+            <element signature="e#91750#91934#0" expanded="false" />
+            <element signature="e#91998#92233#0" expanded="false" />
+            <element signature="e#92297#93057#0" expanded="false" />
+            <element signature="e#93120#93484#0" expanded="false" />
+            <element signature="e#93541#93577#0" expanded="false" />
+            <element signature="e#93637#93788#0" expanded="false" />
+            <element signature="e#93851#94002#0" expanded="false" />
+            <element signature="e#94057#94094#0" expanded="false" />
+            <element signature="e#94151#94189#0" expanded="false" />
+            <element signature="e#94741#95151#0" expanded="false" />
+            <element signature="e#95208#95249#0" expanded="false" />
+            <element signature="e#95308#95350#0" expanded="false" />
+            <element signature="e#95417#95696#0" expanded="false" />
+            <element signature="e#95753#95794#0" expanded="false" />
+            <element signature="e#95853#95895#0" expanded="false" />
+            <element signature="e#95962#96778#0" expanded="false" />
+            <element signature="e#96832#97172#0" expanded="false" />
+            <element signature="e#97230#97272#0" expanded="false" />
+            <element signature="e#97330#97372#0" expanded="false" />
+            <element signature="e#97953#98196#0" expanded="false" />
+            <element signature="e#98253#98441#0" expanded="false" />
+            <element signature="e#98503#98585#0" expanded="false" />
+            <element signature="e#98647#98730#0" expanded="false" />
+            <element signature="e#98793#98904#0" expanded="false" />
+            <element signature="e#98968#99078#0" expanded="false" />
+            <element signature="e#99746#99790#0" expanded="false" />
+            <element signature="e#99851#99896#0" expanded="false" />
+            <element signature="e#100192#100527#0" expanded="false" />
+            <element signature="e#100591#100630#0" expanded="false" />
+            <element signature="e#101309#101569#0" expanded="false" />
+            <element signature="e#101637#101975#0" expanded="false" />
+            <element signature="e#102037#102185#0" expanded="false" />
+            <element signature="e#102255#102476#0" expanded="false" />
+            <element signature="e#102537#102582#0" expanded="false" />
+            <element signature="e#102645#102691#0" expanded="false" />
+            <element signature="e#102761#104105#0" expanded="false" />
+            <element signature="e#104177#104451#0" expanded="false" />
+            <element signature="e#105080#106064#0" expanded="false" />
+            <marker date="1490840695442" expanded="true" signature="18816:18828" placeholder="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/login.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-9.5">
+          <caret line="36" column="49" selection-start-line="36" selection-start-column="49" selection-end-line="36" selection-end-column="49" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app_index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-3.4285715">
+          <caret line="344" column="0" selection-start-line="344" selection-start-column="0" selection-end-line="344" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/images/blue_60.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/views/caiwu/baoxiaoShenhe.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.075675674">
-          <caret line="2012" column="85" selection-start-line="2012" selection-start-column="85" selection-end-line="2012" selection-end-column="85" />
+        <state vertical-scroll-proportion="-11.535714">
+          <caret line="775" column="54" selection-start-line="775" selection-start-column="50" selection-end-line="775" selection-end-column="54" />
           <folding>
             <element signature="n#div#0;n#div#1;n#div#1;n#div#0;n#div#0;n#div#0;n#!!top" expanded="false" />
+            <element signature="n#div#0;n#div#0;n#fieldset#0;n#div#1;n#div#1;n#div#1;n#div#1;n#div#0;n#div#0;n#!!top" expanded="false" />
+            <element signature="n#li#1;n#ul#0;n#div#1;n#div#0;n#fieldset#0;n#div#1;n#div#1;n#div#1;n#div#1;n#div#0;n#div#0;n#!!top" expanded="false" />
+            <element signature="n#li#2;n#ul#0;n#div#1;n#div#0;n#fieldset#0;n#div#1;n#div#1;n#div#1;n#div#1;n#div#0;n#div#0;n#!!top" expanded="false" />
+            <element signature="n#li#3;n#ul#0;n#div#1;n#div#0;n#fieldset#0;n#div#1;n#div#1;n#div#1;n#div#1;n#div#0;n#div#0;n#!!top" expanded="false" />
+            <element signature="n#li#4;n#ul#0;n#div#1;n#div#0;n#fieldset#0;n#div#1;n#div#1;n#div#1;n#div#1;n#div#0;n#div#0;n#!!top" expanded="false" />
             <element signature="n#div#0;n#div#2;n#div#0;n#div#0;n#!!top" expanded="false" />
             <element signature="n#legend#0;n#fieldset#0;n#form#0;n#div#1;n#div#1;n#div#1;n#div#2;n#div#0;n#div#0;n#!!top" expanded="false" />
             <element signature="n#div#0;n#fieldset#0;n#form#0;n#div#1;n#div#1;n#div#1;n#div#2;n#div#0;n#div#0;n#!!top" expanded="false" />
@@ -855,6 +1144,30 @@
             <element signature="n#div#0;n#legend#1;n#form#0;n#div#1;n#div#1;n#div#1;n#div#4;n#div#0;n#div#0;n#!!top" expanded="false" />
             <element signature="n#legend#2;n#form#0;n#div#1;n#div#1;n#div#1;n#div#4;n#div#0;n#div#0;n#!!top" expanded="false" />
             <element signature="n#div#1;n#div#0;n#!!top" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/test/chatModal.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.46744573">
+          <caret line="48" column="64" selection-start-line="48" selection-start-column="60" selection-end-line="48" selection-end-column="64" />
+          <folding>
+            <element signature="n#style#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#span#0;n#strong#0;n#div#0;n#div#0;n#li#0;n#ul#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/js/utils/BootstrapChat.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.31907514">
+          <caret line="106" column="34" selection-start-line="106" selection-start-column="34" selection-end-line="106" selection-end-column="34" />
+          <folding>
+            <element signature="e#255#1463#0" expanded="false" />
+            <element signature="e#12836#12940#0" expanded="false" />
+            <element signature="e#16170#17192#0" expanded="false" />
+            <marker date="1490941670388" expanded="true" signature="17553:17562" placeholder="..." />
           </folding>
         </state>
       </provider>
