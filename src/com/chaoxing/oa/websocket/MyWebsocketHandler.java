@@ -63,9 +63,17 @@ public class MyWebsocketHandler implements WebSocketHandler {
 	@Override
 	public void handleMessage(WebSocketSession webSocketSession, WebSocketMessage<?> message) throws Exception {
 		if(message.getPayloadLength()==0)return;
+		SessionInfo sessionInfo = getSessionInfo(webSocketSession);
 		Gson gs = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
 		Messages msg = gs.fromJson(message.getPayload().toString(), Messages.class);
-		MessageDispatch(msg, webSocketSession);
+		msg.setDate(new Date());
+		if(null != sessionInfo){
+			msg.setSid(sessionInfo.getId());
+			msg.setSender(sessionInfo.getUsername());
+			MessageDispatch(msg, webSocketSession);
+		}else{
+			return ;
+		}
 	}
 	
 	/**

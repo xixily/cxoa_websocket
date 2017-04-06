@@ -60,6 +60,8 @@ public class ShebaoAR implements Serializable {
 	private String remarks;//备注
 	private String bumentiaozhengReport;//部门调整报表
 	private String s_remarks;//涨薪记录
+	private String graduateSchool;
+	private String graduateDate;
 	
 	@Id
 	@Column
@@ -253,6 +255,20 @@ public class ShebaoAR implements Serializable {
 	@Column(name="涨薪记录")
 	public String getS_remarks() {
 		return s_remarks;
+	}
+	@Column(name="毕业院校")
+	public String getGraduateSchool() {
+		return graduateSchool;
+	}
+	public void setGraduateSchool(String graduateSchool) {
+		this.graduateSchool = graduateSchool;
+	}
+	@Column(name="学历证书")
+	public String getGraduateDate() {
+		return graduateDate;
+	}
+	public void setGraduateDate(String graduateDate) {
+		this.graduateDate = graduateDate;
 	}
 	public void setS_remarks(String s_remarks) {
 		this.s_remarks = s_remarks;

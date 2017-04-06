@@ -443,6 +443,7 @@ var employee = {
 		session.employee.cellCoreEmail = userInfo.cellCoreEmail?userInfo.cellCoreEmail:'';
 		var url = "user/getUserName.action";
 		$('#updateUsesrname_form').form('clear');
+		$('#updateUsesrname_form').find('.easyui-combobox').combobox('reload');
 		$.getJSON(url, userInfo, function(result) {
 			if (result.success) {
 //				if(result.obj.ifSecret == "on"){
@@ -500,6 +501,7 @@ var employee = {
 				return;
 			}
 			$('#updateUsesrname_form').form('clear');
+			$('#updateUsesrname_form').find('.easyui-combobox').combobox('reload');
 			session.employee.cellCoreEmail = userInfo.cellCoreEmail?userInfo.cellCoreEmail:'';
 			$.getJSON(url, userInfo, function(result) {
 				if (result.success) {
@@ -537,6 +539,7 @@ var employee = {
 			title : '增加职员'
 		});
 		$('#updateUsesrname_form').form('clear');
+		$('#updateUsesrname_form').find('.easyui-combobox').combobox('reload');
 		$('#userName_info').window('open').window('resize', {
 			top : $(document).scrollTop() + ($(window).height() - 480) * 0.5
 		});

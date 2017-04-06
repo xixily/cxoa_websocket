@@ -69,6 +69,16 @@ public class PMonthWages {
 	private Double lishiSalary;//历史工资
 	private String taxStructure;//报税架构
 	private Integer countId;//统计架构
+	private Integer ifForeign;//外籍
+	private Byte ifEngineering;//理工 
+	private String zhuanruGongsiTime;//转入本公司时间
+	private String degreeCertificate;//学历证书
+	private String dueSocialSecurity;//计划入保时间
+	private String level;//级别
+	private String registeredAddress;//户口地址
+	private String degree;//学历
+	private String sex;//性别
+	
 	public Integer getId() {
 		return id;
 	}
@@ -476,6 +486,60 @@ public class PMonthWages {
 	}
 	public void setCountId(Integer countId) {
 		this.countId = countId;
+	}
+	public Integer getIfForeign() {
+		return ifForeign;
+	}
+	public void setIfForeign(Integer ifForeign) {
+		this.ifForeign = ifForeign;
+	}
+	public Byte getIfEngineering() {
+		return ifEngineering;
+	}
+	public void setIfEngineering(Byte ifEngineering) {
+		this.ifEngineering = ifEngineering;
+	}
+	public String getZhuanruGongsiTime() {
+		return zhuanruGongsiTime;
+	}
+	public void setZhuanruGongsiTime(String zhuanruGongsiTime) {
+		this.zhuanruGongsiTime = zhuanruGongsiTime;
+	}
+	public String getDegreeCertificate() {
+		return degreeCertificate;
+	}
+	public void setDegreeCertificate(String degreeCertificate) {
+		this.degreeCertificate = degreeCertificate;
+	}
+	public String getDueSocialSecurity() {
+		return dueSocialSecurity;
+	}
+	public void setDueSocialSecurity(String dueSocialSecurity) {
+		this.dueSocialSecurity = dueSocialSecurity;
+	}
+	public String getLevel() {
+		return level;
+	}
+	public void setLevel(String level) {
+		this.level = level;
+	}
+	public String getRegisteredAddress() {
+		return registeredAddress;
+	}
+	public void setRegisteredAddress(String registeredAddress) {
+		this.registeredAddress = registeredAddress;
+	}
+	public String getDegree() {
+		return degree;
+	}
+	public void setDegree(String degree) {
+		this.degree = degree;
+	}
+	public String getSex() {
+		return sex;
+	}
+	public void setSex(String sex) {
+		this.sex = sex;
 	}
 	
 }

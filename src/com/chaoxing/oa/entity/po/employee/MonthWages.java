@@ -87,6 +87,15 @@ public class MonthWages implements Serializable{
 	private Double lishiSalary;//历史工资
 	private String taxStructure;//报税架构
 	private Integer countId;//统计架构
+	private Integer ifForeign;//外籍
+	private Byte ifEngineering;//理工 
+	private String zhuanruGongsiTime;//转入本公司时间
+	private String degreeCertificate;//学历证书
+	private String dueSocialSecurity;//计划入保时间
+	private String level;//级别
+	private String registeredAddress;//户口地址
+	private String degree;//学历
+	private String sex;//性别
 	@Id
 	@Column
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -362,6 +371,20 @@ public class MonthWages implements Serializable{
 	public Integer getCountId() {
 		return countId;
 	}
+	@Column(name="学历")
+	public String getDegree() {
+		return degree;
+	}
+	public void setDegree(String degree) {
+		this.degree = degree;
+	}
+	@Column(name="性别")
+	public String getSex() {
+		return sex;
+	}
+	public void setSex(String sex) {
+		this.sex = sex;
+	}
 	public void setLishiSalary(Double lishiSalary) {
 		this.lishiSalary = lishiSalary;
 	}
@@ -566,4 +589,54 @@ public class MonthWages implements Serializable{
 	public void setCountId(Integer countId) {
 		this.countId = countId;
 	}
+	@Column(name="是否外籍")
+	public Integer getIfForeign() {
+		return ifForeign;
+	}
+	public void setIfForeign(Integer ifForeign) {
+		this.ifForeign = ifForeign;
+	}
+	@Column(name="是否理工学")
+	public Byte getIfEngineering() {
+		return ifEngineering;
+	}
+	public void setIfEngineering(Byte ifEngineering) {
+		this.ifEngineering = ifEngineering;
+	}
+	@Column(name="转入本公司时间")
+	public String getZhuanruGongsiTime() {
+		return zhuanruGongsiTime;
+	}
+	public void setZhuanruGongsiTime(String zhuanruGongsiTime) {
+		this.zhuanruGongsiTime = zhuanruGongsiTime;
+	}
+	@Column(name="毕业时间")
+	public String getDegreeCertificate() {
+		return degreeCertificate;
+	}
+	public void setDegreeCertificate(String degreeCertificate) {
+		this.degreeCertificate = degreeCertificate;
+	}
+	@Column(name="投保时间")
+	public String getDueSocialSecurity() {
+		return dueSocialSecurity;
+	}
+	public void setDueSocialSecurity(String dueSocialSecurity) {
+		this.dueSocialSecurity = dueSocialSecurity;
+	}
+	@Column(name="级别")
+	public String getLevel() {
+		return level;
+	}
+	public void setLevel(String level) {
+		this.level = level;
+	}
+	@Column(name="户口地址")
+	public String getRegisteredAddress() {
+		return registeredAddress;
+	}
+	public void setRegisteredAddress(String registeredAddress) {
+		this.registeredAddress = registeredAddress;
+	}
+	
 }
