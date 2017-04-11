@@ -25,12 +25,6 @@ public class HandShake implements HandshakeInterceptor {
 				attributes.put("userInfo", sessionInfo);
 				Integer id = sessionInfo.getId();
 				System.out.println("Websocket:用户[id:" + id + "]握手成功。");
-//				if(null != sessionInfo){
-//					attributes.put("userInfo", sessionInfo);
-//					System.out.println("Websocket:用户[ID:"+ id + "]握手成功。");
-//				}else{
-//					
-//				}
 			}
 			
 		}

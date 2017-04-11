@@ -2,9 +2,13 @@ package com.chaoxing.oa.entity.page.websocket;
 
 import java.util.Date;
 
-public class Messages {
+public class PMessages {
 	public final static int NORMAL_MESSAGES = 100;
 	public final static int SYSTEM_MESSAGES = 110;
+	public final static int SYSTEM_CLEAR_ORDER = 111;
+	public final static int SYSTEM_ALL_RECORDS = 118;
+	public final static int SYSTEM_MANAGE = 119;
+	public final static int CW_SH_MESSAGES = 301;
 	public final static int HEART_BEAT = 1;
 	
 	private String sender;

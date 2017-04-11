@@ -3,9 +3,9 @@
  */
 (function($){
 
-    var websocket = null;
-    var url = null;
-
+    var websocket = undefined;
+    var times = 0;
+    var MAXTIMES = 10;
     /**
      * 日期格式化
      * @param fmt "yyyy-MM-dd HH:mm:ss"
@@ -62,7 +62,8 @@
         this.datePattern = "yyyy-MM-dd HH:mm:ss";
         this.language = options.language ||  'cn';
         this.url = options.url || '';
-        this.websocket = undefined;
+        this.socketJs_url = options.socketJs_url || "";
+        this.websocket = websocket;
         this.onClickSend_ = options.onClickSend;
         this.onClickRefresh_ = options.onClickRefresh;
         this.onClickOnline_ = options.onClickOnline;
@@ -74,8 +75,10 @@
         this.onerror = options.onerror;
         this.onmessage = options.onmessage;
         this.onopen = options.onopen;
-
         this.regex = /^\s*$/g;
+        // webMessgaes
+        this.to = options.to;
+        this.msg_type  = options.msg_type || '100';
     };
 
     /**
@@ -209,17 +212,17 @@
                         content:[{
                             item:'<span>',
                             class:'chat-img pull-left',
-                            content:[{
-                                item:'<img>',
-                                class:'img-circle',
-                                property:{
-                                    src:"app/images/blue_60.png",
-                                    alt:'系统消息',
-                                },
-                                exProperty:{
-                                    app_data:"img"
-                                }
-                            }]
+//                            content:[{
+//                                item:'<img>',
+//                                class:'img-circle',
+//                                property:{
+////                                    src:"app/images/sys_60.png",
+////                                    alt:'系统消息',
+//                                },
+//                                exProperty:{
+//                                    app_data:"img"
+//                                }
+//                            }]
                         },{
                             item:'<div>',
                             class:'chat-body clearfix',
@@ -388,7 +391,7 @@
             defaults.dom.head.content[1].text = language.head_title;
             defaults.dom.body.content[0].content[0].content[1].content[0].content[0].content[0].text = language.sys_Name;
             defaults.dom.body.content[0].content[0].content[1].content[1].text = language.welcome;
-            defaults.dom.body.content[0].content[0].content[0].content[0].property.alt = language.sys_img_alt;
+//            defaults.dom.body.content[0].content[0].content[0].content[0].property.alt = language.sys_img_alt;
             defaults.dom.footer.content[0].content[0].content[0].property.placeholder = language.sender_placeholder;
             defaults.dom.footer.content[0].content[0].content[1].content[0].text = language.sender_text;
         }
@@ -450,9 +453,6 @@
      * @returns dom chat完整dom结构
      */
     BootstrapChat.prototype.init = function(options){
-        if(this.$jq_.data("BootstrapChat.data")){
-            return undefined;
-        }
         this.$jq_ = this.$jq_ ||  $('<div>');
         options = getOptions(this, options, this.language);
         var head = options.dom.head;
@@ -476,19 +476,34 @@
 
     BootstrapChat.prototype.initWebsocket = function(){
         if(this.url){
-            if ('WebSocket' in window) {
-                this.websocket = new WebSocket("ws://" + this.url + "/ws");
-            } else if ('MozWebSocket' in window) {
-                this.websocket = new MozWebSocket("ws://" + this.url + "/ws");
-            } else {
-                this.websocket = new SockJS("http://" + this.url + "/ws/sockjs");
+            if(!(this.websocket && this.websocket.readyState === 1)){
+                if(this.websocket){
+                    try{
+                        this.websocket.close();
+                    }catch(e){
+                        alert("websocket 连接失败，请重试。");
+                    }
+                }
+                try{
+                    if ('WebSocket' in window) {
+                        this.websocket = new WebSocket("ws://" + this.url);
+                    } else if ('MozWebSocket' in window) {
+                        this.websocket = new MozWebSocket("ws://" + this.url);
+                    } else {
+                        this.websocket = new SockJS("http://" + this.url);
+                    }
+                    times = 0;
+                }catch(e){
+                    alert("websocket 连接失败，请重试。");
+                }
             }
             var that = this;
             //打开一个链接
             this.websocket.onopen = function(event) {
                 var msg = {};
                 msg.msg = "WebSocket:已连接";
-                this._addSysMessages(msg);
+                that._addSysMessages(msg);
+                times = 0;
                 console.log(event);
                 if(typeof that.onopen === 'function'){
                     that.onopen(event);
@@ -500,6 +515,13 @@
                 data.img = data.img || DEFAULTS.sender.sender;
                 if(data.msg_type == 110){
                     that._addSysMessages(data);
+                }else if(data.msg_type == 118){ // 初始化数据
+                    that._clear();
+                    var uls = data.uls;
+                    var uid = data.uid;
+                    $.each(uls, function(i, obj){
+                        that._addMessages(obj, (obj.sid == uid ? true : false))
+                    })
                 }else{
                     that._addMessages(data, false);
                 }
@@ -510,8 +532,13 @@
             //发生错误
             this.websocket.onerror = function(event) {
                 var msg = {};
-                msg.msg = "WebSocket:发生错误 ";
+                msg.msg = "WebSocket发生错误:" + event.type;
                 that._addSysMessages(msg);
+                if(times ++ < MAXTIMES){
+                    setTimeout(that.initWebsocket,1000);
+                }else{
+                    alert("无法重连聊天服务器，可能是您登陆超时。");
+                }
                 if(typeof that.onerror === 'function'){
                     that.onerror(event);
                 }
@@ -521,12 +548,26 @@
                 var msg = {};
                 msg.msg = "WebSocket:已关闭";
                 that._addSysMessages(msg);
+                if(times ++ < MAXTIMES){
+                    setTimeout(that.initWebsocket,1000);
+                }else{
+                    alert("无法重连聊天服务器，可能是您登陆超时。")
+                }
+//                that.initWebsocket();
                 if(typeof that.onclose === 'function'){
                     that.onclose(event);
                 }
             }
         }else{
             console.log("没有设置url值，websocket没有初始化。");
+        }
+    }
+
+    BootstrapChat.prototype.websocket_send = function(msg){
+        if(this.websocket && this.websocket.readyState === 1){
+            this.websocket.send(JSON.stringify(msg));
+        }else{
+            this.initWebsocket();
         }
     }
 
@@ -572,19 +613,21 @@
      * @returns {*}
      * @private
      */
-    BootstrapChat.prototype._addMessages = function(msg){
+    BootstrapChat.prototype._addMessages = function(msg, ifself){
+        if(!msg.img){
+            msg.img = ifself ? $.extend({},DEFAULTS.sender.me) : $.extend({},DEFAULTS.sender.sender);
+        }
         if(!msg || !msg.msg) return ;
         $('#' + DEFAULTS.ids.input + this.dateValue).val('');
-        var ifself = msg.ifself;
         if(!this.$jq_.data("BootstrapChat.data")){
             this.$jq_.data("BootstrapChat.data",{})
         }
         var data = this.$jq_.data("BootstrapChat.data") ;
         data.ul = data.ul || [];
         var index = data.ul.length;
-        if(isEmpty(msg)){
-            return false;
-        }
+//        if(isEmpty(msg)){
+//            return false;
+//        }
         var li = $('<li>').addClass(ifself ? 'left clearfix':'right clearfix').attr("chat-id",index);
         li.append($('<span>').append($('<img>').attr('src',msg.img.src).attr('alt',msg.img.alt ? msg.img.alt : "imgs").
                 addClass(msg.img.class ? msg.img.class : "img-circle")).addClass(ifself ? 'chat-img pull-left':'chat-img pull-right'));
@@ -606,7 +649,7 @@
     BootstrapChat.prototype._removeMessages = function(index){
         if(!index) return false;
         try{
-            ul = this.$jq_.data("Bootstrap.data").ul;
+            ul = this.$jq_.data("BootstrapChat.data").ul;
             if(ul && ul.length > index){
                 ul[index].dom.remove();
             }
@@ -616,24 +659,30 @@
     }
 
     BootstrapChat.prototype._clear = function(){
-        ul = this.$jq_.data("Bootstrap.data").ul;
+        ul = this.$jq_.data("BootstrapChat.data").ul;
+        this.$jq_.find('#'+DEFAULTS.ids.chat_ul+this.dateValue + ">li").remove();
         $.each(ul, function(i, obj){
             obj.dom.remove();
+//            ul.pop(i);
         })
+        ul = [];
     };
 
     BootstrapChat.prototype._addSysMessages = function(msg){
         if(!msg || !msg.msg) return ;
         msg.img = DEFAULTS.sender.system;
-        if(isEmpty(msg)){
-            return false;
-        }
-        var li = $('<li>').addClass( 'left clearfix').attr("chat-id",index);
+        var data = this.$jq_.data("BootstrapChat.data") ;
+        data.ul = data.ul || [];
+        var index = data.ul.length;
+//        if(isEmpty(msg)){
+//            return false;
+//        }
+        var li = $('<li>').addClass('right clearfix').attr("chat-id",index);
         li.append($('<span>').append($('<img>').attr('src',msg.img.src).attr('alt',msg.img.alt ? msg.img.alt : "imgs").
-                addClass(msg.img.class ? msg.img.class : "img-circle")).addClass(ifself ? 'chat-img pull-left':'chat-img pull-right'));
+                addClass(msg.img.class ? msg.img.class : "img-circle")).addClass('chat-img pull-right'));
         li.append($('<div>').addClass('chat-body clearfix').append(
-                $('<div>').addClass('header').append($('<strong>').addClass( 'primary-font').html('<span style="color:#ff6a00">[系统消息]:</span>')).
-                        append($('<small>').addClass('pull-right text-muted').append($('<i>').addClass('fa fa-clock-o fa-fw')).append($('<span>').text(msg.date || new Date().format__(this.datePattern))))
+                $('<div>').addClass('header').append($('<strong>').addClass('pull-right primary-font').html('<span style="color:#ff6a00">[系统消息]:</span>')).
+                        append($('<small>').addClass('text-muted').append($('<i>').addClass('fa fa-clock-o fa-fw')).append($('<span>').text(msg.date || new Date().format__(this.datePattern))))
         ).append($('<p>').text(msg.msg)))
         try{
             li.appendTo(this.$jq_.find("div.panel-body>ul.chat"));
@@ -653,7 +702,7 @@
         if(!msg.id) return false;
         this._addMessages(msg,true);
         delete msg.img;
-        this.websocket.send(JSON.stringify(msg));
+        this.websocket_send(msg);
     }
 
     BootstrapChat.prototype.initSend = function(){
@@ -675,13 +724,17 @@
             var msg = $('#' + DEFAULTS.ids.input + that.dateValue).val();
             var data = {};
             data.msg = msg;
+            data.sender = "我";
+            data.to = that.to;
+            data.msg_type = that.msg_type;
             if(!that.regex.test(msg)){
-                if(websocket){
-                    that.websocket.send(JSON.stringify({msg:msg}));
+                if(that.websocket){
+                    that.websocket_send(data);
                 }
                 data.img = DEFAULTS.sender.me;
                 data.date = new Date().format__(that.datePattern);
-                that._addMessages(data);
+//                data.ifself = true;
+                that._addMessages(data, true);
             }
         })
     };
@@ -720,6 +773,10 @@
             }
         })
     }
+
+    BootstrapChat.prototype.addCookies = function(){
+
+    };
 //
 //    BootstrapChat.prototype.initRefresh = function(){
 //        var dom = $('#' + DEFAULTS.ids.drop_ul + this.dateValue + ">li i.fa-refresh");
@@ -815,16 +872,19 @@
     }
 
     $.fn.bootstrapChat = function(options, data){
-//        var value;
         if(typeof options === 'string'){
             this.each(function(){
                 var $this = $(this),
                         chat = $this.data("BootstrapChat.data");
                 if(options === 'init' ||  !chat){
+                    if(options === 'init' && chat){
+                        console.log('元素已经初始化。')
+                        return false;
+                    }
                     chat = new BootstrapChat($this, data);
+                    $this.remove();
                     chat.$jq_.data("BootstrapChat.data", chat);
                     chat.init(data);
-                    $this.remove();
                 }else if(chat[options]){
                     chat[options].apply(chat, data);
                 }else{
@@ -832,17 +892,5 @@
                 }
             })
         }
-//        this.each(function(){
-//            var $this = $(this),
-//                    chat = $this.data('bootstrap.chat') ? $this.data('bootstrap.chat') : new BootstrapTable(this, options);
-//            if(typeof options === 'string'){
-//                if(chat[options] && typeof chat[options] === 'function'){
-//                    value = chat[options].apply(chat);
-//                }else{
-//                    throw new Error("Unknow method: " + options);
-//                }
-//            }
-//        })
     }
-
 }($))

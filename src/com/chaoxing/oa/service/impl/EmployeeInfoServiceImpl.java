@@ -979,14 +979,16 @@ public class EmployeeInfoServiceImpl implements EmployeeInfoService {
 
 	@Override
 	public int updateGridWage(PgridWage pgridWage) {
-		String hql = "update WageDistribution set identityCard=:idcard,company=:company,accountBank=:accountBank,account=:account,householdType=:householdType,"
+		String hql = "update WageDistribution set identityCard=:idcard,company=:company,accountBank=:accountBank,account=:account,"
 				+ "rubaoTime=:rubaoTime,taxStructure=:taxStructure,countId=:countId where id=:id";
+/*		String hql = "update WageDistribution set identityCard=:idcard,company=:company,accountBank=:accountBank,account=:account,householdType=:householdType,"
+				+ "rubaoTime=:rubaoTime,taxStructure=:taxStructure,countId=:countId where id=:id";*/
 		Map<String,Object> params = new HashMap<String, Object>();
 		params.put("idcard", pgridWage.getIdentityCard());
 		params.put("company", pgridWage.getCompany());
 		params.put("accountBank", pgridWage.getAccountBank());
 		params.put("account", pgridWage.getAccount());
-		params.put("householdType", pgridWage.getHouseholdType());
+//		params.put("householdType", pgridWage.getHouseholdType());
 		params.put("rubaoTime", pgridWage.getRubaoTime());
 		params.put("taxStructure",  pgridWage.getTaxStructure());
 		params.put("countId", pgridWage.getCountId());

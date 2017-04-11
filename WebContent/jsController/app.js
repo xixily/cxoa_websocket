@@ -147,6 +147,8 @@ function initClickHandler() {
     });
 }
 
+$('#dialog_wagesInfo').css
+
 /**
  * @author dengxuefeng
  * @requires jquery.js

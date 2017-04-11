@@ -5,7 +5,7 @@
 <head>
 <title>超星自动化办公系统</title>
 <meta HTTP-EQUIV="Pragma" content="no-cache">
-<meta HTTP-EQUIV="Cache-Control" content="no-cache">
+<meta HTTP-EQUIV="Cache-Control" content="no-cache,must-revalidate">
 <meta HTTP-EQUIV="Expires" content="0">
 <meta charset="UTF-8">
 <jsp:include page="inc.jsp"></jsp:include>

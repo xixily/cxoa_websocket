@@ -65,7 +65,7 @@
            	<jsp:include page="../../components/employee/usernameForm.jsp"></jsp:include>
 	</div>
 	<div id="dialog_wagesInfo" class="easyui-dialog" title="查看修改职员工资信息"
-		style="width: 980px;overflow: hidden"
+		style="width: 980px;height:450px;overflow: hidden"
 		data-options="
                 iconCls : 'icon-edit',
                 modal : false,

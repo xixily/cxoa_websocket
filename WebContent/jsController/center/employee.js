@@ -884,16 +884,16 @@ var employee = {
 							field : 'householdType',
 							title : '户口性质',
 							width : 100,
-							editor:{
-	                            type:'combobox',
-	                            options:{
-	                                valueField:'householdType',
-	                                textField:'householdType',
-	                                method:'get',
-	                                url:'employee/getHouseholdType.action',
-	                                required:true
-	                            }
-	                        },
+//							editor:{
+//	                            type:'combobox',
+//	                            options:{
+//	                                valueField:'householdType',
+//	                                textField:'householdType',
+//	                                method:'get',
+//	                                url:'employee/getHouseholdType.action',
+//	                                required:true
+//	                            }
+//	                        },
 //							editor : 'textbox',
 						},{
 							field : 'rubaoTime',
@@ -1153,6 +1153,11 @@ var employee = {
 			}
 		},
 		onEndEdit_: function(index, row,changes){
+			var data = row;
+			if(!data.company||data.company==''||!data.householdType||data.householdType==''){
+				$.messager.alert('tips', '您没有输入公司名称或户口性质，请重新填写！', 'info');
+				return false;
+			}
 			employee.wages.onEndEdit(index, row,changes,true)
 		},
 		onEndEdit : function(index, row,changes,flag) {
@@ -1161,11 +1166,11 @@ var employee = {
 				return false
 			};
 			changes.id = row.id;
-			var data = row;
+			/*var data = row;
 			if(!data.company||data.company==''||!data.householdType||data.householdType==''){
 				$.messager.alert('tips', '您没有输入公司名称或户口性质，请重新填写！', 'info');
 				return false;
-			}
+			}*/
 			if(!isEmpty(changes)){
 //			if(changes.radix || changes.company || changes.accountBank || changes.account){
 				$.post(url ,row, function(result){

@@ -12,7 +12,7 @@ public class Pwages {
 	private Double lunchSubsidy;//午餐补贴
 	private String remarks;//备注
 	private String company;//公司名称
-	private Double radix;//基数
+	private Double radix = 0d;//基数
 	private String householdType;//户口性质
 	private Double basicWage;//基本工资
 	private Double postSalary;//岗位工资
@@ -20,17 +20,17 @@ public class Pwages {
 	private String accountBank;//开户行
 	private String account;//职工帐号
 	private String salaryCode;//工资编号
-	private Double subEndowmentIinsurance;//代扣养老保险
-	private Double subMedicare;//代扣医疗保险
-	private Double subUnemployedInsurance;//代扣失业保险
-	private Double subHouseIinsurance;//代扣住房保险
-	private Double cEndowmentIinsurance;//公司养老保险
-	private Double cMedicare;//公司医疗保险
-	private Double cUnemployedInsurance;//公司失业保险
-	private Double cHouseIinsurance;//公司住房保险
+	private Double subEndowmentIinsurance = 0d;//代扣养老保险
+	private Double subMedicare = 0d;//代扣医疗保险
+	private Double subUnemployedInsurance = 0d;//代扣失业保险
+	private Double subHouseIinsurance = 0d;//代扣住房保险
+	private Double cEndowmentIinsurance = 0d;//公司养老保险
+	private Double cMedicare = 0d;//公司医疗保险
+	private Double cUnemployedInsurance = 0d;//公司失业保险
+	private Double cHouseIinsurance = 0d;//公司住房保险
 	private Double cSickPayTotal;//累计带薪病假
-	private Double cInjuryInsurance;//公司工伤保险
-	private Double cBirthIinsurance;//公司生育保险
+	private Double cInjuryInsurance = 0d;//公司工伤保险
+	private Double cBirthIinsurance = 0d;//公司生育保险
 	private Double annualLleave;//年假累计
 	private String workPhone;//办公电话
 	private Integer internalNumber;//内部编号

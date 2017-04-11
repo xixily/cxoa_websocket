@@ -7,7 +7,7 @@ public class PgridWage {
 	private String company;//公司名称
 	private String accountBank;//开户行
 	private String account;//职工帐号
-	private String householdType;//户口性质
+//	private String householdType;//户口性质
 	private String rubaoTime;//计划入保时间
 	private String taxStructure;//报税架构
 	private Integer countId;//统计架构
@@ -27,9 +27,9 @@ public class PgridWage {
 	public String getAccount() {
 		return account;
 	}
-	public String getHouseholdType() {
-		return householdType;
-	}
+//	public String getHouseholdType() {
+//		return householdType;
+//	}
 	public String getRubaoTime() {
 		return rubaoTime;
 	}
@@ -51,9 +51,9 @@ public class PgridWage {
 	public void setAccount(String account) {
 		this.account = account;
 	}
-	public void setHouseholdType(String householdType) {
-		this.householdType = householdType;
-	}
+//	public void setHouseholdType(String householdType) {
+//		this.householdType = householdType;
+//	}
 	public void setRubaoTime(String rubaoTime) {
 		this.rubaoTime = rubaoTime;
 	}

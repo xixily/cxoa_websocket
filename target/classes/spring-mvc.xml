@@ -95,7 +95,10 @@
 	<!-- 对模型视图名称String的解析，即在模型视图名称添加前后缀 -->
 	<bean
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver"
-		p:prefix="/" p:suffix=".jsp" />
+		p:prefix="/" />
+<!-- 	<bean
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver"
+		p:prefix="/" p:suffix=".jsp" /> -->
 		
 	<!-- 文件上传下载 -->
 	<bean id="multipartResolver"
@@ -155,6 +158,8 @@
 						<value>/system/queryMenus.action</value>
 						<value>/user/modifyPassword.action</value>
 						<value>/public/user/applogin.action</value>
+						<value>/chat/connect.action</value>
+						<value>/chat/sockjs.action</value>
 						<!-- <value>/file/codeImage.action</value> -->
 					</list>
 				</property>

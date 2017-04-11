@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.chaoxing.oa.annotation.SystemControllerLog;
 import com.chaoxing.oa.entity.page.common.Json;
@@ -257,6 +258,8 @@ public class EmployeeController {
 				}else{
 					result.setMsg("入库失败，请刷新后重试。");
 				}
+			}else{
+				result.setMsg("更新失败。");
 			}
 		}else{
 			result.setMsg("社保公司[" + shebaoWage.getCompany() +"]已被锁定，请您联系社保管理员解锁！~");
@@ -314,17 +317,17 @@ public class EmployeeController {
 		String houseHoldType = pwage.getHouseholdType();
 		List<PShebao> shebaoCompany = employeeInfoService.findShebaoRadioByCompany(company);
 		BigDecimal rRadix;
+		pwage.setSubEndowmentIinsurance(0d);
+		pwage.setSubHouseIinsurance(0d);
+		pwage.setSubMedicare(0d);
+		pwage.setSubUnemployedInsurance(0d);
+		pwage.setcBirthIinsurance(0d);
+		pwage.setcEndowmentIinsurance(0d);
+		pwage.setcHouseIinsurance(0d);
+		pwage.setcInjuryInsurance(0d);
+		pwage.setcMedicare(0d);
+		pwage.setcUnemployedInsurance(0d);
 		if(pwage.getRadix()==0){
-			pwage.setSubEndowmentIinsurance(0d);
-			pwage.setSubHouseIinsurance(0d);
-			pwage.setSubMedicare(0d);
-			pwage.setSubUnemployedInsurance(0d);
-			pwage.setcBirthIinsurance(0d);
-			pwage.setcEndowmentIinsurance(0d);
-			pwage.setcHouseIinsurance(0d);
-			pwage.setcInjuryInsurance(0d);
-			pwage.setcMedicare(0d);
-			pwage.setcUnemployedInsurance(0d);
 			return 1;
 		}else if(shebaoCompany!=null&&shebaoCompany.size()>0){
 			for (PShebao pShebao : shebaoCompany) {//社保计算
@@ -468,7 +471,7 @@ public class EmployeeController {
 				result.setMsg("添加失败！");
 			}
 		}else{
-			result.setMsg("对不起，您没有删除权限~！");
+			result.setMsg("对不起，您没有添加权限~！");
 		}
 		return result;
 	}
@@ -1076,6 +1079,8 @@ public class EmployeeController {
 //		System.out.println(date);
 		QueryForm queryForm = new QueryForm();
 		queryForm.setWagesMonth(date);
+		queryForm.setPage(1);
+		queryForm.setRows(31);
 		PSystemConfig ps = employeeInfoService.findSysconfig(null, SysConfig.KAOQIN_BUTTON).get(0);
 		if(ps!=null&&ps.getLocked()==0){
 		if(((Long)employeeInfoService.findWagesDate(queryForm).get("total"))>27){
@@ -1259,6 +1264,13 @@ public class EmployeeController {
 		employeeInfoService.rmoveMonthWage();
 		employeeInfoService.updateAllMonthWage();
 		return result;
+	}
+	
+	@RequestMapping("hello")
+	public String getBasePath(){
+		ModelAndView model = new ModelAndView("views/hello");
+		System.out.println("hello method!");
+		return "app/app_index.html";
 	}
 	
 }

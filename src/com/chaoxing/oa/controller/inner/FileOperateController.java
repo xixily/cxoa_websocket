@@ -111,7 +111,7 @@ public class FileOperateController {
     @RequestMapping(value = "download")  
     public ModelAndView download(HttpServletRequest request,HttpServletResponse response) throws Exception {  
   
-        String storeName = "201205051340364510870879724.zip";  
+        String storeName = "2016081340364510870879724.zip";  
         String realName = "Java设计模式.zip";  
         String contentType = "application/octet-stream";  
   

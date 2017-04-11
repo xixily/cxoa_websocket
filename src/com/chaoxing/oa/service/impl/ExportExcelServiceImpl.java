@@ -511,8 +511,10 @@ public class ExportExcelServiceImpl implements ExportExcelService {
 				sxffWriter.setData(pMonthWage.getRegisteredAddress());
 				sxffWriter.createCell();
 				String idcard = pMonthWage.getIdentityCard();
-				if(null != idcard && idcard.length()==18){
-					int borth = Integer.valueOf(idcard.substring(6).substring(0, 4));
+				if(null != idcard && idcard.length()>=10){
+					idcard = idcard.replace(" ", "");
+					int borth = Integer.valueOf(idcard.substring(0, 10).substring(6));
+//					int borth = Integer.valueOf(idcard.substring(6).substring(0, 4));
 					sxffWriter.setData(String.valueOf(year-borth));
 				}
 				sxffWriter.createCell();
