@@ -32,7 +32,7 @@
 	</table>
 	</div>
     <div style="padding:2px;margin:10px auto;border: 1px dashed LightGrey;width:934px;height:460px;">
-        <form id="updatewages_form" class="easyui-form form_width"  method="post"  data-options="novalidate:true">
+        <form id="updatewages_form" class="easyui-form form_width"  method="post"  data-options="validate:true">
             <table>
                 <tr>
                		<td>工资编号</td>

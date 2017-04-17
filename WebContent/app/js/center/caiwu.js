@@ -13,13 +13,16 @@ var caiwu = {
             btnSelector: '#bx_msg_btn',
             media_li_selector: '#bx_media_li',
             app_back: 'cw_baoxiaoManager',
-            appendSelector:'#cw_bx_append'
+            appendSelector:'#cw_bx_append',
+            chat: true,
+            chat_id: 'bx_manage_chat',
         },
         init: function () {
             $(document).on("click",'#bx_media_li a.media-body',function(event){
                 event.preventDefault();//关闭默认事件
                 event.stopImmediatePropagation();
-                caiwu.baoxiao.showInfo($(this));
+//                caiwu.baoxiao.showInfo($(this));
+                caiwu.showInfo($(this), $.extend({},caiwu.baoxiaoCheck.pageData));
             })
         },
         find: function(data){
@@ -214,6 +217,32 @@ var caiwu = {
 //                }
                 $.messager.alert("提示：", result.msg);
             })
+        },
+        onmessage: function(event){
+            var _msg = JSON.parse(event.data);
+            _msg.msg_type = _msg.msg_type || 100;
+            if(_msg.msg_type == 110){
+                $('#sh_btchat').bootstrapChat('addSysMessages',_msg)
+            }else if(_msg.msg_type == 114){ // 初始化数据
+                $('#sh_btchat').bootstrapChat('clear')
+                var uls = _msg.uls;
+                var uid = _msg.uid;
+                $.each(uls, function(i, obj){
+                    if(obj.sid == uid){
+                        obj.img = caiwu.sender.me;
+                        $('#sh_btchat').bootstrapChat('addMessages',obj, true);
+                    }else{
+                        obj.img = caiwu.sender.sender;
+                        $('#sh_btchat').bootstrapChat('addMessages', obj, false)
+                    }
+                })
+            }else{
+                _msg.img = caiwu.sender.sender;
+                $('#sh_btchat').bootstrapChat('addMessages',_msg,false);
+            }
+        },
+        onopen: function(event){
+
         }
     },
     baoxiaoAppro:{
@@ -451,7 +480,10 @@ var caiwu = {
             btnSelector: '#bx_msg_btn',
             media_li_selector: '#bx_media_li',
             app_back: 'cw_baoxiaoManager',
-            appendSelector:'#cw_bx_append'
+            appendSelector:'#cw_bx_append',
+            chat: true,
+            chat_id: 'sh_btchat',
+//            onmessage: "caiwu.baoxiaoCheck.sh_onmessage",
         },
         pageData_dsp:{
             url: 'caiwu/baoxiaoShenhe',
@@ -790,6 +822,7 @@ var caiwu = {
                     $.messager.alert('操作提示：',result.msg);
                     if(result.success){
                         app.downloadForm.download('public/file/daihuikuanExport.action',{});
+                        $('#dhk_find_btn_').trigger('click');
                     }
 
                 })
@@ -805,7 +838,7 @@ var caiwu = {
                     '<a href="javascript:void(0)" onclick="caiwu.baoxiaoCheck.chupiao_remove($(this))"  style="margin-left: 12px;"><span class="glyphicon glyphicon-minus-sign" aria-hidden="true"></span></a>' +
                     '<a class="save" href="javascript:void(0)" onclick="caiwu.baoxiaoCheck.chupiao_save($(this))" style="margin-left: 12px;"><span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span></a></th>' +
                     '<td><a href="javascript:void (0)" data-type="text" app-data="item" data-pk="1" data-title="报销项目" class="e-text">'+ obj.item +'</a></td>' +
-                    '<td><a href="javascript:void (0)" data-type="text" app-data="money" data-pk="1" data-title="金额" data-name="fp_money"  class="e-money">'+ obj.money +'</a></td>' +
+                    '<td><a href="javascript:void (0)" data-type="text" app-data="money" data-pk="1" data-title="金额" data-name="jk_money"  class="e-money">'+ obj.money +'</a></td>' +
                     '<td><a href="javascript:void (0)" data-type="textarea" app-data="description" data-name="sh_remarks" data-title="审核说明"  class="e-text">'+ obj.description +'</a></td>' +
                     '</tr>');
             dom.before(row);/** after before append prepend  appendTo */
@@ -818,7 +851,7 @@ var caiwu = {
                 $.post('public/caiwu/deleteKoujiekuan.action', data, function(result){
                     if(result.success){
                         row.remove();
-                        var moneylist = $('[app-data="sh_money"]');
+                        var moneylist = $('#cp_dk_table [data-name="jk_money"]');
                         var total = 0;
                         var temp = 0;
                         $.each(moneylist,function(i,obj){
@@ -829,9 +862,10 @@ var caiwu = {
                             }
                             total += temp
                         })
-                        $('[app-data="sh_total"]').html(total);
+//                        $('[app-data="sh_total"]').html(total);
+                        caiwu.baoxiaoCheck.cp_setkjk();caiwu.baoxiaoCheck.cp_setkjk();
                     }
-                    $.messager.alert(result.msg);
+                    $.messager.alert("删除提示", result.msg);
                 })
             }else{
                 row.remove();
@@ -909,6 +943,7 @@ var caiwu = {
             value = total ? Number(total) : 0;
             $('[app-data="sh_total"]').html(value);
             $('#cp_kjk').val(value);
+            $('#cp_kjk').trigger('change');
         },
         chupiao_initEdit: function(dom){
             dom ? dom : $(this);
@@ -970,7 +1005,7 @@ var caiwu = {
                 trList.push($.extend({},trInfo));
             })
             alert(trList);
-        }
+        },
     },
     status: {
         1: "1_tj_dpz.png",
@@ -986,11 +1021,34 @@ var caiwu = {
         10: "8_end.png",
         11: "8_end.png"
     },
+    sender:{
+        me: {
+            src: 'app/images/chat/blue_me.png',
+            alt: '申请人',
+            class: 'img-circle'
+        },
+        sender: {
+            src: 'app/images/chat/red_he.png',
+            alt: '发信人',
+            class: 'img-circle'
+        },
+        checker: {
+            src: 'app/images/chat/red_60.png',
+            alt: '发信人',
+            class: 'img-circle'
+        },
+        system: {
+            src: 'app/images/chat/sys_60.png',
+            alt: '系统消息',
+            class: 'img-circle'
+        }
+    },
     showInfo: function(dom, pageData){
         if(dom){
             var id = dom.find('[app-data="id"]').html();
             var data = $("#" + pageData.source + "body").data(app.getDivData());
             var formData = caiwu.getDataById(id, data);
+            var ownerId = formData.approid;
             $(pageData.infoSelector + ' form').form('clear');
             if(formData){
                 if(data && data.rows) {
@@ -1019,6 +1077,41 @@ var caiwu = {
                     }
                 }
                 $(pageData.infoSelector + ' form').form('setForm',formData,dom);
+            }
+            if(pageData.chat && !($(pageData.listSelector)[0].className == "")){
+//                var onmsg = undefined;
+//                if(pageData.onmessage){
+//                    onmsg = eval(pageData.onmessage);
+//                }
+                $.post('basepath.jsp',{},function(result){
+                    var basePath = result.basePath_noScheme;
+                    $('#'+ pageData.chat_id).bootstrapChat('init',{
+                        url: basePath + 'chat/connect.action',
+                        msg_type: 301,
+                        lis_id: id,
+                        ownerId: ownerId,
+                        socketJs_url: basePath + 'chat/sockjs.action',
+                        dom:{
+                            head:{
+                                content:[{},{},{
+                                    style:'display:none;'
+                                }
+                                ]
+                            }
+                        },
+//                        onmessage: caiwu.baoxiaoCheck.sh_onmessage,
+                        onmessage: function(event){
+                            caiwu.onmessage(event,{chat_id:pageData.chat_id,id:id,ownerId:ownerId})
+                        },
+//                        onmessage: onmsg,
+//                        onopen: function(){
+//                            $('#'+ pageData.chat_id).bootstrapChat('websocket_send',{msg_type:114,lis_id:id,ownerId:ownerId})
+//                        }
+                        onopen: function(event){
+                            caiwu.onopen(event, {chat_id:pageData.chat_id,id:id,ownerId:ownerId});
+                        }
+                    })
+                })
             }
         }
 
@@ -1264,5 +1357,32 @@ var caiwu = {
                 + " " + date.getHours() + seperator2 + date.getMinutes()
                 + seperator2 + date.getSeconds();
         return currentdate;
+    },
+    onmessage: function(event, data){
+        var _msg = JSON.parse(event.data);
+//        $('#'+ data.chat_id)
+        _msg.msg_type = _msg.msg_type || 100;
+        if(_msg.msg_type == 110){
+            $('#'+ data.chat_id).bootstrapChat('addSysMessages',_msg)
+        }else if(_msg.msg_type == 114){ // 初始化数据
+            $('#'+ data.chat_id).bootstrapChat('clear')
+            var uls = _msg.uls;
+            var uid = _msg.uid;
+            $.each(uls, function(i, obj){
+                if(obj.sid == uid){
+                    obj.img = caiwu.sender.me;
+                    $('#'+ data.chat_id).bootstrapChat('addMessages',obj, true);
+                }else{
+                    obj.img = caiwu.sender.sender;
+                    $('#'+ data.chat_id).bootstrapChat('addMessages', obj, false)
+                }
+            })
+        }else{
+            _msg.img = caiwu.sender.sender;
+            $('#'+ data.chat_id).bootstrapChat('addMessages',_msg,false);
+        }
+    },
+    onopen: function(event, data){
+        $('#'+ data.chat_id).bootstrapChat('websocket_send',{msg_type:114,lis_id:data.id,ownerId:data.ownerId})
     }
 }

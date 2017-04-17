@@ -68,6 +68,7 @@ import com.chaoxing.oa.entity.po.view.SheBaoSummary;
 import com.chaoxing.oa.entity.po.view.ShebaoAR;
 import com.chaoxing.oa.entity.po.view.ShebaoMX;
 import com.chaoxing.oa.entity.po.view.Yidong;
+import com.chaoxing.oa.entity.sqlpo.Contract;
 import com.chaoxing.oa.service.EmployeeInfoService;
 import com.chaoxing.oa.system.SysConfig;
 import com.chaoxing.oa.system.cache.CacheManager;
@@ -126,6 +127,8 @@ public class EmployeeInfoServiceImpl implements EmployeeInfoService {
 	private BaseDaoI<TxStructs> txsDao;
 	@Autowired
 	private BaseDaoI<CountStructure> cstDao;
+	@Autowired
+	private BaseDaoI<Contract> contractDao;
 	
 
 //	@Override
@@ -2439,5 +2442,29 @@ public class EmployeeInfoServiceImpl implements EmployeeInfoService {
 		monthSalary.setShifaTotal(shifa);
 	}
 
+	@Override
+	public void findTest() {
+		// TODO Auto-generated method stub
+		
+//		List<Contract> lis  = contractDao.find("from Contract  group by company");
+		
+		List<Contract> list = contractDao.findSql("select * from 合同情况 group by 所属公司");
+		list.get(0);
+		if(!(list.get(0) instanceof Contract)) System.out.println(true);
+		System.out.println();
+//		lis.get(0).getCompany();
+//		List<Object>  objs= objectDao.find("select t.company from Contract t group by t.company");
+//		List<Object>  objs= objectDao.find("select Max(id) from RenshiUserName t ");
+//		System.out.println(objs);
+//		System.out.println(lis);
+	}
+
+	@Override
+	public void updateTest() {
+		String sql = "update 保险公司  set iname='江西吉安' where iid=20";
+		objectDao.executeSql(sql);
+	}
+	
+	
 
 }

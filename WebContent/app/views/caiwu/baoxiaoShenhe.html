@@ -2069,11 +2069,10 @@
     <script type="text/javascript">
         $.fn.editable.defaults.emptytext = "空";
         $(document).ready(function () {
-            $.post('basepath.jsp',{},function(result){
+          /*  $.post('basepath.jsp',{},function(result){
                 var basePath = result.basePath_noScheme;
                 $('#sh_btchat').bootstrapChat('init',{
                     url: basePath + 'chat/connect.action',
-                    to: '',
                     msg_type: 301,
                     socketJs_url: basePath + 'chat/sockjs.action',
                     dom:{
@@ -2085,7 +2084,7 @@
                         }
                     }
                 })
-            })
+            })*/
 
             $('#bx_find_btn a').bind('click', function (event) {
                 var text = $(this).html();
@@ -2097,7 +2096,7 @@
             })
         });
         $(document).on('change','input.bx-relavtive',function(event){
-            var result = Number($('input.bx-relavtive[name="baoxMoney"]').val()) - Number($('input.bx-relavtive[name="tuipiao"]').val()) - Number($('input.bx-relavtive[name="koujk"]').val());
+            var result = Number($('input.bx-relavtive[name="baoxMoney"]').val()) - Number($('input.bx-relavtive[name="tuipiao"]').val()) - Number($('#cp_kjk').val());
             $('#huikuan2').val(result);
         })
     </script>

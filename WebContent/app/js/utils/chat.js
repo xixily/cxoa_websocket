@@ -51,9 +51,9 @@ Chat.prototype = {
 //            data.sender = data.fromName;
             data.img = that._defaults.sender;
             if(data.msg_type == 110){
-                that._addSysMessages(data);
+                that.addSysMessages(data);
             }else{
-                that._addMessages(data, false);
+                that.addMessages(data, false);
             }
         };
         //发生错误
@@ -61,14 +61,14 @@ Chat.prototype = {
             var data = {};
             data.img = this._defaults.system;
             data.msg = "WebSocket:发生错误 ";
-            that._addSysMessages(data);
+            that.addSysMessages(data);
         };
         //关闭事件
         this.websocket.onclose = function(event) {
             var data = {};
             data.img = this._defaults.system;
             data.msg = "WebSocket:已关闭";
-            that._addSysMessages(data);
+            that.addSysMessages(data);
         }
     },
     _initialEmoji: function() {
@@ -117,7 +117,7 @@ Chat.prototype = {
         };
         return result;
     },
-    _addMessages: function(msg, ifself){
+    addMessages: function(msg, ifself){
         if(isEmpty(msg)){
             return false;
         }
@@ -135,7 +135,7 @@ Chat.prototype = {
         }
         return li ;
     },
-    _addSysMessages: function(msg){
+    addSysMessages: function(msg){
         if(msg.isEmpty()){
             return false;
         }
@@ -152,9 +152,9 @@ Chat.prototype = {
         }
         return li ;
     },
-    _sendMessages: function(msg){
+    sendMessages: function(msg){
         if(!msg.id && !msg.msg_type) return false;
-        this._addMessages(msg,true);
+        this.addMessages(msg,true);
         delete msg.img;
         this.websocket.send(JSON.stringify(msg));
     },

@@ -10,4 +10,6 @@ public interface SystemService {
 	public List<PMenus> getMenus(PMenus pmenu);
 
 	public Map<String, Object> findAllMenus(PMenus_ pmenus);
+	
+	public Integer getCaiwushRoleId();
 }

@@ -10,14 +10,24 @@ public class PMessages {
 	public final static int SYSTEM_MANAGE = 119;
 	public final static int CW_SH_MESSAGES = 301;
 	public final static int HEART_BEAT = 1;
+	public final static int GET_SH_MESSAGES = 114;
 	
+	private String lis_id;
 	private String sender;
 	private Integer sid;
 	private Integer to;
 	private String msg;
 	private Date date;
 	private Integer msg_type;
+	private Integer ownerId;
+	private Integer status;
 	
+	public String getLis_id() {
+		return lis_id;
+	}
+	public void setLis_id(String lis_id) {
+		this.lis_id = lis_id;
+	}
 	public String getSender() {
 		return sender;
 	}
@@ -54,6 +64,20 @@ public class PMessages {
 	public void setMsg_type(Integer msg_type) {
 		this.msg_type = msg_type;
 	}
-	
+	public Integer getOwnerId() {
+		return ownerId;
+	}
+	public void setOwnerId(Integer ownerId) {
+		this.ownerId = ownerId;
+	}
+	public static int getCwShMessages() {
+		return CW_SH_MESSAGES;
+	}
+	public Integer getStatus() {
+		return status;
+	}
+	public void setStatus(Integer status) {
+		this.status = status;
+	}
 	
 }

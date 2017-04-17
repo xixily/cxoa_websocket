@@ -750,7 +750,7 @@ var employee = {
 	},
 	wages : {
 		getCountId: function(txStruct, position){
-			txStruct = txStruct.trim_();
+			txStruct = txStruct ? txStruct.trim_() : "";
 			if(txStruct=="办公室" ){
 				return 4;
 			}else if (txStruct == "销售"){

@@ -37,6 +37,8 @@ public interface BaseDaoI<T> {
 	public Long count(String hql, Map<String, Object> params);
 
 	public int executeHql(String hql) throws HibernateException;
+	
+	public int executeSql(String sql) throws HibernateException;
 
 	public int executeHql(String hql, Map<String, Object> params) throws HibernateException;
 	
@@ -50,4 +52,5 @@ public interface BaseDaoI<T> {
 	
 	public void bigUpdate(List<T> objs);
 
+//	public <T> Query selectStatement(Class<T> className, Map<String,Object> varables);
 }

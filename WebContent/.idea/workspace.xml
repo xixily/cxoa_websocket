@@ -21,92 +21,126 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="BootstrapChat.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="BootstrapChat.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/js/utils/BootstrapChat.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.5283019">
-              <caret line="518" column="34" selection-start-line="518" selection-start-column="34" selection-end-line="518" selection-end-column="34" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="349" column="35" selection-start-line="349" selection-start-column="35" selection-end-line="351" selection-end-column="21" />
               <folding>
                 <element signature="e#281#1489#0" expanded="false" />
-                <element signature="e#2896#7312#0" expanded="false" />
-                <element signature="e#7331#10338#0" expanded="false" />
-                <element signature="e#10359#11747#0" expanded="false" />
-                <element signature="e#11777#12375#0" expanded="false" />
-                <element signature="e#12393#12572#0" expanded="false" />
-                <element signature="e#12586#12834#0" expanded="false" />
-                <element signature="e#12895#13512#0" expanded="false" />
-                <element signature="e#15651#15755#0" expanded="false" />
-                <element signature="e#15866#16691#0" expanded="false" />
-                <element signature="e#16897#17590#0" expanded="false" />
-                <element signature="e#29400#29461#0" expanded="false" />
-                <element signature="e#29615#29679#0" expanded="false" />
-                <marker date="1491877211571" expanded="true" signature="26165:26178" placeholder="..." />
+                <element signature="e#1636#2807#0" expanded="false" />
+                <element signature="e#2974#7390#0" expanded="false" />
+                <element signature="e#7409#10416#0" expanded="false" />
+                <element signature="e#10437#11825#0" expanded="false" />
+                <element signature="e#11855#12453#0" expanded="false" />
+                <element signature="e#12471#12650#0" expanded="false" />
+                <element signature="e#12664#12912#0" expanded="false" />
+                <element signature="e#13763#15600#0" expanded="false" />
+                <element signature="e#15729#15833#0" expanded="false" />
+                <element signature="e#23965#24071#0" expanded="false" />
+                <element signature="e#24457#25954#0" expanded="false" />
+                <element signature="e#27892#28187#0" expanded="false" />
+                <element signature="e#28235#28498#0" expanded="false" />
+                <element signature="e#28559#29880#0" expanded="false" />
+                <element signature="e#29982#30170#0" expanded="false" />
+                <element signature="e#31709#33051#0" expanded="false" />
+                <element signature="e#32741#32802#0" expanded="false" />
+                <element signature="e#32956#33020#0" expanded="false" />
+                <element signature="e#33104#33112#0" expanded="false" />
+                <element signature="e#33343#33449#0" expanded="false" />
+                <element signature="e#33513#33618#0" expanded="false" />
+                <element signature="e#33680#33783#0" expanded="false" />
+                <element signature="e#33846#33950#0" expanded="false" />
+                <element signature="e#34016#34123#0" expanded="false" />
+                <marker date="1492135302412" expanded="true" signature="29329:29342" placeholder="..." />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="baoxiaoApprove.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/views/caiwu/baoxiaoApprove.html">
+      <file leaf-file-name="caiwu.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/js/center/caiwu.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-3.542373">
+              <caret line="24" column="49" selection-start-line="24" selection-start-column="49" selection-end-line="24" selection-end-column="49" />
+              <folding>
+                <element signature="n#!!block;n#pageData#0;n#!!block;n#baoxiao#0;n#!!block;n#caiwu#0;n#!!top" expanded="false" />
+                <element signature="n#!!block;n#find#0;n#find#0;n#!!block;n#baoxiao#0;n#!!block;n#caiwu#0;n#!!top" expanded="false" />
+                <element signature="n#!!block;n#findYbx#0;n#findYbx#0;n#!!block;n#baoxiao#0;n#!!block;n#caiwu#0;n#!!top" expanded="false" />
+                <element signature="n#!!block;n#append#0;n#append#0;n#!!block;n#baoxiao#0;n#!!block;n#caiwu#0;n#!!top" expanded="false" />
+                <element signature="n#!!block;n#showInfo#0;n#showInfo#0;n#!!block;n#baoxiao#0;n#!!block;n#caiwu#0;n#!!top" expanded="false" />
+                <element signature="n#!!block;n#disable#0;n#disable#0;n#!!block;n#baoxiao#0;n#!!block;n#caiwu#0;n#!!top" expanded="false" />
+                <element signature="n#!!block;n#validator2#0;n#validator2#0;n#!!block;n#baoxiao#0;n#!!block;n#caiwu#0;n#!!top" expanded="false" />
+                <element signature="n#!!block;n#submitApprove#0;n#submitApprove#0;n#!!block;n#baoxiao#0;n#!!block;n#caiwu#0;n#!!top" expanded="false" />
+                <element signature="n#!!block;n#updateInfo#0;n#updateInfo#0;n#!!block;n#baoxiao#0;n#!!block;n#caiwu#0;n#!!top" expanded="false" />
+                <element signature="n#!!block;n#onmessage#0;n#onmessage#0;n#!!block;n#baoxiao#0;n#!!block;n#caiwu#0;n#!!top" expanded="false" />
+                <element signature="n#!!block;n#pageData#0;n#!!block;n#baoxiaoCheck#0;n#!!block;n#caiwu#0;n#!!top" expanded="false" />
+                <element signature="n#!!block;n#pageData_dsp#0;n#!!block;n#baoxiaoCheck#0;n#!!block;n#caiwu#0;n#!!top" expanded="false" />
+                <element signature="n#!!block;n#pageData_dcp#0;n#!!block;n#baoxiaoCheck#0;n#!!block;n#caiwu#0;n#!!top" expanded="false" />
+                <element signature="n#!!block;n#pageData_dhk#0;n#!!block;n#baoxiaoCheck#0;n#!!block;n#caiwu#0;n#!!top" expanded="false" />
+                <element signature="n#!!block;n#pageData_yhk#0;n#!!block;n#baoxiaoCheck#0;n#!!block;n#caiwu#0;n#!!top" expanded="false" />
+                <element signature="n#!!block;n#init#0;n#init#0;n#!!block;n#baoxiaoCheck#0;n#!!block;n#caiwu#0;n#!!top" expanded="false" />
+                <element signature="n#!!block;n#init_dsp#0;n#init_dsp#0;n#!!block;n#baoxiaoCheck#0;n#!!block;n#caiwu#0;n#!!top" expanded="false" />
+                <element signature="n#!!block;n#init_dcp#0;n#init_dcp#0;n#!!block;n#baoxiaoCheck#0;n#!!block;n#caiwu#0;n#!!top" expanded="false" />
+                <element signature="n#!!block;n#init_yhk#0;n#init_yhk#0;n#!!block;n#baoxiaoCheck#0;n#!!block;n#caiwu#0;n#!!top" expanded="false" />
+                <element signature="n#!!block;n#find#0;n#find#0;n#!!block;n#baoxiaoCheck#0;n#!!block;n#caiwu#0;n#!!top" expanded="false" />
+                <element signature="n#!!block;n#find_dsp#0;n#find_dsp#0;n#!!block;n#baoxiaoCheck#0;n#!!block;n#caiwu#0;n#!!top" expanded="false" />
+                <element signature="n#!!block;n#find_dhk#0;n#find_dhk#0;n#!!block;n#baoxiaoCheck#0;n#!!block;n#caiwu#0;n#!!top" expanded="false" />
+                <element signature="n#!!block;n#find_yhk#0;n#find_yhk#0;n#!!block;n#baoxiaoCheck#0;n#!!block;n#caiwu#0;n#!!top" expanded="false" />
+                <element signature="n#!!block;n#append#0;n#append#0;n#!!block;n#baoxiaoCheck#0;n#!!block;n#caiwu#0;n#!!top" expanded="false" />
+                <element signature="n#!!block;n#append_dsp#0;n#append_dsp#0;n#!!block;n#baoxiaoCheck#0;n#!!block;n#caiwu#0;n#!!top" expanded="false" />
+                <element signature="n#!!block;n#append_dhk#0;n#append_dhk#0;n#!!block;n#baoxiaoCheck#0;n#!!block;n#caiwu#0;n#!!top" expanded="false" />
+                <element signature="n#!!block;n#append_yhk#0;n#append_yhk#0;n#!!block;n#baoxiaoCheck#0;n#!!block;n#caiwu#0;n#!!top" expanded="false" />
+                <element signature="n#!!block;n#sh_disagree#0;n#sh_disagree#0;n#!!block;n#baoxiaoCheck#0;n#!!block;n#caiwu#0;n#!!top" expanded="false" />
+                <element signature="n#!!block;n#sh_agree#0;n#sh_agree#0;n#!!block;n#baoxiaoCheck#0;n#!!block;n#caiwu#0;n#!!top" expanded="false" />
+                <element signature="n#!!block;n#sendMessager#0;n#sendMessager#0;n#!!block;n#baoxiaoCheck#0;n#!!block;n#caiwu#0;n#!!top" expanded="false" />
+                <element signature="n#!!block;n#addMessager#0;n#addMessager#0;n#!!block;n#baoxiaoCheck#0;n#!!block;n#caiwu#0;n#!!top" expanded="false" />
+                <element signature="n#!!block;n#openCheck#0;n#openCheck#0;n#!!block;n#baoxiaoCheck#0;n#!!block;n#caiwu#0;n#!!top" expanded="false" />
+                <element signature="n#!!block;n#openCheck#0;n#openCheck#1;n#!!block;n#baoxiaoCheck#0;n#!!block;n#caiwu#0;n#!!top" expanded="false" />
+                <element signature="n#!!block;n#openShouPiao#0;n#openShouPiao#0;n#!!block;n#baoxiaoCheck#0;n#!!block;n#caiwu#0;n#!!top" expanded="false" />
+                <element signature="n#!!block;n#openKoukuan#0;n#openKoukuan#0;n#!!block;n#baoxiaoCheck#0;n#!!block;n#caiwu#0;n#!!top" expanded="false" />
+                <element signature="n#!!block;n#cpConfirm#0;n#cpConfirm#0;n#!!block;n#baoxiaoCheck#0;n#!!block;n#caiwu#0;n#!!top" expanded="false" />
+                <element signature="n#!!block;n#submitCheck#0;n#submitCheck#0;n#!!block;n#baoxiaoCheck#0;n#!!block;n#caiwu#0;n#!!top" expanded="false" />
+                <element signature="n#!!block;n#submitDaiShoupiao#0;n#submitDaiShoupiao#0;n#!!block;n#baoxiaoCheck#0;n#!!block;n#caiwu#0;n#!!top" expanded="false" />
+                <element signature="n#!!block;n#chupiao_add#0;n#chupiao_add#0;n#!!block;n#baoxiaoCheck#0;n#!!block;n#caiwu#0;n#!!top" expanded="false" />
+                <element signature="n#!!block;n#cp_remove_all#0;n#cp_remove_all#0;n#!!block;n#baoxiaoCheck#0;n#!!block;n#caiwu#0;n#!!top" expanded="false" />
+                <element signature="n#!!block;n#chupiao_initEdit#0;n#chupiao_initEdit#0;n#!!block;n#baoxiaoCheck#0;n#!!block;n#caiwu#0;n#!!top" expanded="false" />
+                <element signature="n#!!block;n#status#0;n#!!block;n#caiwu#0;n#!!top" expanded="false" />
+                <element signature="n#!!block;n#sender#0;n#!!block;n#caiwu#0;n#!!top" expanded="false" />
+                <element signature="n#!!block;n#showInfo#0;n#showInfo#0;n#!!block;n#caiwu#0;n#!!top" expanded="false" />
+                <element signature="e#45240#45635#0" expanded="false" />
+                <element signature="e#45676#46214#0" expanded="false" />
+                <element signature="n#!!block;n#init#0;n#init#0;n#!!block;n#caiwu#0;n#!!top" expanded="false" />
+                <element signature="n#!!block;n#find#0;n#find#0;n#!!block;n#caiwu#0;n#!!top" expanded="false" />
+                <element signature="n#!!block;n#append#0;n#append#0;n#!!block;n#caiwu#0;n#!!top" expanded="false" />
+                <element signature="n#!!block;n#validator#0;n#validator#0;n#!!block;n#caiwu#0;n#!!top" expanded="false" />
+                <element signature="n#!!block;n#getDataById#0;n#getDataById#0;n#!!block;n#caiwu#0;n#!!top" expanded="false" />
+                <element signature="n#!!block;n#listRefresh#0;n#listRefresh#0;n#!!block;n#caiwu#0;n#!!top" expanded="false" />
+                <element signature="n#!!block;n#getNowFormatDate#0;n#getNowFormatDate#0;n#!!block;n#caiwu#0;n#!!top" expanded="false" />
+                <element signature="n#!!block;n#onmessage#0;n#onmessage#0;n#!!block;n#caiwu#0;n#!!top" expanded="false" />
+                <marker date="1492421796520" expanded="true" signature="36320:36338" placeholder="..." />
+                <marker date="1492421796520" expanded="true" signature="36540:36558" placeholder="..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="app.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/js/app.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.53072625">
+              <caret line="721" column="39" selection-start-line="721" selection-start-column="26" selection-end-line="721" selection-end-column="39" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="employee.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/jsController/center/employee.js">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="644" column="26" selection-start-line="644" selection-start-column="26" selection-end-line="644" selection-end-column="26" />
-              <folding>
-                <element signature="n#div#0;n#ul#0;n#div#0;n#!!top" expanded="false" />
-                <element signature="n#div#0;n#div#0;n#!!top" expanded="false" />
-                <element signature="n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#!!top" expanded="false" />
-                <element signature="n#fieldset#0;n#form#0;n#div#1;n#div#1;n#div#2;n#div#0;n#div#0;n#div#0;n#!!top" expanded="false" />
-                <element signature="n#div#0;n#legend#1;n#form#0;n#div#1;n#div#1;n#div#2;n#div#0;n#div#0;n#div#0;n#!!top" expanded="false" />
-                <element signature="n#fieldset#0;n#form#0;n#div#1;n#div#1;n#div#1;n#div#1;n#div#0;n#div#0;n#!!top" expanded="false" />
-                <element signature="n#fieldset#1;n#form#0;n#div#1;n#div#1;n#div#1;n#div#1;n#div#0;n#div#0;n#!!top" expanded="false" />
-                <element signature="n#div#1;n#div#0;n#!!top" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="baoxiaoShenhe.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/views/caiwu/baoxiaoShenhe.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-29.857143">
-              <caret line="1989" column="40" selection-start-line="1989" selection-start-column="40" selection-end-line="1989" selection-end-column="40" />
-              <folding>
-                <element signature="n#div#0;n#ul#0;n#div#0;n#!!top" expanded="false" />
-                <element signature="n#div#0;n#div#0;n#div#0;n#!!top" expanded="false" />
-                <element signature="n#div#0;n#div#1;n#div#1;n#div#0;n#div#0;n#div#0;n#!!top" expanded="false" />
-                <element signature="n#div#0;n#div#1;n#div#0;n#div#0;n#!!top" expanded="false" />
-                <element signature="n#div#0;n#div#1;n#div#1;n#div#1;n#div#0;n#div#0;n#!!top" expanded="false" />
-                <element signature="n#li#0;n#span#0;n#ul#0;n#div#0;n#div#1;n#div#1;n#div#1;n#div#0;n#div#0;n#!!top" expanded="false" />
-                <element signature="n#fieldset#0;n#form#0;n#div#1;n#div#1;n#div#1;n#div#1;n#div#0;n#div#0;n#!!top" expanded="false" />
-                <element signature="n#fieldset#1;n#form#0;n#div#1;n#div#1;n#div#1;n#div#1;n#div#0;n#div#0;n#!!top" expanded="false" />
-                <element signature="n#legend#0;n#form#0;n#div#1;n#div#1;n#div#1;n#div#1;n#div#0;n#div#0;n#!!top" expanded="false" />
-                <element signature="n#fieldset#2;n#form#0;n#div#1;n#div#1;n#div#1;n#div#1;n#div#0;n#div#0;n#!!top" expanded="false" />
-                <element signature="n#div#2;n#div#0;n#div#0;n#!!top" expanded="false" />
-                <element signature="n#div#0;n#div#2;n#div#0;n#div#0;n#!!top" expanded="false" />
-                <element signature="n#legend#0;n#fieldset#0;n#form#0;n#div#1;n#div#1;n#div#1;n#div#2;n#div#0;n#div#0;n#!!top" expanded="false" />
-                <element signature="n#div#0;n#fieldset#0;n#form#0;n#div#1;n#div#1;n#div#1;n#div#2;n#div#0;n#div#0;n#!!top" expanded="false" />
-                <element signature="n#div#1;n#fieldset#0;n#form#0;n#div#1;n#div#1;n#div#1;n#div#2;n#div#0;n#div#0;n#!!top" expanded="false" />
-                <element signature="n#fieldset#1;n#form#0;n#div#1;n#div#1;n#div#1;n#div#2;n#div#0;n#div#0;n#!!top" expanded="false" />
-                <element signature="n#div#3;n#div#0;n#div#0;n#!!top" expanded="false" />
-                <element signature="n#div#4;n#div#0;n#div#0;n#!!top" expanded="false" />
-                <element signature="n#legend#1;n#form#0;n#div#1;n#div#1;n#div#1;n#div#4;n#div#0;n#div#0;n#!!top" expanded="false" />
-                <element signature="n#div#0;n#legend#1;n#form#0;n#div#1;n#div#1;n#div#1;n#div#4;n#div#0;n#div#0;n#!!top" expanded="false" />
-                <element signature="n#legend#2;n#form#0;n#div#1;n#div#1;n#div#1;n#div#4;n#div#0;n#div#0;n#!!top" expanded="false" />
-                <element signature="n#div#1;n#div#0;n#!!top" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="baoxiaoManager.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/views/caiwu/baoxiaoManager.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="41" column="55" selection-start-line="41" selection-start-column="55" selection-end-line="41" selection-end-column="56" />
-              <folding>
-                <element signature="n#style#0;n#div#0;n#fieldset#3;n#form#0;n#div#1;n#div#1;n#div#2;n#div#0;n#!!top" expanded="true" />
-                <element signature="n#div#0;n#fieldset#3;n#form#0;n#div#1;n#div#1;n#div#2;n#div#0;n#!!top" expanded="false" />
-              </folding>
+              <caret line="766" column="43" selection-start-line="766" selection-start-column="43" selection-end-line="766" selection-end-column="43" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -157,25 +191,25 @@
         <option value="$PROJECT_DIR$/app/views/caiwu/baoxiaoApprove.html" />
         <option value="$PROJECT_DIR$/test/buy.js" />
         <option value="$PROJECT_DIR$/components/hetong/tContract.html" />
-        <option value="$PROJECT_DIR$/app/js/center/caiwu.js" />
-        <option value="$PROJECT_DIR$/components/employee/wages.jsp" />
-        <option value="$PROJECT_DIR$/components/employee/usernameForm.jsp" />
-        <option value="$PROJECT_DIR$/jsController/center/employee.js" />
         <option value="$PROJECT_DIR$/inc.jsp" />
         <option value="$PROJECT_DIR$/jslib/jquery-easyui-1.5/src/jquery.form.js" />
         <option value="$PROJECT_DIR$/test/testIframe.html" />
         <option value="$PROJECT_DIR$/app/vendor/bootstrap-table/bootstrap-table.js" />
-        <option value="$PROJECT_DIR$/app/js/app.js" />
         <option value="$PROJECT_DIR$/app_index.html" />
         <option value="$PROJECT_DIR$/app/test/chatModal.html" />
         <option value="$PROJECT_DIR$/app/js/utils/chat.js" />
         <option value="$PROJECT_DIR$/app/views/caiwu/test.html" />
-        <option value="$PROJECT_DIR$/app/views/caiwu/baoxiaoManager.html" />
-        <option value="$PROJECT_DIR$/jsController/app.js" />
         <option value="$PROJECT_DIR$/app/views/caiwu/htContractList.html" />
         <option value="$PROJECT_DIR$/app/js/center/htapply.js" />
-        <option value="$PROJECT_DIR$/app/views/caiwu/baoxiaoShenhe.html" />
+        <option value="$PROJECT_DIR$/jsController/center/employee.js" />
+        <option value="$PROJECT_DIR$/components/employee/usernameForm.jsp" />
+        <option value="$PROJECT_DIR$/components/employee/wages.jsp" />
+        <option value="$PROJECT_DIR$/jsController/app.js" />
+        <option value="$PROJECT_DIR$/app/js/app.js" />
         <option value="$PROJECT_DIR$/app/js/utils/BootstrapChat.js" />
+        <option value="$PROJECT_DIR$/app/views/caiwu/baoxiaoManager.html" />
+        <option value="$PROJECT_DIR$/app/views/caiwu/baoxiaoShenhe.html" />
+        <option value="$PROJECT_DIR$/app/js/center/caiwu.js" />
       </list>
     </option>
   </component>
@@ -187,10 +221,10 @@
     <order />
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="-8" />
+    <option name="x" value="1358" />
     <option name="y" value="-8" />
-    <option name="width" value="1382" />
-    <option name="height" value="744" />
+    <option name="width" value="1936" />
+    <option name="height" value="1056" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
     <OptionsSetting value="true" id="Add" />
@@ -215,6 +249,7 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -323,13 +358,34 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="utils" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WebContent" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WebContent" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="js" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="center" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scratches" />
       <pane id="Scope">
         <subPane subId="Project Files">
           <PATH>
@@ -345,7 +401,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/app/js/utils/BootstrapChat.js" />
+    <property name="last_opened_file_path" value="D:/ClientWorkSpace/HiChat-master" />
     <property name="HbShouldOpenHtmlAsHb" value="" />
     <property name="FullScreen" value="false" />
     <property name="recentsLimit" value="5" />
@@ -353,11 +409,13 @@
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="restartRequiresConfirmation" value="true" />
     <property name="two.files.diff.last.used.file" value="$PROJECT_DIR$/app/js/utils/BootstrapChat.js" />
+    <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors.Debugger" />
+    <property name="settings.editor.splitter.proportion" value="0.2" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="D:\working\cxoa\WebContent\app\views\caiwu" />
       <recent name="D:\working\cxoa\WebContent\app\images\chat" />
+      <recent name="D:\working\cxoa\WebContent\app\views\caiwu" />
       <recent name="D:\working\cxoa\WebContent\app\images" />
       <recent name="D:\working\cxoa\WebContent\app\js\utils" />
       <recent name="D:\yourProjects\cxoa\WebContent\app\js\utils" />
@@ -455,26 +513,26 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
+    <frame x="1358" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.20833333" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.13751318" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39932886" sideWeight="0.50241256" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.061521254" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24969843" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39932886" sideWeight="0.49758744" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.061521254" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3008658" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39932886" sideWeight="0.49758744" order="3" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -487,7 +545,7 @@
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.061521254" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.20833333" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.14910433" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3008658" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24969843" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -566,43 +624,15 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/app/js/center/caiwu.js</url>
-          <line>724</line>
+          <line>756</line>
           <option name="timeStamp" value="70" />
         </line-breakpoint>
       </breakpoints>
-      <option name="time" value="104" />
+      <option name="time" value="120" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/views/caiwu/baoxiaoApprove.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="607" column="10" selection-start-line="607" selection-start-column="10" selection-end-line="607" selection-end-column="10" />
-          <folding>
-            <element signature="n#div#0;n#ul#0;n#div#0;n#!!top" expanded="false" />
-            <element signature="n#div#0;n#div#0;n#!!top" expanded="false" />
-            <element signature="n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#!!top" expanded="false" />
-            <element signature="n#fieldset#0;n#form#0;n#div#1;n#div#1;n#div#2;n#div#0;n#div#0;n#div#0;n#!!top" expanded="false" />
-            <element signature="n#div#0;n#legend#1;n#form#0;n#div#1;n#div#1;n#div#2;n#div#0;n#div#0;n#div#0;n#!!top" expanded="false" />
-            <element signature="n#fieldset#0;n#form#0;n#div#1;n#div#1;n#div#1;n#div#1;n#div#0;n#div#0;n#!!top" expanded="false" />
-            <element signature="n#fieldset#1;n#form#0;n#div#1;n#div#1;n#div#1;n#div#1;n#div#0;n#div#0;n#!!top" expanded="false" />
-            <element signature="n#div#1;n#div#0;n#!!top" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/caiwu/baoxiaoManager.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="41" column="55" selection-start-line="41" selection-start-column="55" selection-end-line="41" selection-end-column="56" />
-          <folding>
-            <element signature="n#style#0;n#div#0;n#fieldset#3;n#form#0;n#div#1;n#div#1;n#div#2;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#div#0;n#fieldset#3;n#form#0;n#div#1;n#div#1;n#div#2;n#div#0;n#!!top" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/jsController/system.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -687,13 +717,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/vendor/jquery/jquery.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="9132" column="60" selection-start-line="9132" selection-start-column="60" selection-end-line="9132" selection-end-column="60" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/jslib/jquery-easyui-1.5/jquery.easyui.min.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.3327616">
@@ -736,31 +759,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/components/employee/usernameForm.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="103" column="20" selection-start-line="103" selection-start-column="20" selection-end-line="124" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/components/hetong/tContract.html">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="71" column="22" selection-start-line="55" selection-start-column="19" selection-end-line="78" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/components/employee/wages.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="40" column="57" selection-start-line="40" selection-start-column="57" selection-end-line="40" selection-end-column="57" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/jsController/center/employee.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.3325062">
-          <caret line="1182" column="41" selection-start-line="1182" selection-start-column="41" selection-end-line="1182" selection-end-column="41" />
         </state>
       </provider>
     </entry>
@@ -825,14 +827,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/js/center/caiwu.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/js/center/hetong1.0.0.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -868,13 +862,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/vendor/bootstrap-table/bootstrap-table.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="2968" column="53" selection-start-line="2968" selection-start-column="53" selection-end-line="2968" selection-end-column="53" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/views/hetong/application.html">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="1.0080738">
@@ -889,13 +876,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/js/app.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="385" column="16" selection-start-line="385" selection-start-column="16" selection-end-line="385" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/js/utils/chat.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.70055866">
@@ -907,23 +887,8 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="342" column="37" selection-start-line="342" selection-start-column="37" selection-end-line="342" selection-end-column="37" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/jsController/app.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-17.642857">
-          <caret line="157" column="23" selection-start-line="157" selection-start-column="23" selection-end-line="157" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/caiwu/baoxiaoManager.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="41" column="55" selection-start-line="41" selection-start-column="55" selection-end-line="41" selection-end-column="56" />
           <folding>
-            <element signature="n#style#0;n#div#0;n#fieldset#3;n#form#0;n#div#1;n#div#1;n#div#2;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#div#0;n#fieldset#3;n#form#0;n#div#1;n#div#1;n#div#2;n#div#0;n#!!top" expanded="false" />
+            <element signature="n#nav#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -945,10 +910,121 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/vendor/flot/jquery.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.3327616">
+          <caret line="204" column="4" selection-start-line="204" selection-start-column="4" selection-end-line="204" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/vendor/jquery/jquery.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="9136" column="0" selection-start-line="9136" selection-start-column="0" selection-end-line="9155" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/components/employee/usernameForm.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="9" column="97" selection-start-line="9" selection-start-column="89" selection-end-line="9" selection-end-column="97" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/components/employee/wages.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="96" column="25" selection-start-line="96" selection-start-column="25" selection-end-line="96" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/jsController/app.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="5" column="28" selection-start-line="5" selection-start-column="28" selection-end-line="5" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/jsController/center/employee.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="766" column="43" selection-start-line="766" selection-start-column="43" selection-end-line="766" selection-end-column="43" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/hetong/cellCoreView.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/vendor/bootstrap-table/bootstrap-table.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.34189945">
+          <caret line="2933" column="26" selection-start-line="2933" selection-start-column="26" selection-end-line="2933" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/caiwu/baoxiaoManager.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-6.321429">
+          <caret line="380" column="98" selection-start-line="380" selection-start-column="98" selection-end-line="380" selection-end-column="98" />
+          <folding>
+            <element signature="n#div#0;n#div#0;n#!!top" expanded="false" />
+            <element signature="n#div#0;n#div#1;n#div#0;n#!!top" expanded="false" />
+            <element signature="n#div#0;n#div#2;n#div#0;n#!!top" expanded="false" />
+            <element signature="n#div#0;n#div#1;n#div#2;n#div#0;n#!!top" expanded="false" />
+            <element signature="n#legend#0;n#form#0;n#div#1;n#div#1;n#div#2;n#div#0;n#!!top" expanded="false" />
+            <element signature="n#fieldset#0;n#form#0;n#div#1;n#div#1;n#div#2;n#div#0;n#!!top" expanded="false" />
+            <element signature="n#legend#1;n#form#0;n#div#1;n#div#1;n#div#2;n#div#0;n#!!top" expanded="false" />
+            <element signature="n#fieldset#1;n#form#0;n#div#1;n#div#1;n#div#2;n#div#0;n#!!top" expanded="false" />
+            <element signature="n#fieldset#2;n#form#0;n#div#1;n#div#1;n#div#2;n#div#0;n#!!top" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/js/utils/BootstrapChat.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="349" column="35" selection-start-line="349" selection-start-column="35" selection-end-line="351" selection-end-column="21" />
+          <folding>
+            <element signature="e#281#1489#0" expanded="false" />
+            <element signature="e#1636#2807#0" expanded="false" />
+            <element signature="e#2974#7390#0" expanded="false" />
+            <element signature="e#7409#10416#0" expanded="false" />
+            <element signature="e#10437#11825#0" expanded="false" />
+            <element signature="e#11855#12453#0" expanded="false" />
+            <element signature="e#12471#12650#0" expanded="false" />
+            <element signature="e#12664#12912#0" expanded="false" />
+            <element signature="e#13763#15600#0" expanded="false" />
+            <element signature="e#15729#15833#0" expanded="false" />
+            <element signature="e#23965#24071#0" expanded="false" />
+            <element signature="e#24457#25954#0" expanded="false" />
+            <element signature="e#27892#28187#0" expanded="false" />
+            <element signature="e#28235#28498#0" expanded="false" />
+            <element signature="e#28559#29880#0" expanded="false" />
+            <element signature="e#29982#30170#0" expanded="false" />
+            <element signature="e#31709#33051#0" expanded="false" />
+            <element signature="e#32741#32802#0" expanded="false" />
+            <element signature="e#32956#33020#0" expanded="false" />
+            <element signature="e#33104#33112#0" expanded="false" />
+            <element signature="e#33343#33449#0" expanded="false" />
+            <element signature="e#33513#33618#0" expanded="false" />
+            <element signature="e#33680#33783#0" expanded="false" />
+            <element signature="e#33846#33950#0" expanded="false" />
+            <element signature="e#34016#34123#0" expanded="false" />
+            <marker date="1492135302412" expanded="true" signature="29329:29342" placeholder="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/views/caiwu/baoxiaoShenhe.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-29.857143">
-          <caret line="1989" column="40" selection-start-line="1989" selection-start-column="40" selection-end-line="1989" selection-end-column="40" />
+        <state vertical-scroll-proportion="0.5703704">
+          <caret line="2092" column="80" selection-start-line="2092" selection-start-column="80" selection-end-line="2092" selection-end-column="80" />
           <folding>
             <element signature="n#div#0;n#ul#0;n#div#0;n#!!top" expanded="false" />
             <element signature="n#div#0;n#div#0;n#div#0;n#!!top" expanded="false" />
@@ -958,7 +1034,6 @@
             <element signature="n#li#0;n#span#0;n#ul#0;n#div#0;n#div#1;n#div#1;n#div#1;n#div#0;n#div#0;n#!!top" expanded="false" />
             <element signature="n#fieldset#0;n#form#0;n#div#1;n#div#1;n#div#1;n#div#1;n#div#0;n#div#0;n#!!top" expanded="false" />
             <element signature="n#fieldset#1;n#form#0;n#div#1;n#div#1;n#div#1;n#div#1;n#div#0;n#div#0;n#!!top" expanded="false" />
-            <element signature="n#legend#0;n#form#0;n#div#1;n#div#1;n#div#1;n#div#1;n#div#0;n#div#0;n#!!top" expanded="false" />
             <element signature="n#fieldset#2;n#form#0;n#div#1;n#div#1;n#div#1;n#div#1;n#div#0;n#div#0;n#!!top" expanded="false" />
             <element signature="n#div#2;n#div#0;n#div#0;n#!!top" expanded="false" />
             <element signature="n#div#0;n#div#2;n#div#0;n#div#0;n#!!top" expanded="false" />
@@ -976,26 +1051,76 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/js/utils/BootstrapChat.js">
+    <entry file="file://$PROJECT_DIR$/app/js/center/caiwu.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5283019">
-          <caret line="518" column="34" selection-start-line="518" selection-start-column="34" selection-end-line="518" selection-end-column="34" />
+        <state vertical-scroll-proportion="-3.542373">
+          <caret line="24" column="49" selection-start-line="24" selection-start-column="49" selection-end-line="24" selection-end-column="49" />
           <folding>
-            <element signature="e#281#1489#0" expanded="false" />
-            <element signature="e#2896#7312#0" expanded="false" />
-            <element signature="e#7331#10338#0" expanded="false" />
-            <element signature="e#10359#11747#0" expanded="false" />
-            <element signature="e#11777#12375#0" expanded="false" />
-            <element signature="e#12393#12572#0" expanded="false" />
-            <element signature="e#12586#12834#0" expanded="false" />
-            <element signature="e#12895#13512#0" expanded="false" />
-            <element signature="e#15651#15755#0" expanded="false" />
-            <element signature="e#15866#16691#0" expanded="false" />
-            <element signature="e#16897#17590#0" expanded="false" />
-            <element signature="e#29400#29461#0" expanded="false" />
-            <element signature="e#29615#29679#0" expanded="false" />
-            <marker date="1491877211571" expanded="true" signature="26165:26178" placeholder="..." />
+            <element signature="n#!!block;n#pageData#0;n#!!block;n#baoxiao#0;n#!!block;n#caiwu#0;n#!!top" expanded="false" />
+            <element signature="n#!!block;n#find#0;n#find#0;n#!!block;n#baoxiao#0;n#!!block;n#caiwu#0;n#!!top" expanded="false" />
+            <element signature="n#!!block;n#findYbx#0;n#findYbx#0;n#!!block;n#baoxiao#0;n#!!block;n#caiwu#0;n#!!top" expanded="false" />
+            <element signature="n#!!block;n#append#0;n#append#0;n#!!block;n#baoxiao#0;n#!!block;n#caiwu#0;n#!!top" expanded="false" />
+            <element signature="n#!!block;n#showInfo#0;n#showInfo#0;n#!!block;n#baoxiao#0;n#!!block;n#caiwu#0;n#!!top" expanded="false" />
+            <element signature="n#!!block;n#disable#0;n#disable#0;n#!!block;n#baoxiao#0;n#!!block;n#caiwu#0;n#!!top" expanded="false" />
+            <element signature="n#!!block;n#validator2#0;n#validator2#0;n#!!block;n#baoxiao#0;n#!!block;n#caiwu#0;n#!!top" expanded="false" />
+            <element signature="n#!!block;n#submitApprove#0;n#submitApprove#0;n#!!block;n#baoxiao#0;n#!!block;n#caiwu#0;n#!!top" expanded="false" />
+            <element signature="n#!!block;n#updateInfo#0;n#updateInfo#0;n#!!block;n#baoxiao#0;n#!!block;n#caiwu#0;n#!!top" expanded="false" />
+            <element signature="n#!!block;n#onmessage#0;n#onmessage#0;n#!!block;n#baoxiao#0;n#!!block;n#caiwu#0;n#!!top" expanded="false" />
+            <element signature="n#!!block;n#pageData#0;n#!!block;n#baoxiaoCheck#0;n#!!block;n#caiwu#0;n#!!top" expanded="false" />
+            <element signature="n#!!block;n#pageData_dsp#0;n#!!block;n#baoxiaoCheck#0;n#!!block;n#caiwu#0;n#!!top" expanded="false" />
+            <element signature="n#!!block;n#pageData_dcp#0;n#!!block;n#baoxiaoCheck#0;n#!!block;n#caiwu#0;n#!!top" expanded="false" />
+            <element signature="n#!!block;n#pageData_dhk#0;n#!!block;n#baoxiaoCheck#0;n#!!block;n#caiwu#0;n#!!top" expanded="false" />
+            <element signature="n#!!block;n#pageData_yhk#0;n#!!block;n#baoxiaoCheck#0;n#!!block;n#caiwu#0;n#!!top" expanded="false" />
+            <element signature="n#!!block;n#init#0;n#init#0;n#!!block;n#baoxiaoCheck#0;n#!!block;n#caiwu#0;n#!!top" expanded="false" />
+            <element signature="n#!!block;n#init_dsp#0;n#init_dsp#0;n#!!block;n#baoxiaoCheck#0;n#!!block;n#caiwu#0;n#!!top" expanded="false" />
+            <element signature="n#!!block;n#init_dcp#0;n#init_dcp#0;n#!!block;n#baoxiaoCheck#0;n#!!block;n#caiwu#0;n#!!top" expanded="false" />
+            <element signature="n#!!block;n#init_yhk#0;n#init_yhk#0;n#!!block;n#baoxiaoCheck#0;n#!!block;n#caiwu#0;n#!!top" expanded="false" />
+            <element signature="n#!!block;n#find#0;n#find#0;n#!!block;n#baoxiaoCheck#0;n#!!block;n#caiwu#0;n#!!top" expanded="false" />
+            <element signature="n#!!block;n#find_dsp#0;n#find_dsp#0;n#!!block;n#baoxiaoCheck#0;n#!!block;n#caiwu#0;n#!!top" expanded="false" />
+            <element signature="n#!!block;n#find_dhk#0;n#find_dhk#0;n#!!block;n#baoxiaoCheck#0;n#!!block;n#caiwu#0;n#!!top" expanded="false" />
+            <element signature="n#!!block;n#find_yhk#0;n#find_yhk#0;n#!!block;n#baoxiaoCheck#0;n#!!block;n#caiwu#0;n#!!top" expanded="false" />
+            <element signature="n#!!block;n#append#0;n#append#0;n#!!block;n#baoxiaoCheck#0;n#!!block;n#caiwu#0;n#!!top" expanded="false" />
+            <element signature="n#!!block;n#append_dsp#0;n#append_dsp#0;n#!!block;n#baoxiaoCheck#0;n#!!block;n#caiwu#0;n#!!top" expanded="false" />
+            <element signature="n#!!block;n#append_dhk#0;n#append_dhk#0;n#!!block;n#baoxiaoCheck#0;n#!!block;n#caiwu#0;n#!!top" expanded="false" />
+            <element signature="n#!!block;n#append_yhk#0;n#append_yhk#0;n#!!block;n#baoxiaoCheck#0;n#!!block;n#caiwu#0;n#!!top" expanded="false" />
+            <element signature="n#!!block;n#sh_disagree#0;n#sh_disagree#0;n#!!block;n#baoxiaoCheck#0;n#!!block;n#caiwu#0;n#!!top" expanded="false" />
+            <element signature="n#!!block;n#sh_agree#0;n#sh_agree#0;n#!!block;n#baoxiaoCheck#0;n#!!block;n#caiwu#0;n#!!top" expanded="false" />
+            <element signature="n#!!block;n#sendMessager#0;n#sendMessager#0;n#!!block;n#baoxiaoCheck#0;n#!!block;n#caiwu#0;n#!!top" expanded="false" />
+            <element signature="n#!!block;n#addMessager#0;n#addMessager#0;n#!!block;n#baoxiaoCheck#0;n#!!block;n#caiwu#0;n#!!top" expanded="false" />
+            <element signature="n#!!block;n#openCheck#0;n#openCheck#0;n#!!block;n#baoxiaoCheck#0;n#!!block;n#caiwu#0;n#!!top" expanded="false" />
+            <element signature="n#!!block;n#openCheck#0;n#openCheck#1;n#!!block;n#baoxiaoCheck#0;n#!!block;n#caiwu#0;n#!!top" expanded="false" />
+            <element signature="n#!!block;n#openShouPiao#0;n#openShouPiao#0;n#!!block;n#baoxiaoCheck#0;n#!!block;n#caiwu#0;n#!!top" expanded="false" />
+            <element signature="n#!!block;n#openKoukuan#0;n#openKoukuan#0;n#!!block;n#baoxiaoCheck#0;n#!!block;n#caiwu#0;n#!!top" expanded="false" />
+            <element signature="n#!!block;n#cpConfirm#0;n#cpConfirm#0;n#!!block;n#baoxiaoCheck#0;n#!!block;n#caiwu#0;n#!!top" expanded="false" />
+            <element signature="n#!!block;n#submitCheck#0;n#submitCheck#0;n#!!block;n#baoxiaoCheck#0;n#!!block;n#caiwu#0;n#!!top" expanded="false" />
+            <element signature="n#!!block;n#submitDaiShoupiao#0;n#submitDaiShoupiao#0;n#!!block;n#baoxiaoCheck#0;n#!!block;n#caiwu#0;n#!!top" expanded="false" />
+            <element signature="n#!!block;n#chupiao_add#0;n#chupiao_add#0;n#!!block;n#baoxiaoCheck#0;n#!!block;n#caiwu#0;n#!!top" expanded="false" />
+            <element signature="n#!!block;n#cp_remove_all#0;n#cp_remove_all#0;n#!!block;n#baoxiaoCheck#0;n#!!block;n#caiwu#0;n#!!top" expanded="false" />
+            <element signature="n#!!block;n#chupiao_initEdit#0;n#chupiao_initEdit#0;n#!!block;n#baoxiaoCheck#0;n#!!block;n#caiwu#0;n#!!top" expanded="false" />
+            <element signature="n#!!block;n#status#0;n#!!block;n#caiwu#0;n#!!top" expanded="false" />
+            <element signature="n#!!block;n#sender#0;n#!!block;n#caiwu#0;n#!!top" expanded="false" />
+            <element signature="n#!!block;n#showInfo#0;n#showInfo#0;n#!!block;n#caiwu#0;n#!!top" expanded="false" />
+            <element signature="e#45240#45635#0" expanded="false" />
+            <element signature="e#45676#46214#0" expanded="false" />
+            <element signature="n#!!block;n#init#0;n#init#0;n#!!block;n#caiwu#0;n#!!top" expanded="false" />
+            <element signature="n#!!block;n#find#0;n#find#0;n#!!block;n#caiwu#0;n#!!top" expanded="false" />
+            <element signature="n#!!block;n#append#0;n#append#0;n#!!block;n#caiwu#0;n#!!top" expanded="false" />
+            <element signature="n#!!block;n#validator#0;n#validator#0;n#!!block;n#caiwu#0;n#!!top" expanded="false" />
+            <element signature="n#!!block;n#getDataById#0;n#getDataById#0;n#!!block;n#caiwu#0;n#!!top" expanded="false" />
+            <element signature="n#!!block;n#listRefresh#0;n#listRefresh#0;n#!!block;n#caiwu#0;n#!!top" expanded="false" />
+            <element signature="n#!!block;n#getNowFormatDate#0;n#getNowFormatDate#0;n#!!block;n#caiwu#0;n#!!top" expanded="false" />
+            <element signature="n#!!block;n#onmessage#0;n#onmessage#0;n#!!block;n#caiwu#0;n#!!top" expanded="false" />
+            <marker date="1492421796520" expanded="true" signature="36320:36338" placeholder="..." />
+            <marker date="1492421796520" expanded="true" signature="36540:36558" placeholder="..." />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/js/app.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.53072625">
+          <caret line="721" column="39" selection-start-line="721" selection-start-column="26" selection-end-line="721" selection-end-column="39" />
+          <folding />
         </state>
       </provider>
     </entry>

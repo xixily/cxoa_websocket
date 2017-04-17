@@ -351,8 +351,8 @@ public class PubCaiwuController {
 		Date afterYear = cal.getTime();//2018.01.01
 		cal.add(Calendar.YEAR, -2);
 		Date lastYear = cal.getTime();
-		results.put("lastYearTotal", publicCaiwuService.getBaoxiaoTotal(pbaoxiao, lastYear, thisYear));
-		results.put("thisYearTotal", publicCaiwuService.getBaoxiaoTotal(pbaoxiao, thisYear, afterYear));
+//		results.put("lastYearTotal", publicCaiwuService.getBaoxiaoTotal(pbaoxiao, lastYear, thisYear));
+//		results.put("thisYearTotal", publicCaiwuService.getBaoxiaoTotal(pbaoxiao, thisYear, afterYear));
 		return results;
 	}
 	

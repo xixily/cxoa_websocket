@@ -3,7 +3,7 @@
 	$.post = undefined;
 	function post_mask(url, data, callback, dataType){
 		post(url,data,function(data, textStatus, jqXHR){
-			if(typeof data == "string"){
+			if(!dataType && typeof data == "string"){
 				try{
 					data = eval("(" + data + ")");
 				}catch(e){
@@ -401,15 +401,16 @@ function clearForm(dom){
 
 function submitForm(dom, callback,disable){
 	var form = dom.closest("form");
-//	console.log(form);
+	disable = disable || true;
 	form.form('submit',{
          onSubmit:function(){
         	 if($(this).form('enableValidation').form('validate')){
         		 if(disable){
         				dom.linkbutton('disable');
         			}
-        		 return $(this).form('enableValidation').form('validate');
+        		 return true;
         	 }
+			 return false;
          },
          success:function(result){
         	 var result =  eval("(" + result + ")");
@@ -1060,9 +1061,9 @@ $.extend($.fn.validatebox.defaults.rules, {
     }, 
     idcard : {// 验证身份证 
         validator : function(value) { 
-            return /^[1-9]\d{5}[1-9]\d{3}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}([0-9]|X)$/i.test(value); 
-//            return /^\d{15}(\d{2}[A-Za-z0-9])?$/i.test(value); 
-        }, 
+            return /(^[1-9]\d{5}[1,2]\d{3}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}([0-9]|X)$)|(^[A-Za-z]\d+$)/.test(value);
+//            return /^[1-9]\d{5}[1-9]\d{3}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}([0-9]|X)$/i.test(value);
+        },
         message : '身份证号码格式不正确'
     }, 
     intOrFloat : {// 验证整数或小数 

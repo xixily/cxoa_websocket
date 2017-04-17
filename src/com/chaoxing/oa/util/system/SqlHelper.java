@@ -43,7 +43,7 @@ public class SqlHelper {
 		Class<?> clss = obj.getClass();
 		Field[] fs = clss.getDeclaredFields();
 		StringBuffer sql = new StringBuffer(" 1=1 ");
-		String concat = isAnd?"and " : "or ";
+		String concat = isAnd ? "and " : "or ";
 		Method method = null;
 		Object value = null;
 		String type = null;

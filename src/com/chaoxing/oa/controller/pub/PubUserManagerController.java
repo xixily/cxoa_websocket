@@ -99,7 +99,7 @@ public class PubUserManagerController {
 	
 	@RequestMapping(value="/applogin",method=RequestMethod.POST)
 	public ModelAndView login(String email, String password, HttpServletRequest request, HttpSession session){
-		System.out.println("登录方法applogin 进入。");
+//		System.out.println("登录方法applogin 进入。");
 		ModelAndView modelView = new ModelAndView("/app_login");
 		if(null!=email && !"".equals(email) && null!=password && !"".equals(password)){
 			SessionInfo sessionInfo = userService.findUser(new QueryForm(email));

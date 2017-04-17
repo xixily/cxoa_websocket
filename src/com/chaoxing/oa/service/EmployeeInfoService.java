@@ -185,6 +185,10 @@ public interface EmployeeInfoService {
 
 	public List<CountStructure> findCountStructure();
 
+	public void findTest();
+
+	public void updateTest();
+
 //	public Json 
 
 

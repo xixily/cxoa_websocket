@@ -24,6 +24,7 @@ public class SystemConfig implements Serializable {
 	private byte locked;
 //	private String locked;
 	private String configType;
+	private String value;
 //	@Id
 //	@GeneratedValue(strategy = GenerationType.AUTO)
 //	@GenericGenerator(name = "sysTable",strategy = "native")
@@ -58,5 +59,15 @@ public class SystemConfig implements Serializable {
 	public void setConfigType(String configType) {
 		this.configType = configType;
 	}
+	
+	@Column(name="_value")
+	public String getValue() {
+		return value;
+	}
+	
+	public void setValue(String value) {
+		this.value = value;
+	}
+	
 	
 }

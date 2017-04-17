@@ -15,7 +15,9 @@ import org.springframework.stereotype.Service;
 import com.chaoxing.oa.dao.BaseDaoI;
 import com.chaoxing.oa.entity.page.system.PMenus;
 import com.chaoxing.oa.entity.page.system.PMenus_;
+import com.chaoxing.oa.entity.page.system.PSystemConfig;
 import com.chaoxing.oa.entity.po.system.Menu;
+import com.chaoxing.oa.entity.po.system.SystemConfig;
 import com.chaoxing.oa.service.SystemService;
 import com.chaoxing.oa.system.SysConfig;
 import com.chaoxing.oa.system.cache.CacheManager;
@@ -23,6 +25,8 @@ import com.chaoxing.oa.system.cache.CacheManager;
 @Service("systemService")
 public class SystemServiceImpl implements SystemService {
 	private BaseDaoI<Menu> menuDao;
+	@Autowired
+	private BaseDaoI<SystemConfig> systemConfigDao;
 
 	public BaseDaoI<Menu> getMenuDao() {
 		return menuDao;
@@ -107,4 +111,22 @@ public class SystemServiceImpl implements SystemService {
 			}
 		}
 	}
+	
+	@Override
+	public Integer getCaiwushRoleId() {
+		Integer roleId = (Integer) CacheManager.getInstance().get(SysConfig.CACHE_CW + SysConfig.USER_ROLE_ID);
+		if(null == roleId){
+			StringBuffer hql = new StringBuffer("from SystemConfig t where t.configType=:type and name=:name");
+			Map<String,Object> params = new HashMap<String, Object>();
+			params.put("type", SysConfig.CW_BX_SH);
+			params.put("name", SysConfig.USER_ROLE_ID);
+			SystemConfig sys = systemConfigDao.get(hql.toString(),params);
+			if(null != sys){
+				roleId = Integer.valueOf(sys.getValue());
+			}
+			CacheManager.getInstance().put(SysConfig.CACHE_CW + SysConfig.USER_ROLE_ID, roleId);
+		}
+		return roleId;
+	}
+	
 }

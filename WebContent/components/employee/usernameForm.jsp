@@ -200,7 +200,7 @@
                 </tr>
                 <tr>
                     <td>身份证号:</td>
-                    <td><input id="textbox_id" class="easyui-textbox" name="identityCard" data-options="prompt:'请输入18位身份证号...',validType:'idcard'
+                    <td><input id="textbox_id" class="easyui-textbox" name="identityCard" data-options="prompt:'请输入18位身份证号...',required:true,validType:'idcard'
                     "/></td>
                     <td>户口性质:</td>
                     <td>

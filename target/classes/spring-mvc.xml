@@ -93,12 +93,12 @@
 	</bean>
 
 	<!-- 对模型视图名称String的解析，即在模型视图名称添加前后缀 -->
-	<bean
+	<!-- <bean
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver"
-		p:prefix="/" />
-<!-- 	<bean
+		p:prefix="/" /> -->
+ 	<bean
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver"
-		p:prefix="/" p:suffix=".jsp" /> -->
+		p:prefix="/" p:suffix=".jsp" />
 		
 	<!-- 文件上传下载 -->
 	<bean id="multipartResolver"

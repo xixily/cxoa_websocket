@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 import com.chaoxing.oa.dao.BaseDaoI;
 import com.chaoxing.oa.entity.page.common.Page;
 import com.chaoxing.oa.entity.page.websocket.PMessages;
+import com.chaoxing.oa.entity.po.employee.UserName;
 import com.chaoxing.oa.entity.po.websocket.Messages;
 import com.chaoxing.oa.service.ChatService;
 import com.chaoxing.oa.system.SysConfig;
@@ -25,6 +26,8 @@ import com.chaoxing.oa.util.system.SqlHelper;
 public class ChatServiceImpl implements ChatService {
 	@Autowired
 	private BaseDaoI<Messages> messagesDao;
+	@Autowired
+	private BaseDaoI<Object> objDao;
 	Logger logger = Logger.getLogger(this.getClass());
 
 	@Override
@@ -109,10 +112,23 @@ public class ChatServiceImpl implements ChatService {
 	}
 	
 	@Override
-	public List<Messages> findChatRecord(int id) {
+	public List<Messages> findAllChatRecord(int id) {
 		String hql = "from Messages t where t.sid=:id or t.to=:id order by t.date asc";
 		Map<String, Object> params = new HashMap<String,Object>();
 		params.put("id", id);
+		return messagesDao.find(hql,params);
+	}
+	
+	@Override
+	public List<Messages> findShChatRecordBylisId(String lisId, int sid, boolean isChecker) {
+		String hql = "from Messages t where t.lis_id=:lisId and (t.sid=:id or t.to=:id) order by t.date asc";
+		Map<String, Object> params = new HashMap<String,Object>();
+		params.put("lisId", lisId);
+		if(isChecker){
+			hql = "from Messages t where t.lis_id=:lisId order by t.date asc";
+		}else{
+			params.put("id", sid);
+		}
 		return messagesDao.find(hql,params);
 	}
 
@@ -129,6 +145,21 @@ public class ChatServiceImpl implements ChatService {
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("id", id);
 		return messagesDao.executeHql(hql, params);
+	}
+
+	@Override
+	public List<Integer> findUserIdByrole(int rid) {
+		String hql = "select t.id from UserName t where t.roleId = :rid";
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("rid", rid);
+		List<Object> ids = objDao.find(hql, params);
+		List<Integer> lis = new ArrayList<Integer>();
+		for (Object object : ids) {
+			if(object instanceof Integer){
+				lis.add((Integer) object);
+			}
+		}
+		return lis;
 	}
 	
 	

@@ -21,7 +21,19 @@ public interface ChatService {
 	
 	public void getChatRecord(Integer id);
 
-	public List<Messages> findChatRecord(int id);
+	public List<Messages> findAllChatRecord(int id);
+
+	/**
+	 * 查询list下的聊天记录
+	 * @param lisId list Id
+	 * @param sid 当前查询用户的id
+	 * @param isChecker 当前查询用户为审核人的时候为true，否则为fals
+	 * @return
+	 */
+	public List<Messages> findShChatRecordBylisId(String lisId, int sid, boolean isChecker);
 
 	public int updateToRead(int id);
+
+	public List<Integer> findUserIdByrole(int rid);
+
 }

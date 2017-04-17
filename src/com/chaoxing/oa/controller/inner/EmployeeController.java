@@ -1270,6 +1270,8 @@ public class EmployeeController {
 	public String getBasePath(){
 		ModelAndView model = new ModelAndView("views/hello");
 		System.out.println("hello method!");
+		employeeInfoService.findTest();
+		employeeInfoService.updateTest();
 		return "app/app_index.html";
 	}
 	

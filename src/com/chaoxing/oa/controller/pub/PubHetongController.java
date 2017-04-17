@@ -40,13 +40,15 @@ public class PubHetongController {
 		SessionInfo sessionInfo = getSessionInfo(session);
 		email = (null!=email && !"".equals(email)) ? email:sessionInfo.getEmail();
 		String level = sessionInfo.getLevel();
-		if(null!=level && "指导".equals(level)){
+		if(null!=level && level.contains("细胞核")){
+//		if(null!=level && "指导".equals(level)){
 			if(null==email || "".equals(email)){
 				return getAllCells(session);
 			}else{
 				return getCoreCells(email, session);
 			}
-		}else if(null!=level && "细胞核".equals(level)){
+		}else if(null!=level && level.contains("细胞核")){
+//		}else if(null!=level && "细胞核".equals(level)){
 			return getCoreCells(email, session);
 		}else{
 			result.setMsg("对不起，您不是细胞核或者指导，无法查看。");
@@ -61,7 +63,8 @@ public class PubHetongController {
 		Json result = new Json();
 		String level = sessionInfo.getLevel();
 		String email = sessionInfo.getEmail();
-		if(null!=level && "指导".equals(level)){
+		if(null!=level && level.contains("指导")){
+//		if(null!=level && "指导".equals(level)){
 			result.setObj(pubHetongService.findCellCoresCount(email));
 			result.setSuccess(true);
 		}else{
@@ -78,10 +81,12 @@ public class PubHetongController {
 		email = (null!=email&&!"".equals(email)?email:sessionInfo.getEmail());
 		String level = sessionInfo.getLevel();
 		String semail = sessionInfo.getEmail();
-		if(null!=level && "细胞核".equals(level)){
+		if(null!=level && level.contains("细胞核")){
+//		if(null!=level && "细胞核".equals(level)){
 			result.setObj(pubHetongService.findCoreCellsCount(semail));
 			result.setSuccess(true);
-		}else if(null!=level && "指导".equals(level)){
+		}else if(null!=level && level.contains("指导")){
+//		}else if(null!=level && "指导".equals(level)){
 			if(null!=email && !"".equals(email)){
 				result.setObj(pubHetongService.findCoreCellsCount(email));
 				result.setSuccess(true);

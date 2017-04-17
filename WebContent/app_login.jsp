@@ -21,11 +21,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<link href="app/vendor/bootstrap-social/bootstrap-social.css" rel="stylesheet">
 	<!-- User login CSS-->
 	<link href="app/dist/css/login.css" rel="stylesheet">
+	<!-- jquery -->
+	<script type="text/javascript" src="app/vendor/jquery/jquery.js"></script>
 </head>
 <body class="templatemo-bg-image">
 	<div class="container">
 		<div class="col-md-12">			
-			<form class="form-horizontal templatemo-login-form" role="form" action="public/user/applogin.action" method="post">
+			<form id="login_form" class="form-horizontal templatemo-login-form" role="form" action="public/user/applogin.action" method="post">
 				<div class="row">
 					<div class="col-md-12">
 						<h1>超星OA登录</h1>
@@ -57,7 +59,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				          <div class="col-md-12">
 				            <div class="checkbox">
 				                <label>
-				                  <input type="checkbox"> 记住登录状态
+				                  <input id="remeber_me" type="checkbox" onchange="if($(this).prop('checked')){
+						                var user = {};
+						                user.email = $('#email').val();
+						                if(user.email && user.email!=''){
+						                	localStorage.user=JSON.stringify(user)
+						                }
+						            }else{
+						            	delete localStorage.user;
+						            }
+						            "> 记住登录状态
 				                </label>
 				            </div>
 				          </div>
@@ -92,6 +103,25 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		password.oninvalid=function(){
 			password.setCustomValidity("请输入6到14位的非纯数字或者纯字母的密码。（例如：123abc）");
 				}
+		var addCookies = function(e){
+			var that = $(e.currentTarget);
+			if(that.prop('checked')){
+				
+			}else{
+				
+			}
+		}
+		$(document).ready(function(){
+			if(localStorage.user && localStorage.user != ''){
+		    	$('#email').val(JSON.parse(localStorage.user).email);
+		    	$('#remeber_me').prop("checked",true);
+		    }else{
+		    	$("#login_form").find('input').val('')
+		    }
+		})
+		/* document.onload = function(){
+		    
+		    } */
 	</script>
 </body>
 </html>
