@@ -35,7 +35,7 @@
     </style>
 </head>
 <body>
-<div id="login_dialog" class="easyui-dialog" title="登录窗口" style="width:400px;padding:30px 40px;" >
+<div id="login_dialog" class="easyui-dialog" title="登录窗口" style="width:400px;padding:30px 40px;" data-options="modal:true,resizable:true">
     <form id="login_frm" method="post" action="http://192.168.1.232:8080/cxoa/user/login.action">
         <div style="margin-bottom:20px">
             <input class="easyui-textbox" name="email" style="width:100%" data-options="label:'邮箱:',required:true,validType:'email'">

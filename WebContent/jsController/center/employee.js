@@ -2346,6 +2346,7 @@ shebaoSummary : {
 			})
 		}
 	},	
+
 	jiagou:{
 		queryJiagou : function(data, src) {
 			var level = data.level;

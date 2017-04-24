@@ -12,6 +12,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
+import org.apache.log4j.Logger;
 import org.hibernate.HibernateException;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -78,7 +79,7 @@ import com.chaoxing.oa.util.system.SqlHelper;
 
 @Service("employeeInfoService")
 public class EmployeeInfoServiceImpl implements EmployeeInfoService {
-
+	private Logger logger = Logger.getLogger(this.getClass());
 	@Autowired
 	private BaseDaoI<RenshiUserName> userNameDao;
 	@Autowired
@@ -585,20 +586,14 @@ public class EmployeeInfoServiceImpl implements EmployeeInfoService {
 		}
 	}
 	
-	@SuppressWarnings("unchecked")
+//	@SuppressWarnings("unchecked")
 	@Override
 	public Map<String, Object> findAllStruct(POStructV pOStructV) {
 		Map<String, Object> osInfo = new HashMap<String, Object>();
-		if(null == CacheManager.getInstance().get(SysConfig.CACHE_COMMON + SysConfig.COMMON_JIAGOU)){
+//		if(null == CacheManager.getInstance().get(SysConfig.CACHE_COMMON + SysConfig.COMMON_JIAGOU)){
 			StringBuffer hql = new StringBuffer("from OStructureV t where 1=1");
-//			Map<String,Object> params = new HashMap<String, Object>();
-//			if(null !=pOStructV.getId()){
-//				hql.append(" and id=:id");
-//				params.put("id", pOStructV.getId());
-//			}
 			List<OStructureV> osList = oStructureVdao.find(hql.toString(),null);
 			List<POStructV> posList = new ArrayList<POStructV>();
-			
 			Iterator<OStructureV> it = osList.iterator();
 			if(osList.size()>0){
 				Map<Integer,OsTotal> countMap = new HashMap<Integer, OsTotal>();
@@ -696,10 +691,10 @@ public class EmployeeInfoServiceImpl implements EmployeeInfoService {
 				}
 			}
 			osInfo.put("rows", posList);
-			CacheManager.getInstance().put(SysConfig.CACHE_COMMON + SysConfig.COMMON_JIAGOU, osInfo);
-		}else{
-			osInfo = (Map<String, Object>) CacheManager.getInstance().get(SysConfig.CACHE_COMMON + SysConfig.COMMON_JIAGOU);
-		}
+//			CacheManager.getInstance().put(SysConfig.CACHE_COMMON + SysConfig.COMMON_JIAGOU, osInfo);
+//		}else{
+//			osInfo = (Map<String, Object>) CacheManager.getInstance().get(SysConfig.CACHE_COMMON + SysConfig.COMMON_JIAGOU);
+//		}
 		return osInfo;
 	}
 	

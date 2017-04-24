@@ -9,6 +9,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.concurrent.ConcurrentSkipListMap;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -28,6 +29,7 @@ import com.google.gson.GsonBuilder;
 
 @Component
 public class MyWebsocketHandler implements WebSocketHandler {
+	private static Logger logger = Logger.getLogger(MyWebsocketHandler.class);
 	public static final Map<Integer, WebSocketSession> userChatSession;
 	@Autowired
 	private ChatService chatService;
@@ -42,13 +44,14 @@ public class MyWebsocketHandler implements WebSocketHandler {
 	private static synchronized void addChatSession(WebSocketSession session, Integer uid){
 		if(null == userChatSession.get(uid)){
 			userChatSession.put(uid, session);
+			logger.info("[MyWebsocketHandler.addChatSession] add session[" + uid + "] success!");
 		}
 	}
 	
 	private static synchronized void removeSession(WebSocketSession session, Integer uid){
 		if(null != userChatSession.get(uid)){
 			userChatSession.remove(uid);
-			System.out.println("remove [" + uid + "] success!");
+			logger.info("[MyWebsocketHandler.addChatSession] remove [" + uid + "] success!");
 		}
 	}
 	
@@ -70,9 +73,8 @@ public class MyWebsocketHandler implements WebSocketHandler {
 			Integer uid = (Integer) sessionInfo.getId();
 			addChatSession(webSocketSession, uid);
 //			getAllMessages(webSocketSession);
-//			System.out.println("创建连接成功！");
+//			logger.error("创建连接成功！");
 		}
-
 	}
 
 	@Override
@@ -82,14 +84,18 @@ public class MyWebsocketHandler implements WebSocketHandler {
 		Gson gs = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
 		try{
 			PMessages msg = gs.fromJson(message.getPayload().toString(), PMessages.class);
-			msg.setDate(new Date());
-			if(null != sessionInfo){
-				msg.setSid(sessionInfo.getId());
-				msg.setSender(sessionInfo.getUsername());
-				MessageDispatch(msg, webSocketSession);
+			if(null != msg){
+				msg.setDate(new Date());
+				if(null != sessionInfo){
+					msg.setSid(sessionInfo.getId());
+					msg.setSender(sessionInfo.getUsername());
+					MessageDispatch(msg, webSocketSession);
+				}
+			}else{
+				logger.error("[MyWebsocketHandler.handleMessage] with an error ：Gson.fromJson(...) Json 数据格式转换错误");
 			}
 		}catch(Exception e){
-			System.out.println("[MyWebsocketHandler.handleMessage] with an error:" + e);
+			logger.error("[MyWebsocketHandler.handleMessage] with an error:" + e);
 		}
 	}
 	
@@ -155,7 +161,7 @@ public class MyWebsocketHandler implements WebSocketHandler {
 				webSocketSession.sendMessage(textMsg);
 				chatService.updateToRead(sessionInfo.getId());
 			} catch (IOException e) {
-				System.out.println("[MyWebsocketHandler.pushHistoryMsg] with an error:" + e);
+				logger.error("[MyWebsocketHandler.pushHistoryMsg] with an error:" + e);
 			}
 		}
 	}
@@ -174,7 +180,7 @@ public class MyWebsocketHandler implements WebSocketHandler {
 				webSocketSession.sendMessage(textMsg);
 				chatService.updateToRead(sessionInfo.getId());
 			} catch (IOException e) {
-				System.out.println("[MyWebsocketHandler.pushHistoryMsg] with an error:" + e);
+				logger.error("[MyWebsocketHandler.pushHistoryMsg] with an error:" + e);
 			}
 		}
 	}
@@ -187,7 +193,7 @@ public class MyWebsocketHandler implements WebSocketHandler {
 				webSocketSession.sendMessage(textMsg);
 				msg.setStatus(0);
 			} catch (IOException e) {
-				System.out.println("[MyWebsocketHandler.sendMsg] with an error:" + e);
+				logger.error("[MyWebsocketHandler.sendMsg] with an error:" + e);
 			}
 		}
 		return msg;
@@ -210,7 +216,7 @@ public class MyWebsocketHandler implements WebSocketHandler {
 				try {
 					webSocketSession.sendMessage(textMsg);
 				} catch (IOException e) {
-					System.out.println("[MyWebsocketHandler.addMessages] with an error:" + e);
+					logger.error("[MyWebsocketHandler.addMessages] with an error:" + e);
 				}
 			}
 		}
@@ -224,7 +230,7 @@ public class MyWebsocketHandler implements WebSocketHandler {
 			try {
 				webSocketSession.sendMessage(textMsg);
 			} catch (IOException e) {
-				System.out.println("[MyWebsocketHandler.addMessages] with an error:" + e);
+				logger.error("[MyWebsocketHandler.addMessages] with an error:" + e);
 			}
 		}
 	}
@@ -260,7 +266,7 @@ public class MyWebsocketHandler implements WebSocketHandler {
 	}
 
 	private void sendSysManageMsg(PMessages msg, WebSocketSession webSocketSession) {
-		SessionInfo session = getSessionInfo(webSocketSession);
+//		SessionInfo session = getSessionInfo(webSocketSession);
 		
 	}
 

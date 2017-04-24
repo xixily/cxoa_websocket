@@ -210,6 +210,21 @@ public class BaseDaoImpl<T> implements BaseDaoI<T> {
 	}
 	
 	@Override
+	public int executeSql(String hql, Map<String, Object> params) throws HibernateException {
+		Query q = this.getCurrentSession().createSQLQuery(hql);
+		if (params != null && !params.isEmpty()) {
+			for (String key : params.keySet()) {
+				q.setParameter(key, params.get(key));
+			}
+		}
+		try {
+			return q.executeUpdate();
+		} catch (HibernateException e) {
+			throw e;
+		}
+	}
+
+	@Override
 	public List<T> findSql(String sql){
 		SQLQuery sq = this.getCurrentSession().createSQLQuery(sql);
 		return sq.list();

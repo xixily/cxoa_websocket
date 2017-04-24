@@ -11,7 +11,7 @@ import javax.persistence.Table;
 @Table(name = "人事username", schema = "")
 public class RenshiUserName implements Serializable {
 	private static final long serialVersionUID = -206738471078895098L;
-	private String renshiRight;// 人事权限
+//	private String renshiRight;// 人事权限
 	private String firstLevel;//一级
 	private String secondLevel;//二级
 	private String thirdLevel;//三级
@@ -106,7 +106,7 @@ public class RenshiUserName implements Serializable {
 			String workPlace, String email, String ifSecret, String maritalStatus, Integer roleId, String ruzhiReport,
 			String lizhiReport, String zhuanzhengReport, String bumentiaozhengReport) {
 		super();
-		this.renshiRight = renshiRight;
+//		this.renshiRight = renshiRight;
 		this.firstLevel = firstLevel;
 		this.secondLevel = secondLevel;
 		this.thirdLevel = thirdLevel;
@@ -172,13 +172,13 @@ public class RenshiUserName implements Serializable {
 		this.zhuanzhengReport = zhuanzhengReport;
 		this.bumentiaozhengReport = bumentiaozhengReport;
 	}
-	@Column(name="人事权限")
-	public String getRenshiRight() {
-		return renshiRight;
-	}
-	public void setRenshiRight(String renshiRight) {
-		this.renshiRight = renshiRight;
-	}
+//	@Column(name="人事权限")
+//	public String getRenshiRight() {
+//		return renshiRight;
+//	}
+//	public void setRenshiRight(String renshiRight) {
+//		this.renshiRight = renshiRight;
+//	}
 	@Column(name="一级")
 	public String getFirstLevel() {
 		return firstLevel;

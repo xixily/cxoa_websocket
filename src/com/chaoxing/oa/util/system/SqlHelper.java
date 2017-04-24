@@ -8,6 +8,8 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.apache.log4j.Logger;
+
 import com.chaoxing.oa.entity.po.caiwu.Baoxiao;
 
 /**
@@ -16,6 +18,8 @@ import com.chaoxing.oa.entity.po.caiwu.Baoxiao;
  *
  */
 public class SqlHelper {
+	
+	public final static Logger logger = Logger.getLogger(SqlHelper.class);
 	
 	/**
 	 * 预设hql and语句
@@ -110,7 +114,8 @@ public class SqlHelper {
 //				continue;
 //			}
 		}
-		System.out.println("return hql:" + sql.toString());
+//		System.out.println("return hql:" + sql.toString());
+		logger.info("[SqlHelper.prepareAndSql] : return hql:" + sql.toString());
 		return sql.toString();
 	}
 	

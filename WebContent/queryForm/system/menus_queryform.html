@@ -10,10 +10,14 @@ $(document).ready(function() {
 <form id="menus_query_form" method="post" enctype="multipart/form-data">
 	<table>
 		<tr>
-			<td>菜单名称:</td>
+			<!--<td>菜单名称:</td>
 			<td>
 				<input name="name" class="easyui-textbox" style="width:100px;" />
-			</td>
+			</td>-->
+			<td>菜单名</td>
+			<td><input type="text" class="easyui-textbox" name="menuName" style="width:100px;"/></td>
+			<td>级别</td>
+			<td><input type="text" class="easyui-textbox" name="menuLevel" style="width:100px;"/></td>
 			<td>
 				<input id="jiagou_serach" class="easyui-linkbutton do_action" appaction="system.menus.queryMenus"  type="button" value="查找"
 					   style="width:46px;height:26px;" />

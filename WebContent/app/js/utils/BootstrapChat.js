@@ -778,6 +778,7 @@
         if(!msg || !msg.msg) return ;
         msg.img = DEFAULTS.sender.system;
         var data = this.$jq_.data("BootstrapChat.data") ;
+        if(!data) return ;
         data.ul = data.ul || [];
         var index = data.ul.length;
 //        if(isEmpty(msg)){
@@ -935,7 +936,8 @@
                         chat = $.extend(chat, data);
                         if(!(chat.websocket && chat.websocket.readyState === 1)){
                             chat.reconnected();
-                        }else  if(data.onopen && typeof onopen === 'function'){
+                        }else  if(data.onopen && typeof data.onopen === 'function'){
+                        	chat.clear();
                             data.onopen();
                         }
                         return ;
@@ -954,4 +956,4 @@
 
         }
     }
-}($))
+}(jQuery))

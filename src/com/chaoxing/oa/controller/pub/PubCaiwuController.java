@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -13,11 +14,8 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -38,12 +36,6 @@ public class PubCaiwuController {
 	@Autowired
 	private PubCaiwuService publicCaiwuService;
 	
-	@RequestMapping(value="/owners/{ownerId}",method=RequestMethod.GET)
-	public String getOwner(@PathVariable String ownerId, Model model){
-		System.out.println("路径值参："+ownerId);
-		return null;
-	}
-	
 	/**
 	 * 个人报销信息查询ypzInit
 	 * @param pbaoxiao
@@ -56,6 +48,19 @@ public class PubCaiwuController {
 	public Map<String, Object> findBaoxiao(PBaoxiao pbaoxiao, Page page, HttpSession session){
 		SessionInfo sessionInfo = (SessionInfo) session.getAttribute(ResourceUtil.getSessionInfoName());
 		Map<String, Object> results = publicCaiwuService.findBaoxiaoByUid(pbaoxiao,page,sessionInfo.getId());
+//		Double lastyear = publicCaiwuService.getLastYear(sessionInfo.getId());
+//		Double thisyear = publicCaiwuService.getThisYear(sessionInfo.getId());
+//		results.put("lastYearTotal", lastyear);
+//		results.put("thisYearTotal", thisyear);
+		results.put("success", true);
+		return results;
+	}
+	
+	@RequestMapping(value="/queryBaoxiaoTotal")
+	@ResponseBody
+	public Map<String, Object> findBaoxiaoTotal(PBaoxiao pbaoxiao, Page page, HttpSession session){
+		SessionInfo sessionInfo = (SessionInfo) session.getAttribute(ResourceUtil.getSessionInfoName());
+		Map<String, Object> results =  new HashMap<String, Object>();
 		Double lastyear = publicCaiwuService.getLastYear(sessionInfo.getId());
 		Double thisyear = publicCaiwuService.getThisYear(sessionInfo.getId());
 		results.put("lastYearTotal", lastyear);
@@ -231,6 +236,19 @@ public class PubCaiwuController {
 		return results;
 	}
 	
+	@RequestMapping(value="/queryDaishenpiTotal")
+	@ResponseBody
+	public Map<String, Object> queryDaishenpiTotal(PBaoxiao pbaoxiao, Page page, HttpSession session){
+		SessionInfo sessionInfo = getSessInfo(session);
+		Map<String, Object> results = new HashMap<>();
+		Double lastyear = publicCaiwuService.getLastYear(sessionInfo.getEmail());
+		Double thisyear = publicCaiwuService.getThisYear(sessionInfo.getEmail());
+		results.put("lastYearTotal", lastyear);
+		results.put("thisYearTotal", thisyear);
+		results.put("success", true);
+		return results;
+	}
+	
 	/**
 	 * 查询已批准记录
 	 * @param pbaoxiao
@@ -244,6 +262,20 @@ public class PubCaiwuController {
 		SessionInfo sessionInfo = getSessInfo(session);
 		pbaoxiao.setStatus(SysConfig.CW_BX_APPROVE_AGREE);
 		Map<String, Object> results = publicCaiwuService.findBaoxiaoByLeader(pbaoxiao, page, sessionInfo.getEmail());
+//		Double lastyear = publicCaiwuService.getLastYear(sessionInfo.getEmail());
+//		Double thisyear = publicCaiwuService.getThisYear(sessionInfo.getEmail());
+//		results.put("lastYearTotal", lastyear);
+//		results.put("thisYearTotal", thisyear);
+		results.put("success", true);
+		return results;
+	}
+	
+	@RequestMapping(value="/queryYipizhunTotal")
+	@ResponseBody
+	public Map<String, Object> queryYipizhunTotal(PBaoxiao pbaoxiao, Page page, HttpSession session){
+		SessionInfo sessionInfo = getSessInfo(session);
+		pbaoxiao.setStatus(SysConfig.CW_BX_APPROVE_AGREE);
+		Map<String, Object> results = new HashMap<String, Object>();
 		Double lastyear = publicCaiwuService.getLastYear(sessionInfo.getEmail());
 		Double thisyear = publicCaiwuService.getThisYear(sessionInfo.getEmail());
 		results.put("lastYearTotal", lastyear);
@@ -296,6 +328,24 @@ public class PubCaiwuController {
 		pbaoxiao.setStatus(SysConfig.CW_BX_APPROVE_AGREE);
 		Map<String, Object> results = publicCaiwuService.findBaoxiao(pbaoxiao, page);
 		results.put("success", true);
+//		Calendar cal = Calendar.getInstance();
+//		cal.set(cal.get(Calendar.YEAR), 0, 1, 0, 0, 0);//2017.01.01 00:00:00
+//		Date thisYear = cal.getTime();
+//		cal.add(Calendar.YEAR, 1);
+//		Date afterYear = cal.getTime();//2018.01.01
+//		cal.add(Calendar.YEAR, -2);
+//		Date lastYear = cal.getTime();
+//		results.put("lastYearTotal", publicCaiwuService.getBaoxiaoTotal(pbaoxiao, lastYear, thisYear));
+//		results.put("thisYearTotal", publicCaiwuService.getBaoxiaoTotal(pbaoxiao, thisYear, afterYear));
+		return results;
+	}
+	
+	@RequestMapping(value="/queryDaishoupiaoTotal")
+	@ResponseBody
+	public Map<String, Object> queryDaishoupiaoTotal(PBaoxiao pbaoxiao, Page page){
+		pbaoxiao.setStatus(SysConfig.CW_BX_APPROVE_AGREE);
+		Map<String, Object> results = new HashMap<String, Object>();
+		results.put("success", true);
 		Calendar cal = Calendar.getInstance();
 		cal.set(cal.get(Calendar.YEAR), 0, 1, 0, 0, 0);//2017.01.01 00:00:00
 		Date thisYear = cal.getTime();
@@ -344,6 +394,23 @@ public class PubCaiwuController {
 		pbaoxiao.setStatus(SysConfig.CW_BX_RECIVED_AGREE);
 		Map<String, Object> results = publicCaiwuService.findBaoxiao(pbaoxiao, page);
 		results.put("success", true);
+//		Calendar cal = Calendar.getInstance();
+//		cal.set(cal.get(Calendar.YEAR), 0, 1, 0, 0, 0);//2017.01.01 00:00:00
+//		Date thisYear = cal.getTime();
+//		cal.add(Calendar.YEAR, 1);
+//		Date afterYear = cal.getTime();//2018.01.01
+//		cal.add(Calendar.YEAR, -2);
+//		Date lastYear = cal.getTime();
+//		results.put("lastYearTotal", publicCaiwuService.getBaoxiaoTotal(pbaoxiao, lastYear, thisYear));
+//		results.put("thisYearTotal", publicCaiwuService.getBaoxiaoTotal(pbaoxiao, thisYear, afterYear));
+		return results;
+	}
+	@RequestMapping(value="/queryDaiShenheTotal")
+	@ResponseBody
+	public Map<String, Object> queryDaiShenheTotal(PBaoxiao pbaoxiao, Page page){
+		pbaoxiao.setStatus(SysConfig.CW_BX_RECIVED_AGREE);
+		Map<String, Object> results = new HashMap<String, Object>();
+		results.put("success", true);
 		Calendar cal = Calendar.getInstance();
 		cal.set(cal.get(Calendar.YEAR), 0, 1, 0, 0, 0);//2017.01.01 00:00:00
 		Date thisYear = cal.getTime();
@@ -351,8 +418,8 @@ public class PubCaiwuController {
 		Date afterYear = cal.getTime();//2018.01.01
 		cal.add(Calendar.YEAR, -2);
 		Date lastYear = cal.getTime();
-//		results.put("lastYearTotal", publicCaiwuService.getBaoxiaoTotal(pbaoxiao, lastYear, thisYear));
-//		results.put("thisYearTotal", publicCaiwuService.getBaoxiaoTotal(pbaoxiao, thisYear, afterYear));
+		results.put("lastYearTotal", publicCaiwuService.getBaoxiaoTotal(pbaoxiao, lastYear, thisYear));
+		results.put("thisYearTotal", publicCaiwuService.getBaoxiaoTotal(pbaoxiao, thisYear, afterYear));
 		return results;
 	}
 	
@@ -394,6 +461,24 @@ public class PubCaiwuController {
 	public Map<String, Object> findDaiChupiao(PBaoxiao pbaoxiao, Page page){
 		pbaoxiao.setStatus(SysConfig.CW_BX_CHECK_AGREE);
 		Map<String, Object> results = publicCaiwuService.findBaoxiao(pbaoxiao, page);
+		results.put("success", true);
+//		Calendar cal = Calendar.getInstance();
+//		cal.set(cal.get(Calendar.YEAR), 0, 1, 0, 0, 0);//2017.01.01 00:00:00
+//		Date thisYear = cal.getTime();
+//		cal.add(Calendar.YEAR, 1);
+//		Date afterYear = cal.getTime();//2018.01.01
+//		cal.add(Calendar.YEAR, -2);
+//		Date lastYear = cal.getTime();
+//		results.put("lastYearTotal", publicCaiwuService.getBaoxiaoTotal(pbaoxiao, lastYear, thisYear));
+//		results.put("thisYearTotal", publicCaiwuService.getBaoxiaoTotal(pbaoxiao, thisYear, afterYear));
+		return results;
+	}
+	
+	@RequestMapping(value="/queryDaiChupiaoTotal")
+	@ResponseBody
+	public Map<String, Object> queryDaiChupiaoTotal(PBaoxiao pbaoxiao, Page page){
+		pbaoxiao.setStatus(SysConfig.CW_BX_CHECK_AGREE);
+		Map<String, Object> results = new HashMap<String, Object>();
 		results.put("success", true);
 		Calendar cal = Calendar.getInstance();
 		cal.set(cal.get(Calendar.YEAR), 0, 1, 0, 0, 0);//2017.01.01 00:00:00
@@ -619,6 +704,24 @@ public class PubCaiwuController {
 	public Map<String, Object> findDaihuikuan(PBaoxiao pbaoxiao, Page page){
 		pbaoxiao.setStatus(SysConfig.CW_BX_CHUPIAO);
 		Map<String, Object> results = publicCaiwuService.findBaoxiao(pbaoxiao, page);
+//		Calendar cal = Calendar.getInstance();
+//		cal.set(cal.get(Calendar.YEAR), 0, 1, 0, 0, 0);//2017.01.01 00:00:00
+//		Date thisYear = cal.getTime();
+//		cal.add(Calendar.YEAR, 1);
+//		Date afterYear = cal.getTime();//2018.01.01
+//		cal.add(Calendar.YEAR, -2);
+//		Date lastYear = cal.getTime();
+//		results.put("lastYearTotal", publicCaiwuService.getBaoxiaoTotal(pbaoxiao, lastYear, thisYear));
+//		results.put("thisYearTotal", publicCaiwuService.getBaoxiaoTotal(pbaoxiao, thisYear, afterYear));
+		results.put("success", true);
+		return results;
+	}
+	
+	@RequestMapping(value="/queryDaihuikuanTotal")
+	@ResponseBody
+	public Map<String, Object> queryDaihuikuanTotal(PBaoxiao pbaoxiao, Page page){
+		pbaoxiao.setStatus(SysConfig.CW_BX_CHUPIAO);
+		Map<String, Object> results = new HashMap<String, Object>();
 		Calendar cal = Calendar.getInstance();
 		cal.set(cal.get(Calendar.YEAR), 0, 1, 0, 0, 0);//2017.01.01 00:00:00
 		Date thisYear = cal.getTime();

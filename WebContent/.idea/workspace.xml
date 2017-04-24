@@ -21,125 +21,115 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="BootstrapChat.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/js/utils/BootstrapChat.js">
+      <file leaf-file-name="jiagou.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/tabs/employee/jiagou.html">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="349" column="35" selection-start-line="349" selection-start-column="35" selection-end-line="351" selection-end-column="21" />
+              <caret line="32" column="59" selection-start-line="32" selection-start-column="56" selection-end-line="32" selection-end-column="59" />
               <folding>
-                <element signature="e#281#1489#0" expanded="false" />
-                <element signature="e#1636#2807#0" expanded="false" />
-                <element signature="e#2974#7390#0" expanded="false" />
-                <element signature="e#7409#10416#0" expanded="false" />
-                <element signature="e#10437#11825#0" expanded="false" />
-                <element signature="e#11855#12453#0" expanded="false" />
-                <element signature="e#12471#12650#0" expanded="false" />
-                <element signature="e#12664#12912#0" expanded="false" />
-                <element signature="e#13763#15600#0" expanded="false" />
-                <element signature="e#15729#15833#0" expanded="false" />
-                <element signature="e#23965#24071#0" expanded="false" />
-                <element signature="e#24457#25954#0" expanded="false" />
-                <element signature="e#27892#28187#0" expanded="false" />
-                <element signature="e#28235#28498#0" expanded="false" />
-                <element signature="e#28559#29880#0" expanded="false" />
-                <element signature="e#29982#30170#0" expanded="false" />
-                <element signature="e#31709#33051#0" expanded="false" />
-                <element signature="e#32741#32802#0" expanded="false" />
-                <element signature="e#32956#33020#0" expanded="false" />
-                <element signature="e#33104#33112#0" expanded="false" />
-                <element signature="e#33343#33449#0" expanded="false" />
-                <element signature="e#33513#33618#0" expanded="false" />
-                <element signature="e#33680#33783#0" expanded="false" />
-                <element signature="e#33846#33950#0" expanded="false" />
-                <element signature="e#34016#34123#0" expanded="false" />
-                <marker date="1492135302412" expanded="true" signature="29329:29342" placeholder="..." />
+                <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="caiwu.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/js/center/caiwu.js">
+      <file leaf-file-name="renshiUserName.jsp" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/tabs/employee/renshiUserName.jsp">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-3.542373">
-              <caret line="24" column="49" selection-start-line="24" selection-start-column="49" selection-end-line="24" selection-end-column="49" />
-              <folding>
-                <element signature="n#!!block;n#pageData#0;n#!!block;n#baoxiao#0;n#!!block;n#caiwu#0;n#!!top" expanded="false" />
-                <element signature="n#!!block;n#find#0;n#find#0;n#!!block;n#baoxiao#0;n#!!block;n#caiwu#0;n#!!top" expanded="false" />
-                <element signature="n#!!block;n#findYbx#0;n#findYbx#0;n#!!block;n#baoxiao#0;n#!!block;n#caiwu#0;n#!!top" expanded="false" />
-                <element signature="n#!!block;n#append#0;n#append#0;n#!!block;n#baoxiao#0;n#!!block;n#caiwu#0;n#!!top" expanded="false" />
-                <element signature="n#!!block;n#showInfo#0;n#showInfo#0;n#!!block;n#baoxiao#0;n#!!block;n#caiwu#0;n#!!top" expanded="false" />
-                <element signature="n#!!block;n#disable#0;n#disable#0;n#!!block;n#baoxiao#0;n#!!block;n#caiwu#0;n#!!top" expanded="false" />
-                <element signature="n#!!block;n#validator2#0;n#validator2#0;n#!!block;n#baoxiao#0;n#!!block;n#caiwu#0;n#!!top" expanded="false" />
-                <element signature="n#!!block;n#submitApprove#0;n#submitApprove#0;n#!!block;n#baoxiao#0;n#!!block;n#caiwu#0;n#!!top" expanded="false" />
-                <element signature="n#!!block;n#updateInfo#0;n#updateInfo#0;n#!!block;n#baoxiao#0;n#!!block;n#caiwu#0;n#!!top" expanded="false" />
-                <element signature="n#!!block;n#onmessage#0;n#onmessage#0;n#!!block;n#baoxiao#0;n#!!block;n#caiwu#0;n#!!top" expanded="false" />
-                <element signature="n#!!block;n#pageData#0;n#!!block;n#baoxiaoCheck#0;n#!!block;n#caiwu#0;n#!!top" expanded="false" />
-                <element signature="n#!!block;n#pageData_dsp#0;n#!!block;n#baoxiaoCheck#0;n#!!block;n#caiwu#0;n#!!top" expanded="false" />
-                <element signature="n#!!block;n#pageData_dcp#0;n#!!block;n#baoxiaoCheck#0;n#!!block;n#caiwu#0;n#!!top" expanded="false" />
-                <element signature="n#!!block;n#pageData_dhk#0;n#!!block;n#baoxiaoCheck#0;n#!!block;n#caiwu#0;n#!!top" expanded="false" />
-                <element signature="n#!!block;n#pageData_yhk#0;n#!!block;n#baoxiaoCheck#0;n#!!block;n#caiwu#0;n#!!top" expanded="false" />
-                <element signature="n#!!block;n#init#0;n#init#0;n#!!block;n#baoxiaoCheck#0;n#!!block;n#caiwu#0;n#!!top" expanded="false" />
-                <element signature="n#!!block;n#init_dsp#0;n#init_dsp#0;n#!!block;n#baoxiaoCheck#0;n#!!block;n#caiwu#0;n#!!top" expanded="false" />
-                <element signature="n#!!block;n#init_dcp#0;n#init_dcp#0;n#!!block;n#baoxiaoCheck#0;n#!!block;n#caiwu#0;n#!!top" expanded="false" />
-                <element signature="n#!!block;n#init_yhk#0;n#init_yhk#0;n#!!block;n#baoxiaoCheck#0;n#!!block;n#caiwu#0;n#!!top" expanded="false" />
-                <element signature="n#!!block;n#find#0;n#find#0;n#!!block;n#baoxiaoCheck#0;n#!!block;n#caiwu#0;n#!!top" expanded="false" />
-                <element signature="n#!!block;n#find_dsp#0;n#find_dsp#0;n#!!block;n#baoxiaoCheck#0;n#!!block;n#caiwu#0;n#!!top" expanded="false" />
-                <element signature="n#!!block;n#find_dhk#0;n#find_dhk#0;n#!!block;n#baoxiaoCheck#0;n#!!block;n#caiwu#0;n#!!top" expanded="false" />
-                <element signature="n#!!block;n#find_yhk#0;n#find_yhk#0;n#!!block;n#baoxiaoCheck#0;n#!!block;n#caiwu#0;n#!!top" expanded="false" />
-                <element signature="n#!!block;n#append#0;n#append#0;n#!!block;n#baoxiaoCheck#0;n#!!block;n#caiwu#0;n#!!top" expanded="false" />
-                <element signature="n#!!block;n#append_dsp#0;n#append_dsp#0;n#!!block;n#baoxiaoCheck#0;n#!!block;n#caiwu#0;n#!!top" expanded="false" />
-                <element signature="n#!!block;n#append_dhk#0;n#append_dhk#0;n#!!block;n#baoxiaoCheck#0;n#!!block;n#caiwu#0;n#!!top" expanded="false" />
-                <element signature="n#!!block;n#append_yhk#0;n#append_yhk#0;n#!!block;n#baoxiaoCheck#0;n#!!block;n#caiwu#0;n#!!top" expanded="false" />
-                <element signature="n#!!block;n#sh_disagree#0;n#sh_disagree#0;n#!!block;n#baoxiaoCheck#0;n#!!block;n#caiwu#0;n#!!top" expanded="false" />
-                <element signature="n#!!block;n#sh_agree#0;n#sh_agree#0;n#!!block;n#baoxiaoCheck#0;n#!!block;n#caiwu#0;n#!!top" expanded="false" />
-                <element signature="n#!!block;n#sendMessager#0;n#sendMessager#0;n#!!block;n#baoxiaoCheck#0;n#!!block;n#caiwu#0;n#!!top" expanded="false" />
-                <element signature="n#!!block;n#addMessager#0;n#addMessager#0;n#!!block;n#baoxiaoCheck#0;n#!!block;n#caiwu#0;n#!!top" expanded="false" />
-                <element signature="n#!!block;n#openCheck#0;n#openCheck#0;n#!!block;n#baoxiaoCheck#0;n#!!block;n#caiwu#0;n#!!top" expanded="false" />
-                <element signature="n#!!block;n#openCheck#0;n#openCheck#1;n#!!block;n#baoxiaoCheck#0;n#!!block;n#caiwu#0;n#!!top" expanded="false" />
-                <element signature="n#!!block;n#openShouPiao#0;n#openShouPiao#0;n#!!block;n#baoxiaoCheck#0;n#!!block;n#caiwu#0;n#!!top" expanded="false" />
-                <element signature="n#!!block;n#openKoukuan#0;n#openKoukuan#0;n#!!block;n#baoxiaoCheck#0;n#!!block;n#caiwu#0;n#!!top" expanded="false" />
-                <element signature="n#!!block;n#cpConfirm#0;n#cpConfirm#0;n#!!block;n#baoxiaoCheck#0;n#!!block;n#caiwu#0;n#!!top" expanded="false" />
-                <element signature="n#!!block;n#submitCheck#0;n#submitCheck#0;n#!!block;n#baoxiaoCheck#0;n#!!block;n#caiwu#0;n#!!top" expanded="false" />
-                <element signature="n#!!block;n#submitDaiShoupiao#0;n#submitDaiShoupiao#0;n#!!block;n#baoxiaoCheck#0;n#!!block;n#caiwu#0;n#!!top" expanded="false" />
-                <element signature="n#!!block;n#chupiao_add#0;n#chupiao_add#0;n#!!block;n#baoxiaoCheck#0;n#!!block;n#caiwu#0;n#!!top" expanded="false" />
-                <element signature="n#!!block;n#cp_remove_all#0;n#cp_remove_all#0;n#!!block;n#baoxiaoCheck#0;n#!!block;n#caiwu#0;n#!!top" expanded="false" />
-                <element signature="n#!!block;n#chupiao_initEdit#0;n#chupiao_initEdit#0;n#!!block;n#baoxiaoCheck#0;n#!!block;n#caiwu#0;n#!!top" expanded="false" />
-                <element signature="n#!!block;n#status#0;n#!!block;n#caiwu#0;n#!!top" expanded="false" />
-                <element signature="n#!!block;n#sender#0;n#!!block;n#caiwu#0;n#!!top" expanded="false" />
-                <element signature="n#!!block;n#showInfo#0;n#showInfo#0;n#!!block;n#caiwu#0;n#!!top" expanded="false" />
-                <element signature="e#45240#45635#0" expanded="false" />
-                <element signature="e#45676#46214#0" expanded="false" />
-                <element signature="n#!!block;n#init#0;n#init#0;n#!!block;n#caiwu#0;n#!!top" expanded="false" />
-                <element signature="n#!!block;n#find#0;n#find#0;n#!!block;n#caiwu#0;n#!!top" expanded="false" />
-                <element signature="n#!!block;n#append#0;n#append#0;n#!!block;n#caiwu#0;n#!!top" expanded="false" />
-                <element signature="n#!!block;n#validator#0;n#validator#0;n#!!block;n#caiwu#0;n#!!top" expanded="false" />
-                <element signature="n#!!block;n#getDataById#0;n#getDataById#0;n#!!block;n#caiwu#0;n#!!top" expanded="false" />
-                <element signature="n#!!block;n#listRefresh#0;n#listRefresh#0;n#!!block;n#caiwu#0;n#!!top" expanded="false" />
-                <element signature="n#!!block;n#getNowFormatDate#0;n#getNowFormatDate#0;n#!!block;n#caiwu#0;n#!!top" expanded="false" />
-                <element signature="n#!!block;n#onmessage#0;n#onmessage#0;n#!!block;n#caiwu#0;n#!!top" expanded="false" />
-                <marker date="1492421796520" expanded="true" signature="36320:36338" placeholder="..." />
-                <marker date="1492421796520" expanded="true" signature="36540:36558" placeholder="..." />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="app.js" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/js/app.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.53072625">
-              <caret line="721" column="39" selection-start-line="721" selection-start-column="26" selection-end-line="721" selection-end-column="39" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="15" column="109" selection-start-line="14" selection-start-column="126" selection-end-line="15" selection-end-column="109" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="employee.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/jsController/center/employee.js">
+      <file leaf-file-name="menus.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/tabs/system/menus.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-6.107143">
+              <caret line="9" column="35" selection-start-line="9" selection-start-column="35" selection-end-line="9" selection-end-column="35" />
+              <folding>
+                <element signature="n#style#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#1;n#div#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#table#0;n#div#0;n#!!top" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="menus3.html" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/tabs/system/menus3.html">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="766" column="43" selection-start-line="766" selection-start-column="43" selection-end-line="766" selection-end-column="43" />
+              <caret line="14" column="34" selection-start-line="14" selection-start-column="34" selection-end-line="14" selection-end-column="34" />
+              <folding>
+                <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="icon.css" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/jslib/jquery-easyui-1.5/themes/icon.css">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="93" column="18" selection-start-line="93" selection-start-column="18" selection-end-line="93" selection-end-column="18" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="system.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/jsController/system.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="208" column="48" selection-start-line="208" selection-start-column="48" selection-end-line="208" selection-end-column="48" />
+              <folding>
+                <element signature="e#26#3832#0" expanded="false" />
+                <element signature="e#9047#9914#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="renshi_queryform.jsp" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/queryForm/employee/renshi_queryform.jsp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="130" column="17" selection-start-line="130" selection-start-column="17" selection-end-line="130" selection-end-column="17" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="menus_queryform.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/queryForm/system/menus_queryform.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="12" column="12" selection-start-line="12" selection-start-column="12" selection-end-line="12" selection-end-column="12" />
+              <folding>
+                <element signature="n#style#0;n#input#0;n#td#1;n#tr#0;n#table#0;n#form#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#input#0;n#td#3;n#tr#0;n#table#0;n#form#0;n#!!top" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="index.jsp" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/index.jsp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="65" column="93" selection-start-line="65" selection-start-column="93" selection-end-line="65" selection-end-column="93" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="center.jsp" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/layout/center.jsp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="7" column="11" selection-start-line="7" selection-start-column="11" selection-end-line="7" selection-end-column="11" />
               <folding />
             </state>
           </provider>
@@ -151,34 +141,20 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="CSS File" />
-        <option value="Html5" />
         <option value="JavaScript File" />
+        <option value="Html5" />
       </list>
     </option>
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/app/js/center/hetong.js" />
-        <option value="$PROJECT_DIR$/app/views/caiwu/apply.html" />
-        <option value="$PROJECT_DIR$/app/js/center/head.js" />
-        <option value="$PROJECT_DIR$/app/app_application.html" />
-        <option value="$PROJECT_DIR$/app/app_index.html" />
-        <option value="$PROJECT_DIR$/index.jsp" />
-        <option value="$PROJECT_DIR$/toolBar/employee/shebaoCompany_toolbar.jsp" />
-        <option value="$PROJECT_DIR$/app/views/hetong/cells.html" />
-        <option value="$PROJECT_DIR$/app/views/hetong/users.html" />
-        <option value="$PROJECT_DIR$/app/views/hetong/contracts.html" />
-        <option value="$PROJECT_DIR$/app/baoxiaoInfo2.html" />
-        <option value="$PROJECT_DIR$/app/vendor/bootstrapvalidator-master/demo/attribute.html" />
-        <option value="$PROJECT_DIR$/app/vendor/bootstrapvalidator-master/demo/html5.html" />
         <option value="$PROJECT_DIR$/app/vendor/bootstrapvalidator-master/demo/choice.html" />
         <option value="$PROJECT_DIR$/app/baoxiaoInfo.html" />
         <option value="$PROJECT_DIR$/app/vendor/bootstrap-editable/bootstrap-editable.js" />
         <option value="$PROJECT_DIR$/app/vendor/bootstrap-editable/bootstrap-editable.css" />
         <option value="$PROJECT_DIR$/app/bxsq.html" />
         <option value="$PROJECT_DIR$/app/shenhe.html" />
-        <option value="$PROJECT_DIR$/jsController/system.js" />
         <option value="$PROJECT_DIR$/jsController/wagesCalculate.js" />
         <option value="$PROJECT_DIR$/jsController/center/hetong.js" />
         <option value="$PROJECT_DIR$/components/hetong/fapiaoForm.jsp" />
@@ -195,21 +171,35 @@
         <option value="$PROJECT_DIR$/jslib/jquery-easyui-1.5/src/jquery.form.js" />
         <option value="$PROJECT_DIR$/test/testIframe.html" />
         <option value="$PROJECT_DIR$/app/vendor/bootstrap-table/bootstrap-table.js" />
-        <option value="$PROJECT_DIR$/app_index.html" />
         <option value="$PROJECT_DIR$/app/test/chatModal.html" />
         <option value="$PROJECT_DIR$/app/js/utils/chat.js" />
         <option value="$PROJECT_DIR$/app/views/caiwu/test.html" />
         <option value="$PROJECT_DIR$/app/views/caiwu/htContractList.html" />
         <option value="$PROJECT_DIR$/app/js/center/htapply.js" />
-        <option value="$PROJECT_DIR$/jsController/center/employee.js" />
         <option value="$PROJECT_DIR$/components/employee/usernameForm.jsp" />
         <option value="$PROJECT_DIR$/components/employee/wages.jsp" />
         <option value="$PROJECT_DIR$/jsController/app.js" />
-        <option value="$PROJECT_DIR$/app/js/app.js" />
-        <option value="$PROJECT_DIR$/app/js/utils/BootstrapChat.js" />
         <option value="$PROJECT_DIR$/app/views/caiwu/baoxiaoManager.html" />
+        <option value="$PROJECT_DIR$/app/js/app.js" />
+        <option value="$PROJECT_DIR$/app/js/utils/noModel.js" />
+        <option value="$PROJECT_DIR$/app/dist/css/noModel.css" />
+        <option value="$PROJECT_DIR$/app/dist/css/noModal.css" />
+        <option value="$PROJECT_DIR$/app/vendor/jquery-mCustomScrolbar/jquery-mousewheel.js" />
+        <option value="$PROJECT_DIR$/app_index.html" />
+        <option value="$PROJECT_DIR$/app_index2.html" />
         <option value="$PROJECT_DIR$/app/views/caiwu/baoxiaoShenhe.html" />
+        <option value="$PROJECT_DIR$/app/views/hetong/cellview.html" />
+        <option value="$PROJECT_DIR$/app/views/hetong/users.html" />
+        <option value="$PROJECT_DIR$/app/views/hetong/contracts.html" />
+        <option value="$PROJECT_DIR$/login.html" />
+        <option value="$PROJECT_DIR$/login_client.html" />
+        <option value="$PROJECT_DIR$/app/js/utils/BootstrapChat.js" />
         <option value="$PROJECT_DIR$/app/js/center/caiwu.js" />
+        <option value="$PROJECT_DIR$/tabs/system/roleManager.html" />
+        <option value="$PROJECT_DIR$/jsController/center/employee.js" />
+        <option value="$PROJECT_DIR$/queryForm/system/menus_queryform.html" />
+        <option value="$PROJECT_DIR$/tabs/system/menus.html" />
+        <option value="$PROJECT_DIR$/jsController/system.js" />
       </list>
     </option>
   </component>
@@ -249,7 +239,6 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -278,7 +267,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
+              <option name="myItemId" value="tabs" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -292,33 +281,11 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
+              <option name="myItemId" value="tabs" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="views" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WebContent" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WebContent" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="views" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="caiwu" />
+              <option name="myItemId" value="system" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -332,55 +299,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="js" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WebContent" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WebContent" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="js" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="utils" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WebContent" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WebContent" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="js" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="center" />
+              <option name="myItemId" value="jsController" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -397,11 +316,12 @@
         </subPane>
         <subPane subId="Tests" />
       </pane>
+      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="D:/ClientWorkSpace/HiChat-master" />
+    <property name="last_opened_file_path" value="D:/ClientWorkSpace/jquery-easyui-1.5" />
     <property name="HbShouldOpenHtmlAsHb" value="" />
     <property name="FullScreen" value="false" />
     <property name="recentsLimit" value="5" />
@@ -414,11 +334,11 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\working\cxoa\WebContent\tabs\system" />
+      <recent name="D:\working\cxoa\WebContent" />
+      <recent name="D:\working\cxoa\WebContent\app\vendor\jquery-ui" />
+      <recent name="D:\working\cxoa\WebContent\app\vendor\jquery-mCustomScrolbar" />
       <recent name="D:\working\cxoa\WebContent\app\images\chat" />
-      <recent name="D:\working\cxoa\WebContent\app\views\caiwu" />
-      <recent name="D:\working\cxoa\WebContent\app\images" />
-      <recent name="D:\working\cxoa\WebContent\app\js\utils" />
-      <recent name="D:\yourProjects\cxoa\WebContent\app\js\utils" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\yourProjects\cxoa\WebContent\app\views\hetong\go" />
@@ -428,20 +348,20 @@
       <recent name="D:\yourProjects\cxoa\WebContent\app" />
     </key>
   </component>
-  <component name="RunManager" selected="JavaScript Debug.baoxiaoShenhe.html">
-    <configuration default="false" name="buy.js" type="NodeJSConfigurationType" factoryName="Node.js" temporary="true" path-to-node="C:/Program Files/nodejs/node" path-to-js-file="buy.js" working-dir="$PROJECT_DIR$/test">
-      <method />
-    </configuration>
-    <configuration default="false" name="testIframe.html" type="JavascriptDebugType" factoryName="JavaScript Debug" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/WebContent/test/testIframe.html">
-      <method />
-    </configuration>
-    <configuration default="false" name="BootstrapChat.js" type="NodeJSConfigurationType" factoryName="Node.js" temporary="true" path-to-node="C:/Program Files/nodejs/node" path-to-js-file="BootstrapChat.js" working-dir="$PROJECT_DIR$/app/js/utils">
-      <method />
-    </configuration>
+  <component name="RunManager" selected="JavaScript Debug.login_client.html">
     <configuration default="false" name="app_index.html" type="JavascriptDebugType" factoryName="JavaScript Debug" temporary="true" nameIsGenerated="true" uri="http://localhost:6334/WebContent/app_index.html">
       <method />
     </configuration>
     <configuration default="false" name="baoxiaoShenhe.html" type="JavascriptDebugType" factoryName="JavaScript Debug" temporary="true" nameIsGenerated="true" uri="http://localhost:6334/WebContent/app/views/caiwu/baoxiaoShenhe.html">
+      <method />
+    </configuration>
+    <configuration default="false" name="app_index2.html" type="JavascriptDebugType" factoryName="JavaScript Debug" temporary="true" nameIsGenerated="true" uri="http://localhost:6334/WebContent/app_index2.html">
+      <method />
+    </configuration>
+    <configuration default="false" name="login.html" type="JavascriptDebugType" factoryName="JavaScript Debug" temporary="true" nameIsGenerated="true" uri="http://localhost:6334/WebContent/login.html">
+      <method />
+    </configuration>
+    <configuration default="false" name="login_client.html" type="JavascriptDebugType" factoryName="JavaScript Debug" temporary="true" nameIsGenerated="true" uri="http://localhost:6334/WebContent/login_client.html">
       <method />
     </configuration>
     <configuration default="true" type="DartCommandLineRunConfigurationType" factoryName="Dart Command Line Application">
@@ -483,19 +403,19 @@
       <method />
     </configuration>
     <list size="5">
-      <item index="0" class="java.lang.String" itemvalue="Node.js.buy.js" />
-      <item index="1" class="java.lang.String" itemvalue="JavaScript Debug.testIframe.html" />
-      <item index="2" class="java.lang.String" itemvalue="Node.js.BootstrapChat.js" />
-      <item index="3" class="java.lang.String" itemvalue="JavaScript Debug.app_index.html" />
-      <item index="4" class="java.lang.String" itemvalue="JavaScript Debug.baoxiaoShenhe.html" />
+      <item index="0" class="java.lang.String" itemvalue="JavaScript Debug.app_index.html" />
+      <item index="1" class="java.lang.String" itemvalue="JavaScript Debug.baoxiaoShenhe.html" />
+      <item index="2" class="java.lang.String" itemvalue="JavaScript Debug.app_index2.html" />
+      <item index="3" class="java.lang.String" itemvalue="JavaScript Debug.login.html" />
+      <item index="4" class="java.lang.String" itemvalue="JavaScript Debug.login_client.html" />
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="JavaScript Debug.baoxiaoShenhe.html" />
-        <item index="1" class="java.lang.String" itemvalue="JavaScript Debug.app_index.html" />
-        <item index="2" class="java.lang.String" itemvalue="Node.js.BootstrapChat.js" />
-        <item index="3" class="java.lang.String" itemvalue="JavaScript Debug.testIframe.html" />
-        <item index="4" class="java.lang.String" itemvalue="Node.js.buy.js" />
+        <item index="0" class="java.lang.String" itemvalue="JavaScript Debug.login_client.html" />
+        <item index="1" class="java.lang.String" itemvalue="JavaScript Debug.login.html" />
+        <item index="2" class="java.lang.String" itemvalue="JavaScript Debug.app_index2.html" />
+        <item index="3" class="java.lang.String" itemvalue="JavaScript Debug.app_index.html" />
+        <item index="4" class="java.lang.String" itemvalue="JavaScript Debug.baoxiaoShenhe.html" />
       </list>
     </recent_temporary>
   </component>
@@ -516,7 +436,7 @@
     <frame x="1358" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.13751318" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.23709168" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39932886" sideWeight="0.50241256" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
@@ -534,25 +454,6 @@
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39932886" sideWeight="0.49758744" order="3" side_tool="false" content_ui="tabs" />
     </layout>
-    <layout-to-restore>
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39932886" sideWeight="0.50241256" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.061521254" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.14910433" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3008658" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24969843" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39932886" sideWeight="0.49758744" order="3" side_tool="false" content_ui="tabs" />
-    </layout-to-restore>
   </component>
   <component name="Vcs.Log.UiProperties">
     <option name="RECENTLY_FILTERED_USER_GROUPS">
@@ -624,197 +525,15 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/app/js/center/caiwu.js</url>
-          <line>756</line>
+          <line>764</line>
           <option name="timeStamp" value="70" />
         </line-breakpoint>
       </breakpoints>
-      <option name="time" value="120" />
+      <option name="time" value="122" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/jsController/system.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="119" column="43" selection-start-line="119" selection-start-column="43" selection-end-line="119" selection-end-column="43" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/jsController/wagesCalculate.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="24" column="39" selection-start-line="24" selection-start-column="39" selection-end-line="24" selection-end-column="39" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/jsController/center/hetong.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="330" column="71" selection-start-line="330" selection-start-column="71" selection-end-line="330" selection-end-column="71" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tabs/employee/kaoqin.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-10.392858">
-          <caret line="51" column="19" selection-start-line="51" selection-start-column="19" selection-end-line="51" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/components/hetong/fapiaoForm.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-9.392858">
-          <caret line="66" column="31" selection-start-line="66" selection-start-column="31" selection-end-line="66" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tabs/dealing/kaoqin.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-1.9285715">
-          <caret line="39" column="32" selection-start-line="39" selection-start-column="32" selection-end-line="39" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/images/5_ysh_wtg.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/dist/css/cxoa_public.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.50059736">
-          <caret line="485" column="21" selection-start-line="485" selection-start-column="21" selection-end-line="485" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/toolBar/employee/shebaoCompany_toolbar.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.023136247">
-          <caret line="20" column="33" selection-start-line="20" selection-start-column="33" selection-end-line="20" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/components/employee/shebaoCompany.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.7729988">
-          <caret line="86" column="66" selection-start-line="86" selection-start-column="66" selection-end-line="86" selection-end-column="66" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/bxs.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="54" column="26" selection-start-line="54" selection-start-column="26" selection-end-line="54" selection-end-column="26" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test/jiagou_queryform.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.43249702">
-          <caret line="21" column="51" selection-start-line="21" selection-start-column="51" selection-end-line="21" selection-end-column="51" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/jslib/jquery-easyui-1.5/jquery.easyui.min.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.3327616">
-          <caret line="4025" column="2" selection-start-line="4025" selection-start-column="2" selection-end-line="4025" selection-end-column="2" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/js/utils/formHelp.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="56" column="28" selection-start-line="56" selection-start-column="28" selection-end-line="56" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/js/utils/jquery.form.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.36619717">
-          <caret line="68" column="62" selection-start-line="68" selection-start-column="40" selection-end-line="68" selection-end-column="62" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test/buy.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.73927957">
-          <caret line="61" column="1" selection-start-line="61" selection-start-column="1" selection-end-line="61" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test/tt.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.4562607">
-          <caret line="14" column="28" selection-start-line="14" selection-start-column="28" selection-end-line="14" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/jslib/xheditor-1.1.14/jquery/jquery-1.4.4.src.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.3327616">
-          <caret line="5712" column="4" selection-start-line="5712" selection-start-column="4" selection-end-line="5712" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/components/hetong/tContract.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="71" column="22" selection-start-line="55" selection-start-column="19" selection-end-line="78" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/jsController/north.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="92" column="46" selection-start-line="92" selection-start-column="46" selection-end-line="92" selection-end-column="46" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app_login.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/index.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="10" column="22" selection-start-line="10" selection-start-column="22" selection-end-line="10" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/inc.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="8" column="142" selection-start-line="8" selection-start-column="142" selection-end-line="8" selection-end-column="142" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test/testIframe.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6978297">
-          <caret line="22" column="0" selection-start-line="22" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/jslib/jquery-easyui-1.5/src/jquery.form.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="433" column="35" selection-start-line="433" selection-start-column="35" selection-end-line="433" selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/login.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="36" column="49" selection-start-line="36" selection-start-column="49" selection-end-line="36" selection-end-column="49" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/images/blue_60.png">
       <provider selected="true" editor-type-id="images">
         <state />
@@ -824,13 +543,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/js/center/hetong1.0.0.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="16" column="10" selection-start-line="16" selection-start-column="10" selection-end-line="16" selection-end-column="10" />
         </state>
       </provider>
     </entry>
@@ -862,13 +574,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/hetong/application.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="1.0080738">
-          <caret line="46" column="10" selection-start-line="46" selection-start-column="10" selection-end-line="46" selection-end-column="10" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/views/caiwu/test.html">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -880,33 +585,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.70055866">
           <caret line="36" column="59" selection-start-line="36" selection-start-column="59" selection-end-line="37" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app_index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="342" column="37" selection-start-line="342" selection-start-column="37" selection-end-line="342" selection-end-column="37" />
-          <folding>
-            <element signature="n#nav#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/caiwu/baoxiaoApprove.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="644" column="26" selection-start-line="644" selection-start-column="26" selection-end-line="644" selection-end-column="26" />
-          <folding>
-            <element signature="n#div#0;n#ul#0;n#div#0;n#!!top" expanded="false" />
-            <element signature="n#div#0;n#div#0;n#!!top" expanded="false" />
-            <element signature="n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#!!top" expanded="false" />
-            <element signature="n#fieldset#0;n#form#0;n#div#1;n#div#1;n#div#2;n#div#0;n#div#0;n#div#0;n#!!top" expanded="false" />
-            <element signature="n#div#0;n#legend#1;n#form#0;n#div#1;n#div#1;n#div#2;n#div#0;n#div#0;n#div#0;n#!!top" expanded="false" />
-            <element signature="n#fieldset#0;n#form#0;n#div#1;n#div#1;n#div#1;n#div#1;n#div#0;n#div#0;n#!!top" expanded="false" />
-            <element signature="n#fieldset#1;n#form#0;n#div#1;n#div#1;n#div#1;n#div#1;n#div#0;n#div#0;n#!!top" expanded="false" />
-            <element signature="n#div#1;n#div#0;n#!!top" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -928,7 +606,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="9" column="97" selection-start-line="9" selection-start-column="89" selection-end-line="9" selection-end-column="97" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -939,28 +616,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/jsController/app.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="5" column="28" selection-start-line="5" selection-start-column="28" selection-end-line="5" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/jsController/center/employee.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="766" column="43" selection-start-line="766" selection-start-column="43" selection-end-line="766" selection-end-column="43" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/hetong/cellCoreView.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/vendor/bootstrap-table/bootstrap-table.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.34189945">
@@ -968,66 +623,112 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$USER_HOME$/Desktop/tempfiles/js组件/popwindow.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="18" column="60" selection-start-line="18" selection-start-column="58" selection-end-line="18" selection-end-column="60" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/Desktop/tempfiles/js组件/selectlist.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-7.7288136">
+          <caret line="29" column="23" selection-start-line="29" selection-start-column="13" selection-end-line="29" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/js/utils/noModal.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/vendor/jquery-mCustomScrolbar/jquery.mCustomScrollbar.min.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/dist/css/noModal.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="17" column="1" selection-start-line="17" selection-start-column="1" selection-end-line="17" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/vendor/jquery-mCustomScrolbar/jquery-mousewheel.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="220" column="4" selection-start-line="220" selection-start-column="4" selection-end-line="220" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/vendor/jquery-ui/jquery-ui.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="31" column="17" selection-start-line="31" selection-start-column="17" selection-end-line="31" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app_index2.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-10.607142">
+          <caret line="324" column="14" selection-start-line="324" selection-start-column="14" selection-end-line="324" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app_index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-19.428572">
+          <caret line="367" column="16" selection-start-line="367" selection-start-column="16" selection-end-line="367" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/views/caiwu/baoxiaoManager.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-6.321429">
-          <caret line="380" column="98" selection-start-line="380" selection-start-column="98" selection-end-line="380" selection-end-column="98" />
+        <state vertical-scroll-proportion="-3.091954">
+          <caret line="312" column="80" selection-start-line="312" selection-start-column="76" selection-end-line="312" selection-end-column="84" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/caiwu/baoxiaoApprove.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-3.091954">
+          <caret line="342" column="40" selection-start-line="342" selection-start-column="32" selection-end-line="342" selection-end-column="40" />
           <folding>
-            <element signature="n#div#0;n#div#0;n#!!top" expanded="false" />
-            <element signature="n#div#0;n#div#1;n#div#0;n#!!top" expanded="false" />
-            <element signature="n#div#0;n#div#2;n#div#0;n#!!top" expanded="false" />
-            <element signature="n#div#0;n#div#1;n#div#2;n#div#0;n#!!top" expanded="false" />
-            <element signature="n#legend#0;n#form#0;n#div#1;n#div#1;n#div#2;n#div#0;n#!!top" expanded="false" />
-            <element signature="n#fieldset#0;n#form#0;n#div#1;n#div#1;n#div#2;n#div#0;n#!!top" expanded="false" />
-            <element signature="n#legend#1;n#form#0;n#div#1;n#div#1;n#div#2;n#div#0;n#!!top" expanded="false" />
-            <element signature="n#fieldset#1;n#form#0;n#div#1;n#div#1;n#div#2;n#div#0;n#!!top" expanded="false" />
-            <element signature="n#fieldset#2;n#form#0;n#div#1;n#div#1;n#div#2;n#div#0;n#!!top" expanded="false" />
+            <element signature="n#div#0;n#ul#0;n#div#0;n#!!top" expanded="false" />
+            <element signature="n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#!!top" expanded="false" />
+            <element signature="n#fieldset#0;n#form#0;n#div#1;n#div#1;n#div#2;n#div#0;n#div#0;n#div#0;n#!!top" expanded="false" />
+            <element signature="n#div#0;n#legend#1;n#form#0;n#div#1;n#div#1;n#div#2;n#div#0;n#div#0;n#div#0;n#!!top" expanded="false" />
+            <element signature="n#fieldset#0;n#form#0;n#div#1;n#div#1;n#div#1;n#div#1;n#div#0;n#div#0;n#!!top" expanded="false" />
+            <element signature="n#fieldset#1;n#form#0;n#div#1;n#div#1;n#div#1;n#div#1;n#div#0;n#div#0;n#!!top" expanded="false" />
+            <element signature="n#div#1;n#div#0;n#!!top" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/js/utils/BootstrapChat.js">
+    <entry file="file://$PROJECT_DIR$/app/views/hetong/cellCoreView.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="349" column="35" selection-start-line="349" selection-start-column="35" selection-end-line="351" selection-end-column="21" />
-          <folding>
-            <element signature="e#281#1489#0" expanded="false" />
-            <element signature="e#1636#2807#0" expanded="false" />
-            <element signature="e#2974#7390#0" expanded="false" />
-            <element signature="e#7409#10416#0" expanded="false" />
-            <element signature="e#10437#11825#0" expanded="false" />
-            <element signature="e#11855#12453#0" expanded="false" />
-            <element signature="e#12471#12650#0" expanded="false" />
-            <element signature="e#12664#12912#0" expanded="false" />
-            <element signature="e#13763#15600#0" expanded="false" />
-            <element signature="e#15729#15833#0" expanded="false" />
-            <element signature="e#23965#24071#0" expanded="false" />
-            <element signature="e#24457#25954#0" expanded="false" />
-            <element signature="e#27892#28187#0" expanded="false" />
-            <element signature="e#28235#28498#0" expanded="false" />
-            <element signature="e#28559#29880#0" expanded="false" />
-            <element signature="e#29982#30170#0" expanded="false" />
-            <element signature="e#31709#33051#0" expanded="false" />
-            <element signature="e#32741#32802#0" expanded="false" />
-            <element signature="e#32956#33020#0" expanded="false" />
-            <element signature="e#33104#33112#0" expanded="false" />
-            <element signature="e#33343#33449#0" expanded="false" />
-            <element signature="e#33513#33618#0" expanded="false" />
-            <element signature="e#33680#33783#0" expanded="false" />
-            <element signature="e#33846#33950#0" expanded="false" />
-            <element signature="e#34016#34123#0" expanded="false" />
-            <marker date="1492135302412" expanded="true" signature="29329:29342" placeholder="..." />
-          </folding>
+        <state vertical-scroll-proportion="-3.1724138">
+          <caret line="31" column="163" selection-start-line="31" selection-start-column="159" selection-end-line="31" selection-end-column="163" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/hetong/cellview.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-2.6206896">
+          <caret line="12" column="24" selection-start-line="12" selection-start-column="23" selection-end-line="12" selection-end-column="24" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/views/caiwu/baoxiaoShenhe.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5703704">
-          <caret line="2092" column="80" selection-start-line="2092" selection-start-column="80" selection-end-line="2092" selection-end-column="80" />
+        <state vertical-scroll-proportion="0.3329208">
+          <caret line="345" column="28" selection-start-line="345" selection-start-column="20" selection-end-line="345" selection-end-column="28" />
           <folding>
             <element signature="n#div#0;n#ul#0;n#div#0;n#!!top" expanded="false" />
-            <element signature="n#div#0;n#div#0;n#div#0;n#!!top" expanded="false" />
             <element signature="n#div#0;n#div#1;n#div#1;n#div#0;n#div#0;n#div#0;n#!!top" expanded="false" />
             <element signature="n#div#0;n#div#1;n#div#0;n#div#0;n#!!top" expanded="false" />
             <element signature="n#div#0;n#div#1;n#div#1;n#div#1;n#div#0;n#div#0;n#!!top" expanded="false" />
@@ -1035,14 +736,11 @@
             <element signature="n#fieldset#0;n#form#0;n#div#1;n#div#1;n#div#1;n#div#1;n#div#0;n#div#0;n#!!top" expanded="false" />
             <element signature="n#fieldset#1;n#form#0;n#div#1;n#div#1;n#div#1;n#div#1;n#div#0;n#div#0;n#!!top" expanded="false" />
             <element signature="n#fieldset#2;n#form#0;n#div#1;n#div#1;n#div#1;n#div#1;n#div#0;n#div#0;n#!!top" expanded="false" />
-            <element signature="n#div#2;n#div#0;n#div#0;n#!!top" expanded="false" />
             <element signature="n#div#0;n#div#2;n#div#0;n#div#0;n#!!top" expanded="false" />
             <element signature="n#legend#0;n#fieldset#0;n#form#0;n#div#1;n#div#1;n#div#1;n#div#2;n#div#0;n#div#0;n#!!top" expanded="false" />
             <element signature="n#div#0;n#fieldset#0;n#form#0;n#div#1;n#div#1;n#div#1;n#div#2;n#div#0;n#div#0;n#!!top" expanded="false" />
             <element signature="n#div#1;n#fieldset#0;n#form#0;n#div#1;n#div#1;n#div#1;n#div#2;n#div#0;n#div#0;n#!!top" expanded="false" />
             <element signature="n#fieldset#1;n#form#0;n#div#1;n#div#1;n#div#1;n#div#2;n#div#0;n#div#0;n#!!top" expanded="false" />
-            <element signature="n#div#3;n#div#0;n#div#0;n#!!top" expanded="false" />
-            <element signature="n#div#4;n#div#0;n#div#0;n#!!top" expanded="false" />
             <element signature="n#legend#1;n#form#0;n#div#1;n#div#1;n#div#1;n#div#4;n#div#0;n#div#0;n#!!top" expanded="false" />
             <element signature="n#div#0;n#legend#1;n#form#0;n#div#1;n#div#1;n#div#1;n#div#4;n#div#0;n#div#0;n#!!top" expanded="false" />
             <element signature="n#legend#2;n#form#0;n#div#1;n#div#1;n#div#1;n#div#4;n#div#0;n#div#0;n#!!top" expanded="false" />
@@ -1051,26 +749,92 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/hetong/application.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.024221454">
+          <caret line="14" column="46" selection-start-line="14" selection-start-column="46" selection-end-line="14" selection-end-column="46" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/hetong/guidanceview.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="50" column="58" selection-start-line="50" selection-start-column="58" selection-end-line="50" selection-end-column="58" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/js/center/hetong1.0.0.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="125" column="43" selection-start-line="125" selection-start-column="34" selection-end-line="125" selection-end-column="43" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/hetong/cells.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="65" column="12" selection-start-line="65" selection-start-column="12" selection-end-line="65" selection-end-column="42" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/hetong/users.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="64" column="40" selection-start-line="64" selection-start-column="32" selection-end-line="64" selection-end-column="40" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/hetong/contracts.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="27" column="42" selection-start-line="27" selection-start-column="42" selection-end-line="27" selection-end-column="42" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/inc.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.17531718">
+          <caret line="8" column="142" selection-start-line="8" selection-start-column="142" selection-end-line="8" selection-end-column="142" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/login_client.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.48212227">
+          <caret line="22" column="19" selection-start-line="22" selection-start-column="19" selection-end-line="22" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/js/utils/BootstrapChat.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="754" column="61" selection-start-line="754" selection-start-column="61" selection-end-line="754" selection-end-column="61" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tabs/system/roleManager.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.043829296">
+          <caret line="2" column="16" selection-start-line="2" selection-start-column="16" selection-end-line="2" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/js/center/caiwu.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-3.542373">
-          <caret line="24" column="49" selection-start-line="24" selection-start-column="49" selection-end-line="24" selection-end-column="49" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="1170" column="17" selection-start-line="1170" selection-start-column="17" selection-end-line="1170" selection-end-column="17" />
           <folding>
+            <element signature="n#!!block;n#baoxiao#0;n#!!block;n#caiwu#0;n#!!top" expanded="false" />
             <element signature="n#!!block;n#pageData#0;n#!!block;n#baoxiao#0;n#!!block;n#caiwu#0;n#!!top" expanded="false" />
-            <element signature="n#!!block;n#find#0;n#find#0;n#!!block;n#baoxiao#0;n#!!block;n#caiwu#0;n#!!top" expanded="false" />
             <element signature="n#!!block;n#findYbx#0;n#findYbx#0;n#!!block;n#baoxiao#0;n#!!block;n#caiwu#0;n#!!top" expanded="false" />
             <element signature="n#!!block;n#append#0;n#append#0;n#!!block;n#baoxiao#0;n#!!block;n#caiwu#0;n#!!top" expanded="false" />
-            <element signature="n#!!block;n#showInfo#0;n#showInfo#0;n#!!block;n#baoxiao#0;n#!!block;n#caiwu#0;n#!!top" expanded="false" />
             <element signature="n#!!block;n#disable#0;n#disable#0;n#!!block;n#baoxiao#0;n#!!block;n#caiwu#0;n#!!top" expanded="false" />
             <element signature="n#!!block;n#validator2#0;n#validator2#0;n#!!block;n#baoxiao#0;n#!!block;n#caiwu#0;n#!!top" expanded="false" />
             <element signature="n#!!block;n#submitApprove#0;n#submitApprove#0;n#!!block;n#baoxiao#0;n#!!block;n#caiwu#0;n#!!top" expanded="false" />
             <element signature="n#!!block;n#updateInfo#0;n#updateInfo#0;n#!!block;n#baoxiao#0;n#!!block;n#caiwu#0;n#!!top" expanded="false" />
             <element signature="n#!!block;n#onmessage#0;n#onmessage#0;n#!!block;n#baoxiao#0;n#!!block;n#caiwu#0;n#!!top" expanded="false" />
-            <element signature="n#!!block;n#pageData#0;n#!!block;n#baoxiaoCheck#0;n#!!block;n#caiwu#0;n#!!top" expanded="false" />
-            <element signature="n#!!block;n#pageData_dsp#0;n#!!block;n#baoxiaoCheck#0;n#!!block;n#caiwu#0;n#!!top" expanded="false" />
-            <element signature="n#!!block;n#pageData_dcp#0;n#!!block;n#baoxiaoCheck#0;n#!!block;n#caiwu#0;n#!!top" expanded="false" />
-            <element signature="n#!!block;n#pageData_dhk#0;n#!!block;n#baoxiaoCheck#0;n#!!block;n#caiwu#0;n#!!top" expanded="false" />
-            <element signature="n#!!block;n#pageData_yhk#0;n#!!block;n#baoxiaoCheck#0;n#!!block;n#caiwu#0;n#!!top" expanded="false" />
+            <element signature="n#!!block;n#baoxiaoAppro#0;n#!!block;n#caiwu#0;n#!!top" expanded="false" />
+            <element signature="n#!!block;n#baoxiaoCheck#0;n#!!block;n#caiwu#0;n#!!top" expanded="false" />
             <element signature="n#!!block;n#init#0;n#init#0;n#!!block;n#baoxiaoCheck#0;n#!!block;n#caiwu#0;n#!!top" expanded="false" />
             <element signature="n#!!block;n#init_dsp#0;n#init_dsp#0;n#!!block;n#baoxiaoCheck#0;n#!!block;n#caiwu#0;n#!!top" expanded="false" />
             <element signature="n#!!block;n#init_dcp#0;n#init_dcp#0;n#!!block;n#baoxiaoCheck#0;n#!!block;n#caiwu#0;n#!!top" expanded="false" />
@@ -1100,27 +864,141 @@
             <element signature="n#!!block;n#status#0;n#!!block;n#caiwu#0;n#!!top" expanded="false" />
             <element signature="n#!!block;n#sender#0;n#!!block;n#caiwu#0;n#!!top" expanded="false" />
             <element signature="n#!!block;n#showInfo#0;n#showInfo#0;n#!!block;n#caiwu#0;n#!!top" expanded="false" />
-            <element signature="e#45240#45635#0" expanded="false" />
-            <element signature="e#45676#46214#0" expanded="false" />
+            <element signature="e#45782#46177#0" expanded="false" />
+            <element signature="e#46218#46756#0" expanded="false" />
             <element signature="n#!!block;n#init#0;n#init#0;n#!!block;n#caiwu#0;n#!!top" expanded="false" />
-            <element signature="n#!!block;n#find#0;n#find#0;n#!!block;n#caiwu#0;n#!!top" expanded="false" />
             <element signature="n#!!block;n#append#0;n#append#0;n#!!block;n#caiwu#0;n#!!top" expanded="false" />
             <element signature="n#!!block;n#validator#0;n#validator#0;n#!!block;n#caiwu#0;n#!!top" expanded="false" />
             <element signature="n#!!block;n#getDataById#0;n#getDataById#0;n#!!block;n#caiwu#0;n#!!top" expanded="false" />
             <element signature="n#!!block;n#listRefresh#0;n#listRefresh#0;n#!!block;n#caiwu#0;n#!!top" expanded="false" />
             <element signature="n#!!block;n#getNowFormatDate#0;n#getNowFormatDate#0;n#!!block;n#caiwu#0;n#!!top" expanded="false" />
             <element signature="n#!!block;n#onmessage#0;n#onmessage#0;n#!!block;n#caiwu#0;n#!!top" expanded="false" />
-            <marker date="1492421796520" expanded="true" signature="36320:36338" placeholder="..." />
-            <marker date="1492421796520" expanded="true" signature="36540:36558" placeholder="..." />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/js/app.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.53072625">
-          <caret line="721" column="39" selection-start-line="721" selection-start-column="26" selection-end-line="721" selection-end-column="39" />
+        <state vertical-scroll-proportion="-0.6440678">
+          <caret line="2" column="19" selection-start-line="2" selection-start-column="19" selection-end-line="2" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/jsController/center/employee.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-9.642858">
+          <caret line="2476" column="10" selection-start-line="2476" selection-start-column="10" selection-end-line="2476" selection-end-column="10" />
+          <folding>
+            <element signature="e#71213#71814#0" expanded="false" />
+            <element signature="e#71850#72089#0" expanded="false" />
+            <element signature="e#72109#73269#0" expanded="false" />
+            <element signature="e#73290#73627#0" expanded="false" />
+            <element signature="e#73648#74426#0" expanded="false" />
+            <element signature="e#74449#74747#0" expanded="false" />
+            <element signature="e#74770#75277#0" expanded="false" />
+            <element signature="e#75309#75614#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/jsController/app.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-2.3050847">
+          <caret line="1225" column="0" selection-start-line="1225" selection-start-column="0" selection-end-line="1225" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/index.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="65" column="93" selection-start-line="65" selection-start-column="93" selection-end-line="65" selection-end-column="93" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/layout/center.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="7" column="11" selection-start-line="7" selection-start-column="11" selection-end-line="7" selection-end-column="11" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tabs/employee/renshiUserName.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="15" column="109" selection-start-line="14" selection-start-column="126" selection-end-line="15" selection-end-column="109" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/queryForm/employee/renshi_queryform.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="130" column="17" selection-start-line="130" selection-start-column="17" selection-end-line="130" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/queryForm/system/menus_queryform.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="12" column="12" selection-start-line="12" selection-start-column="12" selection-end-line="12" selection-end-column="12" />
+          <folding>
+            <element signature="n#style#0;n#input#0;n#td#1;n#tr#0;n#table#0;n#form#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#input#0;n#td#3;n#tr#0;n#table#0;n#form#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tabs/employee/jiagou.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="32" column="59" selection-start-line="32" selection-start-column="56" selection-end-line="32" selection-end-column="59" />
+          <folding>
+            <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/jslib/jquery-easyui-1.5/themes/icon.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="93" column="18" selection-start-line="93" selection-start-column="18" selection-end-line="93" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/jsController/system.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="208" column="48" selection-start-line="208" selection-start-column="48" selection-end-line="208" selection-end-column="48" />
+          <folding>
+            <element signature="e#26#3832#0" expanded="false" />
+            <element signature="e#9047#9914#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tabs/system/menus.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-6.107143">
+          <caret line="9" column="35" selection-start-line="9" selection-start-column="35" selection-end-line="9" selection-end-column="35" />
+          <folding>
+            <element signature="n#style#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#1;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#table#0;n#div#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tabs/system/menus3.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="14" column="34" selection-start-line="14" selection-start-column="34" selection-end-line="14" selection-end-column="34" />
+          <folding>
+            <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

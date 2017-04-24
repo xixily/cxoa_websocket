@@ -125,7 +125,7 @@ public class EmployeeController {
 				poStructV.setId(null);
 			}
 			if(employeeInfoService.updateOrSave(poStructV)>0){
-				CacheManager.getInstance().remove(SysConfig.CACHE_COMMON + SysConfig.COMMON_JIAGOU);
+//				CacheManager.getInstance().remove(SysConfig.CACHE_COMMON + SysConfig.COMMON_JIAGOU);
 				result.setMsg("更新成功");
 				result.setSuccess(true);
 			}
@@ -145,7 +145,7 @@ public class EmployeeController {
 				return result;
 			}
 			if(employeeInfoService.deleteOS(poStructV)>0){
-				CacheManager.getInstance().remove(SysConfig.CACHE_COMMON + SysConfig.COMMON_JIAGOU);
+//				CacheManager.getInstance().remove(SysConfig.CACHE_COMMON + SysConfig.COMMON_JIAGOU);
 				result.setMsg("删除成功！");
 				result.setSuccess(true);
 			}

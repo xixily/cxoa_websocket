@@ -109,9 +109,9 @@ public class ResourceUtil {
 	 * 获得下载文件的目录(port2)
 	 * @return
 	 */
-	public static final String getWebcontent(){
-		return bundle.getString("web_content");
-	}
+//	public static final String getWebcontent(){
+//		return bundle.getString("web_content");
+//	}
 
 	public static final String getKey(String key) {
 		return bundle.getString(key);

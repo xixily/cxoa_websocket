@@ -68,7 +68,7 @@ public class PubUserManagerController {
 				appUser.setEmail(DES.getMail(jo));
 //				appUser.setEmail("1huangyun@chaoxing.com");
 //				appUser.setEmail("zengchao@chaoxing.com");
-				appUser.setEmail("chuanming@chaoxing.com");
+//				appUser.setEmail("chuanming@chaoxing.com");
 //				appUser.setEmail("shihao@chaoxing.com");
 //				appUser.setEmail("hailan@chaoxing.com");
 //				appUser.setEmail("congcong@chaoxing.com");

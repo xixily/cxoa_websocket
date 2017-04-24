@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+	<!-- 禁用浏览器缓存 -->
+	<META HTTP-EQUIV="Pragma" CONTENT="no-cache"> 
+	<META HTTP-EQUIV="Cache-Control" CONTENT="no-cache"> 
+	<META HTTP-EQUIV="Expires" CONTENT="0"> 
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>超星OA办公平台</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="app/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- MetisMenu CSS -->
+    <link href="app/vendor/metisMenu/metisMenu.min.css" rel="stylesheet">
+
+    <!--&lt;!&ndash; DataTables CSS &ndash;&gt;-->
+    <!--<link href="../../vendor/datatables-plugins/dataTables.bootstrap.css" rel="stylesheet">-->
+    <link rel="stylesheet" href="app/vendor/bt-table/dist/bootstrap-table.min.css"/>
+
+    <!-- DataTables Responsive CSS -->
+    <!--<link href="app/vendor/datatables-responsive/dataTables.responsive.css" rel="stylesheet">-->
+
+    <!-- Custom CSS -->
+    <link href="app/dist/css/cxoa_public.css" rel="stylesheet">
+
+    <!-- nomodal -->
+    <!--<link href="style/noModal.css" rel="stylesheet">-->
+
+    <!-- Custom Fonts -->
+    <link href="app/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    <!-- bootstrapValidator CSS-->
+    <link href="app/vendor/bootstrapvalidator-master/bootstrapValidator.min.css" rel="stylesheet" type="text/css">
+
+    <!-- bootstrap nomal 非模态框的尝试  -->
+    <link href="app/vendor/jquery-mCustomScrolbar/jquery.mCustomScrollbar.min.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="app/dist/css/noModal.css"/>
+    <link rel="stylesheet" href="app/vendor/jquery-ui/jquery-ui.css"/>
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <style type="text/css">
+        .media-list a{
+            text-decoration: none;
+        }
+
+        #bx_list,#bx_info{
+            transition: width 1s;
+            -moz-transition: width 1s;	/* Firefox 4 */
+            -webkit-transition: width 1s;	/* Safari 和 Chrome */
+            -o-transition: width 1s;	/* Opera */
+        }
+    </style>
+</head>
+
+<body>
+<div id="wrapper">
+
+    <!-- Navigation -->
+<!--     <nav class="navbar navbar-default navbar-fixed-top hidden-xs" role="navigation" style="margin-bottom: 0"> -->
+    <nav id="nav_bar" class="navbar navbar-default" role="navigation" style="margin-bottom: 0">
+        <!--<div class="container">-->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle " data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">导航切换</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <!--<span class="hidden-xs">-->
+                <span class="hidden-xs">
+                <a class="navbar-brand" href="index.html"><img src="app/images/logo.png" alt="超星OA" style="display: inline-block;height: 130%"/>超星OA办公平台</a>
+                </span>
+            </div>
+            <!-- /.navbar-header -->
+
+            <ul class="nav navbar-top-links navbar-right hidden-xs" >
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        <i class="fa fa-envelope fa-fw"></i> <i class="fa fa-caret-down"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-messages">
+                        <li>
+                            <a href="#">
+                                <div>
+                                    <strong>邓</strong>
+                                    <span class="pull-right text-muted">
+                                        <em>2016.11.29</em>
+                                    </span>
+                                </div>
+                                <div class="mail-font">这里是邮件区域，您在这里可以看到您当前的邮件列表信息...</div>
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="#">
+                                <div>
+                                    <strong>邓</strong>
+                                    <span class="pull-right text-muted">
+                                        <em>2016.11.29</em>
+                                    </span>
+                                </div>
+                                <div class="mail-font">这里是邮件区域，您在这里可以看到您当前的邮件列表信息...</div>
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="#">
+                                <div>
+                                    <strong>邓</strong>
+                                    <span class="pull-right text-muted">
+                                        <em>2016.11.29</em>
+                                    </span>
+                                </div>
+                                <div class="mail-font">这里是邮件区域，您在这里可以看到您当前的邮件列表信息...</div>
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a class="text-center" href="#">
+                                <strong>查看所有邮件</strong>
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        </li>
+                    </ul>
+                    <!-- /.dropdown-messages -->
+                </li>
+                <!-- /.dropdown -->
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        <i class="fa fa-tasks fa-fw"></i> <i class="fa fa-caret-down"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-tasks">
+                        <li>
+                            <a href="#">
+                                <div>
+                                    <p>
+                                        <strong>任务 1</strong>
+                                        <span class="pull-right text-muted">99% 完成</span>
+                                    </p>
+                                    <div class="progress progress-striped active">
+                                        <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="99" aria-valuemin="0" aria-valuemax="100" style="width: 99%">
+                                            <span class="sr-only">99% 完成</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="#">
+                                <div>
+                                    <p>
+                                        <strong>任务 2</strong>
+                                        <span class="pull-right text-muted">98% 完成</span>
+                                    </p>
+                                    <div class="progress progress-striped active">
+                                        <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="98" aria-valuemin="0" aria-valuemax="100" style="width: 98%">
+                                            <span class="sr-only">98% 完成</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="#">
+                                <div>
+                                    <p>
+                                        <strong>任务 3</strong>
+                                        <span class="pull-right text-muted">88% 完成</span>
+                                    </p>
+                                    <div class="progress progress-striped active">
+                                        <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="88" aria-valuemin="0" aria-valuemax="100" style="width: 88%">
+                                            <span class="sr-only">88% 完成</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="#">
+                                <div>
+                                    <p>
+                                        <strong>任务 4</strong>
+                                        <span class="pull-right text-muted">80% 完成</span>
+                                    </p>
+                                    <div class="progress progress-striped active">
+                                        <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 80%">
+                                            <span class="sr-only">80% 完成</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a class="text-center" href="#">
+                                <strong>查看所有任务</strong>
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        </li>
+                    </ul>
+                    <!-- /.dropdown-tasks -->
+                </li>
+                <!-- /.dropdown -->
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        <i class="fa fa-bell fa-fw"></i> <i class="fa fa-caret-down"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-alerts">
+                        <li>
+                            <a href="#">
+                                <div>
+                                    <i class="fa fa-comment fa-fw"></i> 新的评论
+                                    <span class="pull-right text-muted small">4 分钟前</span>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="#">
+                                <div>
+                                    <i class="fa fa-twitter fa-fw"></i> 3 新消息
+                                    <span class="pull-right text-muted small">12 分钟前</span>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="#">
+                                <div>
+                                    <i class="fa fa-envelope fa-fw"></i> 信息发送
+                                    <span class="pull-right text-muted small">4 分钟前</span>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="#">
+                                <div>
+                                    <i class="fa fa-tasks fa-fw"></i> 新任务
+                                    <span class="pull-right text-muted small">4 分钟前</span>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="#">
+                                <div>
+                                    <i class="fa fa-upload fa-fw"></i> 服务器重启
+                                    <span class="pull-right text-muted small">4 分钟前</span>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a class="text-center" href="#">
+                                <strong>查看所有通知</strong>
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        </li>
+                    </ul>
+                    <!-- /.dropdown-alerts -->
+                </li>
+                <!-- /.dropdown -->
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-user">
+                        <li><a href="#"><i class="fa fa-user fa-fw"></i> 用户信息</a>
+                        </li>
+                        <li><a href="#"><i class="fa fa-gear fa-fw"></i> 设置</a>
+                        </li>
+                        <li class="divider"></li>
+                        <li><a onclick="logout()"><i class="fa fa-sign-out fa-fw"></i> 退出登录</a>
+                        </li>
+                    </ul>
+                    <!-- /.dropdown-user -->
+                </li>
+                <!-- /.dropdown -->
+            </ul>
+            <!-- /.navbar-top-links -->
+
+            <div id="app_sidebar" class="navbar-default sidebar" role="navigation">
+                <div class="sidebar-nav navbar-collapse collapse">
+                    <ul class="nav" id="side-menu">
+                    
+                    </ul>
+                </div>
+                <!-- /.sidebar-collapse -->
+            </div>
+            <!-- /.navbar-static-side -->
+        <!--</div>-->
+    </nav>
+
+    <div id="page-wrapper" style="overflow: hidden">
+       <!--   <div class="row hidden-xs" style="margin-top: 60px;">
+            <div class="col-lg-12">
+            </div>
+        </div>
+        <div class="row visible-xs" style="margin-top: 112px;">
+            <div class="col-lg-12">
+            </div>
+        </div> -->
+        <!-- 主div -->
+        <div id="loading" class="loading hide">
+            <span>正在加载数据,请稍后...<img style="display: inline-block" src="app/images/loading.gif" alt="正在加载..." class="img-responsive" width="16"/></span>
+        </div>
+        <div id="container">
+            <input type="text" class="datepicker"/>
+        </div>
+    </div>
+
+    <div id="fixed_link" class="fixed-btn">
+        <a href="#" title="返回顶部" style="display: inline-block;"> <i class="glyphicon glyphicon-arrow-up"></i></a>
+        <!--<li class="divider"></li>-->
+        <div style="height: 1px;border: 0px;margin: 0px;background-color:#abb9d3;width: 100%"></div>
+        <a href="javascript:void(0)" title="添加" class="" style="display: inline-block;"> <i class="glyphicon glyphicon-pencil" style="margin: 3px 3px;"></i></a>
+        <div style="height: 1px;border: 0px;margin: 0px;background-color:#abb9d3;width: 100%"></div>
+<!--
+        <a href="javascript:void(0)" title="返回" onclick="try{$('[app-abck='+ session.app_back +']').trigger('click');}catch(e){alert('返回失败')}" title="添加" class="" style="display: inline-block;"> <i class="fa  fa-reply" style="margin: 3px 3px;"></i></a>
+-->
+        <a href="javascript:void(0)" title="返回" onclick="app_back()" title="返回" class="" style="display: inline-block;"> <i class="fa  fa-reply" style="margin: 3px 3px;"></i></a>
+
+        <div id="msg_position_btn" style="height: 1px;border: 0px;margin: 0px;background-color:#abb9d3;width: 1px;"></div>
+    </div>
+</div>
+<!-- /#wrapper -->
+
+<!-- 消息提示 start-->
+<div id="dialog" title="消息提示：" style="width: 120px;height: 200px;overflow-y: scroll">
+    <ul>
+        <li><a href="#">
+            <p>小五出来约</p>
+        </a></li>
+        <li><a href="">
+            <p>小五出来约</p>
+        </a></li>
+        <li><a href="">
+            <p>小五出来约</p>
+        </a></li>
+    </ul>
+</div>
+<!-- 消息提示 end-->
+<!-- jQuery -->
+<script src="app/vendor/jquery/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="app/vendor/bootstrap/js/bootstrap.min.js"></script>
+
+<!-- Metis Menu Plugin JavaScript -->
+<script src="app/vendor/metisMenu/metisMenu.min.js"></script>
+
+<!-- Metis Menu Plugin JavaScript -->
+<script src="app/vendor/datatables-plugins/bootstrap-autohidingnavbar.js"></script>
+
+<!-- Metis Menu Plugin JavaScript -->
+<!--<script src="js/jquery.noModal.js"></script>-->
+
+<!-- Custom Theme JavaScript -->
+<!--<script src="../dist/js/app.js"></script>-->
+<script src="app/js/app.js"></script>
+<script src="app/js/utils/formHelp.js"></script>
+<script src="app/js/center/caiwu.js"></script>
+<script src="app/js/center/hetong1.0.0.js"></script>
+<!-- bootstrap-table -->
+<script src="app/vendor/bt-table/dist/bootstrap-table.js"></script>
+<script src="app/vendor/bt-table/dist/locale/bootstrap-table-zh-CN.min.js"></script>
+<!-- bootstrapValidator-->
+<script src="app/vendor/jquery-mCustomScrolbar/jquery-mousewheel.js"></script>
+<script src="app/vendor/bootstrapvalidator-master/bootstrapValidator.min.js"></script>
+<script src="app/js/utils/BootstrapChat.js"></script>
+
+<!-- bootstrap nomal 非模态框尝试-->
+<script src="app/vendor/jquery-ui/jquery-ui.js"></script>
+<script src="app/vendor/jquery-mCustomScrolbar/jquery.mCustomScrollbar.js"></script>
+<script src="app/js/utils/noModal.js"></script>
+<script>
+    function app_back(){
+        try{
+            $('[app-back="'+ session.app_back +'"]').trigger('click');
+        }catch(e){
+            alert('返回失败，请尝试其他方式。');
+        }
+    }
+
+    function getMsg(){
+        var position_btn = $('#msg_position_btn')
+        $( "#dialog" ).dialog();
+        $( "#dialog" ).dialog( "option", "position", { my: "right top", at: "right top", of: position_btn} );
+        setTimeout(function(){
+            $( "#dialog" ).dialog( "option", "position", { my: "right top", at: "right top", of: position_btn} );
+        },200);
+    }
+
+//自动隐藏导航头，现在已经取消。
+//    $("#nav_bar").autoHidingNavbar({animationDuration:200,navbarOffset:-82});
+</script>
+</body>
+</html>

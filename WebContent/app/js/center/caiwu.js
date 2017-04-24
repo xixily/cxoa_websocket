@@ -6,6 +6,7 @@ var caiwu = {
         pageData:{
             url: 'caiwu/baoxiaoManager',
             action: 'public/caiwu/queryBaoxiao.action',
+            total_action: 'public/caiwu/queryBaoxiaoTotal.action',
             source: app.getBaoxiao(),
             status: [2, 6, 8],
             infoSelector: '#bx_info',
@@ -22,7 +23,7 @@ var caiwu = {
                 event.preventDefault();//关闭默认事件
                 event.stopImmediatePropagation();
 //                caiwu.baoxiao.showInfo($(this));
-                caiwu.showInfo($(this), $.extend({},caiwu.baoxiaoCheck.pageData));
+                caiwu.showInfo($(this), $.extend({},caiwu.baoxiao.pageData));
             })
         },
         find: function(data){
@@ -249,6 +250,7 @@ var caiwu = {
         pageData:{
             url: 'caiwu/baoxiaoApprove',
             action: 'public/caiwu/queryDaishenpi.action',
+            total_action: 'public/caiwu/queryDaishenpiTotal.action',
             source: app.getBaoxiao(),
             status: [1],
             infoSelector: '#bx_info',
@@ -261,6 +263,7 @@ var caiwu = {
         pageData_ypz:{
             url: 'caiwu/baoxiaoApprove',
             action: 'public/caiwu/queryYipizhun.action',
+            total_action: 'public/caiwu/queryYipizhunTotal.action',
             source: app.getYiPiZhun(),
             infoSelector: '#ypz_info',
             listSelector: '#ypz_list',
@@ -454,13 +457,13 @@ var caiwu = {
         },
         submitAgree : function(){
             var data =  $('#agree_form').serializeJson();
-            if(!data.id || !data.checked) $.messager.alert('提示','请刷新页面后再重试。');
+//            if(!data.id || !data.agree) $.messager.alert('提示','请刷新页面后再重试。');
             $('#bx_appro_dialog').modal('toggle');
             caiwu.baoxiaoAppro.updateInfo(data);
         },
         updateInfo: function(data){
             data = data ? data : {};
-            if(!data.id || !data.checked) $.messager.alert('提示','请刷新页面后再重试。');
+            if(!data.id || !data.agree) $.messager.alert('提示','请刷新页面后再重试。');
             $.post('public/caiwu/approveBaoxiao.action', data, function(result){
                 if(result.success){
                     caiwu.listRefresh('caiwu.baoxiaoAppro.find');
@@ -473,6 +476,7 @@ var caiwu = {
         pageData:{
             url: 'caiwu/baoxiaoShenhe',
             action: 'public/caiwu/queryDaiShenhe.action',
+            total_action: 'public/caiwu/queryDaiShenheTotal.action',
             source: app.getBaoxiao(),
             status: [1],
             infoSelector: '#bx_info',
@@ -488,6 +492,7 @@ var caiwu = {
         pageData_dsp:{
             url: 'caiwu/baoxiaoShenhe',
             action: 'public/caiwu/queryDaishoupiao.action',
+            total_action: 'public/caiwu/queryDaishoupiaoTotal.action',
             source: app.getDaiShouPiao(),
 //            status: [1],
             infoSelector: '#dsp_info',
@@ -500,6 +505,7 @@ var caiwu = {
         pageData_dcp:{
             url: 'caiwu/baoxiaoShenhe',
             action: 'public/caiwu/queryDaiChupiao.action',
+            total_action: 'public/caiwu/queryDaiChupiaoTotal.action',
             source: app.getDaiChuPiao(),
 //            status: [1],
             infoSelector: '#dcp_info',
@@ -512,6 +518,7 @@ var caiwu = {
         pageData_dhk:{
             url: 'caiwu/baoxiaoShenhe',
             action: 'public/caiwu/queryDaihuikuan.action',
+            total_action: 'public/caiwu/queryDaihuikuanTotal.action',
             source: app.getDaiHuiKuan(),
 //            status: [1],
             infoSelector: '#dhk_info',
@@ -524,6 +531,7 @@ var caiwu = {
         pageData_yhk:{
             url: 'caiwu/baoxiaoShenhe',
             action: 'public/caiwu/queryYihuikuan.action',
+            total_action: 'public/caiwu/queryYihuikuanTotal.action',
             source: app.getYiHuiKuan(),
             infoSelector: '#yhk_info',
             listSelector: '#yhk_list',
@@ -1048,7 +1056,7 @@ var caiwu = {
             var id = dom.find('[app-data="id"]').html();
             var data = $("#" + pageData.source + "body").data(app.getDivData());
             var formData = caiwu.getDataById(id, data);
-            var ownerId = formData.approid;
+            var ownerId = formData.uid;
             $(pageData.infoSelector + ' form').form('clear');
             if(formData){
                 if(data && data.rows) {
@@ -1155,32 +1163,23 @@ var caiwu = {
             body = $("#" + pageData.source + "body");
             $.extend(data, app.getPageDefault());
             body.data(app.getQueryParams(), data);
+            //得到总数
+            $.post(pageData.total_action, data, function(result){
+                if(result.success){
+                    $('#' + pageData.source + 'sum span[app-data="thisYearTotal"]').html(result.thisYearTotal);
+                    $('#' + pageData.source + 'sum span[app-data="lastYearTotal"]').html(result.lastYearTotal);
+                }
+            });
+            
+
             $.post(pageData.action, data, function (result) {
-//                try{
-//                    result = eval("(" + result + ")");
-//                }catch(e){
-//                    try{
-//                        result = $(result);
-//                        var msg = result.find('span').html();
-//                        var dialogInfo = $.appDialog.getDefaults();
-//                        dialogInfo.content = msg;
-//                        dialogInfo.buttons[0].text = '确认';
-//                        dialogInfo.buttons[0].handler = function(event){
-//                            location.replace('/cxoa/app_index.html');
-//                        }
-//                        $.appDialog.createDialog(dialogInfo).modal('show');
-//                        return false;
-//                    }catch(e){
-//                        location.replace('/cxoa/app_index.html');
-//                        return false;
-//                    }
-//                }
                 if (result.success) {
                     body.data(app.getDivData(), result);//把数据和div关联
                     var rows = result.rows;
                     $('#' + pageData.source + 'sum span[app-data="total"]').html(result.total);
-                    $('#' + pageData.source + 'sum span[app-data="thisYearTotal"]').html(result.thisYearTotal);
-                    $('#' + pageData.source + 'sum span[app-data="lastYearTotal"]').html(result.lastYearTotal);
+//                    $('#' + pageData.source + 'sum span[app-data="total"]').html(result.total);
+//                    $('#' + pageData.source + 'sum span[app-data="thisYearTotal"]').html(result.thisYearTotal);
+//                    $('#' + pageData.source + 'sum span[app-data="lastYearTotal"]').html(result.lastYearTotal);
                     if (rows && rows.length > 0) {
                         for (var i = 0; i < rows.length; i++) {
                             var row = rows[i];

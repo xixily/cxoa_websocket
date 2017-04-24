@@ -358,6 +358,14 @@
 		</dependency>
 		<!-- websocket add <<<< -->
 		
+		<!-- https://mvnrepository.com/artifact/org.springframework.session/spring-session -->
+		<dependency>
+		    <groupId>org.springframework.session</groupId>
+		    <artifactId>spring-session</artifactId>
+		    <version>1.2.2.RELEASE</version>
+		</dependency>
+
+		
 	<!-- spring end -->
 	
 	<!-- https://mvnrepository.com/artifact/microsoft/sqljdbc -->
