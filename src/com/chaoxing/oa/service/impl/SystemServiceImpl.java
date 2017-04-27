@@ -17,8 +17,11 @@ import org.springframework.stereotype.Service;
 import com.chaoxing.oa.dao.BaseDaoI;
 import com.chaoxing.oa.entity.page.system.PMenus;
 import com.chaoxing.oa.entity.page.system.PMenus_;
+import com.chaoxing.oa.entity.page.system.PUserRole;
 import com.chaoxing.oa.entity.po.system.Menu;
+import com.chaoxing.oa.entity.po.system.RoleResources;
 import com.chaoxing.oa.entity.po.system.SystemConfig;
+import com.chaoxing.oa.entity.po.system.UserRole;
 import com.chaoxing.oa.service.SystemService;
 import com.chaoxing.oa.system.SysConfig;
 import com.chaoxing.oa.system.cache.CacheManager;
@@ -31,6 +34,10 @@ public class SystemServiceImpl implements SystemService {
 	private BaseDaoI<SystemConfig> systemConfigDao;
 	@Autowired
 	private BaseDaoI<Object> objDao;
+	@Autowired
+	private BaseDaoI<RoleResources> roResourcesDao;
+	@Autowired
+	private BaseDaoI<UserRole> roleDao;
 
 	public BaseDaoI<Menu> getMenuDao() {
 		return menuDao;
@@ -140,9 +147,10 @@ public class SystemServiceImpl implements SystemService {
 		Map<String, Object> params = null;
 		if(null != pmenus.getMenuId()){
 			params = new HashMap<String, Object>();
-			sql.append("and menuId=:menuId");
-			params.put("", pmenus.getMenuId());
+			sql.append("and preMenuId=:preMenuId");
+			params.put("preMenuId", pmenus.getMenuId());
 		}
+		
 		List<Object> menus = objDao.findSql(sql.toString(),params);
 		List<PMenus_> pms = new ArrayList<>();
 		Iterator<Object> it = menus.iterator();
@@ -159,7 +167,7 @@ public class SystemServiceImpl implements SystemService {
 				pm.setUrl((String) obj[4]);
 				pm.setIconCls((String) obj[5]);
 				pm.setSortCode((String) obj[6]);
-				if(pm.getMenuLevel()<3){
+				if(null != pm.getMenuLevel() && pm.getMenuLevel()<3){
 					pm.setState("closed");
 				}
 			}
@@ -172,34 +180,33 @@ public class SystemServiceImpl implements SystemService {
 	
 	@Override
 	public int updateMenuLevel(PMenus_ pmenus) {
-		Map<String, Object> params = new HashMap<String, Object>();
-		String hql = "update Menu set preMenuId=:preMenuId,menuLevel=:menuLevel where menuId=:menuId";
-		params.put("preMenuId", pmenus.get_preMenuId());
-		params.put("menuLevel", pmenus.getMenuLevel());
-		params.put("menuId", pmenus.getMenuId());
-		return menuDao.executeHql(hql, params);
+		if(null != pmenus.getMenuLevel()){
+			Map<String, Object> params = new HashMap<String, Object>();
+			Menu preMenu = new Menu();
+			preMenu.setMenuId(pmenus.get_preMenuId());
+			String hql = "update Menu set preMenuId=:preMenuId,menuLevel=:menuLevel where menuId=:menuId";
+			params.put("preMenuId", preMenu);
+			params.put("menuLevel", pmenus.getMenuLevel());
+			params.put("menuId", pmenus.getMenuId());
+			return menuDao.executeHql(hql, params);
+		}else{
+			return 0 ;
+		}
 	}
-	
-//	@Override
-//	public int updateMenuToDown(PMenus_ pmenus) {
-//		Map<String, Object> params = new HashMap<String, Object>();
-//		String hql = "update Menu set preMenuId=:preMenuId,menuLevel=:menuLevel where menuId=:menuId";
-//		params.put("preMenuId", pmenus.get_preMenuId());
-//		params.put("menuLevel", pmenus.getMenuLevel());
-//		params.put("menuId", pmenus.getMenuId());
-//		return menuDao.executeHql(hql, params);
-//	}
 	
 	@Override
 	public int removeMenu(PMenus_ pmenus) {
-		Menu menu = new Menu();
-		menu.setMenuId(pmenus.getMenuId());
-		try {
-			menuDao.delete(menu);
-			return 1;
-		} catch (Exception e) {
-			return 0;
+		if(null != pmenus.getMenuId()){
+			Menu menu = new Menu();
+			menu.setMenuId(pmenus.getMenuId());
+			try {
+				menuDao.delete(menu);
+				return 1;
+			} catch (Exception e) {
+				return 0;
+			}
 		}
+		return 0 ;
 	}
 	
 	@Override
@@ -219,9 +226,12 @@ public class SystemServiceImpl implements SystemService {
 	}
 	
 	@Override
-	public Serializable svaeMenu(PMenus_ pmenus) {
+	public Serializable saveMenu(PMenus_ pmenus) {
 		Menu menu = new Menu();
-		Menu preMenu = new Menu();
+		Menu preMenu = null;
+		if(null != pmenus.get_preMenuId()){
+			preMenu = new Menu();
+		}
 		BeanUtils.copyProperties(pmenus, menu);
 		preMenu.setMenuId(pmenus.get_preMenuId());
 		menu.setPreMenuId(preMenu);
@@ -233,6 +243,131 @@ public class SystemServiceImpl implements SystemService {
 		}
 	}
 	
+	@Override
+	public Map<String, Object> findRoles(PUserRole role) {
+		StringBuffer sql = new StringBuffer("select roleId,roleName,rolevel,preId from userrole where 1=1");
+		Map<String, Object> params = null;
+		Map<String, Object> results = new HashMap<String, Object>();
+		if(null != role.getRoleId()){
+			params = new HashMap<String, Object>();
+			sql.append("and preId=:preId");
+			params.put("preId", role.getRoleId());
+		}
+		List<Object> rs = objDao.findSql(sql.toString(),params);
+		List<PUserRole> roles = new ArrayList<PUserRole>();
+		Iterator<Object> it = rs.iterator();
+		Object[] obj = null;
+		PUserRole prole = null;
+		while(it.hasNext()){
+			obj = (Object[]) it.next();
+			prole = new PUserRole();
+			if(obj.length==4){
+				prole.setRoleId((Integer) obj[0]);
+				prole.setRoleName((String) obj[1]);
+				prole.setRoleLevel((Integer) obj[2]);
+				prole.setPreId((Integer) obj[3]);
+				if(null != prole.getRoleLevel() && prole.getRoleLevel()<3){
+					prole.setState("closed");
+				}
+			}
+			roles.add(prole);
+		}
+		results.put("rows", roles);
+		results.put("total", rs.size());
+		return results;
+	}
+	
+	@Override
+	public Map<String, Object> findRoresoucesByrid(Integer rid) {
+		String sql = new String("select menuId,menuName,menuLevel,preMenuid,url,iconCls,sortCode from roleresources where roleId = :rid");
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("rid", rid);
+		Map<String, Object> results = new HashMap<String, Object>();
+		List<Object> menus = objDao.findSql(sql.toString(),params);
+		List<PMenus_> pms = new ArrayList<>();
+		Iterator<Object> it = menus.iterator();
+		Object[] obj = null;
+		PMenus_ pm = null;
+		while(it.hasNext()){
+			obj = (Object[]) it.next();
+			pm = new PMenus_();
+			if(obj.length==7){
+				pm.setMenuId((Integer) obj[0]);
+				pm.setMenuName((String) obj[1]);
+				pm.setMenuLevel((Integer) obj[2]);
+				pm.set_preMenuId((Integer) obj[3]);
+				pm.setUrl((String) obj[4]);
+				pm.setIconCls((String) obj[5]);
+				pm.setSortCode((String) obj[6]);
+				if(null != pm.getMenuLevel() && pm.getMenuLevel()<3){
+					pm.setState("closed");
+				}
+			}
+			pms.add(pm);
+		}
+		results.put("rows", pms);
+		results.put("total", menus.size());
+		return results;
+	}
+	
+	@Override
+	public int addMenus(List<Integer> ids, Integer roleId, Integer sid) {
+		List<RoleResources> rors = new ArrayList<RoleResources>();
+		Menu menu = menuDao.get(Menu.class, sid);
+		UserRole role = roleDao.get(UserRole.class, roleId);
+		int total = addPreMenuIds(menu, role);// 准备父级菜单
+		logger.info("[SystemServiceImpl.addMenus] 动态添加了父级菜单" + total + "个。");
+		RoleResources rr = null;
+		Integer mid = null;
+		for (int i = 0; i < ids.size(); i++) {
+			mid = ids.get(i);
+			if(null !=  mid){
+				rr = new RoleResources();
+				rr.setMenuId(menuDao.get(Menu.class, mid));
+				rr.setRoleId(role);
+			}
+			rors.add(rr);
+		}
+		return roResourcesDao.bigSave(rors);
+	}
+	
+	private int addPreMenuIds(Menu menu, UserRole role){
+		int sum = 0;
+		Menu prMenu = menu.getPreMenuId();
+		if(null != prMenu){
+			RoleResources rrs = new RoleResources(role, prMenu);
+			try{
+				roResourcesDao.save(rrs);
+				sum++;
+			}catch(Exception e){
+				//TODO  说明这个父级菜单已经存在。
+			}
+			return (sum + addPreMenuIds(prMenu, role));
+		}
+		return sum;
+	}
+	
+	@Override
+	public int removeMenus(List<Integer> ids, Integer roleId) {
+		StringBuffer sql = new StringBuffer("delete from 角色资源  where roleId=:roleId and menuId in(");
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("roleId", roleId);
+		Integer mid = null;
+		boolean flag = false;
+		for (int i = 0; i < ids.size(); i++) {
+			mid = ids.get(i);
+			if(null !=  mid){
+				flag = true;
+				sql.append(":m" + i + ",");
+				params.put("m" + i, mid);
+			}
+		}
+		String sql2 = null;
+		if(flag) sql2 = sql.substring(0, sql.length()-1);
+		sql2 += ")";
+		System.out.println(sql2);
+		return objDao.executeSql(sql2, params);
+	}
 	
 	
 	

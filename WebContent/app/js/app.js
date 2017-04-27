@@ -9,40 +9,40 @@ $(function () {
         initClickHandler();
         enterKeyLisener();
         //默认打开合同管理
-        try {
-            var uls = $('#side-menu ul>li');
-            var width = (this.window.innerWidth > 0) ? this.window.innerWidth : this.screen.width;
-            $.each(uls, function (k, oo) {
-                if (oo.innerText.isLike("合同管理")) {
-                    var url = $(oo).find('a').attr('href').split('\.')[0];
-                    ;
-                    if (width < 768) {
-                        $.open(url, function (success) {
-                            if (success) {
-                                try {
-                                    $('#container [id*="_head"]').find("[app-action]").trigger('click');
-                                    var action = $('#container [app-init]').attr('app-init');
-                                    if (action && action != '') {
-                                        var actionHandler = eval(action);//jQuery.gloabEval()全局方法
-                                        if (actionHandler) {
-                                            actionHandler();
-                                        } else {
-                                            console.log('action handler [' + action + '] is not support!');
-                                        }
-                                    }
-                                } catch (e) {
-                                    console.log("没有找到app-action");
-                                }
-                            }
-                        });
-                    } else {
-                        $(oo).parent().parent().find('>a').trigger('click')
-                        $(oo).find('a').trigger('click');
-                    }
-                }
-            })
-        } catch (e) {
-        }
+//        try {
+//            var uls = $('#side-menu ul>li');
+//            var width = (this.window.innerWidth > 0) ? this.window.innerWidth : this.screen.width;
+//            $.each(uls, function (k, oo) {
+//                if (oo.innerText.isLike("合同管理")) {
+//                    var url = $(oo).find('a').attr('href').split('\.')[0];
+//                    ;
+//                    if (width < 768) {
+//                        $.open(url, function (success) {
+//                            if (success) {
+//                                try {
+//                                    $('#container [id*="_head"]').find("[app-action]").trigger('click');
+//                                    var action = $('#container [app-init]').attr('app-init');
+//                                    if (action && action != '') {
+//                                        var actionHandler = eval(action);//jQuery.gloabEval()全局方法
+//                                        if (actionHandler) {
+//                                            actionHandler();
+//                                        } else {
+//                                            console.log('action handler [' + action + '] is not support!');
+//                                        }
+//                                    }
+//                                } catch (e) {
+//                                    console.log("没有找到app-action");
+//                                }
+//                            }
+//                        });
+//                    } else {
+//                        $(oo).parent().parent().find('>a').trigger('click')
+//                        $(oo).find('a').trigger('click');
+//                    }
+//                }
+//            })
+//        } catch (e) {
+//        }
     });
 });
 $(function () {//监听屏幕变化，重组slider 导航条
@@ -487,16 +487,6 @@ app = {
         page: 1,
         rows: 10
     },
-    CHAT_MESSAGES: {
-        NORMAL_MESSAGES: 100,
-        SYSTEM_MESSAGES: 110,
-        SYSTEM_CLEAR_ORDER: 111,
-        SYSTEM_ALL_RECORDS: 118,
-        SYSTEM_MANAGE: 119,
-        CW_SH_MESSAGES: 301,
-        HEART_BEAT: 1,
-        GET_SH_MESSAGES: 114
-    },
     getCaiwu: function () {
         return app.ID_DEFAULTS.CAIWU;
     },
@@ -544,31 +534,7 @@ app = {
     },
     getExcelDownloadExcel: function () {
         return app.ID_DEFAULTS.EXCELDOWNLOAT;
-    },
-    getNormalMessages: function(){
-        return app.CHAT_MESSAGES.NORMAL_MESSAGES;
-    },
-    getSysMessges: function(){
-        return app.CHAT_MESSAGES.SYSTEM_MESSAGES;
-    },
-    getSysClearOrder: function(){
-        return app.CHAT_MESSAGES.SYSTEM_CLEAR_ORDER;
-    },
-    getAllRecords: function(){
-        return app.CHAT_MESSAGES.SYSTEM_ALL_RECORDS;
-    },
-    getSysManage: function(){
-        return app.CHAT_MESSAGES.SYSTEM_MANAGE;
-    },
-    getShMessage: function(){
-        return app.CHAT_MESSAGES.CW_SH_MESSAGES;
-    },
-    getHeartBeat: function(){
-        return app.CHAT_MESSAGES.HEART_BEAT;
-    },
-    getShMessages: function(){
-        return app.CHAT_MESSAGES.GET_SH_MESSAGES;
-    },
+    }
 }
 
 basePath = "./"
@@ -619,6 +585,7 @@ function logout() {
         if (result.success) {
             console.log('登出成功！');
             location.replace('app_login.jsp');
+//            location.replace('/cxoa/app_login.jsp');
         } else {
             console.log('登出成功！');
             location.replace('app_login.jsp');
@@ -707,6 +674,45 @@ function sideBarClick() {
                 }
             }
         });
+    })
+    //document 委派事件
+    $(document).on("click", '#app_sidebar ul a[href*=".action"]', function (event) {
+        event.preventDefault();//关闭默认事件
+        event.stopImmediatePropagation();//停止冒泡
+        var src = $(event.currentTarget);
+        src.closest('ul').find('li a').removeClass('active')
+//        src.siblings('a').removeClass('active');
+        src.addClass("active");
+        var url = src.attr('href');
+        if (!session.sidebar.opened || session.sidebar.opened != url) {
+        	$('#app_sidebar>div').toggleClass("in")
+        	$.ajax({
+        		type: "GET",
+        		url: url,
+        		timeout: 10000,
+        		cache: false,
+        		success: function (data) {
+        			try {
+        				$('#loading').removeClass('hide');
+        				$('#container').html('');
+        			} catch (e) {
+        			}
+        			session.sidebar.opened = url;
+        			$.containerAppend($(data),function(){
+        				$('#loading').toggleClass('hide');
+        			});
+        		},
+        		error: function (xhr, status, error) {
+        			if (errorCallback && (typeof errorCallback == "function")) {
+        				errorCallback(xhr, status, error);
+        			} else {
+        				if (xhr.statusText != 'success') {
+        					$.messager.alert('页面请求：', '请求超时或网络问题,' + status || error);
+        				}
+        			}
+        		}
+        	});
+        }
     })
 }
 /**

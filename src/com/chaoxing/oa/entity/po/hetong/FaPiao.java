@@ -13,6 +13,7 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Table(name="发票情况")
@@ -21,22 +22,29 @@ import org.hibernate.annotations.DynamicUpdate;
 public class FaPiao implements Serializable{
 	private static final long serialVersionUID = 6234792052500321106L;
 	private Integer id;
-	private Date date;
-	private String company;
-	private String departMement;
-	private String type;
-	private String name;
-	private BigDecimal money;
-	private String remark;
-	private Integer hetongNumber;
-	private BigDecimal huiKuan;
-	private String capitalMoney;
-	private String Applicant;
-	private Date remittanceDate;
-	private Integer queryStatus; 
-	private String fundType; 
-	private String account;
-	private String recorder;
+	@DateTimeFormat(pattern="yyyy-MM-dd")
+	private Date date;//开票时间
+	private String company;//开票公司
+	private String departMement;//开票单位(客户)
+	private String type;//发票类型
+	private String name;//发票品名
+	private BigDecimal money;//发票金额
+	private String remark;//备注
+	private Integer hetongNumber;//合同编号
+	private BigDecimal huiKuan;//回款情况
+	private String capitalMoney;//大写金额
+	private String Applicant;//申请人(舍弃) 负责人
+	@DateTimeFormat(pattern="yyyy-MM-dd")
+	private Date remittanceDate;//汇款时间
+	private Integer queryStatus; //查询情况
+	private String fundType; //资金类型
+	private String account;//账户
+	private String recorder;//录库人
+	//yang add
+	@DateTimeFormat(pattern="yyyy-MM-dd")
+	private Date receivedpaymentsdate;// 回款日期
+	@DateTimeFormat(pattern="yyyy-MM-dd")
+	private Date applicationDate;//申请时间
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "序号")
@@ -158,5 +166,20 @@ public class FaPiao implements Serializable{
 	public void setRecorder(String recorder) {
 		this.recorder = recorder;
 	}
+	@Column(name = "回款日期")
+	public Date getReceivedpaymentsdate() {
+		return receivedpaymentsdate;
+	}
+	public void setReceivedpaymentsdate(Date receivedpaymentsdate) {
+		this.receivedpaymentsdate = receivedpaymentsdate;
+	}
+	@Column(name = "申请时间")
+	public Date getApplicationDate() {
+		return applicationDate;
+	}
+	public void setApplicationDate(Date applicationDate) {
+		this.applicationDate = applicationDate;
+	}
+	
 	
 }

@@ -18,9 +18,9 @@ import org.hibernate.annotations.DynamicUpdate;
 @DynamicUpdate(true)
 public class CustomerDepart implements Serializable {
 	private static final long serialVersionUID = 1655213242440553685L;
-	private Integer id;
-	private Integer dId;
-	private String customerName;
+	private Integer id;//自动编号
+	private Integer dId;//单位编号
+	private String customerName;//用户名称
 	private String province;
 	private String area;
 	private String xingzhi;
@@ -28,7 +28,7 @@ public class CustomerDepart implements Serializable {
 	private String startDate;
 	private String lastDate;
 	private String category;
-	private String charger;
+	private String charger;//负责人
 	private String firstLevel;//一级
 	private String secondLevel;//二级
 	private String thirdLevel;//三级

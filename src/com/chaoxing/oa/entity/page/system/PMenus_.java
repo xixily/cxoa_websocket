@@ -6,6 +6,7 @@ public class PMenus_ {
 	private String menuName;
 	private Integer menuLevel;
 	private Integer _preMenuId;
+	private Integer preid;
 	private String url;
 	private String iconCls;
 	private String sortCode;
@@ -85,7 +86,15 @@ public class PMenus_ {
 		this._parentId = _preMenuId;
 	}
 
+	public Integer getPreid() {
+		return preid;
+	}
 
+	public void setPreid(Integer preid) {
+		this.preid = preid;
+		this._preMenuId = this.preid;
+		this._parentId = this.preid;
+	}
 
 //	@Override
 //	public int compareTo(PMenus_ o) {

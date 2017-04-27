@@ -1,0 +1,121 @@
+@charset "utf-8";
+/* CSS Document */
+
+.main{ width:1000px; margin:0 auto; padding:20px 0;}
+
+.untreated{ line-height:20px; margin:0 0 10px 0;}
+.untreated span{ margin-right:45px;}
+.untreated a{ margin:0 5px; color:#33adff; text-decoration:underline;}
+
+.query{ border:solid #eee 1px;}
+.query h2{ line-height:36px; background:#def6fd; font-size:12px; padding:0 10px;  border-bottom:solid #eee 1px;}
+.query_list{ padding:15px 0;}
+.query_list li{ zoom:1; line-height:20px; float:left; padding:5px 0; width:238px;}
+.query_list li .quy_tit{ float:left; width:84px; text-align:right;}
+.query_list li .fidtext{ width:120px; height:18px; border:solid #eee 1px; padding:0 4px; float:left;}tract_list
+
+.query_bnt{ clear:both; padding:9px 0; border-top:solid #eee 1px; text-align:center;
+    background: -webkit-linear-gradient(#FFFFFF, #f2f1f1);
+    background: -moz-linear-gradient(#FFFFFF, #f2f1f1);
+    background: -o-linear-gradient(#FFFFFF, #f2f1f1);
+    background: linear-gradient(#FFFFFF, #f2f1f1);
+}
+.query_bnt .bnt{ width:46px; height:22px; background:#0099ff; border:0 none; border-radius:2px; cursor:pointer; color:#FFF; cursor:pointer; margin:0 22px;}
+
+.contract{ border:solid #eee 1px; margin:15px 0 0 0;}
+
+.divcheck{ padding:10px; height:22px; line-height:22px; overflow:hidden;
+    background: -webkit-linear-gradient(#FFFFFF, #f7f6f6);
+    background: -moz-linear-gradient(#FFFFFF, #f7f6f6);
+    background: -o-linear-gradient(#FFFFFF, #f7f6f6);
+    background: linear-gradient(#FFFFFF, #f7f6f6);
+
+}
+.divcheck input{ margin:0 4px 3px 0;}
+.divcheck a.leftF{ width:74px; height:22px; text-align:center; display:inline-block; color:#FFF; border-radius:2px; margin:0 30px 0 0;}
+.divcheck .rease{ background:#0099ff;}
+.divcheck .dele{ background:#f43a47;}
+.divcheck .expor{ background:#3f9f38;}
+.divcheck span,.divcheck label{ margin:0 30px 0 0;}
+.divcheck span .icons{ width:12px; height:12px; float:left; border-radius:50%; margin:5px 5px 0 0;}
+.divcheck span .add{ background:#db2929;}
+.divcheck span .rec{ background:#5fd08c;}
+
+.divtable{ width:998px; overflow:hidden; overflow-x:auto;}
+.divtable table{}
+.divtable th,.divtable td{ border:solid #eee 1px; text-align:center; padding:10px 5px;}
+.divtable th{ background:#def6fd;}
+
+.paging{ height:24px; line-height:24px; padding:20px; text-align:center;}
+.paging a{ margin:0 6px;}
+.paging a.cur{ color:#33adff; font-weight:bold;}
+.paging .leftF b{ color:#33adff; text-decoration:underline; font-weight:normal;}
+
+/**/
+.location{ line-height:24px; border-bottom:solid #dcdcdc 1px;}
+.location a{ color:#33adff;}
+
+.contract .addbnt{ background:url(../images/icons.png) no-repeat 0 -20px; width:14px; height:14px; float:left; margin:3px 0 0 5px;}
+.tract_list{ padding:15px 0;}
+.tract_list td{ line-height:20px; padding:5px 0;}
+.tract_list .quy_tit{ float:left; width:84px; text-align:right;}
+.tract_list .fidtext{ width:120px; height:18px; border:solid #eee 1px; padding:0 4px; float:left;}
+
+.tract_list .Modify{ clear:both; padding:4px 0 0 84px;}
+.tract_list .Modify .fidtext{ width:90px;}
+.tract_list .Modify .bnt{ width:30px; height:20px; background:#33adff; color:#FFF; border:0 none; cursor:pointer;}
+.tract_list .text{ color:#F00; clear:both; margin-left:84px;}
+.tareaTable{ margin:0 20px 20px 20px;}
+.tareaTable h3{ font-size:12px; margin-bottom:6px;}
+.tareaTable textarea{ width:100%; border:solid #eee 1px; height:40px; line-height:20px; box-shadow: #eee -1px -1px 0px 0px;}
+.tareaTable th{ text-align:center; padding:6px 4px; border:solid #eee 1px; background:#def6fd;}
+.tareaTable td{ text-align:center; padding:6px 4px; border:solid #eee 1px;}
+.ract_bottom{ text-align:center; margin-top:30px;}
+.ract_bottom a{ width:80px; height:22px; line-height:22px; display:inline-block; text-align:center; color:#FFF; border-radius:2px; margin:0 10px;}
+.ract_bottom .bnt_yi{ background:#0099ff;}
+.ract_bottom .bnt_er{ background:#e20a32;}
+.ract_bottom .bnt_sa{ background:#e0dfdf;}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

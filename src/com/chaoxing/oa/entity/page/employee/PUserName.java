@@ -3,10 +3,10 @@ package com.chaoxing.oa.entity.page.employee;
 import java.math.BigDecimal;
 
 public class PUserName {
-	private int id;//ID
+	private Integer id;//ID
 	private String username;//用户姓名
-	private int roleId;//权限
-	private int departmentId;//部门ID
+	private Integer roleId;//权限
+	private Integer departmentId;//部门ID
 	private String position;//职位
 	private String sex;//性别
 	private String identityCard;//身份号
@@ -81,10 +81,10 @@ public class PUserName {
 	public String getUsername() {
 		return username;
 	}
-	public int getRoleId() {
+	public Integer getRoleId() {
 		return roleId;
 	}
-	public int getDepartmentId() {
+	public Integer getDepartmentId() {
 		return departmentId;
 	}
 	public String getPosition() {
@@ -231,19 +231,19 @@ public class PUserName {
 	public String getIfSecret() {
 		return ifSecret;
 	}
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 	public void setUsername(String username) {
 		this.username = username;
 	}
-	public void setRoleId(int roleId) {
+	public void setRoleId(Integer roleId) {
 		this.roleId = roleId;
 	}
-	public void setDepartmentId(int departmentId) {
+	public void setDepartmentId(Integer departmentId) {
 		this.departmentId = departmentId;
 	}
 	public void setPosition(String position) {

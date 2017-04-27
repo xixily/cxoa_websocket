@@ -21,11 +21,11 @@ import org.hibernate.annotations.GenericGenerator;
 @DynamicInsert(true)
 public class UserName implements Serializable {
 	private static final long serialVersionUID = -3664636485351959352L;
-	private int id;//ID
+	private Integer id;//ID
 	private String username;//用户姓名
 	private String password;//用户密码
-	private int roleId;//权限
-	private int departmentId;//部门ID
+	private Integer roleId;//权限
+	private Integer departmentId;//部门ID
 	private String position;//职位
 	private String sex;//性别
 	private String identityCard;//身份号
@@ -94,10 +94,10 @@ public class UserName implements Serializable {
 	@Column(name="ID", nullable=false)
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@GenericGenerator(name = "usernameTableGenerator", strategy = "native")
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 	
@@ -115,18 +115,18 @@ public class UserName implements Serializable {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	@Column(name = "角色", updatable = false)
-	public int getRoleId() {
+	@Column(name = "角色", updatable = false, insertable = false, columnDefinition=" int(11) DEFAULT '99'")
+	public Integer getRoleId() {
 		return roleId;
 	}
 	@Column(name = "部门ID")
-	public int getDepartmentId() {
+	public Integer getDepartmentId() {
 		return departmentId;
 	}
-	public void setRoleId(int roleId) {
+	public void setRoleId(Integer roleId) {
 		this.roleId = roleId;
 	}
-	public void setDepartmentId(int departmentId) {
+	public void setDepartmentId(Integer departmentId) {
 		this.departmentId = departmentId;
 	}
 	@Column(name="职位")

@@ -5,13 +5,15 @@ import java.util.List;
 import java.util.Map;
 
 import org.hibernate.HibernateException;
+import org.hibernate.Query;
+import org.hibernate.Session;
 
 public interface BaseDaoI<T> {
 
 	public Serializable save(T o) throws Exception;
 
 	public void delete(T o) throws HibernateException;
-
+	
 	public void update(T o) throws Exception;
 
 	public void saveOrUpdate(T o) throws HibernateException;
@@ -42,7 +44,7 @@ public interface BaseDaoI<T> {
 
 	public int executeHql(String hql, Map<String, Object> params) throws HibernateException;
 	
-	public int executeSql(String hql, Map<String, Object> params) throws HibernateException;
+	public int executeSql(String sql, Map<String, Object> params) throws HibernateException;
 	
 	public List<T> findSql(String sql) throws HibernateException;
 	
@@ -50,9 +52,17 @@ public interface BaseDaoI<T> {
 	
 	public int prepareCall(String sql, Map<String, Object> params) throws HibernateException;
 	
-	public void bigSave(List<T> objs);
+	public int bigSave(List<T> objs);
 	
 	public void bigUpdate(List<T> objs);
-
-//	public <T> Query selectStatement(Class<T> className, Map<String,Object> varables);
+	
+	public <T> List<T> queryResultList(Class<T> className, Map<String,Object> varables,int page,int pageSize);
+	
+	public <T> Query selectStatement(Class<T> className, Map<String,Object> varables, Session session,int page,int pageSize);
+	
+	public <T> List<T> queryResultList(Class<T> className, Map<String,Object> varables);
+	
+	public <T> Query selectStatement(Class<T> className, Map<String,Object> varables, Session session);
+	
+	
 }

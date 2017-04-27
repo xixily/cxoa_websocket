@@ -70,7 +70,7 @@ public class SecurityInterceptor implements HandlerInterceptor {
 			if(ipFlag){
 				SessionInfo sessionInfo = (SessionInfo) request.getSession().getAttribute(ResourceUtil.getSessionInfoName());
 				if(null == sessionInfo) return false;
-				if (sessionInfo.getRoleId()==0) {// 超管不需要验证权限
+				if (sessionInfo.getRoleId()==1) {// 超管不需要验证权限
 					return true;
 				} else {
 					List<String> urls = sessionInfo.getResourceUrls();

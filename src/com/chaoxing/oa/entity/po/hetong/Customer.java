@@ -12,8 +12,8 @@ import javax.persistence.Table;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 
-//@Entity
-//@Table(name = "用户列表")
+@Entity
+@Table(name = "用户列表")
 @DynamicUpdate(true)
 @DynamicInsert(true)
 public class Customer implements Serializable {

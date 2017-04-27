@@ -44,7 +44,7 @@
 	background:url('icons/undo.png') no-repeat center center;
 }
 .icon-redo{
-	background:url('icons/redo.png') no-repeat center center;
+	background:url('icons/redeo.png') no-repeat center center;
 }
 .icon-back{
 	background:url('icons/back.png') no-repeat center center;
@@ -93,4 +93,7 @@
 }
 .icon-large-chart{
 	background:url('icons/large_chart.png') no-repeat center center;
+}
+.icon-up{
+	background:url('icons/up.png') no-repeat center center;
 }

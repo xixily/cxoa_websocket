@@ -26,9 +26,9 @@ import org.hibernate.annotations.GenericGenerator;
 @DynamicInsert(true)
 public class Menu implements Serializable{
 	private static final long serialVersionUID = 3894975781188319211L;
-	private int menuId;
+	private Integer menuId;
 	private String menuName;
-	private int menuLevel;
+	private Integer menuLevel;
 	private Menu preMenuId;
 	private String url;
 	private String iconCls;
@@ -37,7 +37,7 @@ public class Menu implements Serializable{
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	@GenericGenerator(name = "m_tables_g",strategy = "native")
-	public int getMenuId() {
+	public Integer getMenuId() {
 		return menuId;
 	}
 	@Column
@@ -45,7 +45,7 @@ public class Menu implements Serializable{
 		return menuName;
 	}
 	@Column
-	public int getMenuLevel() {
+	public Integer getMenuLevel() {
 		return menuLevel;
 	}
 	@ManyToOne(fetch=FetchType.LAZY,targetEntity=Menu.class)
@@ -72,7 +72,7 @@ public class Menu implements Serializable{
 	public Set<Menu> getMenus() {
 		return menus;
 	}
-	public void setMenuId(int menuId) {
+	public void setMenuId(Integer menuId) {
 		this.menuId = menuId;
 	}
 	public void setMenus(Set<Menu> menus) {
@@ -81,7 +81,7 @@ public class Menu implements Serializable{
 	public void setMenuName(String menuName) {
 		this.menuName = menuName;
 	}
-	public void setMenuLevel(int menuLevel) {
+	public void setMenuLevel(Integer menuLevel) {
 		this.menuLevel = menuLevel;
 	}
 	public void setPreMenuId(Menu preMenuId) {
@@ -92,6 +92,13 @@ public class Menu implements Serializable{
 	}
 	public void setIconCls(String iconCls) {
 		this.iconCls = iconCls;
+	}
+	public Menu(Integer menuId) {
+		super();
+		this.menuId = menuId;
+	}
+	public Menu() {
+		super();
 	}
 	
 	

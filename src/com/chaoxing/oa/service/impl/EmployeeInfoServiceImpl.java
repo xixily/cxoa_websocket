@@ -165,7 +165,7 @@ public class EmployeeInfoServiceImpl implements EmployeeInfoService {
 		StringBuffer hql = new StringBuffer("from RenshiUserName t where 1=1 ");
 		addCondition(hql, queryForm, params);
 		SessionInfo userInfo = (SessionInfo) session.getAttribute(ResourceUtil.getSessionInfoName());
-//		if(userInfo.getRoleId() > 1 && !(userInfo.getRoleId()==100)){
+//		if(userInfo.getRoleId() != 1 && !(userInfo.getRoleId()==100)){
 //			hql.append(" and t.renshiRight like :renshiRight ");
 //			params.put("renshiRight", "%" + userInfo.getUsername() + "%");
 //		}
@@ -246,7 +246,7 @@ public class EmployeeInfoServiceImpl implements EmployeeInfoService {
 				+ ",w.tiaoxinRecord,t.company,t.remarks,t.bumentiaozhengReport from RenshiUserName t,WageDistribution w where t.id=w.employeeId ");
 		addCondition(hql, queryForm, params);
 		SessionInfo userInfo = (SessionInfo) session.getAttribute(ResourceUtil.getSessionInfoName());
-		if(userInfo.getRoleId() > 1 && !(userInfo.getRoleId()==100)){
+		if(userInfo.getRoleId() != 1 && !(userInfo.getRoleId()==100)){
 			hql.append(" and t.renshiRight like :renshiRight ");
 			params.put("renshiRight", "%" + userInfo.getUsername() + "%");
 		}
@@ -357,7 +357,7 @@ public class EmployeeInfoServiceImpl implements EmployeeInfoService {
 			hql.append(" and (w.lishiSalary is null or w.lishiSalary='')");
 		}
 		SessionInfo userInfo = (SessionInfo) session.getAttribute(ResourceUtil.getSessionInfoName());
-		if(userInfo.getRoleId() > 1 && !(userInfo.getRoleId()==100)){
+		if(userInfo.getRoleId() != 1 && !(userInfo.getRoleId()==100)){
 			hql.append(" and t.renshiRight like :renshiRight ");
 			params.put("renshiRight", "%" + userInfo.getUsername() + "%");
 		}
@@ -1690,7 +1690,7 @@ public class EmployeeInfoServiceImpl implements EmployeeInfoService {
 			pageSize = (queryForm == null || queryForm.getRows() == 0 || queryForm.getRows()>500) ? 100 : queryForm.getRows();
 		}
 		List<MonthWages> monthWages = monthWagesDao.find(hql.toString(), params, intPage, pageSize);
-		if(sessionInfo.getRoleId()<1 || sessionInfo.getRoleId()==100){
+		if(sessionInfo.getRoleId() != 1 || sessionInfo.getRoleId()==100){
 			for (MonthWages monthWage : monthWages) {
 				if(monthWage!=null){
 					PMonthWages pMonthWage = new PMonthWages();

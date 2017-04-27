@@ -5,7 +5,7 @@
     </div>
 	<!--  table ======-->
 	<div style="margin-bottom: 15px;"></div>
-	<table id="menus_treeGrid" class="easyui-treegrid" title="菜单列表" style="margin-bottom: 20px; height:285px;"
+	<table id="menus_treeGrid" class="easyui-treegrid" title="菜单列表" style="margin-bottom: 20px; height:420px;"
 		   data-options="
 				iconCls: 'icon-ok',
 				rownumbers: true,
@@ -27,29 +27,21 @@
 					text:'编辑',
 					handler: system.menus.edit
 				},'-',{
-					iconCls: 'icon-help',
+					iconCls: 'icon-up',
 					text:'上移',
 					handler: function(){
-						var name = $('#menus_treeGrid').treegrid('getSelected').menuName;
-						$.messager.confirm('提示：','您确定要上移[' + name + ']吗？',function(ok){
+						var selected = $('#menus_treeGrid').treegrid('getSelected');
+						if(selected){
+						
+							$.messager.confirm('提示：','您确定要上移[' + selected.menuName + ']吗？',function(ok){
 							if(ok){
 								system.menus.upLevel();
 							}
 						})
+						}
 					}
 				},'-',{
-					iconCls: 'icon-help',
-					text:'下移',
-					handler: function(){
-						var name = $('#menus_treeGrid').treegrid('getSelected').menuName;
-						$.messager.confirm('提示：','您确定要降低[' + name + ']吗？',function(ok){
-							if(ok){
-								system.menus.downLevel();
-							}
-						})
-					}
-				},'-',{
-					iconCls: 'icon-help',
+					iconCls: 'icon-remove',
 					text:'删除',
 					handler: function(){
 						var name = $('#menus_treeGrid').treegrid('getSelected').menuName;

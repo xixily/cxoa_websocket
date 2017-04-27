@@ -19,13 +19,13 @@ import org.hibernate.annotations.DynamicUpdate;
 public class ItemPrice implements Serializable{
 	private static final long serialVersionUID = 7691804956436796202L;
 	private Integer id;
-	private Integer ctid;
-	private String name;
-	private Float money;
-	private Float amount;
-	private String begain;
-	private String end;
-	private String luku;
+	private Integer ctid;//合同编号
+	private String name;//产品名称
+	private Float money;//产品金额
+	private Float amount;//数量或使用年限
+	private String begain;//生效日期
+	private String end;//截止日期
+	private String luku;//录库人
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)

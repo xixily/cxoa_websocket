@@ -145,8 +145,8 @@ public class BaseDaoImpl<T> implements BaseDaoI<T> {
 				q.setParameter(key, params.get(key));
 			}
 		}
-//		q.setFirstResult(0);
-//		q.setMaxResults(30);
+		q.setFirstResult(0);
+		q.setMaxResults(30);
 		return q.setFirstResult((page - 1) * pageSize).setMaxResults(pageSize).list();
 	}
 
@@ -183,10 +183,24 @@ public class BaseDaoImpl<T> implements BaseDaoI<T> {
 		}
 	}
 	
-
 	@Override
 	public int executeSql(String sql) throws HibernateException {
 		Query q = this.getCurrentSession().createSQLQuery(sql);
+		try {
+			return q.executeUpdate();
+		} catch (HibernateException e) {
+			throw e;
+		}
+	}
+	
+	@Override
+	public int executeSql(String sql, Map<String, Object> params) throws HibernateException {
+		Query q = this.getCurrentSession().createSQLQuery(sql);
+		if (params != null && !params.isEmpty()) {
+			for (String key : params.keySet()) {
+				q.setParameter(key, params.get(key));
+			}
+		}
 		try {
 			return q.executeUpdate();
 		} catch (HibernateException e) {
@@ -209,21 +223,6 @@ public class BaseDaoImpl<T> implements BaseDaoI<T> {
 		}
 	}
 	
-	@Override
-	public int executeSql(String hql, Map<String, Object> params) throws HibernateException {
-		Query q = this.getCurrentSession().createSQLQuery(hql);
-		if (params != null && !params.isEmpty()) {
-			for (String key : params.keySet()) {
-				q.setParameter(key, params.get(key));
-			}
-		}
-		try {
-			return q.executeUpdate();
-		} catch (HibernateException e) {
-			throw e;
-		}
-	}
-
 	@Override
 	public List<T> findSql(String sql){
 		SQLQuery sq = this.getCurrentSession().createSQLQuery(sql);
@@ -269,14 +268,16 @@ public class BaseDaoImpl<T> implements BaseDaoI<T> {
 //	}
 	
 	@Override
-	public void bigSave(List<T> objs){
+	public int bigSave(List<T> objs){
 		Session session = getCurrentSession();
+		int total = 0;
 		//获得spring aop 嵌入的事务
 //		Transaction tx = session.getTransaction();
 		for (int i = 0; i < objs.size(); i++) {
 			T obj = objs.get(i);
 			try {
 				session.save(obj);
+				total ++;
 				if(i%100 == 0){
 					session.flush();
 					session.clear();
@@ -290,6 +291,7 @@ public class BaseDaoImpl<T> implements BaseDaoI<T> {
 		}
 		session.flush();
 		session.clear();
+		return total;
 //		tx.commit();
 	}
 	
@@ -317,55 +319,84 @@ public class BaseDaoImpl<T> implements BaseDaoI<T> {
 //		tx.commit();
 	}
 	
-	/**
-     * 单表多条记录查询
-     * @param className 要查询的对象
-     * @param varables 封装查询条件的map
-     * @return 返回查询结果的List集合
-     */
-    public <T> List<T> queryResultList(Class<T> className, Map<String,Object> varables){        
-        Session session = sessionFactory.getCurrentSession();
-//        Transaction transaction = session.beginTransaction();               
-        List<T> valueList = selectStatement(className, varables, session).list();
-//        transaction.commit();
-        return valueList;       
-    }
-    
-	 /**
-     * 拼接SQL查询字符串,得到Query并赋值查询条件
-     * @param className
-     * @param varables
-     * @param session
-     * @return Query
-     */
-	private <T> Query selectStatement(Class<T> className, Map<String,Object> varables, Session session) {
-        StringBuilder stringBuilder = new StringBuilder();
-        /*
-         * 通过className得到该实体类的字符串形式,
-         */
-        stringBuilder.append("from " + sessionFactory.getClassMetadata(className).getEntityName());
-        stringBuilder.append(" where 1=1 ");
-        /*
-         * 动态的拼接sql语句,如果一个属性的值为"", 则不往条件中添加.
-         */
-        for(Entry<String, Object> entry : varables.entrySet()){
-            if(!entry.getValue().equals("")){
-                stringBuilder.append(" and " + entry.getKey()+"=:" + entry.getKey());
-            }
-        }
+	
+	@Override
+	 public <T> List<T> queryResultList(Class<T> className, Map<String,Object> varables,int page,int pageSize){        
+	        Session session = sessionFactory.getCurrentSession();
+	        List<T> valueList = selectStatement(className, varables, session,page,pageSize).list();
+	        return valueList;       
+	    }
+	
+	@Override
+	 public <T> List<T> queryResultList(Class<T> className, Map<String,Object> varables){        
+	        Session session = sessionFactory.getCurrentSession();
+	        List<T> valueList = selectStatement(className, varables, session).list();
+	        return valueList;       
+	    }
+	
+	@Override
+	public <T> Query selectStatement(Class<T> className, Map<String,Object> varables, Session session,int page,int pageSize) {
+	        StringBuilder stringBuilder = new StringBuilder();
+	        /*
+	         * 通过className得到该实体类的字符串形式,
+	         */
+	        stringBuilder.append("from " + sessionFactory.getClassMetadata(className).getEntityName());
+	        stringBuilder.append(" where 1=1 ");
+	        /*
+	         * 动态的拼接sql语句,如果一个属性的值为"", 则不往条件中添加.
+	         */
+	        for(Entry<String, Object> entry : varables.entrySet()){
+	            if(!entry.getValue().equals("")){
+	                stringBuilder.append(" and " + entry.getKey()+" like:" + entry.getKey());
+	            }
+	        }
 
-        Query query = session.createQuery(stringBuilder.toString());
-        /*
-         * 动态的给条件赋值
-         */
-        for(Entry<String, Object> entry : varables.entrySet()){
-            if(!entry.getValue().equals("")){
-                query.setParameter(entry.getKey(), entry.getValue());
-            }
-        }
-        query.setFirstResult(0).setMaxResults(300);
-        return query;
-    }
+	        Query query = session.createQuery(stringBuilder.toString());
+	        /*
+	         * 动态的给条件赋值
+	         */
+	        for(Entry<String, Object> entry : varables.entrySet()){
+	            if(!entry.getValue().equals("")){
+	                query.setParameter(entry.getKey(), entry.getValue());
+	            }
+	        }
+	        query.setFirstResult((page - 1) * pageSize).setMaxResults(pageSize).list();
+	        return query;
+	    }
+	
+	@Override
+	public <T> Query selectStatement(Class<T> className, Map<String,Object> varables, Session session) {
+	        StringBuilder stringBuilder = new StringBuilder();
+	        /*
+	         * 通过className得到该实体类的字符串形式,
+	         */
+	        stringBuilder.append("from " + sessionFactory.getClassMetadata(className).getEntityName());
+	        stringBuilder.append(" where 1=1 ");
+	        /*
+	         * 动态的拼接sql语句,如果一个属性的值为"", 则不往条件中添加.
+	         */
+	        for(Entry<String, Object> entry : varables.entrySet()){
+	            if(!entry.getValue().equals("")){
+	                stringBuilder.append(" and " + entry.getKey()+" like:" + entry.getKey());
+	            }
+	        }
 
+	        Query query = session.createQuery(stringBuilder.toString());
+	        /*
+	         * 动态的给条件赋值
+	         */
+	        for(Entry<String, Object> entry : varables.entrySet()){
+	            if(!entry.getValue().equals("")){
+	                query.setParameter(entry.getKey(), entry.getValue());
+	            }
+	        }
+	        return query;
+	    }
+	
+	
+	
+	
+	
+	
 	
 }

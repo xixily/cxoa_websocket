@@ -33,7 +33,7 @@ public class RightsController {
 	public List<PMenu> getRleMenu(HttpSession session, Model model){
 		SessionInfo sessionInfo = (SessionInfo) session.getAttribute(ResourceUtil.getSessionInfoName());
 		int role = sessionInfo.getRoleId();
-		if(role==0){
+		if(role==1){
 			return menuService.findAllMenu();
 		}
 		return menuService.findMenuByRole(role,session);

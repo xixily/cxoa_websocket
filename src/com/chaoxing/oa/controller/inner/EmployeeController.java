@@ -380,7 +380,7 @@ public class EmployeeController {
 				queryForm.setId(pwages.getEmployeeId());
 				SessionInfo sessionInfo = (SessionInfo) session.getAttribute(ResourceUtil.getSessionInfoName());	
 				String ifSecret = employeeInfoService.getUserInfo(queryForm).getIfSecret();
-				if(sessionInfo.getRoleId()<=1||sessionInfo.getRoleId()==100||ifSecret.equals("off")){
+				if(sessionInfo.getRoleId()==1||sessionInfo.getRoleId()==100||ifSecret.equals("off")){
 					Pwages mw = employeeInfoService.getWages(pwages.getId());
 					pwages.setTaxStructure(mw.getTaxStructure());
 					pwages.setCountId(mw.getCountId());
@@ -461,7 +461,7 @@ public class EmployeeController {
 		queryForm.setId(pwages.getEmployeeId());
 		SessionInfo sessionInfo = (SessionInfo) session.getAttribute(ResourceUtil.getSessionInfoName());	
 		String ifSecret = employeeInfoService.getUserInfo(queryForm).getIfSecret();
-		if(sessionInfo.getRoleId()<=1||sessionInfo.getRoleId()==100||ifSecret.equals("off")){
+		if(sessionInfo.getRoleId()==1||sessionInfo.getRoleId()==100||ifSecret.equals("off")){
 			Pwages pw = new Pwages();
 			BeanUtils.copyProperties(pwages, pw);
 			if(employeeInfoService.addWages(pw)!=0){
@@ -485,7 +485,7 @@ public class EmployeeController {
 			queryForm.setId(pwages.getEmployeeId());
 			SessionInfo sessionInfo = (SessionInfo) session.getAttribute(ResourceUtil.getSessionInfoName());	
 			String ifSecret = employeeInfoService.getUserInfo(queryForm).getIfSecret();
-			if(sessionInfo.getRoleId()<=1||sessionInfo.getRoleId()==100||ifSecret.equals("off")){
+			if(sessionInfo.getRoleId()==1||sessionInfo.getRoleId()==100||ifSecret.equals("off")){
 				if(employeeInfoService.deleteWages(pwages)!=0){
 					result.setSuccess(true);
 					result.setMsg("删除成功！");
@@ -748,7 +748,7 @@ public class EmployeeController {
 		SessionInfo sessionInfo = (SessionInfo) session.getAttribute(ResourceUtil.getSessionInfoName());
 		Json result = new Json();
 		PMonthWages target = employeeInfoService.getMonthWages(pmonthWages.getId());
-		if(sessionInfo.getRoleId()!=0&&sessionInfo.getRoleId()!=100){
+		if(sessionInfo.getRoleId()!=1&&sessionInfo.getRoleId()!=100){
 			target.setChuqinDay(pmonthWages.getChuqinDay());
 			target.setZhuanzhengChaeDay(pmonthWages.getZhuanzhengChaeDay());
 			target.setFakuan(pmonthWages.getFakuan());

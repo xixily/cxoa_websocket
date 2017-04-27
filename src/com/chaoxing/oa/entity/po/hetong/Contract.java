@@ -1,7 +1,7 @@
 package com.chaoxing.oa.entity.po.hetong;
 
 import java.io.Serializable;
-import java.sql.Date;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,6 +12,7 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Table(name = "合同情况", schema = "")
@@ -19,51 +20,64 @@ import org.hibernate.annotations.DynamicUpdate;
 @DynamicUpdate(true)
 public class Contract implements Serializable{
 	private static final long serialVersionUID = 211351489592348383L;
-	private Integer id;
-	private Date dengjiTime;
-	private Date signedTime;
-	private String company;
-	private String depart;
-	private String guidangCode;
-	private String tiehuaStatus;
-	private String pingming;
-	private String bookCount;
-	private Float contractMoney;
-	private String area;
-	private String province;
-	private String operator;
-	private Date sealedTime;
-	private String coopStatus;
-	private String guidangDate;
-	private String youjiStatus;
-	private String fapiaoStatus;
-	private String agreementNumber;
-	private String agreementText;
-	private String remarksText;
-	private Float year;
-	private Float kaipiaoMoney;
-	private Date toCaiwuTime;
-	private String payMethod;
-	private Integer cid;//用户单位表外键
-	private String suozaijuan;
-	private String divid;
-	private Float yewuType;
-	private String youxiaoqi;
-	private String cundangNumber;
-	private Integer ebooks;
-	private Integer ebookLibs;
-	private Integer video;
-	private Integer videoLibs;
-	private Integer duxiu;
-	private Integer MEDALINK;
-	private Date terminateTime;
-	private String xingzhi;
-	private String firstLevel;//一级
-	private String secondLevel;//二级
-	private String thirdLevel;//三级
-	private String fourthLevel;//四级
-	private String luku;
-	private Integer did;//单位编号
+	private Integer id;//合同编号
+	private Date dengjiTime;//登记时间
+	private Date signedTime;//签订时间
+	private String company;//所属公司
+	private String depart;//单位(购买单位)
+	private String guidangCode;//归档编号
+	private String tiehuaStatus;//贴花情况
+	private String pingming;//品名
+	private String bookCount;//图书数量
+	private Float contractMoney;//合同金额
+	private String area;//地区
+	private String province;//省份
+	private String operator;//经办人
+	private Date sealedTime;//盖章时间
+	private String coopStatus;//对方盖章情况
+	private String guidangDate;//归档时间
+	private String youjiStatus;//邮寄情况
+	private String fapiaoStatus;//发票情况
+	private String agreementNumber;//合同数量
+	private String agreementText;//合同内容
+	private String remarksText;//备注
+	private Float year;//年代
+	private Float kaipiaoMoney;//开票金额
+	private Date toCaiwuTime;//转财务时间
+	private String payMethod;//付款方式
+	private Integer cid;//用户单位表外键  用户编号
+	private String suozaijuan;//所在卷
+	private String divid;//分类
+	private Float yewuType;//业务类型
+	private String youxiaoqi;//有效期
+	private String cundangNumber;//存档编号
+	private Integer ebooks;//电子书
+	private Integer ebookLibs;//电子书包库
+	private Integer video;//视频
+	private Integer videoLibs;//视频包库
+	private Integer duxiu;//独秀
+	private Integer MEDALINK;//MEDALINK
+	private Date terminateTime;//合同终止时间
+	private String xingzhi;//性质 (单位性质)
+	private String firstLevel;//一级 公司    
+	private String secondLevel;//二级  部门
+	private String thirdLevel;//三级 岗位
+	private String fourthLevel;//四级 小组
+	private String luku;//录库人
+	private Integer didNum;//单位编号
+	//yang add
+	/*private String company_property;//单位性质
+*/	private String user_property;//用户性质
+	private String receivedAmount;//回款金额
+	private Integer expressCondition;//快递情况   1 已发 0 未发
+	private Integer dealConditon;//处理状态   0 未处理 1 审核未通过 2 审核已通过 3 合同完结 4 保存
+	@DateTimeFormat(pattern="yyyy-MM-dd")
+	private Date endTime;//项目预计结束时间
+	@DateTimeFormat(pattern="yyyy-MM-dd")
+	private Date receiveTime;//回款时间
+	@DateTimeFormat(pattern="yyyy-MM-dd")
+	private Date submitTime;//提交时间
+	private String product;//所含产品
 	@Id
 	@Column(name = "合同编号")
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -74,6 +88,7 @@ public class Contract implements Serializable{
 	public Date getDengjiTime() {
 		return dengjiTime;
 	}
+	//提交日期
 	@Column(name = "签定时间")
 	public Date getSignedTime() {
 		return signedTime;
@@ -142,7 +157,7 @@ public class Contract implements Serializable{
 	public String getAgreementNumber() {
 		return agreementNumber;
 	}
-	@Column(name = "合同内容")
+	@Column(name = "合同内容")//合同概要
 	public String getAgreementText() {
 		return agreementText;
 	}
@@ -243,8 +258,8 @@ public class Contract implements Serializable{
 		return luku;
 	}
 	@Column(name = "单位编号")
-	public Integer getDid() {
-		return did;
+	public Integer getDidNum() {
+		return didNum;
 	}
 	public void setId(Integer id) {
 		this.id = id;
@@ -378,8 +393,73 @@ public class Contract implements Serializable{
 	public void setLuku(String luku) {
 		this.luku = luku;
 	}
-	public void setDid(Integer did) {
-		this.did = did;
+	public void setDidNum(Integer didNum) {
+		this.didNum = didNum;
+	}
+	
+	//yang add
+/*	@Column(name = "单位性质")
+	public String getCompany_property() {
+		return company_property;
+	}
+	public void setCompany_property(String company_property) {
+		this.company_property = company_property;
+	}*/
+	@Column(name = "用户性质")
+	public String getUser_property() {
+		return user_property;
+	}
+	public void setUser_property(String user_property) {
+		this.user_property = user_property;
+	}
+	@Column(name = "回款金额")
+	public String getReceivedAmount() {
+		return receivedAmount;
+	}
+	public void setReceivedAmount(String receivedAmount) {
+		this.receivedAmount = receivedAmount;
+	}
+	@Column(name = "快递情况")
+	public Integer getExpressCondition() {
+		return expressCondition;
+	}
+	public void setExpressCondition(Integer expressCondition) {
+		this.expressCondition = expressCondition;
+	}
+	@Column(name = "处理状态")
+	public Integer getDealConditon() {
+		return dealConditon;
+	}
+	public void setDealConditon(Integer dealConditon) {
+		this.dealConditon = dealConditon;
+	}
+	@Column(name = "项目预计结算时间")
+	public Date getEndTime() {
+		return endTime;
+	}
+	public void setEndTime(Date endTime) {
+		this.endTime = endTime;
+	}
+	@Column(name = "回款时间")
+	public Date getReceiveTime() {
+		return receiveTime;
+	}
+	public void setReceiveTime(Date receiveTime) {
+		this.receiveTime = receiveTime;
+	}
+	@Column(name = "提交时间")
+	public Date getSubmitTime() {
+		return submitTime;
+	}
+	public void setSubmitTime(Date submitTime) {
+		this.submitTime = submitTime;
+	}
+	@Column(name = "所含产品")
+	public String getProduct() {
+		return product;
+	}
+	public void setProduct(String product) {
+		this.product = product;
 	}
 	
 	

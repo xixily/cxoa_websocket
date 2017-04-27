@@ -102,7 +102,6 @@ public class UserController {
 	@ResponseBody
 	public Json login(QueryForm queryForm, HttpServletRequest request, HttpSession session){
 		Json result = new Json();
-		System.out.println("login Get 方法");
 		if(queryForm.getEmail() == null||queryForm.getEmail().equals("")|| queryForm.getPassword() == null||queryForm.getPassword().equals("")){
 			result.setMsg("请您输入用户名或者密码");
 			return result;
@@ -116,7 +115,6 @@ public class UserController {
 				session.setAttribute(ResourceUtil.getSessionInfoName(), sessionInfo);
 				result.setSuccess(true);
 				result.setMsg("登录成功！~");
-				System.out.println(sessionInfo);
 			}else{
 				result.setMsg( "您输入的密码不正确！");
 			}
@@ -214,7 +212,7 @@ public class UserController {
 //		long r = 2;
 		System.out.println("是否保密:"+username.getIfSecret());
 		SessionInfo sessionInfo = (SessionInfo) session.getAttribute(ResourceUtil.getSessionInfoName());
-		if(sessionInfo.getRoleId()<=1 || sessionInfo.getRoleId()==100){
+		if(sessionInfo.getRoleId()==1 || sessionInfo.getRoleId()==100){
 			System.out.println("是否保密：" + username.getIfSecret());
 			if(username.getIfSecret()==null){
 				username.setIfSecret("off");

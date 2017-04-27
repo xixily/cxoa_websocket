@@ -1,0 +1,176 @@
+@charset "utf-8";
+/* CSS Document */
+
+.main{ width:860px; margin:0 auto; padding:20px 0;}
+.location{ line-height:24px; border-bottom:solid #dcdcdc 1px;}
+.location a{ color:#33adff;}
+.untreated{ line-height:24px; margin:0 0 10px 0; border-bottom:solid #dcdcdc 1px;}
+.untreated span{ margin-right:45px;}
+.untreated a{ margin:0 5px; color:#33adff; text-decoration:underline;}
+.contract{ border:solid #eee 1px; margin:15px 0 0 0;}
+.tract_list{ padding:15px 0;}
+.tract_list td{ line-height:20px; padding:5px 0;}
+.tract_list .quy_tit{ float:left; width:80px; text-align:right;}
+.tract_list .fidtext,.courier_list .fidtext{ width:120px; height:18px; border:solid #eee 1px; padding:0 4px; float:left;}
+.tract_list .text{ font-size:10px; color:#e20a32; clear:both; margin-left:84px;}
+.tract_list .bnt{ width:46px; height:20px; background:#0099ff; border:0 none; cursor:pointer; color:#FFF; border-radius:2px; margin-left:10px;}
+
+.tareaTable{ margin:0 20px 20px 20px;}
+.tareaTable h3{ font-size:12px; margin-bottom:6px;}
+.tareaTable h3 a{ background:#0099ff; padding:2px 8px; color:#FFF; border-radius:2px;}
+.tareaTable textarea{ width:100%; border:solid #eee 1px; height:40px; line-height:20px; box-shadow: #eee -1px -1px 0px 0px;}
+.tareaTable th{ text-align:center; padding:6px 4px; border:solid #eee 1px; background:#def6fd;}
+.tareaTable td{ text-align:center; padding:6px 4px; border:solid #eee 1px;}
+.tareaTable td a.dele{ color:#e20a32;}
+.ract_bottom{ text-align:center; margin-top:30px;}
+.ract_bottom a{ width:80px; height:22px; line-height:22px; display:inline-block; text-align:center; color:#FFF; border-radius:2px; margin:0 10px;}
+.ract_bottom .bnt_yi{ background:#0099ff;}
+.ract_bottom .bnt_er{ background:#e20a32;}
+.ract_bottom .bnt_sa{ background:#e0dfdf;}
+
+
+.maskLayer{width:100%;height:100%;filter:alpha(opacity=70);opacity:0.5;background:#000;position:absolute;z-index:996;top:0;left:0;display:none;}
+.popwindow{ width:640px; height:444px; background:#FFF; border-radius:2px; position:absolute; z-index:999;}
+.popwindow h3{ line-height:40px; background:#0099ff; text-align:center; color:#FFF;}
+.popwindow a.dele{ background:url(../images/icons.png) no-repeat 0 -40px; width:10px; height:10px; float:right; margin:15px 15px 0 0;}
+
+.pop_product{ height:280px;}
+.pop_invoice{}
+.pop_courier{}
+
+.courier_list{ padding:20px 0 0 0;}
+.courier_list li{ zoom:1; float:left; padding:8px 0;}
+.courier_list li .text{ font-size:10px; color:#e20a32; position:absolute; top:27px; right:10px;}
+.courier_list li.li01{ width:320px;}
+.courier_list li.li01 .fidtext{ width:150px;}
+.courier_list li.li02{ width:212px; position:relative;}
+.courier_list li.li02 .fidtext{ width:110px;}
+.courier_list li.li03{ width:640px;}
+.courier_list li.li03 .fidtext{ width:532px;}
+.courier_list li.li04{ width:640px; text-align:center; border-top:dashed #ccc 1px; margin-top:12px; padding-top:12px;}
+.courier_list li.li05{ width:428px;}
+.courier_list li.li05 .fidtext{ width:322px;}
+.courier_list li.li06{ width:440px; padding-left:200px;}
+.courier_list li label{ width:80px; display:block; line-height:20px; float:left; text-align:right;}
+.courier_list textarea{ width:600px; border:solid #eee 1px; height:60px; line-height:20px; float:left; clear:both; margin:10px 0 0 20px; box-shadow: #eee -1px -1px 0px 0px;}
+.courier_list .bnt{ width:46px; height:22px; line-height:22px; text-align:center; background:#0099ff; border:0 none; cursor:pointer; vertical-align:middle; color:#FFF; display:inline-block; border-radius:2px;}
+.courier_list a.bnt{ background:#e0dfdf; color:#333; margin-left:20px;}
+
+
+
+.contract{ border:solid #eee 1px; margin:15px 0 0 0;}
+
+.divcheck{ padding:10px; height:22px; line-height:22px; overflow:hidden;
+    background: -webkit-linear-gradient(#FFFFFF, #f7f6f6);
+    background: -moz-linear-gradient(#FFFFFF, #f7f6f6);
+    background: -o-linear-gradient(#FFFFFF, #f7f6f6);
+    background: linear-gradient(#FFFFFF, #f7f6f6);
+
+}
+.divcheck input{ margin:0 4px 3px 0;}
+.divcheck a.leftF{ width:74px; height:22px; text-align:center; display:inline-block; color:#FFF; border-radius:2px; margin:0 30px 0 0;}
+.divcheck .rease{ background:#0099ff;}
+.divcheck .dele{ background:#f43a47;}
+.divcheck .expor{ background:#3f9f38;}
+.divcheck span,.divcheck label{ margin:0 30px 0 0;}
+.divcheck span .icons{ width:12px; height:12px; float:left; border-radius:50%; margin:5px 5px 0 0;}
+.divcheck span .add{ background:#db2929;}
+.divcheck span .rec{ background:#5fd08c;}
+.divcheck span .cet{ background:#e5bf29;}
+
+.divtable{ width:858px; overflow:hidden; overflow-x:auto;}
+.divtable table{}
+.divtable th,.divtable td{ border:solid #eee 1px; text-align:center; padding:10px 5px;}
+.divtable th{ background:#def6fd;}
+
+.paging{ height:24px; line-height:24px; padding:20px; text-align:center;}
+.paging a{ margin:0 6px;}
+.paging a.cur{ color:#33adff; font-weight:bold;}
+.paging .leftF b{ color:#33adff; text-decoration:underline; font-weight:normal;}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

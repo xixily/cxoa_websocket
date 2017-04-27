@@ -1,18 +1,22 @@
 package com.chaoxing.oa.entity.po.hetong;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
+import org.springframework.format.annotation.DateTimeFormat;
 
 
-//@Entity
-//@Table(name="发货情况")
+@Entity
+@Table(name="发货情况")
 @DynamicInsert(true)
 @DynamicUpdate(true)
 public class Fahuo implements Serializable {
@@ -22,15 +26,15 @@ public class Fahuo implements Serializable {
 	private String d_contact;//收件人
 	private String d_company;//邮寄单位(到方
 	private String d_address;//邮寄地址
-	private String d_tel;//联系电话（到方）
+	private String d_tel;//联系电话(到方  收件人电话)
 	private String postMethod;//这里我只需要顺丰的
 	private String jDate;//邮寄时间
 	private String mailno;//邮寄凭证号(运单号)
 	private String remark;//备注
 	private String d_post_code;//邮编
-	private String content;//内容
+	private String content;//快递内容
 	private String areaCode;//区号
-	private String sender;//发货人
+	private String sender;//发件人
 	private String d_city;//城市
 	private String area;//地区
 	private String recorder;//录库人
@@ -38,8 +42,13 @@ public class Fahuo implements Serializable {
 	 * 货单新增
 	 */
 	private String destcode;//目的地区域代码
-//	private String 
+
+	@DateTimeFormat(pattern="yyyy-MM-dd")
+	private Date applicationDate;//申请时间
+	private String postAddress;//发件地
+	
 	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name="序号")
 	public Integer getOrderid() {
 		return orderid;
@@ -166,5 +175,20 @@ public class Fahuo implements Serializable {
 	public void setRecorder(String recorder) {
 		this.recorder = recorder;
 	}
+	@Column(name = "申请时间")
+	public Date getApplicationDate() {
+		return applicationDate;
+	}
+	public void setApplicationDate(Date applicationDate) {
+		this.applicationDate = applicationDate;
+	}
+	@Column(name = "发件地")
+	public String getPostAddress() {
+		return postAddress;
+	}
+	public void setPostAddress(String postAddress) {
+		this.postAddress = postAddress;
+	}
+	
 
 }

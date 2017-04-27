@@ -6,7 +6,7 @@ try{
 	parent.$.messager.progress('close');
 }catch(e){
 	alert("登录超时，程序即将退出~！");
-	location.replace('/cxoa/app_login.jsp');
+	location.replace('app_login.jsp');
 }
 </script>
 </div>

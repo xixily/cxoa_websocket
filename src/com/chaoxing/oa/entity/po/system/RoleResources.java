@@ -2,6 +2,7 @@ package com.chaoxing.oa.entity.po.system;
 
 import java.io.Serializable;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -22,7 +23,7 @@ import org.hibernate.annotations.GenericGenerator;
 @DynamicInsert(true)
 public class RoleResources implements Serializable {
 	private static final long serialVersionUID = 1382136916950279442L;
-	private int id;
+	private Integer id;
 	private UserRole roleId;
 	private Menu menuId;
 //	private String url;
@@ -32,15 +33,15 @@ public class RoleResources implements Serializable {
 	@Column
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	@GenericGenerator(name="roleresources_table_g",strategy="native")
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
-	@ManyToOne(fetch=FetchType.LAZY,targetEntity=UserRole.class)
+	@ManyToOne(fetch=FetchType.LAZY,targetEntity=UserRole.class,cascade=CascadeType.ALL)
 	@JoinColumn(name="roleId")
 	public UserRole getRoleId() {
 		return roleId;
 	}
-	@ManyToOne(fetch=FetchType.LAZY,targetEntity=Menu.class)
+	@ManyToOne(fetch=FetchType.LAZY,targetEntity=Menu.class,cascade=CascadeType.ALL)
 	@JoinColumn(name="menuId")
 	public Menu getMenuId() {
 		return menuId;
@@ -56,7 +57,7 @@ public class RoleResources implements Serializable {
 //	public void setSortCode(String sortCode) {
 //		this.sortCode = sortCode;
 //	}
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 	public void setRoleId(UserRole roleId) {
@@ -68,5 +69,14 @@ public class RoleResources implements Serializable {
 //	public void setUrl(String url) {
 //		this.url = url;
 //	}
+	public RoleResources(UserRole roleId, Menu menuId) {
+		super();
+		this.roleId = roleId;
+		this.menuId = menuId;
+	}
+	
+	public RoleResources() {
+		super();
+	}
 	
 }

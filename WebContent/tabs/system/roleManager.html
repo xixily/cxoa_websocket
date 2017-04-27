@@ -1,10 +1,79 @@
-<!DOCTYPE html>
-<html>
-<head lang="en">
-    <meta charset="UTF-8">
-    <title></title>
-</head>
-<body>
+<div id="jiagou" title="菜单管理" style="padding: 10px;" data-options="iconCls:'icon-man',closable:true">
+    <div class="easyui-panel" id="menus_query_form_panel" title="菜单查询" style="width:98%;padding: 10px;margin-bottom: 10px;"
+            data-options="margin:'10px 0px',iconCls:'icon-search',collapsible:true,href:'queryForm/system/menus_queryform.html',tools:[
+				{iconCls:'icon-reload',handler:function(){$('#menus_query_form_panel').panel('open').panel('refresh')}}]">
+    </div>
+	<!--  table ======-->
+	<div style="margin-bottom: 15px;"></div>
+	<table id="menus_treeGrid" class="easyui-treegrid" title="菜单列表" style="margin-bottom: 20px; height:420px;"
+		   data-options="
+				iconCls: 'icon-ok',
+				rownumbers: true,
+				animate: true,
+				collapsible: true,
+				fitColumns: true,
+				url: 'system/getMenus.action',
+				method: 'get',
+				idField: 'menuId',
+				treeField: 'menuName',
+				pageSize: 15,
+                pageList: [10,15,30],
+				toolbar: [{
+					iconCls: 'icon-add',
+					text:'添加',
+					handler: system.menus.add
+				},'-',{
+					iconCls: 'icon-edit',
+					text:'编辑',
+					handler: system.menus.edit
+				},'-',{
+					iconCls: 'icon-up',
+					text:'上移',
+					handler: function(){
+						var selected = $('#menus_treeGrid').treegrid('getSelected');
+						if(selected){
+						
+							$.messager.confirm('提示：','您确定要上移[' + selected.menuName + ']吗？',function(ok){
+							if(ok){
+								system.menus.upLevel();
+							}
+						})
+						}
+					}
+				},'-',{
+					iconCls: 'icon-remove',
+					text:'删除',
+					handler: function(){
+						var name = $('#menus_treeGrid').treegrid('getSelected').menuName;
+						$.messager.confirm('提示：','您确定要删除[' + name + ']吗？',function(ok){
+							if(ok){
+								system.menus.remove()
+							}
+						})
 
-</body>
-</html>
+					}
+				}],
+				onClickRow:function(){
+					if(menuEdit){
+						$.messager.confirm('提示：','您确定要更新吗',function(ok){
+							if(ok){
+								system.menus.save();
+							}else{
+								system.menus.cancel();
+							}
+						})
+					}
+				},
+                onDblClickRow : system.menus.edit,
+			">
+		<thead>
+		<tr>
+			<th data-options="field:'menuName',width:180,editor:{type:'textbox',required:true}">菜单名</th>
+			<!--<th data-options="field:'menuLevel',width:60,align:'right',editor:{type:'textbox',required:true}">级别</th>-->
+			<th data-options="field:'url',width:80,editor:{type:'textbox',required:true}">地址</th>
+			<th data-options="field:'iconCls',width:80,editor:{type:'textbox',required:true}">图标</th>
+			<th data-options="field:'sortCode',width:120,editor:{type:'textbox',required:true}">排序代码</th>
+		</tr>
+		</thead>
+	</table>
+</div>

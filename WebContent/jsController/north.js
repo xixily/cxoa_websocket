@@ -7,10 +7,10 @@ var north = {
 //			console.log('======>>> o%', result);
 			if (result.success) {
 				console.log('登出成功！');
-				location.replace('/cxoa');
+				location.replace('login.jsp');
 			} else {
 				console.log('登出成功！');
-				location.replace('/cxoa');
+				location.replace('login.jsp');
 			}
 		});
 	},

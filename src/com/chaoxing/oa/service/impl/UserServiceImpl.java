@@ -174,7 +174,7 @@ public class UserServiceImpl implements UserServiceI {
 	@Override
 	public long updateUserRole(PUserName username) {
 		Map<String, Object> params = new HashMap<String, Object>();
-		if(username.getRoleId()==0 || username.getId()==0){
+		if(username.getRoleId()==1 || username.getId()==0){
 			return 0;
 		}
 		params.put("roleId", username.getRoleId());
