@@ -1,5 +1,10 @@
 <%@ page language="java" pageEncoding="UTF-8" contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%-- <%@page import="java.lang.*" %>
+<% String version = "1.0.1" %> --%>
+<%
+	String version = "1.0.1";
+%>
 <!-- my97日期控件 -->
 <script type="text/javascript" src="${pageContext.request.contextPath}/jslib/My97DatePickerBeta4.8b2/My97DatePicker/WdatePicker.js" charset="utf-8"></script>
 <!-- easyui控件 -->
@@ -16,7 +21,7 @@
 <%-- <!-- xhEditor插件库 -->
 <script type="text/javascript" src="${pageContext.request.contextPath}/jslib/xheditor-1.1.14/xheditor-1.1.14-zh-cn.min.js" charset="utf-8"></script>
  --%><!-- 自己定义的样式和JS扩展 -->
-<link rel="stylesheet" href="${pageContext.request.contextPath}/style/oaCss.css" type="text/css"></link>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/style/oaCss<%=version %>.css" type="text/css"></link>
 <%-- <script type="text/javascript" src="${pageContext.request.contextPath}/jsController/app.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/jsController/north.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/jsController/west.js"></script>

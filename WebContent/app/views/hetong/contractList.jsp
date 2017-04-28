@@ -156,14 +156,14 @@
 						<input type="text" name="textfield" class="fidtext" style="width:47px;" />
 					</li> -->
 						<li> 
-							<div class="quy_tit">合同状态：</div> <select id="zhuangtai"
-							name="zhuangtai" class="leftF">
+							<div class="quy_tit">合同状态：</div> 
+							<select id="zhuangtai" name="zhuangtai" class="leftF">
 								<option value="-1">全部</option>
 								<option value="0"> 未处理</option>
 								<option value="1">审核未通过</option>
 								<option value="2">审核已通过</option>
 								<option value="3">合同完结</option>
-						</select>
+						   </select>
 						</li>
 						<!-- <li>
 						<div class="quy_tit">回帐情况：</div>
@@ -184,9 +184,9 @@
 		</div>
 		<div class="contract">
 			<div class="divcheck">
-				<!-- <label class="leftF"><input type="checkbox" name="checkbox" />全选</label> -->
-				<!-- <a class="rease leftF" href="#">+新增合同</a>
-				<a class="dele leftF" href="#">删除合同</a> -->
+				
+				
+				
 				<!-- <a class="expor leftF" href="/file/exportContractExcel.action">导出</a> -->
 				<!-- <span class="leftF"><b class="add icons"></b>坏账合同</span>  -->
 				<span class="leftF"><b class="rec icons"></b>待处理合同</span>

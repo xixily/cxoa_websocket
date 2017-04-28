@@ -162,31 +162,6 @@ var system = {
 					$.messager.alert("该记录已经是最高级别了。");
 				}
 			},
-//			downLevel: function(){
-//				var row = $('#menus_treeGrid').treegrid('getSelected');
-//				var preMenu = $('#menus_treeGrid').treegrid('getParent');
-//				if(preMenu){
-//					row.preid = preMenu._preMenuId;
-//				}
-//				if(row){
-//					$.messager.confirm("提示：","您确定要降低[" + row.menuName + "]的级别吗？",function(ok){
-//						if(ok){
-//							$.post("system/updateLevel.action",{menuId: row.menuId}, function(result){
-//								if(result.success){
-//									$('#menus_treeGrid').treegrid({
-//										onLoadSuccess:function(){
-//											$('#menus_treeGrid').treegrid('expandTo',row.menuId);
-//											$('#menus_treeGrid').treegrid('select',row.menuId);
-//										}
-//									});
-//									$('#menus_treeGrid').treegrid('reload');
-//								}
-//								$.messager.alert("提示：",result.msg);
-//							})
-//						}
-//					});
-//				}
-//			},
 			exportExcel : function(flag){
 				downloadForm.createForm();
 				var url = flag ? "file/exportOStruct.action":"file/exportOS.action";
@@ -200,7 +175,193 @@ var system = {
 					}
 				});
 			}
+		},
+		roleMange: {
+		findRole: function(data){
+			var bootNode = $('#roles_treeGrid').treegrid('getData');
+			var array = system.roleMange.getNodes(bootNode);
+			$.each(array, function(i, obj){
+				if(obj.roleName.indexOf(data.roleName)>=0){
+					$('#roles_treeGrid').treegrid('expandTo',obj.roleId);
+					$('#roles_treeGrid').treegrid('select',obj.roleId);
+				}
+			})
+		},
+		menu2role: function(menusId, roleId){
+			menusId = menusId || "menuList";
+			roleId = roleId || "roleResources";
+			var selected = $('#' + menusId).treegrid('getSelected');
+			if(selected){
+				if($('#' + roleId).treegrid('find',selected.menuId)){
+					return false;
+				};
+				var data = {};
+				var menus = system.roleMange.getMenuNodeIds(selected);
+				data.roleId = $("#role_id").val();
+				data.ids = menus;
+				data.sid = selected.menuId;
+				if(data.roleId && data.sid ){
+					$.post('system/addRoleMenus.action', data, function(result){
+						if(result.success){
+							system.roleMange.addPreNodes(selected);
+							system.roleMange.appendNodes(selected._parentId, [selected]);
+						}
+						$.messager.alert("提示：", result.msg);
+					})
+				}else{
+					$.messager.alert("提示：", "获取角色信息失败，请确认。");
+				}
+			}else{
+				$.messager.alert("提示：", "请先选择菜单！")
+			}
+		},
+		deleteFromRole: function(roleId){
+			roleId = roleId || "roleResources"
+			var selected = $('#' + roleId).treegrid('getSelected');
+			if(selected){
+				var data = {};
+				var menus = system.roleMange.getMenuNodeIds(selected);
+				data.ids = menus;
+				data.roleId = $("#role_id").val();
+				if(data.roleId){
+					$.post('system/removeRoleMenus.action', data, function(result){
+						if(result.success){
+							$('#' + roleId).treegrid('remove', selected.menuId);
+						}
+						$.messager.alert("提示：", result.msg);
+					})
+				}
+			}else{
+				$.messager.alert("提示：", "请先选择角色菜单！");
+			}
+		},
+		/**
+		 *
+		 * @param praent int
+		 * @param data constructor is  Array()
+		 */
+		appendNodes: function(praent, data){
+			$('#roleResources').treegrid('append',{
+				parent: praent,
+				data: data
+			});
+			$('#roleResources').treegrid('expandTo',data[0].menuId);
+			$('#roleResources').treegrid('select',data[0].menuId);
+		},
+		addPreNodes: function(menu){
+			if(!menu) return ;
+			var preId = menu._parentId;
+			var preNode = undefined;
+			if(preId){
+				preNode = $('#roleResources').treegrid('find',preId);
+				if(!preNode){
+					preNode = $.extend(true, {}, $('#menuList').treegrid('find',preId));
+					preNode.children = [];
+					system.roleMange.addPreNodes(preNode);
+					system.roleMange.appendNodes(preNode._parentId, [preNode]);
+				}
+			}
+		},
+		openWindow: function(row){
+			$('#role_id').val(row.roleId);
+			$('#role_manager_dialog').window('open');
+			$('#roleResources').treegrid({ //本角色菜单
+				url:'system/queryResourceById.action',
+				title: row.roleName + "权限",
+				queryParams: {
+					rid: row.roleId
+				}
+			});
+			var parent = $('#roles_treeGrid').treegrid('getParent',row.roleId);
+			var parentId = parent ? (parent.roleId || 1) : 1;
+			var title = parentId == 1 ? "超级管理员权限" : parent.roleName + "权限";
+			$('#menuList').treegrid({ //父级菜单
+				url:'system/queryResourceById.action',
+				title: title,
+				queryParams: {
+					rid: parentId
+				}
+			});
+		},
+		getMenuNodeIds: function(objs, arry){
+			arry = arry || [];
+//					var tempObj = undefined;
+			if(objs){
+				if(objs.constructor.name !== "Array"){
+					objs = [objs];
+				}
+				$.each(objs, function(i, obj){
+//							tempObj = $.extend(true,{},obj);
+//							delete tempObj.children;
+					arry.push(obj.menuId);
+					if(obj.children && obj.children.length>0){
+						system.roleMange.getMenuNodeIds(obj.children, arry);
+					}
+				})
+			}
+			return arry;
+		},
+		getNodes: function(objs, arry){
+			arry = arry || [];
+			var tempObj = undefined;
+			if(objs){
+				if(objs.constructor.name !== "Array"){
+					objs = [objs];
+				}
+				$.each(objs, function(i, obj){
+					tempObj = $.extend(true,{},obj);
+					delete tempObj.children;
+					arry.push(tempObj);
+					if(obj.children && obj.children.length>0){
+						system.roleMange.getNodes(obj.children, arry);
+					}
+				})
+			}
+			return arry;
+		},
+		openAdd: function(){
+			var selected = $('#roles_treeGrid').treegrid('getSelected');
+			$('#role_form .easyui-linkbutton').linkbutton('enable')
+			if(selected){
+				$('#role_form').form('clear');
+//						$('#preId_hidden').val(selected.roleId);
+				$('#role_form').form('load',{
+					preId: selected.roleId,
+					roleLevel: (Number(selected.roleLevel)+1),
+					preName: selected.roleName,
+				});
+				$('#roleInfo').dialog('open');
+			}else{
+				$.messager.alert("提示：","请先选择角色。")
+			}
+		},
+		addRole: function(dom){
+			var preId = $('#preId_hidden').val();
+			$('#role_form').form({
+				url : 'system/addRole.action'
+			});
+			if(preId){
+				submitForm(dom,function(result){
+					if(result.success){
+						$('#roles_treeGrid').treegrid('reload',preId);
+						$('#roleInfo').dialog('close')
+					}
+					$.messager.alert("提示：",result.msg);
+				})
+			}else{
+				$.messager.alert('提示：','父级id不存在，请重新打开添加窗口。');
+			}
+		},
+		removeRoel: function(){
+			var selected = $('#roles_treeGrid').treegrid('getSelected');
+			$.post('system/removeRole.action',{rid: selected.roleId},function(result){
+				if(result.success){
+					$('#roles_treeGrid').treegrid('remove', selected.roleId);
+				}
+				$.messager.alert("提示：",result.msg);
+			})
 		}
+	}
 }
 //字符ASCII码
 var charCode = {

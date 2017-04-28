@@ -17,6 +17,7 @@ import com.chaoxing.oa.entity.po.hetong.FaPiao;
 import com.chaoxing.oa.entity.po.hetong.Fahuo;
 import com.chaoxing.oa.entity.po.hetong.ItemPrice;
 import com.chaoxing.oa.entity.po.view.RenshiUserName;
+import com.chaoxing.oa.entity.po.view.Usercontracts;
 import com.chaoxing.oa.entity.po.hetong.CompanyInfo;
 import com.chaoxing.oa.entity.po.hetong.Contract;
 import com.chaoxing.oa.entity.po.hetong.ContractVO;
@@ -48,6 +49,8 @@ public class HtServiceImpl implements HtService {
 	private BaseDaoI<ContractVO> contractVODao;   
 	@Autowired
 	private BaseDaoI<Customer> customerDao;   
+	@Autowired
+	private BaseDaoI<Usercontracts> usercontractsDao;   
 
 	// 获取合同列表 
 	@Override
@@ -277,9 +280,6 @@ public class HtServiceImpl implements HtService {
 	
 	@Override
 	public void updatecontractNoPass(int contractId) {
-	/*Contract contract = contractDao.get(Contract.class, contractId);
-	contract.setDealConditon(1);
-	contractDao.saveOrUpdate(contract);*/
 	Map<String,Object> params = new HashMap<String,Object>();
 	params.put("contractId", contractId);
 	String hql = "update Contract set dealConditon=1 where id=:contractId";
@@ -470,9 +470,9 @@ public class HtServiceImpl implements HtService {
 	public List<ItemPrice> getItemPriceByContractId(int id) {
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("htid", id);
-		String sql = "select * from 合同分项报价  where 合同编号=:htid";
+		String hql = "from ItemPrice  where ctid=:htid";
 		//String hql ="FROM ItemPrice where ctid=:htid";
-		List<ItemPrice> itemPriceList = itemPriceDao.findSql(sql, params);
+		List<ItemPrice> itemPriceList = itemPriceDao.find(hql,params);
 		return itemPriceList;
 	}
 	
@@ -481,9 +481,9 @@ public class HtServiceImpl implements HtService {
 	public List<FaPiao> getFaPiaoByContractId(int id) {
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("htid", id);
-		String sql = "select * from 发票情况  where 合同编号=:htid";
+		String hql = "from FaPiao where hetongNumber=:htid";
 		//String hql ="FROM FaPiao where hetongNumber=:htid";
-		List<FaPiao> faPiaoList = fapiaoDao.findSql(sql, params);
+		List<FaPiao> faPiaoList = fapiaoDao.find(hql, params);
 		return faPiaoList;
 	}
 	
@@ -505,9 +505,8 @@ public class HtServiceImpl implements HtService {
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("htid", id);
 		//String hql = "FROM Fahuo  where hetongCode=:htid";
-		String sql = "select * from 发货情况  where 合同编号=:htid";
-
-		List<Fahuo> fahuoList = fahuoDao.findSql(sql, params);
+		String hql = "from Fahuo where hetongCode=:htid";
+		List<Fahuo> fahuoList = fahuoDao.find(hql, params);
 		return fahuoList;
 	}
 	
@@ -553,19 +552,19 @@ public class HtServiceImpl implements HtService {
 	
 	
 //---------------------销售	
-	//修改
+	
 	@Override
-	public List<Object> getContractListSale(String email, int page, int size) {
+	public List<Usercontracts> getContractListSale(String email, int page, int size) {
 		Map<String,Object> params = new HashMap<String,Object>();
-		int begin = (page-1)*size;
-		params.put("email", email);
-		params.put("size", size);
-		params.put("begin", begin);
+		params.put("email",email);
+		
 		/*String hql = "from Contract where operator =:responsibility order by id desc";*/
 //		String sql = "SELECT *  FROM ((`用户单位` `c` LEFT JOIN (`username` `u` LEFT JOIN `组织结构图` `d` ON ((`u`.`部门ID` = `d`.`id`))) ON (((`u`.`邮箱` = `c`.`销售邮箱`) AND (`d`.`四级` = `c`.`小组`)))) LEFT JOIN `合同情况` `h` ON ((`h`.`用户编号` = `c`.`自动编号`))) WHERE 销售邮箱=:email limit :page,:size";
-		String sql = "SELECT * FROM usercontracts WHERE 邮箱=:email  limit :begin,:size ";                                                                                                                                                                                       
-		List<Object> contractList = objDao.findSql(sql, params);
-		return contractList;
+		/*String sql = "SELECT * FROM usercontracts WHERE 邮箱=:email  limit :begin,:size ";                                                                                                                                                                                       
+		List<Object> contractList = objDao.findSql(sql, params);*/
+		String hql ="FROM Usercontracts where email=:email order by id desc";
+		List<Usercontracts> usercontractsList = usercontractsDao.find(hql,params,page,size);
+		return usercontractsList;
 	}
 	
 	@Override
@@ -627,7 +626,7 @@ public class HtServiceImpl implements HtService {
 		List<Object> lis = objDao.findSql(hal);
 		System.out.println();
 	}
-	
+	//id 自动编号  主键
 	@Override
 	public CustomerDepart getUserAndDepartId(Integer yonghuId) {
 		Map<String,Object> params = new HashMap<String,Object>();

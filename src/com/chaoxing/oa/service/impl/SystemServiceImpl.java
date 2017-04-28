@@ -245,19 +245,21 @@ public class SystemServiceImpl implements SystemService {
 	
 	@Override
 	public Map<String, Object> findRoles(PUserRole role) {
-		StringBuffer sql = new StringBuffer("select roleId,roleName,rolevel,preId from userrole where 1=1");
+		StringBuffer sql = new StringBuffer("select roleId,roleName,rolevel,preId from userrole where 1=1 ");
 		Map<String, Object> params = null;
 		Map<String, Object> results = new HashMap<String, Object>();
 		if(null != role.getRoleId()){
 			params = new HashMap<String, Object>();
-			sql.append("and preId=:preId");
+			sql.append("and (preId=:preId or roleId=:roleId) ORDER BY rolevel ASC ");
 			params.put("preId", role.getRoleId());
+			params.put("roleId", role.getRoleId());
 		}
 		List<Object> rs = objDao.findSql(sql.toString(),params);
 		List<PUserRole> roles = new ArrayList<PUserRole>();
 		Iterator<Object> it = rs.iterator();
 		Object[] obj = null;
 		PUserRole prole = null;
+		int i = 0 ;
 		while(it.hasNext()){
 			obj = (Object[]) it.next();
 			prole = new PUserRole();
@@ -266,11 +268,15 @@ public class SystemServiceImpl implements SystemService {
 				prole.setRoleName((String) obj[1]);
 				prole.setRoleLevel((Integer) obj[2]);
 				prole.setPreId((Integer) obj[3]);
+				if(i == 0){//让它的头指向控，便于easyui gridtree 找到最高层
+					prole.set_parentId(null);
+				}
 				if(null != prole.getRoleLevel() && prole.getRoleLevel()<3){
 					prole.setState("closed");
 				}
 			}
 			roles.add(prole);
+			i++;
 		}
 		results.put("rows", roles);
 		results.put("total", rs.size());
@@ -310,13 +316,24 @@ public class SystemServiceImpl implements SystemService {
 		return results;
 	}
 	
+	
+	@Override
+	public List<Integer> findParentResoucerIds(Integer roleId) {
+		String sql = "select menuId from 角色资源 where roleid=:roleId";
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("roleId", roleId);
+		List<Object> objs = objDao.findSql(sql, params);
+		List<Integer> ids = new ArrayList<Integer>();
+		for (int i = 0; i < objs.size(); i++) {
+			ids.add((Integer) objs.get(i));
+		}
+		return ids;
+	}
 	@Override
 	public int addMenus(List<Integer> ids, Integer roleId, Integer sid) {
 		List<RoleResources> rors = new ArrayList<RoleResources>();
 		Menu menu = menuDao.get(Menu.class, sid);
 		UserRole role = roleDao.get(UserRole.class, roleId);
-		int total = addPreMenuIds(menu, role);// 准备父级菜单
-		logger.info("[SystemServiceImpl.addMenus] 动态添加了父级菜单" + total + "个。");
 		RoleResources rr = null;
 		Integer mid = null;
 		for (int i = 0; i < ids.size(); i++) {
@@ -328,6 +345,8 @@ public class SystemServiceImpl implements SystemService {
 			}
 			rors.add(rr);
 		}
+		int total = addPreMenuIds(menu, role);// 准备父级菜单
+		logger.info("[SystemServiceImpl.addMenus] 动态添加了父级菜单" + total + "个。");
 		return roResourcesDao.bigSave(rors);
 	}
 	
@@ -335,12 +354,19 @@ public class SystemServiceImpl implements SystemService {
 		int sum = 0;
 		Menu prMenu = menu.getPreMenuId();
 		if(null != prMenu){
-			RoleResources rrs = new RoleResources(role, prMenu);
-			try{
-				roResourcesDao.save(rrs);
-				sum++;
-			}catch(Exception e){
-				//TODO  说明这个父级菜单已经存在。
+			String sql = "select id from 角色资源 where roleId=:roleId and menuId=:menuId ";
+			Map<String, Object> params = new HashMap<String, Object>();
+			params.put("roleId", role.getRoleId());
+			params.put("menuId", prMenu.getMenuId());
+			List<Object> lis = objDao.findSql(sql, params);
+			if(lis.size() < 1){
+				RoleResources rrs = new RoleResources(role, prMenu);
+				try{
+					roResourcesDao.save(rrs);
+					sum++;
+				}catch(Exception e){
+					logger.error("SystemServiceImpl.addPreMenuIds:" + e);
+				}
 			}
 			return (sum + addPreMenuIds(prMenu, role));
 		}
@@ -367,6 +393,51 @@ public class SystemServiceImpl implements SystemService {
 		sql2 += ")";
 		System.out.println(sql2);
 		return objDao.executeSql(sql2, params);
+	}
+	
+	@Override
+	public Serializable  addRole(PUserRole purole) {
+		String sql = "insert into userrole(preId, rolevel, roleName) values(:preId,:roleLevel,:roleName)";
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("preId", purole.getPreId());
+		params.put("roleLevel", purole.getRoleLevel());
+		params.put("roleName", purole.getRoleName());
+//		UserRole urole = new UserRole();
+//		urole.setRoleLevel(purole.getRoleLevel());
+//		urole.setRoleName(purole.getRoleName());
+//		urole.setPreRole(new UserRole(purole.getPreId()));
+		try {
+			return objDao.executeSql(sql, params);
+		} catch (Exception e) {
+			logger.error("[SystemService.addRole] with an error:" + e);
+		}
+		return null;
+	}
+	
+	@Override
+	public Integer getPreRoleId(Integer roleId) {
+		String sql = "select preid from userrole where roleId=:roleId";
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("roleId", roleId);
+		List<Object> objs = objDao.findSql(sql, params);
+		Integer preId = null;
+		if(objs.size()>0){
+			preId = (Integer) objs.get(0);
+		}
+		return preId;
+	}
+	
+	@Override
+	public int removeRole(Integer rid) {
+		String hql = "delete from UserRole where roleId=:rid";
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("rid", rid);
+		try{
+			return roleDao.executeHql(hql, params);
+		}catch(Exception e){
+			logger.error("[SystemServiceImpl.removeRole] with an error :"  + e);
+		}
+		return 0;
 	}
 	
 	

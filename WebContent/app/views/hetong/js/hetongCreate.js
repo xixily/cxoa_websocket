@@ -255,7 +255,6 @@ $("#updateFapiao").click(function(){
 	/*var hetongNumber =$("#htNum").text();//合同编号
 	var applicationDate =$("#applicationTimeAboutFapiao").text(); //申请时间*/
 	var fapiaoID = $("#fapiaoId").val();
-	
 	var money =$("#kaipiaoAmount").val();
 	var capitalMoney =$("#daxieAmount").val();
 	var company =$("#kaipiaoCompany").val();
@@ -290,7 +289,6 @@ $("#updateFapiao").click(function(){
 	        
 		 }else{
 			$.messager.alert('提示：',res.msg);
-
 		 }
 	});
 })

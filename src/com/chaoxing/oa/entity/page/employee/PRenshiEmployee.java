@@ -70,6 +70,7 @@ public class PRenshiEmployee implements Serializable{
 	private Integer ifForeign;//外籍
 	private Byte ifEngineering;//理工 
 	private String txStruct;
+	private String zhuanruGongsiTime;//转入本公司时间
 	
 	public int getId() {
 		return id;
@@ -468,6 +469,12 @@ public class PRenshiEmployee implements Serializable{
 	}
 	public void setTxStruct(String txStruct) {
 		this.txStruct = txStruct;
+	}
+	public String getZhuanruGongsiTime() {
+		return zhuanruGongsiTime;
+	}
+	public void setZhuanruGongsiTime(String zhuanruGongsiTime) {
+		this.zhuanruGongsiTime = zhuanruGongsiTime;
 	}
 	
 }

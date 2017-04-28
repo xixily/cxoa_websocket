@@ -45,4 +45,12 @@ public interface SystemService {
 
 	public int removeMenus(List<Integer> ids, Integer roleId);
 
+	public List<Integer> findParentResoucerIds(Integer roleId);
+
+	public Serializable addRole(PUserRole purole);
+
+	public Integer getPreRoleId(Integer rid);
+
+	public int removeRole(Integer rid);
+
 }

@@ -15,7 +15,7 @@
 <link href="/app/views/hetong/css/selectlist.css" rel="stylesheet" type="text/css" />
 <div class="main">
 			
-	<div class="location">首页 &gt; <a href="#">合同信息</a></div>
+	<!-- <div class="location">首页 &gt; <a href="#">合同信息</a></div> -->
 	<div class="contract">
 	<form id="form1" name="form1" method="post" action="">
 		<div class="query_list" style="border-bottom:solid #eee 1px; background:#def6fd;">
@@ -209,12 +209,12 @@
 			
 			 <c:forEach var="a" items="${itemPriceList }" >
 			  <tr>
-				<td>${a[0]}</td>
-				<td>${a[2]}</td>
-				<td>${a[3]}</td>
-				<td>${a[4]}</td>
-				<td>${a[5]}</td>
-				<td>${a[6]}</td>
+				<td>${a.id}</td>
+				<td>${a.name}</td>
+				<td>${a.money}</td>
+				<td>${a.amount}</td>
+				<td>${a.begain}</td>
+				<td>${a.end}</td>
 			  </tr> 
 			  </c:forEach> 
 			</table>
@@ -222,7 +222,8 @@
 			<div style="display:none" class="Modify">
 			<input id="productInfo" type="text" name="textfield" class="fidtext" />
 			<!-- <input type="button" name="button" value="确定" class="bnt" /> --></div>
-			<p class="text">${contractVO.productInfo }</p>
+			<p class="text" style="color:red">${contractVO.productInfo }</p>
+			
 		</div>
 		<div class="tareaTable">
 			<h3>发票情况：</h3>
@@ -236,22 +237,23 @@
 				<th width="13%">发票品名</th>
 				<th width="9%">金额</th>
 				<th width="9%">回款情况</th>
-				<th width="7%">申请人</th>
+				<!-- <th width="7%">申请人</th> -->
 				<th width="11%">回款日期</th>
+				<th width="11%">备注</th>
 			  </tr>
 			  
 			 <c:forEach var="f" items="${faPiaoList }" >
 			  <tr>
-				<td>${f[1]}</td>
-				<td>${f[2]}</td>
-				<td>${f[3]}</td>
-				<td>${f[4]}</td>
-				<td>${f[5]}</td>
-				<td>${f[6]}</td>
-				<td>${f[7]}</td>
-				<td>${f[9]}</td>
-				<td>${f[11]}</td>
-				<td>${f[12]}</td>
+				<td>${f.id}</td>
+				<td>${f.date}</td>
+				<td>${f.company}</td>
+				<td>${f.departMement}</td>
+				<td>${f.type}</td>
+				<td>${f.name}</td>
+				<td>${f.money}</td>
+				<td>${f.huiKuan}</td>
+				<td>${f.receivedpaymentsdate}</td>
+				<td>${f.remark}</td>
 			  </tr>
 			  </c:forEach>
 			  
@@ -273,7 +275,7 @@
 				<div style="display:none" class="Modify">
 				<input id="fapiaoCondition" type="text" name="textfield" class="fidtext" />
 				<!-- <input type="button" name="button" value="确定" class="bnt" /> --></div>
-				<p class="text">${contractVO.fapiaoStatus }</p>
+				<p class="text" style="color:red">${contractVO.fapiaoStatus }</p>
 		</div>
 		<div class="tareaTable">
 			<h3>快递情况：</h3>
@@ -285,7 +287,7 @@
 				<th width="12%">收件地址</th>
 				<th width="10%">联系电话</th>
 				<th width="8%">发件日期</th>
-				<th width="7%">发件人</th>
+				<!-- <th width="7%">发件人</th> -->
 				<!-- <th width="13%">发件地址</th> -->
 				<th width="7%">快递内容</th>
 				<th width="8%">快递公司</th>
@@ -294,16 +296,15 @@
 			  
 			  <c:forEach var="f" items="${fahuoList }" >
 			  <tr>
-				<td>${f[0]}</td>
-				<td>${f[2]}</td>
-				<td>${f[3]}</td>
-				<td>${f[4]}</td>
-				<td>${f[5]}</td>
-				<td>${f[7]}</td>
-				<td>${f[13]}</td>
-				<td>${f[11]}</td>
-				<td>${f[6]}</td>
-				<td>${f[8]}</td>
+			    <td>${f.orderid}</td>
+				<td>${f.d_contact}</td>
+				<td>${f.d_company}</td>
+				<td>${f.d_address}</td>
+				<td>${f.d_tel}</td>
+				<td>${f.jDate}</td>
+				<td>${f.content}</td>
+				<td>${f.postMethod}</td>
+				<td>${f.mailno}</td>
 			  </tr>
 			  </c:forEach> 
 			
@@ -326,7 +327,7 @@
 			<div style="display:none" class="Modify">
 			<input id="kuaidiCondition" type="text" name="textfield" class="fidtext" />
 			<!-- <input type="button" name="button" value="确定" class="bnt" /> --></div>
-			<p class="text">${contractVO.youjiStatus }</p>
+			<p class="text" style="color:red">${contractVO.youjiStatus }</p>
 		</div>
 		
 		
@@ -337,7 +338,7 @@
 			<div style="display:none" class="Modify">
 			<input id="htgaiyao" type="text" name="textfield" class="fidtext" />
 			<!-- <input type="button" name="button" value="确定" class="bnt" /> --></div>
-			<p class="text">${contractVO.agreementText }</p>
+			<p class="text" style="color:red">${contractVO.agreementText }</p>
 		</div>
 		<div class="tareaTable">
 			<h3>付款方式：</h3>
@@ -346,7 +347,7 @@
 			<div style="display:none" class="Modify">
 			<input id="payMethod" type="text" name="textfield" class="fidtext" />
 			<!-- <input type="button" name="button" value="确定" class="bnt" /> --></div>
-			<p class="text">${contractVO.payMethod }</p>
+			<p class="text" style="color:red">${contractVO.payMethod }</p>
 		</div>
 		<div class="tareaTable">
 			<h3>备　　注：</h3>
@@ -412,7 +413,7 @@ $(document).ready(function(){
 	}) 
 })
 
-//未通过
+//未通过   更新合同状态  添加错误消息
 $("#noPass").click(function(){
 	var id = $("#contractId").text();
 	
@@ -433,9 +434,6 @@ $("#noPass").click(function(){
 			"contractMoney":contractMoney,"endTime":endTime,"productInfo":productInfo,"fapiaoStatus":fapiaoStatus,"youjiStatus":youjiStatus,
 			"agreementText":agreementText,"payMethod":payMethod};
 	$.get('ht/addErrorInfo.action',data,function(res){
-		if(res.success==true){
-			
-		}
 		
 	})
 	
@@ -451,6 +449,14 @@ $("#noPass").click(function(){
 }) 
 	
 })
+
+$("#cancel").click(function(){
+	$.get('ht/contractList.action',function(result){
+		$('#container').html(result);
+	})
+})
+
+
 
 
 

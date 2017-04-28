@@ -82,6 +82,7 @@ public class RenshiUserName implements Serializable {
 	private Integer ifForeign;//外籍
 	private Byte ifEngineering;//理工 
 	private String txStruct;
+	private String zhuanruGongsiTime;//转入本公司时间
 	
 	public RenshiUserName() {
 		super();
@@ -666,6 +667,15 @@ public class RenshiUserName implements Serializable {
 	}
 	public void setTxStruct(String txStruct) {
 		this.txStruct = txStruct;
+	}
+	
+	@Column(name = "转入本公司时间")
+	public String getZhuanruGongsiTime() {
+		return zhuanruGongsiTime;
+	}
+
+	public void setZhuanruGongsiTime(String zhuanruGongsiTime) {
+		this.zhuanruGongsiTime = zhuanruGongsiTime;
 	}
 	
 	

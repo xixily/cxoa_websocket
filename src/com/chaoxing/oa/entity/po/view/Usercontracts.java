@@ -1,25 +1,18 @@
-package com.chaoxing.oa.entity.po.hetong;
+package com.chaoxing.oa.entity.po.view;
 
 import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import org.hibernate.annotations.DynamicInsert;
-import org.hibernate.annotations.DynamicUpdate;
-import org.springframework.format.annotation.DateTimeFormat;
-
 @Entity
-@Table(name = "合同情况", schema = "")
-@DynamicInsert(true)
-@DynamicUpdate(true)
-public class Contract implements Serializable{
-	private static final long serialVersionUID = 211351489592348383L;
+@Table(name = "usercontracts")
+public class Usercontracts implements Serializable{
+	private static final long serialVersionUID = 1450095262238418730L;
+	
 	private Integer id;//合同编号
 	private Date dengjiTime;//登记时间
 	private Date signedTime;//签订时间
@@ -65,22 +58,17 @@ public class Contract implements Serializable{
 	private String fourthLevel;//四级 小组
 	private String luku;//录库人
 	private Integer didNum;//单位编号
-	//yang add
-	/*private String company_property;//单位性质
-*/	private String user_property;//用户性质
+	private String user_property;//用户性质
 	private String receivedAmount;//回款金额
 	private Integer expressCondition;//快递情况   1 已发 0 未发
-	private Integer dealConditon;//处理状态   0 未处理 1 审核未通过 2 审核已通过 3 合同完结 4 保存    023不能修改  14能修改
-	@DateTimeFormat(pattern="yyyy-MM-dd")
+	private Integer dealConditon;//处理状态   0 未处理 1 审核未通过 2 审核已通过 3 合同完结 4 保存
 	private Date endTime;//项目预计结束时间
-	@DateTimeFormat(pattern="yyyy-MM-dd")
 	private Date receiveTime;//回款时间
-	@DateTimeFormat(pattern="yyyy-MM-dd")
 	private Date submitTime;//提交时间
 	private String product;//所含产品
+	private String email; //邮箱
 	@Id
 	@Column(name = "合同编号")
-	@GeneratedValue(strategy = GenerationType.AUTO)
 	public Integer getId() {
 		return id;
 	}
@@ -88,7 +76,7 @@ public class Contract implements Serializable{
 	public Date getDengjiTime() {
 		return dengjiTime;
 	}
-	//提交日期
+	
 	@Column(name = "签定时间")
 	public Date getSignedTime() {
 		return signedTime;
@@ -460,6 +448,13 @@ public class Contract implements Serializable{
 	}
 	public void setProduct(String product) {
 		this.product = product;
+	}
+	@Column(name = "邮箱")
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
 	}
 	
 	

@@ -580,7 +580,7 @@
                 msg.msg = "WebSocket:已连接";
                 that.addSysMessages(msg);
                 times = 0;
-                console.log(event);
+//                console.log(event);
                 if(typeof that.onopen === 'function'){
                     that.onopen(event);
                 }

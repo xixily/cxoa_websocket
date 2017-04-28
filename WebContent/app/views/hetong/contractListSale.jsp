@@ -34,9 +34,7 @@
 	
 	<div class="contract">
 		<div class="divcheck">
-			<!-- <label class="leftF"><input type="checkbox" name="checkbox" />全选</label> -->
 			<!-- <a class="rease leftF" href="#">+新增合同</a> -->
-			<!-- <a class="dele leftF" href="#">删除合同</a> -->
 			<!-- <a class="expor leftF" href="#">导出</a> -->
 			<span class="leftF"><b class="cet icons"></b>未通过合同</span>
 		</div>
@@ -50,7 +48,7 @@
 				<th width="6%">用户性质</th>
 				<th width="8%">单位性质</th>
 				<th width="9%">登记时间</th>
-				<th width="12%">所含产品</th> 
+				<th width="12%">所含产品</th>
 				<th width="8%">所属公司</th>
 				<th width="6%">合同金额</th>
 				<th width="6%">回款金额</th>
@@ -61,56 +59,53 @@
 			  
 			   
 			  <c:forEach var="c" items="${pageBean.list }" varStatus="cs">
-			  <c:if test="${c[42]!='1'}"> 
+			  <c:if test="${c.dealConditon!='1'}">
 			  <tr>
 				<td>${cs.index + 1}</td>
-				<td>${c[35]}</td>
-				<td>${c[29]}</td>
-				<td>${c[59]}</td>
-				<td>${c[54]}</td>
-				<td>${c[63]}</td>
-				<td>${c[37]}</td>
-				<td>${c[57]}</td>
-				<td>${c[36]}</td>
-				<td>${c[20]}</td>
-				 
-				<c:if test="${c[42]=='0'}"><td>未处理</td></c:if>
-                <c:if test="${c[42]=='1'}"><td>审核未通过</td></c:if>
-                <c:if test="${c[42]=='2'}"><td>审核已通过</td></c:if>
-                <c:if test="${c[42]=='3'}"><td>合同完结</td></c:if>
-                <c:if test="${c[42]=='4'}"><td>暂存</td></c:if>
-                <td ><a class="detail" id="${c[35]}" href="javascript:void(0)">详情</a></td>
-                <c:if test="${c[42]=='0'}"><td><a class="delete" id="${c[35]}" href="javascript:void(0)">删除</a></td></c:if>
-                <c:if test="${c[42]=='4'}"><td><a class="delete" id="${c[35]}" href="javascript:void(0)">删除</a></td></c:if> 
-			 </tr>
+				<td>${c.id }</td>
+				<td>${c.depart }</td>
+				<td>${c.user_property }</td>
+				<td>${c.xingzhi }</td>
+				<td>${c.submitTime }</td>
+				<td>${c.pingming }</td>
+				<td>${c.company }</td>
+				<td>${c.contractMoney }</td>
+				<td>${c.receivedAmount }</td>
+				<c:if test="${c.dealConditon=='0'}"><td>未处理</td></c:if>
+                <%-- <c:if test="${c.dealConditon=='1'}"><td>审核未通过</td></c:if> --%>
+                <c:if test="${c.dealConditon=='2'}"><td>审核已通过</td></c:if>
+                <c:if test="${c.dealConditon=='3'}"><td>合同完结</td></c:if>
+                <c:if test="${c.dealConditon=='4'}"><td>暂存</td></c:if>
+                <td ><a class="detail" id="${c.id }" href="javascript:void(0)">详情</a></td>
+                <c:if test="${c.dealConditon=='0'}"><td><a class="delete" id="${c.id }" href="javascript:void(0)">删除</a></td></c:if>
+                <c:if test="${c.dealConditon=='4'}"><td><a class="delete" id="${c.id }" href="javascript:void(0)">删除</a></td></c:if>
+			  </tr>
 			  </c:if> 
 			  
-			   <c:if test="${c[42] =='1'}">
+			  <c:if test="${c.dealConditon =='1'}">
+			   <tr>
 			   <td bgcolor="#dcfcd3">${cs.index + 1}</td>
-				<td bgcolor="#dcfcd3">${c[35]}</td>
-				<td bgcolor="#dcfcd3">${c[29]}</td>
-				<td bgcolor="#dcfcd3">${c[59]}</td>
-				<td bgcolor="#dcfcd3">${c[54]}</td>
-				<td bgcolor="#dcfcd3">${c[63]}</td>
-				<td bgcolor="#dcfcd3">${c[37]}</td>
-				<td bgcolor="#dcfcd3">${c[57]}</td>
-				<td bgcolor="#dcfcd3">${c[36]}</td>
-				<td bgcolor="#dcfcd3">${c[20]} </td>
+				<td bgcolor="#dcfcd3">${c.id }</td>
+				<td bgcolor="#dcfcd3">${c.depart }</td>
+				<td bgcolor="#dcfcd3">${c.user_property }</td>
+				<td bgcolor="#dcfcd3">${c.xingzhi }</td>
+				<td bgcolor="#dcfcd3">${c.submitTime }</td>
+				<td bgcolor="#dcfcd3">${c.pingming }</td>
+				<td bgcolor="#dcfcd3">${c.company }</td>
+				<td bgcolor="#dcfcd3">${c.contractMoney }</td>
+				<td bgcolor="#dcfcd3">${c.receivedAmount } </td>
 				<td bgcolor="#dcfcd3">审核未通过</td>
-				<%-- <c:if test="${c[42]=='0'}"><td>未处理</td></c:if>
-                <c:if test="${c[42]=='1'}"><td>审核未通过</td></c:if>
-                <c:if test="${c[42]=='2'}"><td>审核已通过</td></c:if>
-                <c:if test="${c[42]=='3'}"><td>合同完结</td></c:if> --%>
-                <td bgcolor="#dcfcd3"><a class="detail" id="${c[35] }" href="javascript:void(0)">详情</a></td>
-                <c:if test="${c[42]=='0'}"><td bgcolor="#dcfcd3"><a class="delete" id="${c[35] }" href="javascript:void(0)">删除</a></td></c:if>
-                <c:if test="${c[42]=='4'}"><td bgcolor="#dcfcd3"><a class="delete" id="${c[35] }" href="javascript:void(0)">删除</a></td></c:if>
-                
+				<%-- <c:if test="${c.dealConditon=='0'}"><td>未处理</td></c:if> --%>
+                <%-- <c:if test="${c.dealConditon=='1'}"><td>审核未通过</td></c:if> --%>
+                <%-- <c:if test="${c.dealConditon=='2'}"><td>审核已通过</td></c:if> --%>
+                <%-- <c:if test="${c.dealConditon=='3'}"><td>合同完结</td></c:if> --%>
+                <td bgcolor="#dcfcd3"><a class="detail" id="${c.id }" href="javascript:void(0)">详情</a></td>
+                <%-- <c:if test="${c.dealConditon=='0'}"><td bgcolor="#dcfcd3"><a class="delete" id="${c.id }" href="javascript:void(0)">删除</a></td></c:if>
+                <c:if test="${c.dealConditon=='4'}"><td bgcolor="#dcfcd3"><a class="delete" id="${c.id }" href="javascript:void(0)">删除</a></td></c:if> --%>
 			  </tr>
 			  
 			  </c:if> 
 			   </c:forEach>
-			   
-			   
 	<!-- 		  <tr>
 				<td bgcolor="#dcfcd3"><input type="checkbox" name="checkbox" /></td>
 				<td bgcolor="#dcfcd3">1</td>
@@ -203,10 +198,17 @@ $(".delete").click(function(){
 //点击详情
 $(".detail").click(function(){
 	var id = $(this).attr("id");
-	$.get('ht/contractDetailForSale.action',{id:id},function(result){
-		$('#container').html(result);
-		})
-	
+	var dealCondition = $(this).parent().prev().text();
+	if(dealCondition=='未处理'||dealCondition=='审核已通过'||dealCondition=='合同完结'){
+		$.get('ht/contractDetailForSale.action',{id:id},function(result){
+			$('#container').html(result);
+			})
+	}else{
+		//审核未通过  暂存
+		$.get('ht/contractDetailForSale2.action',{id:id},function(result){
+			$('#container').html(result);
+			})
+	}
 	
 })
 </script>

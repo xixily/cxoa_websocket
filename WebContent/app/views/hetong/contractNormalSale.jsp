@@ -294,7 +294,6 @@
        		<label>截止日期：</label>
 <!-- 			<input id="endDate" type="text" name="textfield" class="fidtext" />
  -->			<input type="text" onClick="WdatePicker({dateFmt:'yyyy-MM-dd'})" id="endDate" name="textfield" class="fidtext"></input>
-			
         </li>
           
          <input style="display:none;" id="productID" type="text" name="textfield" class="fidtext" value=""/>
@@ -358,7 +357,6 @@
         
     	<li class="li02">
        		<label>开票日期：</label>
-			<!-- <input id="kaipiaoDate" type="text" name="textfield" class="fidtext" /> -->
 			<input type="text" onClick="WdatePicker({dateFmt:'yyyy-MM-dd'})" id="kaipiaoDate" name="textfield" class="fidtext"></input>
 			
         </li>

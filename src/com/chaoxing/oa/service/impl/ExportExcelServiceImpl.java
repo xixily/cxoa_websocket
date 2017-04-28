@@ -220,7 +220,9 @@ public class ExportExcelServiceImpl implements ExportExcelService {
 					sxffWriter.setStringData("");
 				}
 				sxffWriter.createCell();
-				sxffWriter.setStringData(pRenshiEmployee.getZhuanzhengTime());
+				sxffWriter.setStringData(pRenshiEmployee.getZhuanruGongsiTime());
+				sxffWriter.createCell();
+				sxffWriter.setStringData(pRenshiEmployee.getContractNumber());
 			}
 			sxffWriter.flush();
 			return filePath;
@@ -1928,6 +1930,8 @@ public class ExportExcelServiceImpl implements ExportExcelService {
 		sxffWriter.setStringData("是否理工学");
 		sxffWriter.createCell();
 		sxffWriter.setStringData("转入本公司时间");
+		sxffWriter.createCell();
+		sxffWriter.setStringData("合同编号");
 		}
 
 

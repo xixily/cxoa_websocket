@@ -28,6 +28,7 @@ import com.chaoxing.oa.entity.po.hetong.Fahuo;
 import com.chaoxing.oa.entity.po.hetong.ItemPrice;
 import com.chaoxing.oa.entity.po.hetong.PageBean;
 import com.chaoxing.oa.entity.po.view.RenshiUserName;
+import com.chaoxing.oa.entity.po.view.Usercontracts;
 import com.chaoxing.oa.entity.po.hetong.CompanyInfo;
 import com.chaoxing.oa.service.HtService;
 import com.chaoxing.oa.util.system.ResourceUtil;
@@ -108,7 +109,7 @@ public class HtController {
 		return "app/views/hetong/contractNormal";
 	}
 	
-	
+	//未处理 审核已通过 合同完结(这三种状态返回的页面)
 	@RequestMapping(value = "/contractDetailForSale")
 	public String contractDetailForSale(Model model, @RequestParam("id") Integer id,HttpSession session) throws ParseException {
 		Contract contract = htService.getContracDetailById(id);
@@ -139,34 +140,55 @@ public class HtController {
 		return "app/views/hetong/contractNormalDetailSale";
 	}
 	
+	//审核未通过  暂存
+	@RequestMapping(value = "/contractDetailForSale2")
+	public String contractDetailForSale2(Model model, @RequestParam("id") Integer id,HttpSession session) throws ParseException {
+		Contract contract = htService.getContracDetailById(id);
+		
+		//产品列表
+		List<ItemPrice> itemPriceList = htService.getItemPriceByContractId(id);
+		//发票列表
+		List<FaPiao> faPiaoList = htService.getFaPiaoByContractId(id);
+		//快递列表
+		List<Fahuo> fahuoList = htService.getFaHuoByContractId(id);
 
+		//根据合同编号查询出错误消息
+		ContractVO contractVO = htService.getContractVOByid(id);
+		
+		//查询出销售本人负责的项目单位
+		SessionInfo sessionInfo = (SessionInfo)session.getAttribute(ResourceUtil.getSessionInfoName());
+		String email = sessionInfo.getEmail();
+		
+		//销售本人负责的单位列表
+		List<CustomerDepart> companyList = htService.getDepartListAboutSale(email);
+		//获取所有产品列表
+		List<Object> productList = htService.getAllProduct();
+		
+		model.addAttribute("contract", contract);
+		model.addAttribute("itemPriceList", itemPriceList);
+		model.addAttribute("faPiaoList", faPiaoList);
+		model.addAttribute("fahuoList", fahuoList);
+		model.addAttribute("companyList", companyList);
+		model.addAttribute("ContractVO", contractVO);
+		model.addAttribute("productList", productList);
+		return "app/views/hetong/contractNormalDetailSale2";
+	}
+	
 	// 年份 购买单位 所属公司 单位性质 产品名称 省份 小组/细胞核 项目负责人 合同金额100-500 合同状态
 	@RequestMapping(value = "/contractListCondition")
 	public String contractListCondition(Model model, 
 			@RequestParam(value = "page", defaultValue = "1") int page,
-			
 			@RequestParam(value = "size", defaultValue = "10") int size,
-			
-		/*	@RequestParam(value = "year", defaultValue = "") String yearStr,//年份
-*/			  
+			//@RequestParam(value = "year", defaultValue = "") String yearStr,//年份
 			@RequestParam(value = "purchaseCom", defaultValue = "") String purchaseCom,// 购买单位
-	
 	        @RequestParam(value = "gongsi", defaultValue = "") String gongsi, // 所属公司
-	  
 	        @RequestParam(value = "danwei", defaultValue = "") String danwei,//单位性质 
-	  
 	        @RequestParam(value = "chanpin", defaultValue = "") String product,//产品名称
-	  
 	        @RequestParam(value = "shengfen", defaultValue = "") String province,//省份
-	  
 	        @RequestParam(value = "group", defaultValue = "") String group,//小组
-	  
 	        @RequestParam(value = "responsibility", defaultValue = "") String  responsibility,//项目负责人
-	  
 	        @RequestParam(value = "userId", defaultValue = "") Integer userId,
-	        
         	@RequestParam(value = "zhuangtai", defaultValue = "")String stateStr//合同状态
-
 	) throws ParseException {
 
 		// List<Contract> contractList =  htService.getContractListCondition(year,purchaseCom,gongsi,danwei,product,province,group,responsibility,zhuangtai,userId,page,size);
@@ -184,21 +206,19 @@ public class HtController {
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy");
 			year = sdf.parse(yearStr);
 		}*/
-		
-		
 		Integer state=-1;
 		try {
 			if(stateStr!=null && (stateStr.equals("")==false)){
 				state = Integer.parseInt(stateStr);
 			}
 			
-			List<Contract> contractList = htService.getContractListConditionTest(purchaseCom,gongsi,danwei,product,province,group,responsibility,userId,state, page, size);
+			List<Contract> contractList = htService.getContractListConditionTest(purchaseCom,gongsi,danwei,product,province,group,responsibility,userId,state,page,size);
 			int conditionCountContract = htService.getConditionCountContract(purchaseCom,gongsi,danwei,product,province,group,responsibility,userId,state);
+			
 			PageBean<Contract> pageBean = new PageBean<Contract>();
-
 			pageBean.init(size, conditionCountContract, page);
-
 			pageBean.setList(contractList);
+			
 			model.addAttribute("pageBean", pageBean);
 			model.addAttribute("companyList", companyList);
 			model.addAttribute("propertyList", propertyList);
@@ -207,10 +227,7 @@ public class HtController {
 		} catch (NumberFormatException e) {
                 e.printStackTrace();
 		}
-		
-	
 		return "app/views/hetong/contractList";
-
 	}
 
 	// 获取未处理合同列表
@@ -380,7 +397,7 @@ public class HtController {
 			String bumenmingcheng = renshiUserName.getSecondLevel();
 			String shengfen = renshiUserName.getThirdLevel();
 			String xibaohe = renshiUserName.getFourthLevel();
-			//根据邮箱获取负责人
+			//根据邮箱获取负责人 从用户单位表中查出的负责人
 			String charger = htService.getOperator(email);
 			//要从session中获取用户信息  set 负责人(本人负责的合同)
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-mm-dd");
@@ -393,8 +410,8 @@ public class HtController {
 			CustomerDepart c = htService.getUserAndDepartId(yonghuId);
 			//单位性质
 			String danweixingzhi = c.getXingzhi();
-			//自动编号
-			Integer id2 = c.getId();
+			//单位编号
+			Integer id2 = c.getdId();
 			Customer customer = htService.getyonghuById(id2);
 			//用户性质
 			if(customer!=null){
@@ -481,11 +498,11 @@ public class HtController {
 		String responsibility = htService.getOperator(email);*/
 		
 		/*List<Contract> contractList = htService.getContractListSale(responsibility, page, size);*/
-		List<Object> contractList = htService.getContractListSale(email, page, size);
+		List<Usercontracts> contractList = htService.getContractListSale(email, page, size);
 		// 总合同数量
 		int totalCountContract = htService.getTotalCountContractSale(email);
 		
-		PageBean<Object> pageBean = new PageBean<Object>();
+		PageBean<Usercontracts> pageBean = new PageBean<Usercontracts>();
 
 		pageBean.init(size, totalCountContract, page);
 		pageBean.setList(contractList);
@@ -984,7 +1001,6 @@ public class HtController {
 			//创建
 			htService.addErrorInfo(contractVO);
 			json.setSuccess(true);
-			
 		} catch (Exception e) {
 			e.printStackTrace();
 			json.setSuccess(false);

@@ -14,6 +14,7 @@ import com.chaoxing.oa.entity.po.hetong.FaPiao;
 import com.chaoxing.oa.entity.po.hetong.Fahuo;
 import com.chaoxing.oa.entity.po.hetong.ItemPrice;
 import com.chaoxing.oa.entity.po.view.RenshiUserName;
+import com.chaoxing.oa.entity.po.view.Usercontracts;
 import com.chaoxing.oa.entity.po.hetong.CompanyInfo;
 
 public interface HtService {
@@ -142,7 +143,7 @@ public interface HtService {
 	
 	
 	//销售负责的合同列表
-	public List<Object> getContractListSale(String emial, int page, int size);
+	public List<Usercontracts> getContractListSale(String emial, int page, int size);
 	
    //销售负责的总合同数量
 	public int getTotalCountContractSale(String eamil);

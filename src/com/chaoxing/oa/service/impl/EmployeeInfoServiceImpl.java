@@ -914,7 +914,7 @@ public class EmployeeInfoServiceImpl implements EmployeeInfoService {
 			if(wageDistribution!=null){
 				Pwages p = new Pwages();
 				BeanUtils.copyProperties(wageDistribution, p);
-				if(roleId!=100&&roleId!=0&&!(ifSecret.equals("off"))){
+				if(roleId!=100&&roleId!=1&&!(ifSecret.equals("off"))){
 					p.setSalary(null);
 					p.setBasicWage(null);
 					p.setPostSalary(null);

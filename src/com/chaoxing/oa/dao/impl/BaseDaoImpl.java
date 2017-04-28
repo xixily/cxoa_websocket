@@ -41,6 +41,8 @@ public class BaseDaoImpl<T> implements BaseDaoI<T> {
 				return this.getCurrentSession().save(o);
 			} catch (HibernateException e) {
 				throw e;
+			} catch(Exception e2){
+				throw e2;
 			}
 	}
 

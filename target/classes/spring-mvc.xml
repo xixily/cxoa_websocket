@@ -160,7 +160,6 @@
 						<value>/public/user/applogin.action</value>
 						<value>/chat/connect.action</value>
 						<value>/chat/sockjs.action</value>
-						<!-- <value>/file/codeImage.action</value> -->
 					</list>
 				</property>
 			</bean>
@@ -171,18 +170,6 @@
 				<!-- 需要记录日志的地址 -->
 				<property name="excludeUrls">
 					<list>
-						<!-- <value>/user/login.action</value>
-						<value>/user/logout.action</value>
-						<value>/menu/allMenu.action</value>
-						<value>/system/allMenu.action</value>
-						<value>/employee/getFourThLevel.action</value>
-						<value>/employee/getOStruct.action</value>
-						<value>/employee/getCompany.action</value>
-						<value>/employee/getInsuranceCompany.action</value>
-						<value>/system/queryMenus.action</value>
-						<value>/user/modifyPassword.action</value>
-						<value>/employee/getHouseholdType.action</value>
-						<value>/employee/getLevel.action</value> -->
 						<value>/user/updateUserName.action</value>
 						<value>/user/deleteUserName.action</value>
 						<value>/user/addUserName.action</value>
@@ -227,6 +214,14 @@
 						<value>/employee/addShebao.action</value>
 						<value>/employee/addMonthWages.action</value>
 						<value>/employee/generateCompanyType.action</value>
+						<value>/system/updateLevel.action</value>
+						<value>/system/removeMenus.action</value>
+						<value>/system/updateMenu.action</value>
+						<value>/system/saveMenu.action</value>
+						<value>/system/addRole.action</value>
+						<value>/system/removeRole.action</value>
+						<value>/system/addRoleMenus.action</value>
+						<value>/system/removeRoleMenus.action</value>
 					</list>
 				</property>
 			</bean>
