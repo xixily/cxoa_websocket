@@ -141,6 +141,23 @@ public class SystemServiceImpl implements SystemService {
 	}
 	
 	@Override
+	public boolean getCaiwushRoleId(Integer urole) {
+		String roleId = (String) CacheManager.getInstance().get(SysConfig.CACHE_CW + SysConfig.USER_ROLE_ID);
+		if(null == roleId){
+			StringBuffer hql = new StringBuffer("from SystemConfig t where t.configType=:type and name=:name");
+			Map<String,Object> params = new HashMap<String, Object>();
+			params.put("type", SysConfig.CW_BX_SH);
+			params.put("name", SysConfig.USER_ROLE_ID);
+			SystemConfig sys = systemConfigDao.get(hql.toString(),params);
+			if(null != sys){
+				roleId = String.valueOf(sys.getValue());
+			}
+			CacheManager.getInstance().put(SysConfig.CACHE_CW + SysConfig.USER_ROLE_ID, roleId);
+		}
+		return roleId.contains("" + urole);
+	}
+	
+	@Override
 	public Map<String, Object> findMenus(PMenus_ pmenus) {
 		Map<String,Object> results = new HashMap<String, Object>();
 		StringBuffer sql = new StringBuffer("select menuId,menuName,menuLevel,preMenuid,url,iconCls,sortCode from 菜单表  where 1=1 ");
@@ -211,18 +228,33 @@ public class SystemServiceImpl implements SystemService {
 	
 	@Override
 	public int updateMenu(PMenus_ pmenus) {
-		Menu menu = new Menu();
-		Menu preMenu = new Menu();
-		BeanUtils.copyProperties(pmenus, menu);
-		preMenu.setMenuId(pmenus.get_preMenuId());
-		menu.setPreMenuId(preMenu);
-		try {
-			menuDao.update(menu);
-			return 1;
-		} catch (Exception e) {
+		String sql = "update 菜单表 t set t.menuName=:menuName,t.menuLevel=:menuLevel,t.preMenuId=:preMenuId,t.url=:url,t.iconCls=:iconCls,t.sortCode=:sortCode where t.menuId = :menuId";
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("menuName", pmenus.getMenuName());
+		params.put("menuLevel", pmenus.getMenuLevel());
+		params.put("preMenuId", pmenus.get_preMenuId());
+		params.put("url", pmenus.getUrl());
+		params.put("iconCls", pmenus.getIconCls());
+		params.put("sortCode", pmenus.getSortCode());
+		params.put("menuId", pmenus.getMenuId());
+		try{
+			return menuDao.executeSql(sql, params);
+		}catch(Exception e){
 			logger.error("[SystemServiceImpl.updateMenu] with a error:" + e);
 			return 0;
 		}
+//		Menu menu = new Menu();
+//		Menu preMenu = new Menu();
+//		BeanUtils.copyProperties(pmenus, menu);
+//		preMenu.setMenuId(pmenus.get_preMenuId());
+//		menu.setPreMenuId(preMenu);
+//		try {
+//			menuDao.update(menu);
+//			return 1;
+//		} catch (Exception e) {
+//			logger.error("[SystemServiceImpl.updateMenu] with a error:" + e);
+//			return 0;
+//		}
 	}
 	
 	@Override
@@ -352,6 +384,7 @@ public class SystemServiceImpl implements SystemService {
 	
 	private int addPreMenuIds(Menu menu, UserRole role){
 		int sum = 0;
+//		String sql = "select preMenuId from 菜单表  where menuId=:menuId";
 		Menu prMenu = menu.getPreMenuId();
 		if(null != prMenu){
 			String sql = "select id from 角色资源 where roleId=:roleId and menuId=:menuId ";

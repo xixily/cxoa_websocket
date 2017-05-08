@@ -75,7 +75,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				        </div>
 				        <div class="form-group">
 				          <div class="col-md-12">
-				            <input id="login_in" type="submit" value="登录" class="btn btn-warning">
+				            <input id="login_in" type="submit" value="登录" style="height:30px;" class="btn btn-warning">
+				            </input>
 				          </div>
 				        </div>
 				        <div class="form-group">
@@ -116,7 +117,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		    	$('#email').val(JSON.parse(localStorage.user).email);
 		    	$('#remeber_me').prop("checked",true);
 		    }else{
-		    	$("#login_form").find('input').val('')
+		    	$("#login_form").find('input').val('');
+		    	$("#login_in").val('登陆');
 		    }
 		})
 		/* document.onload = function(){

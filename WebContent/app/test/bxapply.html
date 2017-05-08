@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <link href="../vendor/bootstrap/css/bootstrap.min.css" media="screen" rel="stylesheet" type="text/css">
+    <link href="style/bootstrap-combobox.css" media="screen" rel="stylesheet" type="text/css">
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <h1>Inline Form</h1>
+        <form class="form-inline">
+            <div class="form-group">
+                <select class="form-control">
+                    <option value="" selected="selected">Select a State</option>
+                    <option value="AL">Alabama</option>
+                    <option value="AK">Alaska</option>
+                    <option value="AZ">Arizona</option>
+                    <option value="AR">Arkansas</option>
+                    <option value="CA">California</option>
+                    <option value="CO">Colorado</option>
+                    <option value="CT">Connecticut</option>
+                    <option value="DE">Delaware</option>
+                    <option value="DC">District Of Columbia</option>
+                    <option value="FL">Florida</option>
+                    <option value="GA">Georgia</option>
+                    <option value="HI">Hawaii</option>
+                    <option value="ID">Idaho</option>
+                    <option value="IL">Illinois</option>
+                    <option value="IN">Indiana</option>
+                    <option value="IA">Iowa</option>
+                    <option value="KS">Kansas</option>
+                    <option value="KY">Kentucky</option>
+                    <option value="LA">Louisiana</option>
+                    <option value="ME">Maine</option>
+                    <option value="MD">Maryland</option>
+                    <option value="MA">Massachusetts</option>
+                    <option value="MI">Michigan</option>
+                    <option value="MN">Minnesota</option>
+                    <option value="MS">Mississippi</option>
+                    <option value="MO">Missouri</option>
+                    <option value="MT">Montana</option>
+                    <option value="NE">Nebraska</option>
+                    <option value="NV">Nevada</option>
+                    <option value="NH">New Hampshire</option>
+                    <option value="NJ">New Jersey</option>
+                    <option value="NM">New Mexico</option>
+                    <option value="NY">New York</option>
+                    <option value="NC">North Carolina</option>
+                    <option value="ND">North Dakota</option>
+                    <option value="OH">Ohio</option>
+                    <option value="OK">Oklahoma</option>
+                    <option value="OR">Oregon</option>
+                    <option value="PA">Pennsylvania</option>
+                    <option value="RI">Rhode Island</option>
+                    <option value="SC">South Carolina</option>
+                    <option value="SD">South Dakota</option>
+                    <option value="TN">Tennessee</option>
+                    <option value="TX">Texas</option>
+                    <option value="UT">Utah</option>
+                    <option value="VT">Vermont</option>
+                    <option value="VA">Virginia</option>
+                    <option value="WA">Washington</option>
+                    <option value="WV">West Virginia</option>
+                    <option value="WI">Wisconsin</option>
+                    <option value="WY">Wyoming</option>
+                </select>
+            </div>
+            <div  id="bank_selected"  class="form-group">
+                <select class="combobox form-control" name="inline">
+                    <option value="" selected="selected">Select a State</option>
+                    <option value="AL">Alabama</option>
+                    <option value="AK">Alaska</option>
+                    <option value="AZ">Arizona</option>
+                    <option value="AR">Arkansas</option>
+                    <option value="CA">California</option>
+                    <option value="CO">Colorado</option>
+                    <option value="CT">Connecticut</option>
+                    <option value="DE">Delaware</option>
+                    <option value="DC">District Of Columbia</option>
+                    <option value="FL">Florida</option>
+                    <option value="GA">Georgia</option>
+                    <option value="HI">Hawaii</option>
+                    <option value="ID">Idaho</option>
+                    <option value="IL">Illinois</option>
+                    <option value="IN">Indiana</option>
+                    <option value="IA">Iowa</option>
+                    <option value="KS">Kansas</option>
+                    <option value="KY">Kentucky</option>
+                    <option value="LA">Louisiana</option>
+                    <option value="ME">Maine</option>
+                    <option value="MD">Maryland</option>
+                    <option value="MA">Massachusetts</option>
+                    <option value="MI">Michigan</option>
+                    <option value="MN">Minnesota</option>
+                    <option value="MS">Mississippi</option>
+                    <option value="MO">Missouri</option>
+                    <option value="MT">Montana</option>
+                    <option value="NE">Nebraska</option>
+                    <option value="NV">Nevada</option>
+                    <option value="NH">New Hampshire</option>
+                    <option value="NJ">New Jersey</option>
+                    <option value="NM">New Mexico</option>
+                    <option value="NY">New York</option>
+                    <option value="NC">North Carolina</option>
+                    <option value="ND">North Dakota</option>
+                    <option value="OH">Ohio</option>
+                    <option value="OK">Oklahoma</option>
+                    <option value="OR">Oregon</option>
+                    <option value="PA">Pennsylvania</option>
+                    <option value="RI">Rhode Island</option>
+                    <option value="SC">South Carolina</option>
+                    <option value="SD">South Dakota</option>
+                    <option value="TN">Tennessee</option>
+                    <option value="TX">Texas</option>
+                    <option value="UT">Utah</option>
+                    <option value="VT">Vermont</option>
+                    <option value="VA">Virginia</option>
+                    <option value="WA">Washington</option>
+                    <option value="WV">West Virginia</option>
+                    <option value="WI">Wisconsin</option>
+                    <option value="WY">Wyoming</option>
+                </select>
+            </div>
+        </form>
+    </div>
+</div>
+<div id="bx_apply_dialog" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLabel" data-backdrop="static" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                <h4 class="modal-title" id="myLabel" style="text-align: center">报销申请表</h4>
+            </div>
+            <div class="modal-body">
+                <form id="add_form" class="form-horizontal" role="form">
+                    <!--<legend>-->
+                    <!--<span>报销信息</span>-->
+                    <!--</legend>-->
+                    <fieldset>
+                        <div class="form-group">
+                            <label class="col-xs-4 col-sm-2 control-label" for="_money">报销金额:</label>
+                            <div class="col-xs-8 col-sm-4">
+                                <input type="number"  class="form-control input-sm" id="_money" name="money" placeholder="报销金额...">
+                            </div>
+                            <label class="col-xs-4 col-sm-2  control-label">还借款金额:</label>
+                            <div class="col-xs-8 col-sm-4">
+                                <input type="number" class="form-control input-sm" name="huankuan" placeholder="还款金额...">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-xs-4 col-sm-2  control-label" for="_bx_bank">银行:</label>
+                            <div class="col-xs-8 col-sm-4">
+                                <select name="bank" id="_bx_bank" class="combobox form-control input-sm" >
+                                    <option value="jtyh" selected>交通银行</option>
+                                    <option value="gs">工商银行</option>
+                                    <option value="gd">光大银行</option>
+                                    <option value="js">建设银行</option>
+                                    <option value="zs">招商银行</option>
+                                    <option value="nh">农业银行</option>
+                                </select>
+                            </div>
+                            <label class="col-xs-4 col-sm-2 control-label">卡号:</label>
+                            <div class="col-xs-8 col-sm-4">
+                                <select name="bank" id="account" class="combobox form-control input-sm" >
+                                    <option value="6217002020213131" selected>6217002020213131</option>
+                                    <option value="6217002020213131">6217002020213131</option>
+                                    <option value="6217002020213131">6217002020213131</option>
+                                    <option value="6217002020213131">6217002020213131</option>
+                                    <option value="6217002020213131">6217002020213131</option>
+                                    <option value="6217002020213131">6217002020213131</option>
+                                </select>
+                                <!-- <input type="text" class="form-control input-sm" name="account" placeholder="卡号...">-->
+                                <!--<div id="bx_bank_select_group" class="form-group">-->
+                                    <!--<select class="combobox form-control" name="inline">-->
+                                        <!--<option value="" selected="selected">Select a State</option>-->
+                                        <!--<option value="AL">Alabama</option>-->
+                                        <!--<option value="AK">Alaska</option>-->
+                                        <!--<option value="AZ">Arizona</option>-->
+                                        <!--<option value="AR">Arkansas</option>-->
+                                        <!--<option value="CA">California</option>-->
+                                        <!--<option value="CO">Colorado</option>-->
+                                        <!--<option value="CT">Connecticut</option>-->
+                                        <!--<option value="DE">Delaware</option>-->
+                                        <!--<option value="DC">District Of Columbia</option>-->
+                                        <!--<option value="FL">Florida</option>-->
+                                        <!--<option value="GA">Georgia</option>-->
+                                        <!--<option value="HI">Hawaii</option>-->
+                                        <!--<option value="ID">Idaho</option>-->
+                                        <!--<option value="IL">Illinois</option>-->
+                                        <!--<option value="IN">Indiana</option>-->
+                                        <!--<option value="IA">Iowa</option>-->
+                                        <!--<option value="KS">Kansas</option>-->
+                                        <!--<option value="KY">Kentucky</option>-->
+                                        <!--<option value="LA">Louisiana</option>-->
+                                        <!--<option value="ME">Maine</option>-->
+                                        <!--<option value="MD">Maryland</option>-->
+                                        <!--<option value="MA">Massachusetts</option>-->
+                                        <!--<option value="MI">Michigan</option>-->
+                                        <!--<option value="MN">Minnesota</option>-->
+                                        <!--<option value="MS">Mississippi</option>-->
+                                        <!--<option value="MO">Missouri</option>-->
+                                        <!--<option value="MT">Montana</option>-->
+                                        <!--<option value="NE">Nebraska</option>-->
+                                        <!--<option value="NV">Nevada</option>-->
+                                        <!--<option value="NH">New Hampshire</option>-->
+                                        <!--<option value="NJ">New Jersey</option>-->
+                                        <!--<option value="NM">New Mexico</option>-->
+                                        <!--<option value="NY">New York</option>-->
+                                        <!--<option value="NC">North Carolina</option>-->
+                                        <!--<option value="ND">North Dakota</option>-->
+                                        <!--<option value="OH">Ohio</option>-->
+                                        <!--<option value="OK">Oklahoma</option>-->
+                                        <!--<option value="OR">Oregon</option>-->
+                                        <!--<option value="PA">Pennsylvania</option>-->
+                                        <!--<option value="RI">Rhode Island</option>-->
+                                        <!--<option value="SC">South Carolina</option>-->
+                                        <!--<option value="SD">South Dakota</option>-->
+                                        <!--<option value="TN">Tennessee</option>-->
+                                        <!--<option value="TX">Texas</option>-->
+                                        <!--<option value="UT">Utah</option>-->
+                                        <!--<option value="VT">Vermont</option>-->
+                                        <!--<option value="VA">Virginia</option>-->
+                                        <!--<option value="WA">Washington</option>-->
+                                        <!--<option value="WV">West Virginia</option>-->
+                                        <!--<option value="WI">Wisconsin</option>-->
+                                        <!--<option value="WY">Wyoming</option>-->
+                                    <!--</select>-->
+                                <!--</div>-->
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-xs-4 col-sm-2 control-label" for="_number">报销张数:</label>
+                            <div class="col-xs-8 col-sm-4">
+                                <input type="number" step="1" max="30" min="0" id="_number" class="form-control input-sm" name="number" placeholder="报销张数...">
+                            </div>
+                            <label for="_kdn" class="col-xs-4 col-sm-2 control-label"></label>
+                            <div class="col-xs-8 col-sm-4">
+                                <input id="_kdn" type="text" class="form-control input-sm" name="kdno" placeholder="快递单号..."/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-xs-4 col-sm-2 control-label" for="_explain">说明:</label>
+                            <div class="col-xs-8 col-sm-4">
+                                <textarea name="explain" id="_explain" cols="30" rows="3" class="form-control"></textarea>
+                                <!--<input type="text" class="form-control input-sm" name="account" placeholder="说明...">-->
+                            </div>
+                            <label class="col-xs-4 col-sm-2 control-label" for="_explain">银行卡号:</label>
+                            <div class="col-xs-8 col-sm-4">
+                                <input id="search" type="text" class="form-control input-sm" name="kdno" placeholder="快递单号..." data-provide="typeahead" data-items="4"/>
+<!--
+                                <input type="text" class="span3" style="margin: 0 auto;" data-provide="typeahead" data-items="4" data-source="[&quot;Ahmedabad&quot;,&quot;Akola&quot;,&quot;Asansol&quot;,&quot;Aurangabad&quot;,&quot;Bangaluru&quot;,&quot;Baroda&quot;,&quot;Belgaon&quot;,&quot;Berhumpur&quot;,&quot;Calicut&quot;,&quot;Chennai&quot;,&quot;Chapra&quot;,&quot;Cherapunji&quot;]">
+-->
+                                <!--<input type="text" class="span3" id="search" data-provide="typeahead" data-items="4" />-->
+                            </div>
+                        </div>
+                    </fieldset>
+                    <div class="row">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-primary" onclick="caiwu.baoxiao.submitApprove()">提交</button>
+            </div>
+
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div>
+
+<script src="../vendor/jquery/jquery.min.js" type="text/javascript"></script>
+<script src="../vendor/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+<script src="js/bootstrap-combobox.js" type="text/javascript"></script>
+<script src="js/bootstrap3-typeahead.min.js"></script>
+<script type="text/javascript">
+    //<![CDATA[
+    var subjects = ['6217002020019621663', '6217002020019621686', '6217002020019621786', '6217002020019621934', '6217002020019621112', '6217002020019621999', '6217002020019621364', '6217002020019621225', '6217002020019621471'];
+    $(document).ready(function(){
+        $('.combobox').combobox();
+    });
+    //]]>
+</script>
+</body>
+</html>

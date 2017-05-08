@@ -1,6 +1,6 @@
 @charset "utf-8";
 *{margin:0px; padding:0px;}
-body{font:12px/1.5 微软雅黑, 黑体, Arial, Helvetica, sans-serif; background:#FFF;}
+/* body{font:12px/1.5 微软雅黑, 黑体, Arial, Helvetica, sans-serif; background:#FFF;} */
 /* body{font:12px/1.5 微软雅黑, 黑体, Arial, Helvetica, sans-serif; color:#333; background:#FFF;} */
 img{border:0px; display:block;}
 ul,ol{list-style-type:none;}

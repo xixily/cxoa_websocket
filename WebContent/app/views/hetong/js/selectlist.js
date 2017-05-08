@@ -330,7 +330,7 @@
             
         //绑定模拟选择列表一系列事件
         setSelectEvent: function(element){
-        	debugger;
+        	
             var that = this,
                 $this = $(element),
                 showSpeed = that.settings.speed,
@@ -345,7 +345,6 @@
             if(that.settings.enable){
                 $(selectID)
                     .click(function(event){
-                    	debugger;
                         event.stopPropagation();
                         $(this).children('.select-list').slideToggle(showSpeed);
 

@@ -66,12 +66,6 @@ public class PubUserManagerController {
 			if(jo != null){
 				AppUser appUser = new AppUser();
 				appUser.setEmail(DES.getMail(jo));
-//				appUser.setEmail("1huangyun@chaoxing.com");
-//				appUser.setEmail("zengchao@chaoxing.com");
-//				appUser.setEmail("chuanming@chaoxing.com");
-//				appUser.setEmail("shihao@chaoxing.com");
-//				appUser.setEmail("hailan@chaoxing.com");
-//				appUser.setEmail("congcong@chaoxing.com");
 				appUser.setName(DES.getName(jo));
 				appUser.setUid(DES.getUid(jo));
 				appUser.setPhone(DES.getPhone(jo));
@@ -124,6 +118,7 @@ public class PubUserManagerController {
 		SessionInfo sessionInfo = (SessionInfo) session.getAttribute(ResourceUtil.getSessionInfoName());
 		int role = sessionInfo.getRoleId();
 //		role = 500;
+
 		List<PMenu> pmenus = menuService.findPubMenuByRole(role);
 		result.setObj(pmenus);
 		result.setSuccess(true);

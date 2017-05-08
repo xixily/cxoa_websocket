@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.chaoxing.oa.dao.BaseDaoI;
+import com.chaoxing.oa.entity.page.caiwu.PUserBank;
 import com.chaoxing.oa.entity.page.common.Page;
 import com.chaoxing.oa.entity.page.employee.PRenshiEmployee;
 import com.chaoxing.oa.entity.page.pub.caiwu.PBaoxiao;
@@ -23,6 +24,8 @@ import com.chaoxing.oa.entity.page.pub.caiwu.PKoukuan;
 import com.chaoxing.oa.entity.po.caiwu.Baoxiao;
 import com.chaoxing.oa.entity.po.caiwu.BaoxiaoStatus;
 import com.chaoxing.oa.entity.po.caiwu.KoukuanItem;
+import com.chaoxing.oa.entity.po.caiwu.UserBank;
+import com.chaoxing.oa.entity.po.employee.UserName;
 import com.chaoxing.oa.entity.po.view.RenshiUserName;
 import com.chaoxing.oa.entity.po.view.pub.caiwu.BaoxiaoView;
 import com.chaoxing.oa.service.PubCaiwuService;
@@ -45,6 +48,8 @@ public class PubCaiwuServiceImpl implements PubCaiwuService {
 	private BaseDaoI<BaoxiaoStatus> bxStatusDao;
 	@Autowired
 	private BaseDaoI<KoukuanItem> koukuanDao;
+	@Autowired
+	private BaseDaoI<UserBank> userBankDao;
 	
 	private Logger logger = Logger.getLogger(this.getClass());
 
@@ -128,6 +133,7 @@ public class PubCaiwuServiceImpl implements PubCaiwuService {
 		pbx.setCaiwuRemarks(bx.getCaiwuRemarks());
 		pbx.setKoujk(bx.getKoujk());
 		pbx.setBaoxMoney(bx.getBaoxMoney());
+		pbx.setHuikuan(bx.getHuikuan());
 		pbx.setBaoxTime(DateUtil.format(bx.getBaoxTime(), "yyyy-MM-dd"));
 		pbx.setStatus(bx.getStatus());
 		pbx.setKunhao(bx.getKunhao());
@@ -346,7 +352,9 @@ public class PubCaiwuServiceImpl implements PubCaiwuService {
 	public Long getBaoxiaoTotal(PBaoxiao pbaoxiao, Date min, Date max) {
 		Map<String, Object> params = new HashMap<String, Object>();
 //		String sql = "select sum(t.baoxMoney) from BaoxiaoView t where ";
-		StringBuffer hql = new StringBuffer("select sum(t.baoxMoney) from BaoxiaoView t where ");
+		StringBuffer hql = new StringBuffer("select sum(t.baoxMoney) from BaoxiaoView t where (t.baoxTime>=:min and t.baoxTime<:max) and ");
+		params.put("min", min);
+		params.put("max", max);
 		try {
 			hql.append(SqlHelper.prepareAndSql(pbaoxiao, params, true));
 			List<Object> bxvs = objectDao.find(hql.toString(), params);
@@ -357,7 +365,6 @@ public class PubCaiwuServiceImpl implements PubCaiwuService {
 				}else{
 					return 0l;
 				}
-				
 			}
 		} catch (Exception e) {
 			logger.error("PubCaiwuServiceImpl.getBaoxiaoTotal:" + e);
@@ -450,10 +457,18 @@ public class PubCaiwuServiceImpl implements PubCaiwuService {
 	
 	@Override
 	public int updateBaoxiaoHuikuan() {
-		String hql = "update Baoxiao set status=:nstatus where status=:status";
+		String hqq = "select new Baoxiao(max(cpNumber)) from Baoxiao ";
+		List<Baoxiao> lb = baoxiaoDao.find(hqq);
+		Long max = 0l;
+		if(!lb.isEmpty()){
+			max = lb.get(0).getCpNumber() + 1;
+			max = null != max ? max : 0;
+		}
+		String hql = "update Baoxiao set status=:nstatus,cpNumber=:max where status=:status";
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("status", SysConfig.CW_BX_CHUPIAO);
 		params.put("nstatus", SysConfig.CW_BX_YIHUIKUAN);
+		params.put("max", max);
 		return baoxiaoDao.executeHql(hql,params);
 	}
 
@@ -592,6 +607,19 @@ public class PubCaiwuServiceImpl implements PubCaiwuService {
 		return 0;
 	}
 	
+	
+	@Override
+	public Long getMaxCpNumber() {
+		String hqq = "select new Baoxiao(max(cpNumber)) from Baoxiao ";
+		List<Baoxiao> lb = baoxiaoDao.find(hqq);
+		Long max = 0l;
+		if(!lb.isEmpty()){
+			max = lb.get(0).getCpNumber();
+			max = null != max ? max : 0;
+		}
+		return max;
+	}
+
 	public List<BaoxiaoStatus> getBaoxiaoStatus(){
 		return getBaoxiaoStatus(false);
 	}
@@ -604,6 +632,39 @@ public class PubCaiwuServiceImpl implements PubCaiwuService {
 		return (List<BaoxiaoStatus>) CacheManager.getInstance().get(SysConfig.CACHE_COMMON + SysConfig.COMMON_BAOXIAO_STATUS);
 		
 	}
+
+	@Override
+	public Serializable addUserBank(Integer id, String bank, String account) {
+		UserBank ub = new UserBank();
+		ub.setUser(new UserName(id));
+		ub.setAccount(account);
+		ub.setBank(bank);
+		try {
+			return userBankDao.save(ub);
+		} catch (Exception e) {
+			logger.info("报销默认卡号已经存在:" + e);
+		}
+		return null;
+	}
+
+	@Override
+	public List<PUserBank> findBxBanks(Integer uid) {
+		String hql = "from UserBank where user.id=:uid";
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("uid", uid);
+		List<UserBank> ubs = userBankDao.find(hql, params);
+		List<PUserBank> pubs = new ArrayList<PUserBank>();
+		UserBank ub = null;
+		PUserBank pub = null;
+		for (int i = 0; i < ubs.size(); i++) {
+			ub = ubs.get(i);
+			pub = new PUserBank();
+			BeanUtils.copyProperties(ub, pub);
+			pubs.add(pub);
+		}
+		return pubs;
+	}
+	
 	
 
 }

@@ -200,8 +200,9 @@ var caiwu = {
                     if(result.success){
                         $('#bx_apply_dialog').modal('toggle')
                         caiwu.listRefresh();
+                    }else{
+                    	$.messager.alert("添加提示：",result.msg);
                     }
-                    $.messager.alert("添加提示：",result.msg);
                 })
             }
         },
@@ -213,10 +214,9 @@ var caiwu = {
                 $.messager.alert("提示：", "批次号不存在，请刷新页面后重试。")
             }
             $.post("public/caiwu/updateSelfBaoxiao.action",data,function(result){
-//                if(result.success){
-//
-//                }
-                $.messager.alert("提示：", result.msg);
+                if(!result.success){
+                	$.messager.alert("提示：", result.msg);
+                }
             })
         },
         onmessage: function(event){
@@ -244,6 +244,18 @@ var caiwu = {
         },
         onopen: function(event){
 
+        },
+        openApplication: function(){
+            $('#add_form').form('clear');
+            $.post('public/caiwu/getBxBanks.action', {},function(result){
+                if(result.success){
+                    var objs = result.obj;
+                    if(objs && objs[0]){
+                        $('#add_form').form('setForm',{account:objs[0].account})
+                    }
+                }
+                $('#bx_apply_dialog').modal('toggle')
+            })
         }
     },
     baoxiaoAppro:{
@@ -348,25 +360,6 @@ var caiwu = {
                 $.extend(data, app.getPageDefault());
                 body.data(app.getQueryParams(), data);//设置查询参数。
                 $.post(url, data, function (result) {
-//                    try{
-//                        result = eval("(" + result + ")");
-//                    }catch(e){
-//                        try{
-//                            result = $(result);
-//                            var msg = result.find('span').html();
-//                            var dialogInfo = appDialog.getDefaults();
-//                            dialogInfo.content = msg;
-//                            dialogInfo.buttons[0].text = '确认';
-//                            dialogInfo.buttons[0].handler = function(event){
-//                                location.replace('/cxoa/app_index.html');
-//                            }
-//                            $.appDialog.createDialog(dialogInfo).modal('show');
-//                            return false;
-//                        }catch(e){
-//                            location.replace('/cxoa/app_index.html');
-//                            return false;
-//                        }
-//                    }
                     if (result.success) {
                         body.data(app.getDivData(), result);//把数据和div关联
                         var rows = result.rows;
@@ -431,11 +424,12 @@ var caiwu = {
                 var src = $(event.currentTarget);
                 data.id = src.parent().parent().find('[app-data="id"]').html();
             }
-            $('#agree_form').form('clear');
-            $('#agree_form').form('setForm',data);
-            $('#bx_appro_true').removeClass('hide');
-            $('#bx_appro_false').addClass('hide');
-            $('#bx_appro_dialog').modal('toggle');
+//            $('#agree_form').form('clear');
+//            $('#agree_form').form('setForm',data);
+//            $('#bx_appro_true').removeClass('hide');
+//            $('#bx_appro_false').addClass('hide');
+//            $('#bx_appro_dialog').modal('toggle');
+            caiwu.baoxiaoAppro.submitAgree(data);
         },
         disAgree: function(event){
             var data = {};
@@ -455,8 +449,8 @@ var caiwu = {
             $('#bx_appro_true').addClass('hide');
             $('#bx_appro_dialog').modal('toggle');
         },
-        submitAgree : function(){
-            var data =  $('#agree_form').serializeJson();
+        submitAgree : function(data){
+            data =  data || $('#agree_form').serializeJson();
 //            if(!data.id || !data.agree) $.messager.alert('提示','请刷新页面后再重试。');
             $('#bx_appro_dialog').modal('toggle');
             caiwu.baoxiaoAppro.updateInfo(data);
@@ -467,8 +461,9 @@ var caiwu = {
             $.post('public/caiwu/approveBaoxiao.action', data, function(result){
                 if(result.success){
                     caiwu.listRefresh('caiwu.baoxiaoAppro.find');
+                }else{
+                	$.messager.alert("批准提示:", result.msg);
                 }
-                $.messager.alert("批准提示:", result.msg);
             })
         }
     },
@@ -621,8 +616,9 @@ var caiwu = {
                     if(result.success){
                         $('#cw_check_btn').toggleClass("hide");
 //                        $('[app-action="caiwu.baoxiaoCheck.find"]').trigger('click');
+                    }else{
+                    	$.messager.alert("提示：",result.msg);
                     }
-                    $.messager.alert("提示：",result.msg);
                 })
             })
         },
@@ -764,8 +760,9 @@ var caiwu = {
                     if(result.success){
                         $('#cw_cp_btn').toggleClass("hide");
                         $('.do_action[app-action="caiwu.baoxiaoCheck.find_dcp"]').trigger('click');
+                    }else{
+                    	$.messager.alert("提示：",result.msg);
                     }
-                    $.messager.alert("提示：",result.msg);
                 })
             })
         },
@@ -782,8 +779,9 @@ var caiwu = {
 //                    result = eval("("+ result +")");
                     if(result.success){
                         caiwu.listRefresh('caiwu.baoxiaoAppro.find');//TODO listRefresh(target) target 需要修改
+                    }else{
+                    	$.messager.alert("添加提示：",result.msg);
                     }
-                    $.messager.alert("添加提示：",result.msg);
                 })
             }
         },
@@ -800,8 +798,9 @@ var caiwu = {
                 $.post("public/caiwu/recivedBaoxiao.action",data,function(result){
                     if(result.success){
                         caiwu.listRefresh('caiwu.baoxiaoCheck.find_dsp');
+                    }else{
+                    	$.messager.alert("添加提示：",result.msg);
                     }
-                    $.messager.alert("添加提示：",result.msg);
                 })
             }
         },
@@ -827,10 +826,11 @@ var caiwu = {
         submitDaihuikuan: function(){
             $.messager.confirm("下载提示","执行下载操作同时会直接汇款操作，之后您可以在已汇款查询这些信息，你确定要执行吗？",function(result){
                 $.post('public/caiwu/baoxiaoHuikuan.action',{},function(result){
-                    $.messager.alert('操作提示：',result.msg);
                     if(result.success){
                         app.downloadForm.download('public/file/daihuikuanExport.action',{});
                         $('#dhk_find_btn_').trigger('click');
+                    }else{
+                    	$.messager.alert('操作提示：',result.msg);
                     }
 
                 })
@@ -872,8 +872,9 @@ var caiwu = {
                         })
 //                        $('[app-data="sh_total"]').html(total);
                         caiwu.baoxiaoCheck.cp_setkjk();caiwu.baoxiaoCheck.cp_setkjk();
+                    }else{
+                    	$.messager.alert("删除提示", result.msg);
                     }
-                    $.messager.alert("删除提示", result.msg);
                 })
             }else{
                 row.remove();
@@ -907,8 +908,9 @@ var caiwu = {
                         row.removeClass('edit');
                         row.find('[app-data="id"]').html = result.obj;
                         caiwu.baoxiaoCheck.cp_setkjk();
+                    }else{
+                    	$.messager.alert("更新提示：", result.msg);
                     }
-                    $.messager.alert("更新提示：", result.msg);
                 })
             }else{
                 $.messager.alert("数据提示：","请您先输入金额");
@@ -921,8 +923,9 @@ var caiwu = {
                 $.post('public/caiwu/removeAllKjk.action',data,function(result){
                     if(result.success){
                         caiwu.baoxiaoCheck.cp_page_remove();
+                    }else{
+                    	$.messager.alert("删除提示：",result.msg);
                     }
-                    $.messager.alert("删除提示：",result.msg);
                 })
             }
         },

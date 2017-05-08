@@ -20,14 +20,16 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/jslib/jquery.cookie.js" charset="utf-8"></script>
 <%-- <!-- xhEditor插件库 -->
 <script type="text/javascript" src="${pageContext.request.contextPath}/jslib/xheditor-1.1.14/xheditor-1.1.14-zh-cn.min.js" charset="utf-8"></script>
- --%><!-- 自己定义的样式和JS扩展 -->
+ --%>
+<%--  <!-- 自己定义的样式和JS扩展 -->
 <link rel="stylesheet" href="${pageContext.request.contextPath}/style/oaCss<%=version %>.css" type="text/css"></link>
-<%-- <script type="text/javascript" src="${pageContext.request.contextPath}/jsController/app.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/jsController/app.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/jsController/north.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/jsController/west.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/jsController/employee.js"></script>
- --%>
+
 <script type="text/javascript" src="${pageContext.request.contextPath}/jslib/util.js" charset="utf-8"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/jslib/jquery.md5.js" charset="utf-8"></script> --%>
 <script type="text/javascript" src="${pageContext.request.contextPath}/jslib/jquery.md5.js" charset="utf-8"></script>
 <%-- <!-- 动态加载js代码  -->
 <script type="text/javascript" src="${pageContext.request.contextPath}/jslib/LAB.min.js"></script> --%>

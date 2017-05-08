@@ -356,6 +356,7 @@ $(function () {//监听屏幕变化，重组slider 导航条
     $.appGet = appGet;
 
     var post = $.post;
+    $.post_ = post;
     $.post = undefined;
     function post_mask(url, data, callback, dataType) {
         post(url, data, function (data, textStatus, jqXHR) {
@@ -697,7 +698,7 @@ function sideBarClick() {
         				$('#container').html('');
         			} catch (e) {
         			}
-        			session.sidebar.opened = url;
+        			session.sidebar.opened = '';
         			$.containerAppend($(data),function(){
         				$('#loading').toggleClass('hide');
         			});

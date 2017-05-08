@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
+import com.chaoxing.oa.entity.page.caiwu.PUserBank;
 import com.chaoxing.oa.entity.page.common.Page;
 import com.chaoxing.oa.entity.page.employee.PRenshiEmployee;
 import com.chaoxing.oa.entity.page.pub.caiwu.PBaoxiao;
@@ -90,6 +91,12 @@ public interface PubCaiwuService {
 	public List<PBaoxiaoStatus> findAllBaoxiaoStatus();
 
 	public void findAllCells(String email);
+
+	public Long getMaxCpNumber();
+
+	public Serializable addUserBank(Integer id, String bank, String account);
+
+	public List<PUserBank> findBxBanks(Integer uid);
 
 
 }

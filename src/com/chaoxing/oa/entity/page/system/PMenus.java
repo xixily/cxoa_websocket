@@ -79,6 +79,6 @@ public class PMenus implements Comparable<PMenus>{
 
 	@Override
 	public int compareTo(PMenus o) {
-		return this.menuId.compareTo(o.getMenuId());
+		return null != this.sortCode ? this.sortCode.compareTo(o.getSortCode() + o.hashCode()) : 1;
 	}
 }

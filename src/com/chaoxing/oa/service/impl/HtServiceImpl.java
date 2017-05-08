@@ -18,6 +18,8 @@ import com.chaoxing.oa.entity.po.hetong.Fahuo;
 import com.chaoxing.oa.entity.po.hetong.ItemPrice;
 import com.chaoxing.oa.entity.po.view.RenshiUserName;
 import com.chaoxing.oa.entity.po.view.Usercontracts;
+import com.chaoxing.oa.entity.po.view.Usercontracts2;
+import com.chaoxing.oa.entity.po.hetong.Area;
 import com.chaoxing.oa.entity.po.hetong.CompanyInfo;
 import com.chaoxing.oa.entity.po.hetong.Contract;
 import com.chaoxing.oa.entity.po.hetong.ContractVO;
@@ -51,6 +53,10 @@ public class HtServiceImpl implements HtService {
 	private BaseDaoI<Customer> customerDao;   
 	@Autowired
 	private BaseDaoI<Usercontracts> usercontractsDao;   
+	@Autowired
+	private BaseDaoI<Usercontracts2> usercontracts2Dao; 
+	@Autowired
+	private BaseDaoI<Area> areaDao;  
 
 	// 获取合同列表 
 	@Override
@@ -86,7 +92,7 @@ public class HtServiceImpl implements HtService {
 	}
 	//获取满足搜索条件的合同数量
 	@Override
-	public int getConditionCountContract(String depart, String company, String xingzhi, String pingming, String province,String fourthLevel,String operator, Integer cid, Integer dealConditon) {
+	public int getConditionCountContract(String depart, String company, String xingzhi,String fourthLevel,String operator, Integer cid, Integer dealConditon) {
 		Map<String, Object> params = new HashMap<String, Object>();
 		/*String dengjiTime1 = "%"+dengjiTime+"%";*/
 		/*params.put("dengjiTime", dengjiTime1);*/
@@ -115,17 +121,17 @@ public class HtServiceImpl implements HtService {
 		if(xingzhi.equals("全部")==false){
 		    params.put("xingzhi", xingzhi);
 		}
-		if(pingming.equals("全部")==false){
+	/*	if(pingming.equals("全部")==false){
 			params.put("pingming", pingming);
-		}
-		if(province.equals("全国")==false){
+		}*/
+	/*	if(province.equals("全国")==false){
 			params.put("province", province);
-		}
+		}*/
 		if(cid!=null){
 			params.put("cid", cid);
 		}
 		
-		 List<Contract> contractList = contractDao.queryResultList(Contract.class, params);
+		 List<Usercontracts2> contractList = contractDao.queryResultList(Usercontracts2.class, params);
 		 int count = contractList.size();
 		 
 		return count;
@@ -139,7 +145,7 @@ public class HtServiceImpl implements HtService {
 	}
 	
 	@Override
-	public List<Contract> getContractListConditionTest(String depart, String company, String xingzhi, String pingming, String province,String fourthLevel,String operator, Integer cid, Integer dealConditon,int page, int size) {
+	public List<Usercontracts2> getContractListConditionTest(String depart, String company, String xingzhi,String fourthLevel,String charger, Integer cid, Integer dealConditon,int page, int size) {
 		Map<String, Object> params = new HashMap<String, Object>();
 		/*String dengjiTime1 = "%"+dengjiTime+"%";*/
 		/*params.put("dengjiTime", dengjiTime1);*/
@@ -154,9 +160,9 @@ public class HtServiceImpl implements HtService {
 		    params.put("fourthLevel", fourthLevel1);
 		}
 		
-		if(operator!=null && (operator.equals("")==false)){
-			String operator1 = "%"+operator+"%";
-		    params.put("operator", operator1);
+		if(charger!=null && (charger.equals("")==false)){
+			String charger1 = "%"+charger+"%";
+		    params.put("charger", charger1);
 		}
 		
 		if(dealConditon!=-1){
@@ -168,26 +174,26 @@ public class HtServiceImpl implements HtService {
 		if(xingzhi.equals("全部")==false){
 		    params.put("xingzhi", xingzhi);
 		}
-		if(pingming.equals("全部")==false){
+		/*if(pingming.equals("全部")==false){
 			params.put("pingming", pingming);
-		}
-		if(province.equals("全国")==false){
+		}*/
+		/*if(province.equals("全国")==false){
 			params.put("province", province);
-		}
+		}*/
 		if(cid!=null){
 			params.put("cid", cid);
 		}
 		
-		 List<Contract> contractList = contractDao.queryResultList(Contract.class, params,page,size);
+		 List<Usercontracts2> contractList = usercontracts2Dao.queryResultList(Usercontracts2.class, params,page,size);
 		
 		return contractList;
 	}
 	
 	//获取未处理合同列表
 	@Override
-	public List<Contract> getUnHandledContract(int page,int size) {
-		String hql ="from Contract  where 处理状态=0";
-		List<Contract> unHandledContractList = contractDao.find(hql,page,size);
+	public List<Usercontracts2> getUnHandledContract(int page,int size) {
+		String hql ="from Usercontracts2  where dealConditon=0";
+		List<Usercontracts2> unHandledContractList = usercontracts2Dao.find(hql,page,size);
 		return unHandledContractList;
 	}
 	//更新合同信息
@@ -211,10 +217,31 @@ public class HtServiceImpl implements HtService {
 		String hql = "update Contract set company=:company,depart=:depart,cid=:cid,didNum=:didNum,contractMoney=:contractMoney,agreementNumber=:agreementNumber,endTime=:endTime,agreementText=:agreementText,remarksText=:remarksText,payMethod=:payMethod where id=:id";
 		objDao.executeHql(hql,params);
 	}
+	//由暂存改为未处理
+	@Override
+	public void updateZanCunContract(Integer id, String company, String depart, Integer cid, Integer didNum,
+			Float contractMoney, String agreementNumber, Date endTime, String agreementText, String remarksText,
+			String payMethod,Integer changeStatus){
+		Map<String,Object> params = new HashMap<String,Object>();
+		params.put("id", id);
+		params.put("company", company);
+		params.put("depart", depart);
+		params.put("cid", cid);
+		params.put("didNum", didNum);
+		params.put("contractMoney", contractMoney);
+		params.put("agreementNumber", agreementNumber);
+		params.put("endTime", endTime);
+		params.put("agreementText", agreementText);
+		params.put("remarksText", remarksText);
+		params.put("payMethod", payMethod);
+		params.put("changeStatus", changeStatus);
+		String hql = "update Contract set company=:company,depart=:depart,cid=:cid,didNum=:didNum,contractMoney=:contractMoney,agreementNumber=:agreementNumber,endTime=:endTime,agreementText=:agreementText,remarksText=:remarksText,payMethod=:payMethod,dealConditon=:changeStatus where id=:id";
+		objDao.executeHql(hql,params);
+	}
 	
 	@Override
 	public int getUnhandledContract() {
-		String hql ="select count(*) from Contract c where 处理状态=0";;
+		String hql ="select count(*) from Usercontracts2 c where dealConditon=0";;
 		Long count = contractDao.count(hql);
 		int count1 = Integer.parseInt(count.toString());
 		return count1;
@@ -228,16 +255,16 @@ public class HtServiceImpl implements HtService {
 	
 	@Override
 	public int getTotalCountContract() {
-		String hql ="select count(*) from Contract where dealConditon!=4 or dealConditon is null";
-		Long totalCountContract = contractDao.count(hql);
+		String hql ="select count(*) from Usercontracts2 where dealConditon!=4 or dealConditon is null";
+		Long totalCountContract = usercontracts2Dao.count(hql);
 		int totalCountContract1 = Integer.parseInt(totalCountContract.toString());
 		return totalCountContract1;
 	}
 	// 获取合同列表(分页)
 	@Override
-	public List<Contract> getContractList(int page, int size) { 
-		String hql = "from Contract where dealConditon!=4 or dealConditon is null order by id desc";
-		List<Contract> contractList = contractDao.find(hql, page, size);
+	public List<Usercontracts2> getContractList(int page, int size) { 
+		String hql = "from Usercontracts2 where dealConditon!=4 or dealConditon is null order by id desc";
+		List<Usercontracts2> contractList = usercontracts2Dao.find(hql, page, size);
 		return contractList;
 	}
 	//createContract
@@ -382,7 +409,7 @@ public class HtServiceImpl implements HtService {
 	// 更新发票
 	@Override
 	public void updateFapiao(BigDecimal money, String capitalMoney, String company, String departMement, String type,
-			String name, Date date1, String remark, Integer fapiaoID){
+			String name, Date date1, String remark, Integer fapiaoID,Date receivedpaymentsdate,BigDecimal huiKuan,String fundType,String account){
 		Map<String,Object> params = new HashMap<String,Object>();
 		params.put("money", money);
 		params.put("capitalMoney", capitalMoney);
@@ -393,7 +420,11 @@ public class HtServiceImpl implements HtService {
 		params.put("date1", date1);
 		params.put("remark", remark);
 		params.put("fapiaoID", fapiaoID);
-		String sql = "update 发票情况 set 金额=:money,大写金额=:capitalMoney,开票公司=:company,开票单位=:departMement,发票类型=:type,发票品名 =:name, 开票时间=:date1,备注=:remark where 序号=:fapiaoID";
+		params.put("receivedpaymentsdate", receivedpaymentsdate);
+		params.put("huiKuan", huiKuan);
+		params.put("fundType", fundType);
+		params.put("account", account);
+		String sql = "update 发票情况 set 金额=:money,大写金额=:capitalMoney,开票公司=:company,开票单位=:departMement,发票类型=:type,发票品名 =:name, 开票时间=:date1,备注=:remark,回款日期=:receivedpaymentsdate,回款情况=:huiKuan,资金类型=:fundType,账户=:account where 序号=:fapiaoID";
 		fapiaoDao.executeSql(sql,params);
 		
 		
@@ -433,25 +464,20 @@ public class HtServiceImpl implements HtService {
 	@Override
 	public Fahuo selectFahuo(Integer fahuoId) {
 		Fahuo fahuo = fahuoDao.get(Fahuo.class, fahuoId);
-
 		return fahuo;
-
 	}
  
 	
 	// 更新快递信息
-	
-	
-	
 	@Override
-	public void updateFahuo(String mailno, String d_contact, String d_tel, String d_company, 
+	public void updateFahuo(String mailno, String d_contact, String d_tel, 
 			String d_address,  String jDate, String postMethod,  String content,
 			Integer orderid) {
 		Map<String,Object> params = new HashMap<String,Object>();
 		params.put("mailno", mailno);
 		params.put("d_contact", d_contact);
 		params.put("d_tel", d_tel);
-		params.put("d_company", d_company);
+		/*params.put("d_company", d_company);*/
 		//params.put("d_post_code", d_post_code);
 		params.put("d_address", d_address);
 		//params.put("sender", sender);
@@ -460,7 +486,7 @@ public class HtServiceImpl implements HtService {
 		//params.put("remark", remark);
 		params.put("content", content);
 		params.put("orderid", orderid);
-		String hql = "update Fahuo set mailno=:mailno,d_contact=:d_contact, d_tel=:d_tel,d_company=:d_company,d_address=:d_address,jDate=:jDate,postMethod=:postMethod,content=:content where orderid=:orderid";
+		String hql = "update Fahuo set mailno=:mailno,d_contact=:d_contact, d_tel=:d_tel,d_address=:d_address,jDate=:jDate,postMethod=:postMethod,content=:content where orderid=:orderid";
 		itemPriceDao.executeHql(hql,params);
 		
 	}
@@ -513,12 +539,12 @@ public class HtServiceImpl implements HtService {
 	
 	//获取下拉公司列表
 	@Override
-	public List<Contract> getCompanyList() {
-		String sql = "select 所属公司  from 合同情况  group by 所属公司";
+	public List<CompanyInfo> getCompanyList() {
+		String hql = "from CompanyInfo ";
 		
-		List<Contract> companyList = contractDao.findSql(sql);
+		List<CompanyInfo> companyInfoList = companyInfoDao.find(hql);
 	
-		return companyList;
+		return companyInfoList;
 	}
 	
 	@Override
@@ -655,7 +681,7 @@ public class HtServiceImpl implements HtService {
 	public void updateContractSave(Integer id, String company, String depart, Integer cid, Integer didNum,
 			Float contractMoney, String agreementNumber, Date endTime, String agreementText, String remarksText,
 			String payMethod, Integer dealConditon,String gangweiXingzhi, String bumenmingcheng,
-			String shengfen, String xibaohe,Date submitTime,String danweixingzhi,String yonghuxingzhi) {
+			String shengfen, String xibaohe,Date submitTime,String danweixingzhi,String yonghuxingzhi,String productName,Float f) {
 		Map<String,Object> params = new HashMap<String,Object>();
 		params.put("id", id);
 		params.put("company", company);
@@ -676,10 +702,13 @@ public class HtServiceImpl implements HtService {
 		params.put("submitTime", submitTime);
 		params.put("danweixingzhi", danweixingzhi);
 		params.put("yonghuxingzhi", yonghuxingzhi);
+		params.put("productName", productName);
+		params.put("f", f);
+		
 		
 		String hql = "update Contract set company=:company,depart=:depart,cid=:cid,didNum=:didNum,contractMoney=:contractMoney,agreementNumber=:agreementNumber,endTime=:endTime,"
 				+ "agreementText=:agreementText,remarksText=:remarksText,payMethod=:payMethod,dealConditon=:dealConditon, "
-				+ "firstLevel=:gangweiXingzhi,secondLevel=:bumenmingcheng,thirdLevel=:shengfen,fourthLevel=:xibaohe,submitTime=:submitTime,xingzhi=:danweixingzhi,user_property=:yonghuxingzhi where id=:id";
+				+ "firstLevel=:gangweiXingzhi,secondLevel=:bumenmingcheng,thirdLevel=:shengfen,fourthLevel=:xibaohe,submitTime=:submitTime,xingzhi=:danweixingzhi,user_property=:yonghuxingzhi,product=:productName,kaipiaoMoney=:f where id=:id";
 		objDao.executeHql(hql,params);
 		
 	}
@@ -780,14 +809,15 @@ public class HtServiceImpl implements HtService {
 	}
 	@Override
 	public void updateContractXingzheng(String yinhuashui, String guidangDate, Float huaizhangAmount,String guidangCode,
-			Integer contractId) {
+			Integer contractId,String guidangNum) {
 		Map<String,Object> params = new HashMap<String,Object>();
 		params.put("yinhuashui", yinhuashui);
 		params.put("guidangDate", guidangDate);
 		params.put("huaizhangAmount", huaizhangAmount);
 		params.put("guidangCode",guidangCode);
 		params.put("contractId", contractId);
-		String hql = "update Contract set tiehuaStatus=:yinhuashui,guidangDate=:guidangDate,year=:huaizhangAmount,guidangCode=:guidangCode where id=:contractId";
+		params.put("guidangNum", guidangNum);
+		String hql = "update Contract set tiehuaStatus=:yinhuashui,guidangDate=:guidangDate,year=:huaizhangAmount,guidangCode=:guidangCode,guidangNum=:guidangNum where id=:contractId";
 		objDao.executeHql(hql,params);
 		
 	}
@@ -811,7 +841,6 @@ public class HtServiceImpl implements HtService {
 	//获取归档最大编号
 	@Override
 	public String getguidangMaxNum(String code) {
-		
 		Map<String,Object> params = new HashMap<String,Object>();		
 		params.put("code", code + "%");
 //		String sql = "select code from 公司代码  where 公司代码 =:company";
@@ -822,5 +851,57 @@ public class HtServiceImpl implements HtService {
 		return guidangMaxNum;
 		
 	}
+	@Override
+	public RenshiUserName getTelephoneByEmail(String email) {
+		Map<String,Object> params = new HashMap<String,Object>();		
+		params.put("email",email);
+		String hql = "from RenshiUserName where postcode=:email";
+		//String hql ="FROM ItemPrice where ctid=:htid";
+		RenshiUserName renshiUserName = renshiUserNameDao.get(hql,params);
+		return renshiUserName;
+		
+	}
+	//更新回款金额和日期
+	@Override
+	public void updateHuikuanAndDate(Integer contractId, String total, Date latestDate) {
+		Map<String,Object> params = new HashMap<String,Object>();		
+		params.put("contractId",contractId);
+		params.put("total",total);
+		params.put("latestDate",latestDate);
+		String hql = "update Contract set receivedAmount=:total,receiveTime=:latestDate where id=:contractId";
+		objDao.executeHql(hql,params);
+	}
+	@Override
+	public void updateDealCondition(Integer contractId) {
+		Map<String,Object> params = new HashMap<String,Object>();
+	    params.put("contractId", contractId);
+		String sql = "UPDATE 合同情况 SET 处理状态=3 WHERE 合同编号= :contractId";
+		contractDao.executeSql(sql,params);
+	}
+	
+	@Override
+	public List<Area> getZhanghu(String substringCompany) {
+		Map<String,Object> params = new HashMap<String,Object>();		
+		params.put("substringCompany",substringCompany+"%");
+		
+		String hql = "from Area where area_name like :substringCompany";
+		
+		List<Area> areaList = areaDao.find(hql,params);
+		return areaList;
+		
+	}
+	@Override
+	public List<Contract> getCompanyNum(String code) {
+		Map<String,Object> params = new HashMap<String,Object>();		
+		params.put("code",code+"%");
+		
+		String hql = "from Contract where guidangCode like :code";
+		
+		List<Contract> contractList = contractDao.find(hql,params);
+		return contractList;
+		
+	}
+	
+	
 	
 }

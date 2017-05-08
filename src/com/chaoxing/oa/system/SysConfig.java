@@ -90,5 +90,6 @@ public class SysConfig {
 	public final static Integer CW_BX_CHECK_DISAGREE = 8;//审核不通过
 	public final static Integer CW_BX_CHUPIAO = 9;//已出票
 	public final static Integer CW_BX_YIHUIKUAN = 10;//已汇款
+	public final static Integer CW_BX_YIWANCHENG = 10;//已汇款
 	public final static String CW_BX_SH = "cw_bx_sh";
 }

@@ -516,11 +516,19 @@ public class PubHetongServiceImpl implements PubHetongService {
 		}
 		return prenshi;
 	}
+	
+	@Override
+	public List<Contract> findUserContractsById(Integer userId) {
+		String hql = "from Contract where cid = :userId";
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("userId", userId);
+		List<Contract> lis = contractDao.find(hql.toString(), params);
+		return lis;
+	}
 
 	protected long getCount(String hql, Map<String, Object> params) {
 		String hqll = "select count(*) from " + hql.split("from")[1];
 		return objectDao.count(hqll,params);
 	}
-
 
 }

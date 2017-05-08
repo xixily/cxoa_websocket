@@ -68,9 +68,9 @@
 							<div class="quy_tit">所属公司：</div> 
 							<select id="gongsi" name="gongsi" class="leftF">
 							<option value="0">全部</option>
-							<c:forEach var="c" items="${companyList }">
+							<c:forEach var="c" items="${companyInfoList }">
 							  <c:if test="${c!= null }">
-							    <option value="1">${c}</option>
+							    <option value="${c.name}">${c.name}</option>
 							    </c:if>   
 							</c:forEach>
 								
@@ -83,12 +83,12 @@
 								<option value="0">全部</option>
 							<c:forEach var="p" items="${propertyList }">
 							<c:if test="${p!=null }">
-								<option value="1">${p }</option>
+								<option value="${p }">${p }</option>
 							</c:if>
 							</c:forEach>
 						</select>
 						</li>
-						<li>
+						<%-- <li>
 							<div class="quy_tit">产品名称：</div> 
 							<select id="chanpin" name="chanpin" class="leftF">
 							<option value="0">全部</option>
@@ -99,8 +99,8 @@
 							</c:forEach>
 						   </select>
 						   
-						</li>
-						<li>
+						</li> --%>
+						<!-- <li>
 							<div class="quy_tit">省 份：</div> 
 							<select id="shengfen" name="shengfen" class="leftF">
 								<option value="0">全国</option> 
@@ -136,7 +136,7 @@
 								<option value="12">湖南</option>
 							
 						</select>
-						</li>
+						</li> -->
 						<li>
 							<div class="quy_tit">小组/细胞核：</div> <input id="group" type="text"
 							name="textfield" class="fidtext" />
@@ -198,7 +198,7 @@
 						<tr>
 							<th width="4%">序号</th>
 							<th width="4%">合同编号</th>
-							<th width="8%">购买单位</th>
+							<th width="8%">单位名称</th>
 							<th width="4%">单位性质</th>
 							<th width="5%">省份</th>
 							<th width="4%">小组/细胞核</th>
@@ -222,11 +222,11 @@
 					<td bgcolor="#dcfcd3">${c.id }</td>
 					<td bgcolor="#dcfcd3">${c.depart }</td>
 					<td bgcolor="#dcfcd3">${c.xingzhi }</td>
-					<td bgcolor="#dcfcd3">${c.province }</td>
+					<td bgcolor="#dcfcd3">${c.cprovince }</td>
 					<td bgcolor="#dcfcd3">${c.fourthLevel }</td>
-					<td bgcolor="#dcfcd3">${c.operator }</td>
+					<td bgcolor="#dcfcd3">${c.charger }</td>
 					<td bgcolor="#dcfcd3">${c.submitTime }</td>
-					<td bgcolor="#dcfcd3">${c.pingming }</td>
+					<td bgcolor="#dcfcd3">${c.product }</td>
 					<td bgcolor="#dcfcd3">${c.company }</td>
 					<td bgcolor="#dcfcd3">${c.contractMoney }</td>
 					<td bgcolor="#dcfcd3">${c.receivedAmount }</td>
@@ -244,11 +244,11 @@
 								<td>${c.id }</td>
 								<td>${c.depart }</td>
 								<td>${c.xingzhi }</td>
-								<td>${c.province }</td>
+								<td>${c.cprovince }</td>
 								<td>${c.fourthLevel }</td>
-								<td>${c.operator }</td>
+								<td>${c.charger }</td>
 								<td>${c.submitTime }</td>
-								<td>${c.pingming }</td>
+								<td>${c.product }</td>
 								<td>${c.company }</td>
 								<td>${c.contractMoney }</td>
 								<td>${c.receivedAmount }</td>
@@ -259,7 +259,7 @@
 									<td>审核未通过</td>
 								</c:if>
 								<c:if test="${c.dealConditon=='2'}">
-									<td>审核已通过</td>
+									<td class="dealCondition">审核已通过</td>
 								</c:if>
 								<c:if test="${c.dealConditon=='3'}">
 									<td>合同完结</td>
@@ -301,6 +301,13 @@ $(document).ready(function(){
 		
 		
 function changeMethod(nextPage){
+ 
+	var danwei = $("#danwei .select-button").val();//单位性质
+	var gongsi = $("#gongsi .select-button").val();//所属公司
+	/* var chanpin = $("#chanpin .select-button").val();//产品 */
+	/* var shengfen = $("#shengfen .select-button").val();//省份 */
+	var zhuangtai = $("#zhuangtai .selected").attr("data-value");//状态 
+	
 	 //购买单位
 	 var purchaseCom = $("#purchaseCom").val();
 	 var purchaseCom1 = purchaseCom.trim()
@@ -311,15 +318,56 @@ function changeMethod(nextPage){
 	 //用户ID
 	 var userId = $("#userId").val().trim();
 	 
-	if($('input[id="undeal"]').prop("checked")){
-		$.get('ht/getUndealcontractList.action',{page:nextPage},function(result){
+     var data = {"purchaseCom":purchaseCom1,"danwei":danwei,"gongsi":gongsi,"group":group,"responsibility":responsibility,"zhuangtai":zhuangtai,"userId":userId,"page":nextPage};
+    
+     if($('input[id="undeal"]').prop("checked")){
+ 		$.get('public/ht/getUndealcontractList.action',{page:nextPage},function(result){
+ 			$('#container').html(result);
+ 			$('input[id="undeal"]').attr("checked","checked");
+ 			})
+ 	}else{
+ 	   $.post_('public/ht/contractListCondition.action',data,function(result){
+ 			$('#container').empty();
+ 			
+ 			$('#container').html(result);
+ 			$("#purchaseCom").val(purchaseCom);
+ 			if(danwei!='全部'){
+ 			$("#danwei").val(danwei);
+ 			}
+ 			/* $("#danwei .select-button").val(danwei); */
+ 			if(gongsi!='全部'){
+ 				$("#gongsi").val(gongsi);
+ 			}
+ 			/* $("#gongsi .select-button").val(gongsi); */
+ 			
+ 			
+ 			
+ 			
+ 			if(zhuangtai!='全部'){
+ 				$("#zhuangtai").val(zhuangtai);
+ 			}
+ 			$("#zhuangtai .select-button").val(zhuangtai);
+ 			
+ 			/* if(shengfen!='全国'){
+ 				$("#shengfen").val(shengfen);
+ 			}
+ 			$("#shengfen .select-button").val(shengfen); */
+ 			
+ 			$("#userId").val(userId);
+ 			$("#group").val(group);
+ 			$("#responsibility").val(responsibility);
+ 			}) 
+ 	}
+     
+/* 	if($('input[id="undeal"]').prop("checked")){
+		$.get('public/ht/getUndealcontractList.action',{page:nextPage},function(result){
 			$('#container').html(result);
 			$('input[id="undeal"]').attr("checked","checked");
 			})
 	}else if(purchaseCom1 !=''){
 		//搜索条件跳转
 		var data = {"purchaseCom":purchaseCom,"page":nextPage};
-		$.get('ht/contractListCondition.action',data,function(result){
+		$.post_('public/ht/contractListCondition.action',data,function(result){
 			$("#container").empty();
 			$("#container").html(result);
 			$("#purchaseCom").val(purchaseCom);
@@ -327,7 +375,7 @@ function changeMethod(nextPage){
 	}else if(group !=''){
 		//搜索条件跳转
 		var data = {"group":group,"page":nextPage};
-		$.get('ht/contractListCondition.action',data,function(result){
+		$.post_('public/ht/contractListCondition.action',data,function(result){
 			$("#container").empty();
 			$("#container").html(result);
 			$("#group").val(group);
@@ -335,7 +383,7 @@ function changeMethod(nextPage){
 	}else if(responsibility !=''){
 		//搜索条件跳转
 		var data = {"responsibility":responsibility,"page":nextPage};
-		$.get('ht/contractListCondition.action',data,function(result){
+		$.post_('public/ht/contractListCondition.action',data,function(result){
 			$("#container").empty();
 			$("#container").html(result);
 			$("#responsibility").val(responsibility);
@@ -343,29 +391,29 @@ function changeMethod(nextPage){
 	}else if(userId !=''){
 		//搜索条件跳转
 		var data = {"userId":userId,"page":nextPage};
-		$.get('ht/contractListCondition.action',data,function(result){
+		$.post_('public/ht/contractListCondition.action',data,function(result){
 			$("#container").empty();
 			$("#container").html(result);
 			$("#userId").val(userId);
 			})
 	}else{
-		$.get('ht/contractList.action',{page:nextPage},function(result){
+		$.get('public/ht/contractList.action',{page:nextPage},function(result){
 			$('#container').html(result);
 			})
-        }
+        } */
 }
 			
 
 $("#undeal").click(function(){
 	var purchaseCom = $("#purchaseCom").val();
 	if($('input[id="undeal"]').prop("checked")){
-		$.get('ht/getUndealcontractList.action',function(result){
+		$.get('public/ht/getUndealcontractList.action',function(result){
 			$("#container").empty();
 			$("#container").html(result);
 			$('input[id="undeal"]').attr("checked","checked");
 		})
 	  }else{
-		$.get('ht/contractList.action',function(result){
+		$.get('public/ht/contractList.action',function(result){
 			$("#container").empty();
 			$("#container").html(result);
 		})
@@ -376,19 +424,19 @@ $("#undeal").click(function(){
 		
 $(".detail").click(function(){
 		var id = $(this).attr("id");
-		$.get('ht/contractDetail.action',{id:id},function(result){
+		$.get('public/ht/contractDetail.action',{id:id},function(result){
 			$('#container').html(result);
 			})
 })
 
 	
 $("#search").click(function(){
- 	var year = $("#edu .select-button").val(); 
+ 	
     var purchaseCom = $("#purchaseCom").val();//购买单位
 	var danwei = $("#danwei .select-button").val();//单位性质
 	var gongsi = $("#gongsi .select-button").val();//所属公司
-	var chanpin = $("#chanpin .select-button").val();//产品
-	var shengfen = $("#shengfen .select-button").val();//省份
+	/* var chanpin = $("#chanpin .select-button").val();//产品 */
+	/* var shengfen = $("#shengfen .select-button").val();//省份 */
 	var group = $("#group").val();//小组
 	var responsibility = $("#responsibility").val();//责任人
 	var zhuangtai = $("#zhuangtai .selected").attr("data-value");//状态 
@@ -396,13 +444,34 @@ $("#search").click(function(){
 	var userId = $("#userId").val(); //用户ID
 	/* var data = {"year":year,"purchaseCom":purchaseCom,"danwei":danwei,"gongsi":gongsi,"chanpin":chanpin,"shengfen":shengfen,"group":group,"responsibility":responsibility,
 		"zhuangtai":zhuangtai,"userId":userId};  */
-	var data = {"year":year,"purchaseCom":purchaseCom,"danwei":danwei,"gongsi":gongsi,"chanpin":chanpin,"shengfen":shengfen,"group":group,"responsibility":responsibility,"zhuangtai":zhuangtai,"userId":userId};
-	   $.get('ht/contractListCondition.action',data,function(result){
+	var data = {"purchaseCom":purchaseCom,"danwei":danwei,"gongsi":gongsi,"group":group,"responsibility":responsibility,"zhuangtai":zhuangtai,"userId":userId};
+	   $.post_('public/ht/contractListCondition.action',data,function(result){
 		$('#container').empty();
 		$('#container').html(result);
 		$("#purchaseCom").val(purchaseCom);
-		$("#danwei .select-button").val(danwei);
-		$("#gongsi .select-button").val(gongsi);
+		
+		if(danwei!='全部'){
+		$("#danwei").val(danwei);
+		}
+		
+		 /* $("#danwei .select-button").val(danwei);  */
+		if(gongsi!='全部'){
+			$("#gongsi").val(gongsi);
+		}
+		/* $("#gongsi .select-button").val(gongsi); */
+		
+		
+		
+		if(zhuangtai!='全部'){
+			$("#zhuangtai").val(zhuangtai);
+		}
+		$("#zhuangtai .select-button").val(zhuangtai);
+		
+		/* if(shengfen!='全国'){
+			$("#shengfen").val(shengfen);
+		}
+		 $("#shengfen .select-button").val(shengfen);  */
+		
 		$("#userId").val(userId);
 		$("#group").val(group);
 		$("#responsibility").val(responsibility);
@@ -415,6 +484,28 @@ $("#search").click(function(){
 		$("#group").val("");
 		$("#responsibility").val("");
 		$("#userId").val("");
+		$("#gongsi .select-button").val("全部");
+		$("#danwei .select-button").val("全部");
+		$("#zhuangtai .select-button").val("全部");
+		
 	})
+	//由审核已通过到合同完结
+	$(".dealCondition").click(function(){
+	var id = $(this).parent().children('td').eq(1).text();
 	
-	</script>
+	$.messager.confirm("提示","您确认要改为合同完结状态吗？",function(){
+		  $.post('public/ht/updateDealCondition.action',{"id":id},function(res){
+			 
+			   if(res.success==true){
+					$.get('public/ht/contractList.action',function(result){
+						$('#container').html(result);
+					})
+				   $.messager.alert('提示:','操作成功');
+				 }else{
+					 $.messager.alert('提示：','操作失败');
+			   }
+	       })
+	   })
+});
+	
+</script>

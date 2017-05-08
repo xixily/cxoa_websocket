@@ -40,6 +40,7 @@ public class PBaoxiao {
 	private String fourthLevel;//四级
 	private String cellCoreEmail;//细胞核邮箱
 	private String guidanceEmail;//指导邮箱
+	private Long cpNumber;//汇款批次号
 	
 	public Long getId() {
 		return id;
@@ -262,6 +263,12 @@ public class PBaoxiao {
 	}
 	public void setHuikuan(Float huikuan) {
 		this.huikuan = huikuan;
+	}
+	public Long getCpNumber() {
+		return cpNumber;
+	}
+	public void setCpNumber(Long cpNumber) {
+		this.cpNumber = cpNumber;
 	}
 	
 }

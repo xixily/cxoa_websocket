@@ -51,6 +51,7 @@ public class BaoxiaoView implements Serializable{
 	private String fourthLevel;//四级
 	private String cellCoreEmail;//细胞核邮箱
 	private String guidanceEmail;//指导邮箱
+	private Long cpNumber;//汇款批次号
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	public Long getId() {
@@ -199,6 +200,13 @@ public class BaoxiaoView implements Serializable{
 	@Column(name="指导邮箱")
 	public String getGuidanceEmail() {
 		return guidanceEmail;
+	}
+	@Column
+	public Long getCpNumber() {
+		return cpNumber;
+	}
+	public void setCpNumber(Long cpNumber) {
+		this.cpNumber = cpNumber;
 	}
 	public void setId(Long id) {
 		this.id = id;

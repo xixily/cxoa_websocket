@@ -15,6 +15,7 @@ import com.chaoxing.oa.entity.page.pub.hetong.PGuidanceView;
 import com.chaoxing.oa.entity.page.pub.hetong.PYingshou;
 import com.chaoxing.oa.entity.page.pub.hetong.PucfView;
 import com.chaoxing.oa.entity.page.pub.hetong.UserList;
+import com.chaoxing.oa.entity.po.hetong.Contract;
 
 public interface PubHetongService {
 
@@ -73,5 +74,8 @@ public interface PubHetongService {
 	public void getFapiaoDetail(Integer id);
 	
 	public PRenshiEmployee getUserByEmai(String email);
+
+	//查询用户发票合同
+	public List<Contract> findUserContractsById(Integer userId);
 
 }

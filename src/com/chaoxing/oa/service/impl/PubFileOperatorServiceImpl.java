@@ -35,7 +35,7 @@ public class PubFileOperatorServiceImpl implements com.chaoxing.oa.service.PubFi
 				sxffWriter.createCell();
 				sxffWriter.setStringData(pb.getUsername());
 				sxffWriter.createCell();
-				sxffWriter.setNumbericData(new BigDecimal(pb.getHuankuan()));
+				sxffWriter.setNumbericData(new BigDecimal(pb.getHuikuan()));
 			}
 		} catch (IOException e) {
 			logger.error("PubFileOperatorServiceImpl.getDaihuiKuanExcel:" + e);

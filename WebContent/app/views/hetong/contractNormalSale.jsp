@@ -13,6 +13,9 @@
 .pop_product {
     height: 380px;
 }
+.popwindow {
+	height: initial;
+}
 </style>
 <div class="main">
 	<!-- <div class="location">首页 &gt; <a href="#">合同信息</a></div> -->
@@ -125,10 +128,6 @@
 				<div id="htNum" class="leftF"></div>
 			</td> -->
 		  </tr>
-		  
-		  
-		  
-		  
 		</table>
 		</div>
 		
@@ -194,7 +193,7 @@
 			  <tr>
 				<th width="5%">序号</th>
 				<th width="6%">收件人</th>
-				<th width="10%">收件单位</th>
+				<!-- <th width="10%">收件单位</th> -->
 				<th width="8%">收件地址</th>
 				<th width="11%">联系电话</th>
 				<th width="9%">发件日期</th>
@@ -362,11 +361,11 @@
         </li>
     	<li class="li02">
        		<label>回款日期：</label>
-			<input type="text" name="textfield" class="fidtext" disabled='disabled'/>
+			<input id="huikuanDate" type="text" name="textfield" class="fidtext" disabled='disabled'/>
         </li>
     	<li class="li02">
        		<label>回款金额：</label>
-			<input type="text" name="textfield" class="fidtext" disabled='disabled'/>
+			<input id="huikuanAmount" type="text" name="textfield" class="fidtext" disabled='disabled'/>
         </li>
     	<!-- <li class="li02">
        		<label>资金类型：</label>
@@ -374,18 +373,18 @@
 				<option value="0">教图湖北市场</option>
 				<option value="1">教图湖北市场</option>
 			</select>
-        </li> -->
-    	<!-- <li class="li02">
+        </li>
+    	<li class="li02">
        		<label>账　　户：</label>
 			<select id="zhanghu" name="zhanghu" class="leftF" >
 				<option value="0">教图湖北市场</option>
 				<option value="1">教图湖北市场</option>
 			</select>
-        </li> -->
-    	 <li class="li02">
+        </li>  -->
+    <!-- 	 <li class="li02">
        		<label>财务月份：</label>
 			<input id ="" type="text" name="textfield" class="fidtext" disabled='disabled'/>
-        </li> 
+        </li>  -->
     	<li class="li03">
        		<label>备　　注：</label>
 			<textarea id="remarkAboutFapiao"></textarea>
@@ -419,10 +418,10 @@
        		<label>联系电话：</label>
 			<input id="tel" type="text" name="textfield" class="fidtext" />
         </li>
-    	<li class="li01">
+    	<!-- <li class="li01">
        		<label>收件单位：</label>
 			<input id="receiveCom" type="text" name="textfield" class="fidtext" />
-        </li>
+        </li> -->
     	<!-- <li class="li01">
        		<label>邮　　编：</label>
 			<input id="email" type="text" name="textfield" class="fidtext" />
@@ -444,18 +443,24 @@
 			<!-- <input id="postDate" type="text" name="textfield" class="fidtext" /> -->
 			<input type="text" onClick="WdatePicker({dateFmt:'yyyy-MM-dd'})" id="postDate" name="textfield" class="fidtext"></input>
         </li>
-    	<li class="li02">
+    	<!-- <li class="li02">
        		<label>快递公司：</label>
 			<input id="expressCom" type="text" name="textfield" class="fidtext" />
-        </li> 
-        <%-- <li class="li06">
+        </li>  -->
+        <li class="li02">
        		<label>快递公司：</label>
 			<select id="expressCom" name="xuanze" class="leftF" >
-				  <option value="${p }">EMS</option>
-				  
+				  <option value="EMS">EMS</option>
+				  <option value="EMS">申通快递</option>
+				  <option value="EMS">圆通快递</option>
+				  <option value="EMS">中通快递</option>
+				  <option value="EMS">韵达快递</option>
+				  <option value="EMS">顺丰快递</option>
+				  <option value="EMS">汇通快递</option>
+				  <option value="EMS">天天快递</option>
+				  <option value="EMS">宅急送</option>
 			</select>
-        </li> --%>
-        
+        </li> 
         
         
     	<li class="li02">
@@ -504,7 +509,7 @@
 				/* var depart = $("#danwei .select-button").val(); */
 				var yonghuId = $($("#danwei").children("input").get(0)).val()
 				var data ={"yonghuId":yonghuId};
-				  $.get('ht/getUserAndDepartId.action',data,function(res){
+				  $.get('public/ht/getUserAndDepartId.action',data,function(res){
 					        var customerDepart = res.obj;
 					        var userId = customerDepart.dId;
 					        var danweiId = customerDepart.id;
@@ -555,10 +560,10 @@
 						"contractMoney":contractMoney,
 						"agreementNumber":agreementNumber,"endTime":endTime,"agreementText":agreementText,
 						"remarksText":remarksText,"payMethod":payMethod,"yonghuId":yonghuId};		
-		 $.get('ht/addContractNormal.action',data,function(res){
+		 $.post('public/ht/addContractNormal.action',data,function(res){
 				if(res.success==true){
 					$.messager.alert('提示：',res.msg);
-					$.get('ht/contractListSale.action',function(result){
+					$.get('public/ht/contractListSale.action',function(result){
 						$('#container').html(result);
 						})
 				}else{
@@ -572,6 +577,16 @@
 	
 		//创建合同(提交)
 	$("#contractSubmit").click(function(){
+		var flag = true;
+		var b = validateContractAmount();
+		if(b==false){
+			flag = false;
+		}
+		if(flag == false){
+			return;
+		}
+		
+		
 		var id = $("#htNum").text();//合同编号
 		
 		var company = $("#company").val();
@@ -593,10 +608,10 @@
 						"contractMoney":contractMoney,
 						"agreementNumber":agreementNumber,"endTime":endTime,"agreementText":agreementText,
 						"remarksText":remarksText,"payMethod":payMethod,"yonghuId":yonghuId};		
-		 $.get('ht/addContractNomalSubmit.action',data,function(res){
+		 $.post('public/ht/addContractNomalSubmit.action',data,function(res){
 				if(res.success==true){
 					$.messager.alert('提示：',res.msg);
-					$.get('ht/contractListSale.action',function(result){
+					$.get('public/ht/contractListSale.action',function(result){
 						$('#container').html(result);
 						})
 				}else{
@@ -615,15 +630,15 @@
 			//如果没有生成合同，直接回到合同列表页面;如果已经生成合同，提示 要放弃当前操作吗?  删除当前合同和合同所属的产品,发票,快递
 			if(id!=null&&id!=""){
 				var data = {"id":id};
-				$.get('ht/contractNormalCancel.action',data,function(res){
+				$.post('public/ht/contractNormalCancel.action',data,function(res){
 					if(res.success==true){
-						$.get('ht/contractListSale.action',function(result){
+						$.get('public/ht/contractListSale.action',function(result){
 							$('#container').html(result);
 							})
 					   }
 					})
 			}else{
-				$.get('ht/contractListSale.action',function(result){
+				$.get('public/ht/contractListSale.action',function(result){
 					$('#container').html(result);
 					})
 			 }
@@ -633,7 +648,7 @@
 	
 //点添加产品时，创建合同对象
 $("#addProduct").click(function(){
-	$("#sureAboutProduct").attr("style","display:block;"); 
+	$("#sureAboutProduct").attr("style","display:inline;"); 
 	$("#updateProduct").attr("style","display:none;");
 	$("#deleteProduct").attr("style","display:none;");
 	
@@ -645,7 +660,7 @@ $("#addProduct").click(function(){
 	
 	var id = $("#htNum").text();//合同编号
 	if(id==""||null==id){
-		 $.get('ht/addRealContract.action',function(res){
+		 $.get('public/ht/addRealContract.action',function(res){
 			 if(res.success==true){
 				var htId =  res.obj;
 				console.log(htId);
@@ -658,19 +673,19 @@ $("#addProduct").click(function(){
 })
 //点击新增快递	
 $("#addFahuo").click(function(){
-	$("#sureAboutFaHuo").attr("style","display:block;");
+	$("#sureAboutFaHuo").attr("style","display:inline;");
 	$("#updateFahuo").attr("style","display:none;");
 	$("#deleteFahuo").attr("style","display:none;");
 	
 	$("#receiver").val("");
 	$("#tel").val("");
-	$("#receiveCom").val("");
+	/* $("#receiveCom").val(""); */
 	$("#email").val("");
 	$("#receiveAddress").val("");
 	$("#post").val("");
 	$("#postAddress").val("");
 	$("#postDate").val("");
-	$("#expressCom").val("");
+	$("#expressCom .select-button").val("EMS");
 	$("#expressNum").val("");
 	$("#expressContent").val("");
 	//$("#remarkAboutExpress").val("");
@@ -680,7 +695,7 @@ $("#addFahuo").click(function(){
 $("#addFapiao").click(function(){
 
 	
-	$("#sureAboutFapiao").attr("style","display:block;");
+	$("#sureAboutFapiao").attr("style","display:inline;");
 	$("#updateFapiao").attr("style","display:none;");
 	$("#deleteFapiao").attr("style","display:none;");
 	
@@ -692,6 +707,7 @@ $("#addFapiao").click(function(){
 	$("#pinming").val("");
 	$("#kaipiaoDate").val("");
 	$("#remarkAboutFapiao").val("");
+	$("#kaipiaoAmountError").text("");
 })	
 
 
@@ -722,18 +738,18 @@ $("#addFahuo").click(function(){
 	//获取发件地
 	//获取所属公司
 	var company = $("#company").val();
-	
-	$.get('ht/getFajiandi.action',{"company":company},function(res){
-		 if(res.success==true){
-			
-			var companyInfo = res.obj;
-			$("#postAddress").val(companyInfo.address);
-		 }else{
-			$("#postAddress").val("");
-		 }
-		 
-	}); 
-	
+	if(company!=""){
+		$.post('public/ht/getFajiandi.action',{"company":company},function(res){
+			 if(res.success==true){
+				
+				var companyInfo = res.obj;
+				$("#postAddress").val(companyInfo.address);
+			 }else{
+				$("#postAddress").val("");
+			 }
+			 
+		}); 
+	}
 	
 	
 	$("#htNumRelationFaHuo").text(id);
@@ -755,10 +771,7 @@ function validateContractAmount(){
 
 	//验证发票金额是否合法
 	function validateFapiaoAmount(){
-		var kaipiaoAmount = $("#kaipiaoAmount").val();
-		var contractAmount = $("#contractAmount").val();
-	     var reg = new RegExp("^[0-9]*$");
-	     
+	    var reg = new RegExp("^[0-9]*$");
 	 	var id = $("#htNum").text();//合同编号
 		var kaipiaoAmount = $("#kaipiaoAmount").val();//开票金额
 		var htTotalAmount = $("#contractAmount").val();//合同总金额
@@ -776,7 +789,7 @@ function validateContractAmount(){
 			 return false;
 		 }
 		
-			/* 	 $.get('ht/getTotalFapiaoAmount.action',{"id":id},function(res){
+			/* 	 $.get('public/ht/getTotalFapiaoAmount.action',{"id":id},function(res){
 		 if(res.success==true){
 			var a = res.obj;
 			debugger;
@@ -804,7 +817,7 @@ function validateContractAmount(){
 		}	
 
 </script>
-<<script type="text/javascript">
+<script type="text/javascript">
 Date.prototype.Format = function(format){ 
 
 	var o = { 

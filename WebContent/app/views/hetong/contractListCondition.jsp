@@ -176,7 +176,7 @@
 					<td bgcolor="#dcfcd3">${c.company }</td>
 					<td bgcolor="#dcfcd3">${c.contractMoney }</td>
 				    <td bgcolor="#dcfcd3">未处理</td>
-					<td bgcolor="#dcfcd3"><a href="/ht/contractDetail.action?id=${c.id }">详情</a></td>
+					<td bgcolor="#dcfcd3"><a href="/public/ht/contractDetail.action?id=${c.id }">详情</a></td>
 			        </tr>
 				    </c:if> --%>
 				    
@@ -214,7 +214,7 @@
 					<td bgcolor="#dcfcd3">中文发现、读秀</td>
 					<td bgcolor="#dcfcd3">世纪超星</td>
 					<td bgcolor="#dcfcd3">300，000</td>
-					<td bgcolor="#dcfcd3"><a href="/ht/contractDetail">详情</a></td>
+					<td bgcolor="#dcfcd3"><a href="/public/ht/contractDetail">详情</a></td>
 				  </tr> -->
 				  </c:forEach>
 				</table>
@@ -271,9 +271,9 @@ $(document).ready(function(){
 	
 		
 function changeMethod(nextPage){
-			/* location.href="/ht/contractList.action?page="+nextPage; */
+			/* location.href="/public/ht/contractList.action?page="+nextPage; */
 			
-			$.get('ht/contractListCondition.action',{page:nextPage},function(result){
+			$.get('public/ht/contractListCondition.action',{page:nextPage},function(result){
 				$('#container').html(result);
 				})
 		}
@@ -284,7 +284,7 @@ function changeMethod(nextPage){
 		alert("1111");
 		$.ajax({
 			type:'Post',
-			url:'/ht/getUndealcontractList.action',
+			url:'/public/ht/getUndealcontractList.action',
 			data:formdata,
 			dataType:'json',
 			success:function(result){
@@ -299,7 +299,7 @@ function changeMethod(nextPage){
 
 	$(".detail").click(function(){
 		var id = $(this).attr("id");
-		$.get('ht/contractDetail.action',{id:id},function(result){
+		$.get('public/ht/contractDetail.action',{id:id},function(result){
 			$('#container').html(result);
 			})
 	})
@@ -319,13 +319,13 @@ $("#search").click(function(){
 	/* var data = {"year":year,"purchaseCom":purchaseCom,"danwei":danwei,"gongsi":gongsi,"chanpin":chanpin,"shengfen":shengfen,"group":group,"responsibility":responsibility,
 		"zhuangtai":zhuangtai,"userId":userId};  */
 	var data = {"purchaseCom":purchaseCom};
-	  $.get('ht/contractListCondition.action',data,function(result){
+	  $.post_('public/ht/contractListCondition.action',data,function(result){
 			$('#container').html(result);
 			}) 
 	
  		/* $.ajax({
 			type:'GET',
-			url:'/ht/contractListCondition.action',
+			url:'/public/ht/contractListCondition.action',
 			data:data,
 			dataType:'json',
 			success:function(result){
@@ -334,7 +334,7 @@ $("#search").click(function(){
 			error: function (XMLHttpRequest, textStatus, errorThrown) { alert("网络异常1111"); } 
 			
 		});  */
-		/* $.get('ht/contractListCondition.action',formdata, function(result){
+		/* $.get('public/ht/contractListCondition.action',formdata, function(result){
 		console.log(result);})
 		/* var formdata = new FormData($("#form1")[0]);
 		formdata.append("year",year);

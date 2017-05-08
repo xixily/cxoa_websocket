@@ -15,7 +15,8 @@
 }
 </style>
 <div class="main">
-	<div class="location">首页 &gt; <a href="#">合同信息</a></div>
+<!-- <input  type="button" name="button" value="返回" class="bnt"/> -->
+ 	<!-- <div class="location">首页 &gt; <a href="#">合同信息</a></div> -->
 	<div class="contract">
     <form id="form1" name="form1" method="post" action="">
 		<div class="tract_list">
@@ -32,17 +33,20 @@
 				<p class="text">所属公司所属公司</p>
 			</td> -->
 			<td valign="top" width="25%">
-				<div class="quy_tit">所属公司：</div>
+				<div class="quy_tit">所属公司:</div>
 				<input id="company" type="text" name="textfield" class="fidtext" value="${contract.company }" disabled="disabled"/>
 				 <p class="text">${ContractVO.company }</p> 
 			</td>
 			<td valign="top" width="25%">
-				<div class="quy_tit">单位名称：</div>
-				<select id="danwei" name="danwei" class="leftF" value="${contract.depart }" >
+				
+				<%-- <select id="danwei" name="danwei" class="leftF" value="${contract.depart }" >
 				<c:forEach var="c" items="${companyList}">
 					<option value="${c.id }"> ${c.customerName}</option>					
 				</c:forEach>
-				</select>
+				</select> --%>
+				
+				<div class="quy_tit">单位名称:</div>
+				<input id="danwei" type="text" name="textfield" class="fidtext" value="${contract.depart }" disabled="disabled"/>
 				 <p class="text">${ContractVO.depart }</p>
 				<!-- <input type="text" name="textfield" class="fidtext" /> -->
 			</td>
@@ -214,7 +218,7 @@
 			  <tr>
 				<th width="5%">序号</th>
 				<th width="6%">收件人</th>
-				<th width="10%">收件单位</th>
+				<!-- <th width="10%">收件单位</th> -->
 				<th width="8%">收件地址</th>
 				<th width="11%">联系电话</th>
 				<th width="9%">发件日期</th>
@@ -227,7 +231,7 @@
 			  <tr>
 				<td bgcolor="#f5f6f6">${f.orderid}</td>
 				<td bgcolor="#f5f6f6">${f.d_contact}</td>
-				<td bgcolor="#f5f6f6">${f.d_company}</td>
+				<%-- <td bgcolor="#f5f6f6">${f.d_company}</td> --%>
 				<td bgcolor="#f5f6f6">${f.d_address}</td>
 				<td bgcolor="#f5f6f6">${f.d_tel}</td>
 				<td bgcolor="#f5f6f6">${f.jDate}</td>
@@ -480,26 +484,13 @@
 
 <script type="text/javascript">
 	$(function(){
-		$('#danwei').selectlist({
+		$('select').selectlist({
 			width: 130,
-			height: 18,
-			//选择项目单位携带出对应的用户ID和单位ID
-		 	onChange: function(){
-				/* var depart = $("#danwei .select-button").val(); */
-				var yonghuId = $($("#danwei").children("input").get(0)).val()
-				var data ={"yonghuId":yonghuId};
-				  $.get('ht/getUserAndDepartId.action',data,function(res){
-					        var customerDepart = res.obj;
-					        var userId = customerDepart.dId;
-					        var danweiId = customerDepart.id;
-					        $("#userId").val(userId);
-					        $("#danweiId").val(danweiId);
-				});  
-			} 
+			height: 18
 		});		
 	})
 	
-	//更新合同
+	//更新合同(本页面没用)
 	$("#saleSubmitAgain").click(function(){
 		var id = $("#htNum").text();
 		var company = $("#company").val();
@@ -524,10 +515,10 @@
 				//,"agreementText":agreementText,"remarksText":remarksText,"payMethod":payMethod
 	    var data={"id":id,"company":company,"depart":depart,"cid":cid,"didNum":didNum,"contractMoney":contractMoney,"agreementNumber":agreementNumber,"endTime":endTime,"agreementText":agreementText,"remarksText":remarksText,"payMethod":payMethod}		
 				
-		 $.get('ht/updateContractNormal.action',data,function(res){
+		 $.post('public/ht/updateContractNormal.action',data,function(res){
 				if(res.success==true){
 					$.messager.alert('提示：',res.msg);
-					$.get('ht/contractListSale.action',function(result){
+					$.get('public/ht/contractListSale.action',function(result){
 						$('#container').html(result);
 						})
 				}else{
@@ -555,10 +546,10 @@
 		
 	    var data={"id":id,"company":company,"depart":depart,"cid":cid,"didNum":didNum,"contractMoney":contractMoney,"agreementNumber":agreementNumber,"endTime":endTime,"agreementText":agreementText,"remarksText":remarksText,"payMethod":payMethod}		
 				
-		 $.get('ht/updateContractNormal.action',data,function(res){
+		 $.get('public/ht/updateContractNormal.action',data,function(res){
 				if(res.success==true){
 					$.messager.alert('提示：',res.msg);
-					$.get('ht/contractListSale.action',function(result){
+					$.get('public/ht/contractListSale.action',function(result){
 						$('#container').html(result);
 						})
 				}else{
@@ -568,10 +559,5 @@
 		
 	}) */
 	
-	
-	$(document).ready(function(){
-		$("#danwei .select-button").val("${contract.depart}");
-		/* $('li[data-value="${contract.depart}"').trigger('click'); */
-	})
 </script>
 

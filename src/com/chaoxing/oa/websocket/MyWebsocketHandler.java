@@ -148,6 +148,7 @@ public class MyWebsocketHandler implements WebSocketHandler {
 	
 	private void getShListMessages(PMessages msg,WebSocketSession webSocketSession) {
 		SessionInfo sessionInfo = getSessionInfo(webSocketSession);
+//		boolean isChecker = sysService.getCaiwushRoleId(sessionInfo.getRoleId());
 		boolean isChecker = sysService.getCaiwushRoleId() == sessionInfo.getRoleId() ? true : false;
 		if(null != sessionInfo){
 			List<Messages> messages = chatService.findShChatRecordBylisId(msg.getLis_id(), sessionInfo.getId(), isChecker);
@@ -238,9 +239,11 @@ public class MyWebsocketHandler implements WebSocketHandler {
 	//财务审核信息每个财务审核管理员都能收到
 	private void sendCaiwuMsg(PMessages msg, WebSocketSession webSocketSession) {
 		SessionInfo session = getSessionInfo(webSocketSession);
+//		boolean isChecker = sysService.getCaiwushRoleId(session.getRoleId());
 		Integer cwRoleId = sysService.getCaiwushRoleId();
 		WebSocketSession wbsession = null;
 		if(cwRoleId == session.getRoleId()){// 财务管理员处理信息发送给申报人
+//		if(isChecker){// 财务管理员处理信息发送给申报人
 			Integer ownerId = msg.getOwnerId();
 			if(null != ownerId){
 				wbsession = userChatSession.get(ownerId);

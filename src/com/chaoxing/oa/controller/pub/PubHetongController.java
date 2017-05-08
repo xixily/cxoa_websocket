@@ -1,11 +1,14 @@
 package com.chaoxing.oa.controller.pub;
 
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.chaoxing.oa.entity.page.common.Json;
@@ -15,6 +18,7 @@ import com.chaoxing.oa.entity.page.hetong.PCustomerDepart;
 import com.chaoxing.oa.entity.page.hetong.PFapiao;
 import com.chaoxing.oa.entity.page.pub.hetong.UserList;
 import com.chaoxing.oa.entity.page.system.SessionInfo;
+import com.chaoxing.oa.entity.po.hetong.Contract;
 import com.chaoxing.oa.service.PubHetongService;
 import com.chaoxing.oa.util.system.ResourceUtil;
 
@@ -78,6 +82,7 @@ public class PubHetongController {
 	public Json getCoreCells(String email, HttpSession session){
 		Json result = new Json();
 		SessionInfo sessionInfo = getSessionInfo(session);
+		
 		email = (null!=email&&!"".equals(email)?email:sessionInfo.getEmail());
 		String level = sessionInfo.getLevel();
 		String semail = sessionInfo.getEmail();
@@ -242,6 +247,20 @@ public class PubHetongController {
 		}
 		return result;
 	}
+	
+	@RequestMapping(value="/getUserContractById")
+	@ResponseBody
+	public Json getUserContract(@RequestParam(required=true) Integer userId){
+		Json result = new Json();
+		if(userId != 0){
+			List<Contract> lis = pubHetongService.findUserContractsById(userId);
+			result.setSuccess(true);
+			result.setMsg("查询成功~！");
+			result.setObj(lis);
+		}
+		return result;
+	}
+	
 	
 	private int ifCell(String email, String semail){
 		PRenshiEmployee puser = pubHetongService.getUserByEmai(semail);

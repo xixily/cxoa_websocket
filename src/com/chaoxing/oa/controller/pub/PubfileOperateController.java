@@ -29,6 +29,8 @@ public class PubfileOperateController {
 	
 	@RequestMapping(value="/daihuikuanExport")
 	public ModelAndView exportDaihuikuan(PBaoxiao pbaoxiao, HttpServletRequest request, HttpServletResponse response){
+		Long max = publicCaiwuService.getMaxCpNumber();
+		pbaoxiao.setCpNumber(max);
 		Map<String, Object> results = publicCaiwuService.findBaoxiao(pbaoxiao, new Page(1, 30000));
 		List<PBaoxiao> pbs = (List<PBaoxiao>) results.get("rows");
 		if(pbs!=null && pbs.size()>0){

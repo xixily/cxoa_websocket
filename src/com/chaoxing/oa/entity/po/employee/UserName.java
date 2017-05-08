@@ -2,17 +2,23 @@ package com.chaoxing.oa.entity.po.employee;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.GenericGenerator;
+
+import com.chaoxing.oa.entity.po.caiwu.UserBank;
 
 
 @Entity
@@ -89,6 +95,7 @@ public class UserName implements Serializable {
 	private Integer ifForeign;//外籍
 	private Byte ifEngineering;//理工 
 	private String txStruct;
+	private List<UserBank> userBank;
 	
 	@Id
 	@Column(name="ID", nullable=false)
@@ -516,10 +523,16 @@ public class UserName implements Serializable {
 	public BigDecimal getSickLleaveTotal() {
 		return sickLleaveTotal;
 	}
-	
 	@Column(name="年假累计", columnDefinition=" decimal(10,2) DEFAULT '0.00'")
 	public BigDecimal getAnnualLleave() {
 		return annualLleave;
+	}
+	@OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY,targetEntity = UserBank.class,orphanRemoval = true,mappedBy = "user")//用户作为一方使用OneToMany注解
+	public List<UserBank> getUserBank() {
+		return userBank;
+	}
+	public void setUserBank(List<UserBank> userBank) {
+		this.userBank = userBank;
 	}
 	public void setSickLleaveTotal(BigDecimal sickLleaveTotal) {
 		this.sickLleaveTotal = sickLleaveTotal;
@@ -571,6 +584,13 @@ public class UserName implements Serializable {
 	}
 	public void setTxStruct(String txStruct) {
 		this.txStruct = txStruct;
+	}
+	public UserName() {
+		super();
+	}
+	public UserName(Integer id) {
+		super();
+		this.id = id;
 	}
 	
 

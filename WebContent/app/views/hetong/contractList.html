@@ -1,0 +1,73 @@
+<div id="ht_manager_guidance">
+
+    <div id="user_list_ctlist">
+        <h4 style="text-align:center">合同列表</h4>
+        <table id="user_ctList_table"
+               data-toggle="table"
+               data-height="568"
+               data-show-header="true"
+               data-show-columns="true"
+               data-toolbar="#ht_ulist_toolbar"
+               data-search="true"
+               data-striped="true"
+               data-id-field="email"
+               data-show-footer="true"
+               data-detail-view="true"
+               data-detail-formatter="hetong.htManager.zhidao.detailFormatter"
+               data-query-params="queryParams"
+               data-query-params-type=""
+               data-show-toggle="true"
+               data-show-refresh="true"
+               data-page-size="50"
+               data-page-list="[15,30,50,100]"
+               data-response-handler="responseHandler"
+               data-pagination="true"
+               data-side-pagination="client"
+               data-cache="false"
+                >
+            <thead>
+            <tr>
+                <th data-field="autoCode" data-visible="false" data-sortable="true">合同编号</th>
+                <th data-field="autoCode" data-visible="false" data-sortable="true">登记时间</th>
+                <th data-field="autoCode" data-visible="false" data-sortable="true">签定时间</th>
+                <th data-field="autoCode" data-visible="false" data-sortable="true">所属公司</th>
+                <th data-field="autoCode" data-visible="false" data-sortable="true">单位</th>
+                <th data-field="autoCode" data-visible="false" data-sortable="true">归档编号</th>
+                <th data-field="autoCode" data-visible="false" data-sortable="true">贴花情况</th>
+                <th data-field="autoCode" data-visible="false" data-sortable="true">品名</th>
+                <th data-field="autoCode" data-visible="false" data-sortable="true">图书数量</th>
+                <th data-field="autoCode" data-visible="false" data-sortable="true">合同金额</th>
+                <th data-field="autoCode" data-visible="false" data-sortable="true">地区</th>
+                <th data-field="autoCode" data-visible="false" data-sortable="true">省份</th>
+                <th data-field="autoCode" data-visible="false" data-sortable="true">经办人</th>
+                <th data-field="autoCode" data-visible="false" data-sortable="true">盖章时间</th>
+                <th data-field="autoCode" data-visible="false" data-sortable="true">图书数量</th>
+                <th data-field="autoCode" data-visible="false" data-sortable="true">图书数量</th>
+                <th data-field="autoCode" data-visible="false" data-sortable="true">图书数量</th>
+                <th data-field="autoCode" data-visible="false" data-sortable="true">图书数量</th>
+                <th data-field="autoCode" data-visible="false" data-sortable="true">图书数量</th>
+                <th data-field="autoCode" data-visible="false" data-sortable="true">图书数量</th>
+                <th data-field="autoCode" data-visible="false" data-sortable="true">图书数量</th>
+                <th data-field="autoCode" data-visible="false" data-sortable="true">图书数量</th>
+                <th data-field="autoCode" data-visible="false" data-sortable="true">图书数量</th>
+                <th data-field="autoCode" data-visible="false" data-sortable="true">图书数量</th>
+                <th data-field="autoCode" data-visible="false" data-sortable="true">图书数量</th>
+                <th data-field="autoCode" data-visible="false" data-sortable="true">图书数量</th>
+                <th data-field="autoCode" data-visible="false" data-sortable="true">图书数量</th>
+            </tr>
+            </thead>
+        </table>
+    </div>
+
+    <div id="ht_detail" style="display:none">
+
+    </div>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $('#ht_ulist_table').bootstrapTable({
+                url:'public/hetong/getUserList.action',
+                onClickRow: hetong.htManager.zhidao.onUlistClickRow
+            });
+        })
+    </script>
+</div>

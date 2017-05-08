@@ -29,12 +29,14 @@ import com.chaoxing.oa.entity.po.hetong.ItemPrice;
 import com.chaoxing.oa.entity.po.hetong.PageBean;
 import com.chaoxing.oa.entity.po.view.RenshiUserName;
 import com.chaoxing.oa.entity.po.view.Usercontracts;
+import com.chaoxing.oa.entity.po.view.Usercontracts2;
+import com.chaoxing.oa.entity.po.hetong.Area;
 import com.chaoxing.oa.entity.po.hetong.CompanyInfo;
 import com.chaoxing.oa.service.HtService;
 import com.chaoxing.oa.util.system.ResourceUtil;
 
 @Controller
-@RequestMapping("/ht")
+@RequestMapping("/public/ht")
 public class HtController {
 
 	private HtService htService;
@@ -53,19 +55,19 @@ public class HtController {
 	@RequestMapping(value = "/contractList")
 	public String agreementList(Model model, @RequestParam(value = "page", defaultValue = "1") int page,
 			@RequestParam(value = "size", defaultValue = "10") int size, HttpSession session) {
-
+		
 		// 查询出未处理合同的数量
 		int unhandledCount = htService.getUnhandledContract();
-		List<Contract> contractList = htService.getContractList(page, size);
+		List<Usercontracts2> contractList = htService.getContractList(page, size);
 		// 总合同数量
 		int totalCountContract = htService.getTotalCountContract();
 		// 所属公司列表信息
-		List<Contract> companyList = htService.getCompanyList(); 
+		List<CompanyInfo> companyInfoList = htService.getCompanyList(); 
 		//单位性质列表信息
 		List<Contract> propertyList = htService.getPropertyList();
 		//产品名称列表信息
 		List<ItemPrice> productList = htService.getProductList();
-		PageBean<Contract> pageBean = new PageBean<Contract>();
+		PageBean<Usercontracts2> pageBean = new PageBean<Usercontracts2>();
 		/* PageBean<Contract> pageBean = new PageBean<Contract>(); */
 		pageBean.init(size, totalCountContract, page);
 		pageBean.setList(contractList);
@@ -73,21 +75,30 @@ public class HtController {
 		model.addAttribute("contractList", contractList);
 		model.addAttribute("pageBean", pageBean);
 		model.addAttribute("unhandledCount", unhandledCount);
-		model.addAttribute("companyList", companyList);
+		model.addAttribute("companyInfoList", companyInfoList);
 		model.addAttribute("propertyList", propertyList);
 		model.addAttribute("productList", productList);
 		return "app/views/hetong/contractList";
 
 	}
 
-	// 合同详情       产品 发票 快递 获取负责人相关信息  
+	// 合同详情       产品 发票 快递 获取负责人相关信息   RenshiUserName
 	@RequestMapping(value = "/contractDetail")
-	public String contractDetail(Model model, @RequestParam("id") Integer id) throws ParseException {
+	public String contractDetail(Model model, @RequestParam("id") Integer id,HttpSession session) throws ParseException {
 		Contract contract = htService.getContracDetailById(id);
-		/*//负责人
-		String operator = contract.getOperator();*/
+		//根据合同拿到所属公司
+		String company = contract.getCompany();
+		String substringCompany = company.substring(0, 2);
+		List<Area> zhanghuList = htService.getZhanghu(substringCompany);
+		SessionInfo sessionInfo = (SessionInfo)session.getAttribute(ResourceUtil.getSessionInfoName());
+		String email = sessionInfo.getEmail();
+		//根据邮箱在人事username里拿联系电话
+		RenshiUserName renshiUserName = htService.getTelephoneByEmail(email);
+		
+		//用户单位ID
 		Integer cid = contract.getCid();
 		CustomerDepart customerDepart = htService.getCustomerDepartByoperator(cid);
+		
 	/*	Date dengjiTime = new Date();
 		contract.setDengjiTime(dengjiTime);*/
 		//产品列表
@@ -106,6 +117,8 @@ public class HtController {
 		model.addAttribute("fahuoList", fahuoList);
 		model.addAttribute("customerDepart", customerDepart);
 		model.addAttribute("contractVO", contractVO);
+		model.addAttribute("renshiUserName", renshiUserName);
+		model.addAttribute("zhanghuList", zhanghuList);
 		return "app/views/hetong/contractNormal";
 	}
 	
@@ -142,7 +155,7 @@ public class HtController {
 	
 	//审核未通过  暂存
 	@RequestMapping(value = "/contractDetailForSale2")
-	public String contractDetailForSale2(Model model, @RequestParam("id") Integer id,HttpSession session) throws ParseException {
+	public String contractDetailForSale2(Model model, @RequestParam("id") Integer id,@RequestParam("state") Integer state,HttpSession session) throws ParseException {
 		Contract contract = htService.getContracDetailById(id);
 		
 		//产品列表
@@ -171,6 +184,7 @@ public class HtController {
 		model.addAttribute("companyList", companyList);
 		model.addAttribute("ContractVO", contractVO);
 		model.addAttribute("productList", productList);
+		model.addAttribute("state", state);
 		return "app/views/hetong/contractNormalDetailSale2";
 	}
 	
@@ -183,9 +197,9 @@ public class HtController {
 			@RequestParam(value = "purchaseCom", defaultValue = "") String purchaseCom,// 购买单位
 	        @RequestParam(value = "gongsi", defaultValue = "") String gongsi, // 所属公司
 	        @RequestParam(value = "danwei", defaultValue = "") String danwei,//单位性质 
-	        @RequestParam(value = "chanpin", defaultValue = "") String product,//产品名称
-	        @RequestParam(value = "shengfen", defaultValue = "") String province,//省份
-	        @RequestParam(value = "group", defaultValue = "") String group,//小组
+	        /*@RequestParam(value = "chanpin", defaultValue = "") String product,//产品名称
+*/	        /*@RequestParam(value = "shengfen", defaultValue = "") String province,//省份
+*/	        @RequestParam(value = "group", defaultValue = "") String group,//小组
 	        @RequestParam(value = "responsibility", defaultValue = "") String  responsibility,//项目负责人
 	        @RequestParam(value = "userId", defaultValue = "") Integer userId,
         	@RequestParam(value = "zhuangtai", defaultValue = "")String stateStr//合同状态
@@ -194,7 +208,7 @@ public class HtController {
 		// List<Contract> contractList =  htService.getContractListCondition(year,purchaseCom,gongsi,danwei,product,province,group,responsibility,zhuangtai,userId,page,size);
 		
 		// 所属公司列表信息
-	    List<Contract> companyList = htService.getCompanyList(); 
+	    List<CompanyInfo> companyInfoList = htService.getCompanyList(); 
 		//单位性质列表信息
 		List<Contract> propertyList = htService.getPropertyList();
 		//产品名称列表信息
@@ -212,15 +226,16 @@ public class HtController {
 				state = Integer.parseInt(stateStr);
 			}
 			
-			List<Contract> contractList = htService.getContractListConditionTest(purchaseCom,gongsi,danwei,product,province,group,responsibility,userId,state,page,size);
-			int conditionCountContract = htService.getConditionCountContract(purchaseCom,gongsi,danwei,product,province,group,responsibility,userId,state);
+			List<Usercontracts2> contractList = htService.getContractListConditionTest(purchaseCom,gongsi,danwei,group,responsibility,userId,state,page,size);
+			int conditionCountContract = htService.getConditionCountContract(purchaseCom,gongsi,danwei,group,responsibility,userId,state);
 			
-			PageBean<Contract> pageBean = new PageBean<Contract>();
+			PageBean<Usercontracts2> pageBean = new PageBean<Usercontracts2>();
 			pageBean.init(size, conditionCountContract, page);
 			pageBean.setList(contractList);
 			
+			model.addAttribute("gongsi", gongsi);
 			model.addAttribute("pageBean", pageBean);
-			model.addAttribute("companyList", companyList);
+			model.addAttribute("companyInfoList", companyInfoList);
 			model.addAttribute("propertyList", propertyList);
 			model.addAttribute("productList", productList);
 			model.addAttribute("unhandledCount", unhandledCount);
@@ -236,8 +251,8 @@ public class HtController {
 			@RequestParam(value = "size", defaultValue = "10") int size) {
 		// 查询出未处理合同的数量
 		int unhandledCount = htService.getUnhandledContract();
-		List<Contract> unHandledContractList = htService.getUnHandledContract(page, size);
-		PageBean<Contract> pageBean = new PageBean<Contract>();
+		List<Usercontracts2> unHandledContractList = htService.getUnHandledContract(page, size);
+		PageBean<Usercontracts2> pageBean = new PageBean<Usercontracts2>();
 		/* PageBean<Contract> pageBean = new PageBean<Contract>(); */
 		pageBean.init(size, unhandledCount, page);
 		pageBean.setList(unHandledContractList);
@@ -290,6 +305,11 @@ public class HtController {
 			) {
 		Json json = new Json();
 		try {
+			if(id==null){
+				json.setSuccess(false);
+				json.setMsg("请先填写完合同、产品信息再保存！");
+				return json;
+			}
 			Contract contract = htService.getContracDetailById(id);
 			Integer dealConditon = 4;
 			//查询出销售本人负责的项目单位
@@ -304,41 +324,78 @@ public class HtController {
 			RenshiUserName renshiUserName = htService.getRenshiUserName(saleId);
 			
 			//岗位性质  部门名称 省份  细胞核
-			String gangweiXingzhi = renshiUserName.getFirstLevel();
-			String bumenmingcheng = renshiUserName.getSecondLevel();
-			String shengfen = renshiUserName.getThirdLevel();
-			String xibaohe = renshiUserName.getFourthLevel();
+			String gangweiXingzhi=null;
+			String bumenmingcheng=null;
+			String shengfen =null;
+			String xibaohe =null;
+			if(renshiUserName!=null){
+				gangweiXingzhi = renshiUserName.getFirstLevel();
+				bumenmingcheng = renshiUserName.getSecondLevel();
+				shengfen = renshiUserName.getThirdLevel();
+				xibaohe = renshiUserName.getFourthLevel();
+			}
+			
 			//提交时间
 			Date date = new Date();
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-			Date endTime2 = sdf.parse(endTime);
+			Date endTime2=null;
+			try {
+				endTime2 = sdf.parse(endTime);
+			} catch (Exception e) {
+				
+			}
+			
 			/*//根据邮箱获取负责人
 			String resPerson = htService.getOperator(email);*/
 			CustomerDepart c = htService.getUserAndDepartId(yonghuId);
 			//单位性质
 			String danweixingzhi = c.getXingzhi();
-			//自动编号
-			Integer id2 = c.getId();
+			//单位编号
+			Integer id2 = c.getdId();
 			Customer customer = htService.getyonghuById(id2);
 			//用户性质
-			String yonghuxingzhi = customer.getXingzhi();
+			String yonghuxingzhi =null;
+			if(customer!=null){
+				yonghuxingzhi = customer.getXingzhi();
+			}
+			
 			
 			StringBuilder productName2 = new StringBuilder();
-		/*	//产品列表
+			//产品列表  
 			List<ItemPrice> itemPriceList = htService.getItemPriceByContractId(id);
 			for (ItemPrice itemPrice : itemPriceList) {
 				//Object b = itemPrice;
 				productName2.append(itemPrice.getName()+",");
 			}
+			//所含产品
 			String productName = productName2.toString();
-			System.out.println(productName);*/
 			
+		/*	//回款金额  receivedAmount
+			List<FaPiao> faPiaoList = htService.getFaPiaoByContractId(id);
+			Integer totalHuikuan =0;
+			for (FaPiao faPiao : faPiaoList) {
+				BigDecimal huiKuan = faPiao.getHuiKuan();
+				Date receivedpaymentsdate = faPiao.getReceivedpaymentsdate();
+				
+				 int huikuanInt=huiKuan.intValue();
+				 totalHuikuan = huikuanInt+totalHuikuan;
+			}
+			String huikuanString = totalHuikuan.toString();*/
 			
+			//开票总金额
+			List<FaPiao> faPiaoList = htService.getFaPiaoByContractId(id);
+			Integer totalHuikuan =0;
+			float f =0.0f;
+			for (FaPiao faPiao : faPiaoList) {
+				 BigDecimal money = faPiao.getMoney();
+				 float moneyFloat = money.floatValue();
+				 f = moneyFloat+f;
+			}
 			
 			htService.updateContractSave(id, company, depart, cid, didNum, contractMoney, 
 					agreementNumber, endTime2, 
 					agreementText, remarksText, payMethod,
-					dealConditon,gangweiXingzhi,bumenmingcheng,shengfen,xibaohe,date,danweixingzhi,yonghuxingzhi);
+					dealConditon,gangweiXingzhi,bumenmingcheng,shengfen,xibaohe,date,danweixingzhi,yonghuxingzhi,productName,f);
 			json.setSuccess(true);
 			json.setObj(contract);
 			json.setMsg("创建合同成功");
@@ -370,19 +427,36 @@ public class HtController {
 			HttpSession session) {
 		Json json = new Json();
 		try {
+			if(id==null){
+				json.setSuccess(false);
+				json.setMsg("请填写完合同、产品信息后再提交!");
+				return json;
+			}else{
+				
+			
 			Contract contract = htService.getContracDetailById(id);
 			
-			/*StringBuilder productName2 = new StringBuilder();
+			StringBuilder productName2 = new StringBuilder();
 			//产品列表
 			List<ItemPrice> itemPriceList = htService.getItemPriceByContractId(id);
 			for (ItemPrice itemPrice : itemPriceList) {
 				//Object b = itemPrice;
 				productName2.append(itemPrice.getName()+",");
 			}
-			String productName = productName2.toString();*/
+			String productName = productName2.toString();
 			
+			//开票总金额
+			List<FaPiao> faPiaoList = htService.getFaPiaoByContractId(id);
+			Integer totalHuikuan =0;
+			float f =0.0f;
+			for (FaPiao faPiao : faPiaoList) {
+				 BigDecimal money = faPiao.getMoney();
+				 float moneyFloat = money.floatValue();
+				 f = moneyFloat+f;
+			}
+			String huikuanString = totalHuikuan.toString();
 			
-			/*SimpleDateFormat sdf = new SimpleDateFormat("yyyy-mm-dd");
+			/*SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 			String formatDate = sdf.format(date);*/
 			Integer dealConditon = 0;
 			//查询出销售本人负责的项目单位
@@ -392,20 +466,24 @@ public class HtController {
 			//根据销售本人ID查询出RenshiUserName对象
 			RenshiUserName renshiUserName = htService.getRenshiUserName(saleId);
 			
-			//岗位性质  部门名称 省份  细胞核
+			//岗位性质  部门名称 省份  细胞核(销售人员信息)
 			String gangweiXingzhi = renshiUserName.getFirstLevel();
 			String bumenmingcheng = renshiUserName.getSecondLevel();
 			String shengfen = renshiUserName.getThirdLevel();
 			String xibaohe = renshiUserName.getFourthLevel();
+			String SalePhoneNumber = renshiUserName.getPhoneNumber();
 			//根据邮箱获取负责人 从用户单位表中查出的负责人
 			String charger = htService.getOperator(email);
 			//要从session中获取用户信息  set 负责人(本人负责的合同)
-			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-mm-dd");
-			Date endTime2 = sdf.parse(endTime);
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+			Date endTime2=null;
+			try {
+				endTime2 = sdf.parse(endTime);
+			} catch (Exception e) {
+				
+			}
 			//提交时间
 			Date date = new Date();
-
-			
 			
 			CustomerDepart c = htService.getUserAndDepartId(yonghuId);
 			//单位性质
@@ -416,13 +494,14 @@ public class HtController {
 			//用户性质
 			if(customer!=null){
 				String yonghuxingzhi = customer.getXingzhi();
-				htService.updateContractSave(id, company, depart, cid, didNum, contractMoney, agreementNumber, endTime2, agreementText, remarksText, payMethod,dealConditon,gangweiXingzhi,bumenmingcheng,shengfen,xibaohe,date,danweixingzhi,yonghuxingzhi);
+				htService.updateContractSave(id, company, depart, cid, didNum, contractMoney, agreementNumber, endTime2, agreementText, remarksText, payMethod,dealConditon,gangweiXingzhi,bumenmingcheng,shengfen,xibaohe,date,danweixingzhi,yonghuxingzhi,productName,f);
 				json.setSuccess(true);
 				json.setObj(contract);
 				json.setMsg("创建合同成功");
 			}else{
 				json.setSuccess(false);
 				json.setMsg("创建合同失败");
+			}
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -475,6 +554,7 @@ public class HtController {
 		Json json = new Json();
 		try {
 			Contract contract = new Contract();
+			contract.setDealConditon(4);
 			htService.addContractNomal(contract);
 			Integer id = contract.getId();
 			json.setSuccess(true);
@@ -574,7 +654,9 @@ public class HtController {
 			@RequestParam(value ="yinhuashui") String yinhuashui,
 			@RequestParam(value ="guidangDate") String guidangDate,
 			@RequestParam(value ="huaizhangAmount") Float huaizhangAmount,
-			@RequestParam(value ="company") String company
+			@RequestParam(value ="company") String company,
+			@RequestParam(value ="guidangCode") String guidangCode,
+			@RequestParam(value ="guidangNum") String guidangNum //归档份数
 			) {
 
 		Json json = new Json();
@@ -582,34 +664,45 @@ public class HtController {
 		try {
 			contractId = Integer.parseInt(id);
 			if (contractId > 0) {
-				//生成归档编号
-				String code = htService.getdanweicode(company);//cx
-				Date date = new Date();
-				SimpleDateFormat sdf = new SimpleDateFormat("yyyy");
-				String format = sdf.format(date);
-				String substringformat = format.substring(2);//17
+				if(guidangCode==null||guidangCode==""){
+					Date date = new Date();
+					SimpleDateFormat sdf = new SimpleDateFormat("yyyy");
+					String format = sdf.format(date);//2017
+					String substringformat = format.substring(2);//17
+					//生成归档编号
+					String code = htService.getdanweicode(company);//cx
+					String guidangCode2=null;
+					List<Contract> contractList =  htService.getCompanyNum(code);
+					if(contractList.size()==0){
+						guidangCode2 = code+substringformat+"0001";
+					}else{
+						String guidangMaxNum = htService.getguidangMaxNum(code);
+						String substring = guidangMaxNum.substring(4);//0009
+						int a = Integer.parseInt(substring);
+						int b = a+1;
+						String bs = String.valueOf(b);
+						if(bs.length()==1){
+							bs = "000"+bs;
+						}
+						if(bs.length()==2){
+							bs = "00"+bs;
+						}
+						if(bs.length()==3){
+							bs = "0"+bs;
+						}
+						if(bs.length()==4){
+							bs = ""+bs;
+						}
+						guidangCode2 = code+substringformat+bs;
+					}
 				
-				String guidangMaxNum = htService.getguidangMaxNum(code);
-				String substring = guidangMaxNum.substring(4);//0009
-				int a = Integer.parseInt(substring);
-				int b = a+1;
-				String bs = String.valueOf(b);
-				if(bs.length()==1){
-					bs = "000"+bs;
+					htService.updateContractXingzheng(yinhuashui,guidangDate,huaizhangAmount,guidangCode2,contractId,guidangNum);
+					json.setSuccess(true);
+					json.setMsg("操作成功");
+				}else{
+					htService.updateContractXingzheng(yinhuashui,guidangDate,huaizhangAmount,guidangCode,contractId,guidangNum);
 				}
-				if(bs.length()==2){
-					bs = "00"+bs;
-				}
-				if(bs.length()==3){
-					bs = "0"+bs;
-				}
-				if(bs.length()==4){
-					bs = ""+bs;
-				}
-				String guidangCode = code+substringformat+bs;
-				htService.updateContractXingzheng(yinhuashui,guidangDate,huaizhangAmount,guidangCode,contractId);
-				json.setSuccess(true);
-				json.setMsg("操作成功");
+			
 			} else {
 				json.setMsg("操作失败");
 			}
@@ -673,34 +766,53 @@ public class HtController {
 	        return json;
 		}
 	
-	  //更新合同信息(回显页面)
-			@ResponseBody
-			@RequestMapping(value = "/updateContractNormal")
-			public Json updateContractNormal(@RequestParam(value ="id") Integer id,
-					@RequestParam(value ="company") String company,
-					@RequestParam(value ="depart") String depart,
-					@RequestParam(value ="cid") Integer cid,
-					@RequestParam(value ="didNum") Integer didNum,
-					@RequestParam(value ="contractMoney") Float contractMoney,
-					@RequestParam(value ="agreementNumber") String agreementNumber,
-					@RequestParam(value ="endTime") String endTime,
-					@RequestParam(value ="agreementText") String agreementText,
-					@RequestParam(value ="remarksText") String remarksText,
-					@RequestParam(value ="payMethod") String payMethod
-					) {
-				Json json = new Json();
+  //更新合同信息(回显页面)
+	@ResponseBody
+	@RequestMapping(value = "/updateContractNormal")
+	public Json updateContractNormal(@RequestParam(value ="id") Integer id,
+			@RequestParam(value ="company") String company,
+			@RequestParam(value ="depart") String depart,
+			@RequestParam(value ="cid") Integer cid,
+			@RequestParam(value ="didNum") Integer didNum,
+			@RequestParam(value ="contractMoney") Float contractMoney,
+			@RequestParam(value ="agreementNumber") String agreementNumber,
+			@RequestParam(value ="endTime") String endTime,
+			@RequestParam(value ="agreementText") String agreementText,
+			@RequestParam(value ="remarksText") String remarksText,
+			@RequestParam(value ="payMethod") String payMethod,
+			@RequestParam(value ="state") String state
+	) {
+		Json json = new Json();
+		try {
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+				Date endTime2=null;
+				Integer stateInt=null; 
 				try {
-						SimpleDateFormat sdf = new SimpleDateFormat("yyyy-mm-dd");
-						Date endTime2 = sdf.parse(endTime);
-					    htService.updateContract(id,company,depart,cid,didNum,contractMoney,agreementNumber,endTime2,agreementText,remarksText,payMethod);
-						json.setSuccess(true);
-						json.setMsg("更新合同信息成功");
+					endTime2 = sdf.parse(endTime);
+					stateInt = Integer.parseInt(state);
 				} catch (Exception e) {
-					e.printStackTrace();
-					json.setMsg("更新合同信息失败");
 				}
-		        return json;
-			}
+				
+				if(stateInt==1){
+					htService.updateContract(id,company,depart,cid,didNum,contractMoney,agreementNumber,endTime2,agreementText,remarksText,payMethod);
+					json.setSuccess(true);
+					json.setMsg("更新合同信息成功");
+				}else if(stateInt==4){
+					//由暂存状态改为未处理状态
+					Integer changeStatus = 0;
+					htService.updateZanCunContract(id,company,depart,cid,didNum,contractMoney,agreementNumber,endTime2,agreementText,remarksText,payMethod,changeStatus);
+					json.setSuccess(true);
+					json.setMsg("更新合同信息成功");
+				}else{}
+				
+				
+			   
+		} catch (Exception e) {
+			e.printStackTrace();
+			json.setMsg("更新合同信息失败");
+		}
+        return json;
+	}
 
 	
 	// --------------产品-----------------------------------------
@@ -789,14 +901,14 @@ public class HtController {
 
 	// ----------------发票
 
-	@RequestMapping(value = "/faPiaoList")
+/*	@RequestMapping(value = "/faPiaoList")
 	public String faPiaoList(String htNum, Model model) {
 
 		List<FaPiao> faPiaoList = htService.getfaPiaoList(htNum);
 		model.addAttribute("faPiaoList", faPiaoList);
 		return "app/views/hetong/list.jsp";
 
-	}
+	}*/
     @ResponseBody
 	@RequestMapping(value="/addFaPiao")
 	public Json addFaPiao(FaPiao faPiao,HttpSession session) {
@@ -860,13 +972,23 @@ public class HtController {
 		@RequestParam(value ="name") String name, 
 	    @RequestParam(value ="date") String date,
 		@RequestParam(value ="remark") String remark,
-		@RequestParam(value ="fapiaoID") Integer fapiaoID
+		@RequestParam(value ="fapiaoID") Integer fapiaoID,
+		@RequestParam(value ="receivedpaymentsdate") String receivedpaymentsdateStr,
+		@RequestParam(value ="huiKuan") BigDecimal huiKuan,
+		@RequestParam(value ="fundType") String fundType,
+		@RequestParam(value ="account") String account
 		) {
 	Json json = new Json();
 	try {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-		Date date1 = sdf.parse(date);
-		htService.updateFapiao(money,capitalMoney,company,departMement,type,name,date1,remark,fapiaoID);
+		Date date1=null;
+		Date receivedpaymentsdate=null;
+		try {
+			date1 = sdf.parse(date);
+			receivedpaymentsdate = sdf.parse(receivedpaymentsdateStr);
+		} catch (Exception e) {
+		}
+		htService.updateFapiao(money,capitalMoney,company,departMement,type,name,date1,remark,fapiaoID,receivedpaymentsdate,huiKuan,fundType,account);
 		json.setSuccess(true);
 		json.setMsg("修改发票成功");
 	} catch (Exception e) {
@@ -954,7 +1076,7 @@ public class HtController {
 			@RequestParam(value ="mailno") String mailno,
 			@RequestParam(value ="d_contact") String d_contact,
 		    @RequestParam(value ="d_tel") String d_tel,
-			@RequestParam(value ="d_company") String d_company,
+			/*@RequestParam(value ="d_company") String d_company,*/
     	    @RequestParam(value ="d_address") String d_address,
    		    @RequestParam(value ="jDate") String jDate,
     		@RequestParam(value ="postMethod") String postMethod,
@@ -964,7 +1086,7 @@ public class HtController {
 		Json json = new Json();
 		try {
 			
-			htService.updateFahuo(mailno,d_contact,d_tel,d_company,d_address,jDate,postMethod,content,fahuoId);
+			htService.updateFahuo(mailno,d_contact,d_tel,d_address,jDate,postMethod,content,fahuoId);
 			json.setSuccess(true);
 			json.setMsg("修改快递成功");
 		} catch (Exception e) {
@@ -1031,9 +1153,47 @@ public class HtController {
 		return json;
 	}
 	
+	//updateHuikuanAndDate
+	@ResponseBody
+	@RequestMapping(value = "/updateHuikuanAndDate")
+	public Json updateHuikuanAndDate(
+			@RequestParam(value ="contractId") Integer contractId,
+			@RequestParam(value ="total") String total,
+			@RequestParam(value ="latestDate2") String latestDate2
+			) {
+        Json json = new Json();   
+		try {
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+			Date latestDate =null;
+			try {
+				 latestDate = sdf.parse(latestDate2);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			htService.updateHuikuanAndDate(contractId,total,latestDate);
+			json.setSuccess(true);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			json.setSuccess(false);
+		}
+		return json;
+	}
 	
-	
-	
+	//updateDealCondition 由审核通过状态改为合同完结状态
+	@ResponseBody
+	@RequestMapping(value = "/updateDealCondition")
+	public Json updateDealCondition(@RequestParam(value ="id") Integer contractId) {
+        Json json = new Json();   
+		try {
+			htService.updateDealCondition(contractId);
+			json.setSuccess(true);
+		} catch (Exception e) {
+			e.printStackTrace();
+			json.setSuccess(false);
+		}
+		return json;
+	}
 	
 /*   //添加错误消息   
 	@ResponseBody

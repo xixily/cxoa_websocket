@@ -11,26 +11,28 @@
     <title>超星OA办公平台</title>
 
     <!-- Bootstrap Core CSS -->
-    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- MetisMenu CSS -->
-    <link href="vendor/metisMenu/metisMenu.min.css" rel="stylesheet">
+    <link href="../../vendor/metisMenu/metisMenu.min.css" rel="stylesheet">
 
     <!--&lt;!&ndash; DataTables CSS &ndash;&gt;-->
-    <link rel="stylesheet" href="vendor/datatables-plugins/dataTables.bootstrap.css"/>
+    <!--<link rel="stylesheet" href="vendor/datatables-plugins/dataTables.bootstrap.css"/>-->
+    <link rel="stylesheet" href="../../vendor/bt-table/dist/bootstrap-table.min.css"/>
+    <!--<link rel="stylesheet" href="vendor/bt-table/bootsrap-editable.css"/>-->
     <!--<link href="../../vendor/datatables-plugins/dataTables.bootstrap.css" rel="stylesheet">-->
 
     <!-- DataTables Responsive CSS -->
-    <link href="vendor/datatables-responsive/dataTables.responsive.css" rel="stylesheet">
+    <link href="../../vendor/datatables-responsive/dataTables.responsive.css" rel="stylesheet">
 
     <!-- Custom CSS -->
-    <link href="dist/css/cxoa_public.css" rel="stylesheet">
+    <link href="../../dist/css/cxoa_public.css" rel="stylesheet">
 
     <!-- nomodal -->
     <!--<link href="style/noModal.css" rel="stylesheet">-->
 
     <!-- Custom Fonts -->
-    <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="../../vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -65,7 +67,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.html"><img src="images/logo.png" alt="超星OA" style="display: inline-block;height: 130%"/>超星OA办公平台</a>
+                <a class="navbar-brand" href="index.html"><img src="../../images/logo.png" alt="超星OA" style="display: inline-block;height: 130%"/>超星OA办公平台</a>
             </div>
             <!-- /.navbar-header -->
             <ul class="nav navbar-top-links navbar-right">
@@ -264,7 +266,7 @@
                         <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-user">
-                        <li><a href="#" onclick="$('#user_info_modal').modal('toggle');"><i class="fa fa-user fa-fw"></i> 用户信息</a>
+                        <li><a href="#"><i class="fa fa-user fa-fw"></i> 用户信息</a>
                         </li>
                         <li><a href="#"><i class="fa fa-gear fa-fw"></i> 设置</a>
                         </li>
@@ -328,226 +330,86 @@
             </div>
         </div>
         <!-- 主div -->
-        <div id="loading" class="loading">
-            <span>正在加载数据,请稍后...<img style="display: inline-block" src="images/loading.gif" alt="正在加载..." class="img-responsive" width="16"/></span>
-        </div>
-        <div id="user_info">
-            <div id="user_info_modal" class="modal fade">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                            <p style="text-align:center">个人信息</p>
-                        </div>
-                        <!--<div class="modal-header">-->
-                            <!--<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>-->
-                            <!--&lt;!&ndash;<h4 class="modal-title">Modal title</h4>&ndash;&gt;-->
-                        <!--</div>-->
-                        <div class="modal-body">
-                            <div class="row">
-                                <div class="col-xs-5"></div>
-                                <div class="col-xs-6" style="margin-bottom: 16px;">
-                                    <img src="images/111.jpg" alt="头像..." class="img-rounded" width="90" height="90">
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-xs-2"></div>
-                                <div class="col-xs-9">
-                                    <form class="form-horizontal" role="form">
-                                        <div class="form-group">
-                                            <label for="username" class="col-sm-2 control-label">姓名</label>
-                                            <div class="col-sm-10">
-                                                <input name="username" id="username" type="text" class="form-control" value="邓雪锋" placeholder="姓名..." readonly="">
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="email" class="col-sm-2 control-label">邮箱</label>
-                                            <div class="col-sm-10">
-                                                <input type="email" name="email" id="email" class="form-control" value="dengxuefeng@chaoxing.com" placeholder="邮箱..." readonly="">
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="position" class="col-sm-2 control-label">职位</label>
-                                            <div class="col-sm-10">
-                                                <input type="text" name="position" id="position" class="form-control" value="Java工程师" placeholder="Email" readonly="">
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="level" class="col-sm-2 control-label">级别</label>
-                                            <div class="col-sm-10">
-                                                <input type="text" name="level" id="level" class="form-control" value="细胞核" placeholder="级别..." readonly="">
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="workSpace" class="col-sm-2 control-label">工作地点</label>
-                                            <div class="col-sm-10">
-                                                <input type="text"  name="workPlace" id="workSpace" class="form-control" value="北京金隅嘉华大厦C710" readonly="">
-                                            </div>
-                                        </div>
-
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                            <button type="button" class="btn btn-primary">确认</button>
-                        </div>
-                    </div><!-- /.modal-content -->
-                </div><!-- /.modal-dialog -->
-            </div><!-- /.modal -->
-        </div>
-        <div id="container" style="display: none">
-            <div id="ht_customer">
-                <table width="100%" class="table table-striped table-bordered table-hover" id="ht_customer_list">
-                    <thead>
-                    <tr>
-                        <th>用户名称</th>
-                        <th><span name="last_year"></span>2015</th>
-                        <th><span name="this_year"></span>2016</th>
-                        <th>应收</th>
-                        <th>实收</th>
-                        <th>数字1</th>
-                        <th>数字2</th>
-                        <th>数字3</th>
-                        <th>数字4</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr class="odd gradeX">
-                        <td>北京市丰台区图书馆</td>
-                        <td>372400</td>
-                        <td>280000</td>
-                        <td >11755</td>
-                        <td >19600</td>
-                        <td >11755</td>
-                        <td >19600</td>
-                        <td >11755</td>
-                        <td >19600</td>
-                    </tr>
-                    <tr class="even gradeC">
-                        <td>北京市石景山区财政局</td>
-                        <td>30000</td>
-                        <td>10000</td>
-                        <td >11250</td>
-                        <td > </td>
-                        <td >11250</td>
-                        <td > </td>
-                        <td >11250</td>
-                        <td > </td>
-                    </tr>
-                    <tr class="odd gradeA">
-                        <td>北京市西城区第二图书馆</td>
-                        <td>300000</td>
-                        <td>100000</td>
-                        <td >4207</td>
-                        <td ></td>
-                        <td >4207</td>
-                        <td ></td>
-                        <td >4207</td>
-                        <td ></td>
-                    </tr>
-                    <tr class="even gradeA">
-                        <td>房山区文化活动中心</td>
-                        <td>110000</td>
-                        <td>307460</td>
-                        <td >5032</td>
-                        <td >186340</td>
-                        <td >5032</td>
-                        <td >186340</td>
-                        <td >5032</td>
-                        <td >186340</td>
-                    </tr>
-                    <tr class="odd gradeA">
-                        <td>首都图书馆</td>
-                        <td>4223675</td>
-                        <td>4075825</td>
-                        <td >3500</td>
-                        <td >318500</td>
-                        <td >3500</td>
-                        <td >318500</td>
-                        <td >3500</td>
-                        <td >318500</td>
-                    </tr>
-                    <tr class="even gradeA">
-                        <td>武昌首义学院</td>
-                        <td>10998.14</td>
-                        <td>3087.41</td>
-                        <td >4613</td>
-                        <td > </td>
-                        <td >4613</td>
-                        <td > </td>
-                        <td >4613</td>
-                        <td > </td>
-                    </tr>
-                    <tr class="odd gradeX">
-                        <td>北京市丰台区图书馆</td>
-                        <td>372400</td>
-                        <td>280000</td>
-                        <td >11755</td>
-                        <td >19600</td>
-                        <td >11755</td>
-                        <td >19600</td>
-                        <td >11755</td>
-                        <td >19600</td>
-                    </tr>
-                    <tr class="even gradeC">
-                        <td>北京市石景山区财政局</td>
-                        <td>30000</td>
-                        <td>10000</td>
-                        <td >11250</td>
-                        <td > </td>
-                        <td >11250</td>
-                        <td > </td>
-                        <td >11250</td>
-                        <td > </td>
-                    </tr>
-                    <tr class="odd gradeA">
-                        <td>北京市西城区第二图书馆</td>
-                        <td>300000</td>
-                        <td>100000</td>
-                        <td >4207</td>
-                        <td ></td>
-                        <td >4207</td>
-                        <td ></td>
-                        <td >4207</td>
-                        <td ></td>
-                    </tr>
-                    <tr class="even gradeA">
-                        <td>房山区文化活动中心</td>
-                        <td>110000</td>
-                        <td>307460</td>
-                        <td >5032</td>
-                        <td >186340</td>
-                        <td >5032</td>
-                        <td >186340</td>
-                        <td >5032</td>
-                        <td >186340</td>
-                    </tr>
-                    <tr class="odd gradeA">
-                        <td>首都图书馆</td>
-                        <td>4223675</td>
-                        <td>4075825</td>
-                        <td >3500</td>
-                        <td >318500</td>
-                        <td >3500</td>
-                        <td >318500</td>
-                        <td >3500</td>
-                        <td >318500</td>
-                    </tr>
-                    <tr class="even gradeA">
-                        <td>武昌首义学院</td>
-                        <td>10998.14</td>
-                        <td>3087.41</td>
-                        <td >4613</td>
-                        <td > </td>
-                        <td >4613</td>
-                        <td > </td>
-                        <td >4613</td>
-                        <td > </td>
-                    </tr>
-                    </tbody>
-                </table>
+        <div id="container">
+            <ul class="nav nav-tabs" role="tablist">
+                <li role="presentation" class="active"><a href="#ht_manager_sk" data-toggle="tab">收款</a></li>
+                <li role="presentation"><a href="#ht_manager_ys" data-toggle="tab">应收</a></li>
+                <div id="ht_contracts_toggle" class="btn-group pull-right">
+                    <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">
+                        <input type="hidden" name="email"/>
+                        XXX<span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu" role="menu">
+                        <li><a href="#">Action</a></li>
+                        <li><a href="#">Another action</a></li>
+                        <li><a href="#">Something else here</a></li>
+                        <li class="divider"></li>
+                        <li><a href="#">Separated link</a></li>
+                    </ul>
+                    <button type="button" class="btn btn-default pull-right" onclick=" $('#ht_detail').hide();$('#user_list_view').show();"><i class="fa fa-arrow-circle-left"> </i> 返回</button>
+                </div>
+            </ul>
+            <div id="ht_customer" class="tab-content">
+                <!--<h4 style="text-align: center">用户单位列表</h4>-->
+                <div class="tab-pane fade in active" id="ht_manager_sk">
+                    <table id="table"
+                           data-toggle="table"
+                           data-height="526"
+                           data-show-header="true"
+                           data-show-columns="true"
+                           data-search="true"
+                           data-striped="true"
+                           data-buttons-align="left"
+                           data-search-align="left"
+                           data-query-params="queryParams"
+                           data-query-params-type=""
+                           data-show-toggle="true"
+                           data-show-refresh="true"
+                           data-response-handler="responseHandler"
+                           data-pagination="true"
+                           data-side-pagination="client"
+                           data-cache="false"
+                           data-url="data/data_ht.json">
+                        <thead>
+                        <tr>
+                            <th data-field="id" data-sortable="true">时间</th>
+                            <th data-field="contractId" data-sortable="true">发票品名</th>
+                            <th data-field="customerName" data-sortable="true">收款金额</th>
+                        </tr>
+                        </thead>
+                    </table>
+                </div>
+                <div class="tab-pane fade" id="ht_manager_ys">
+                    <table id="tb2"
+                           data-toggle="table"
+                           data-height="526"
+                           data-show-header="true"
+                           data-show-columns="true"
+                           data-search="true"
+                           data-striped="true"
+                           data-buttons-align="left"
+                           data-search-align="left"
+                           data-query-params="queryParams"
+                           data-query-params-type=""
+                           data-show-toggle="true"
+                           data-show-refresh="true"
+                           data-response-handler="responseHandler"
+                           data-pagination="true"
+                           data-side-pagination="client"
+                           data-cache="false"
+                           data-url="data/data_ht.json">
+                        <thead>
+                        <tr>
+                            <th data-field="id" data-sortable="true">时间</th>
+                            <th data-field="contractId" data-sortable="true">品名</th>
+                            <th data-field="customerName" data-visible="false" data-sortable="true">合同金额</th>
+                            <th data-field="contractId" data-sortable="true">已收款</th>
+                            <th data-field="contractId" data-sortable="true">应收款</th>
+                            <th data-field="contractId" data-visible="false" data-sortable="true">开票金额</th>
+                        </tr>
+                        </thead>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
@@ -564,34 +426,70 @@
 <!-- /#wrapper -->
 
 <!-- jQuery -->
-<script src="vendor/jquery/jquery.min.js"></script>
+<script src="../../vendor/jquery/jquery.min.js"></script>
 
 <!-- Bootstrap Core JavaScript -->
-<script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+<script src="../../vendor/bootstrap/js/bootstrap.min.js"></script>
 
 <!-- Metis Menu Plugin JavaScript -->
-<script src="vendor/metisMenu/metisMenu.js"></script>
+<script src="../../vendor/metisMenu/metisMenu.js"></script>
 
 <!-- Metis Menu Plugin JavaScript -->
-<script src="vendor/datatables/js/jquery.dataTables.js"></script>
-<script src="vendor/datatables-plugins/dataTables.bootstrap.min.js"></script>
-<script src="vendor/datatables-responsive/dataTables.responsive.js"></script>
+<!--<script src="vendor/datatables/js/jquery.dataTables.js"></script>-->
+<!--<script src="vendor/datatables-plugins/dataTables.bootstrap.min.js"></script>-->
+<!--<script src="vendor/datatables-responsive/dataTables.responsive.js"></script>-->
 <!--<script src="vendor/bootstrap-table/bootstrap-table-zh-CN.min.js"></script>-->
 <!--<script src="js/jquery.noModal.js"></script>-->
 
 <!-- Custom Theme JavaScript -->
 <!--<script src="../dist/js/app.js"></script>-->
-<script src="js/app.js"></script>
-<script src="js/utils/formHelp.js"></script>
-<script src="js/center/caiwu.js"></script>
+<script src="../../js/app.js"></script>
+<script src="../../js/utils/formHelp.js"></script>
+<script src="../../js/center/caiwu.js"></script>
 <script src="js/center/hetong.js"></script>
+<!-- Bootstrap table plugin-->
+<script src="../../vendor/bt-table/dist/bootstrap-table.js"></script>
+<script src="../../vendor/bt-table/dist/locale/bootstrap-table-zh-CN.min.js"></script>
 
-<script type="text/javascript">
-//    $(document).ready(function() {
-//        $('#ht_customer_list').DataTable({
-//            responsive: true
-//        });
-//    });
+<script>
+    $(document).ready(function(){
+        $('#ht_find_user_ul a').bind('click',function(event){
+            var text = $(this).html();
+            var value = $(this).find('.sr-only').html();
+            var hidden = $('<input type="hidden" name="chargerId" value="' + value +'"/>');
+            var closest = $('#ht_find_user');
+            closest.html(text);
+            closest.append(hidden[0]);
+            hetong.htManager.findCharger(value);
+            event.stopImmediatePropagation();
+        })
+        $('#ht_find_type_ul a').bind('click',function(event){
+            var text = $(this).html();
+            var type = $(this).find('.sr-only').html();
+            var hidden = $('<input type="hidden" name="type" value="' + type +'"/>');
+            var closest = $('#ht_find_type');
+            closest.html(text);
+            closest.append(hidden[0]);
+            event.stopImmediatePropagation();
+        })
+        var $table = $('#table'),
+                $ok = $('#search');
+        $ok.click(function () {
+            $table.bootstrapTable('refresh');
+        });
+    })
+    function queryParams(params) {
+//        var params = {};
+        $('#toolbar').find('input[name]').each(function () {
+            params[$(this).attr('name')] = $(this).val();
+        });
+        return params;
+    }
+
+    function responseHandler(res) {
+//        return res;
+        return res.rows;
+    }
 </script>
 </body>
 

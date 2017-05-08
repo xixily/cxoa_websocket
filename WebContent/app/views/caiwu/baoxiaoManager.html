@@ -7,7 +7,7 @@
         </div>
         <div class="col-xs-3 col-md-4">
             <div id="bx_sp_cells" class="dropdown pull-right" style="padding-top: 5px;margin-right: 20px;">
-                <button class="btn btn-default" onclick="$('#bx_apply_dialog').modal('toggle')">
+                <button class="btn btn-default" onclick="caiwu.baoxiao.openApplication()">
                     <i class="fa fa-pencil"></i>
                 </button>
             </div>
@@ -216,7 +216,8 @@
                         <div class="form-group">
                             <label class="col-xs-4 col-sm-2 control-label">邮寄时间:</label>
                             <div class="col-xs-8 col-sm-4">
-                                <input type="date" class="form-control input-sm" name="jtime" placeholder="邮寄时间...">
+                                <!--<input type="date" class="form-control input-sm" name="jtime" placeholder="邮寄时间...">-->
+                                <input type="text" class="form-control input-sm jquery-ui-date" name="jtime" placeholder="邮寄时间..." app-target="jquery-ui-date"/>
                             </div>
                             <label class="col-xs-4 col-sm-2 control-label" for="kdno2">快递单号:</label>
                             <div class="col-xs-8 col-sm-4">
@@ -248,7 +249,8 @@
                         <div class="form-group">
                             <label class="col-xs-4 col-sm-2 control-label" for="approTime">批准时间:</label>
                             <div class="col-xs-8 col-sm-4">
-                                <input type="date" class="form-control input-sm" id="approTime" placeholder="批准时间...">
+                                <!--<input type="date" class="form-control input-sm" id="approTime" placeholder="批准时间...">-->
+                                <input type="text" class="form-control input-sm jquery-ui-date" id="approTime" placeholder="批准时间...">
                             </div>
                             <label class="col-xs-4 col-sm-2 control-label" for="approRemark">备注:</label>
                             <div class="col-xs-8 col-sm-4">
@@ -263,11 +265,13 @@
                         <div class="form-group">
                             <label class="col-xs-4 col-sm-2 control-label" for="receiveTime">收票时间:</label>
                             <div class="col-xs-8 col-sm-4">
-                                <input type="date" class="form-control input-sm" id="receiveTime" name="reciveTime" placeholder="收票时间...">
+                                <input type="text" class="form-control input-sm jquery-ui-date" id="receiveTime" name="reciveTime" placeholder="收票时间...">
+                              <!--  <input type="date" class="form-control input-sm" id="receiveTime" name="reciveTime" placeholder="收票时间...">-->
                             </div>
                             <label class="col-xs-4 col-sm-2 control-label" for="bxTime">报销时间:</label>
                             <div class="col-xs-8 col-sm-4">
-                                <input type="date" class="form-control input-sm" id="bxTime" placeholder="报销时间...">
+                                <input type="text" class="form-control input-sm jquery-ui-date" id="bxTime" placeholder="报销时间...">
+                                <!--<input type="date" class="form-control input-sm" id="bxTime" placeholder="报销时间...">-->
                             </div>
                             <!--<label class="col-xs-4 col-sm-2 control-label" for="kdno">快递单号:</label>-->
                             <!--<div class="col-xs-8 col-sm-4">-->
@@ -341,8 +345,8 @@
                             <div class="form-group">
                                 <label class="col-xs-4 col-sm-2  control-label" for="_bx_bank">银行:</label>
                                 <div class="col-xs-8 col-sm-4">
-                                    <select name="bank" id="_bx_bank" class="form-control input-sm">
-                                        <option value="jtyh">交通银行</option>
+                                    <select name="bank" id="_bx_bank" class="form-control input-sm" disabled>
+                                        <option value="jtyh" selected>交通银行</option>
                                         <option value="gs">工商银行</option>
                                         <option value="gd">光大银行</option>
                                         <option value="js">建设银行</option>
@@ -352,7 +356,7 @@
                                 </div>
                                 <label class="col-xs-4 col-sm-2 control-label">卡号:</label>
                                 <div class="col-xs-8 col-sm-4">
-                                    <input type="text" class="form-control input-sm" name="account" placeholder="卡号...">
+                                   <input type="text" class="form-control input-sm" name="account" placeholder="卡号...">
                                 </div>
                             </div>
                             <div class="form-group">

@@ -260,7 +260,8 @@ var hetong = {
                         id:data.autoCode
                     }
                 });
-            }
+            },
+
         },
         testTable: function(){
             $('#ht_customer_list').DataTable({

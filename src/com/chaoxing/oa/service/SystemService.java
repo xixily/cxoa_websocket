@@ -15,6 +15,8 @@ public interface SystemService {
 	public Map<String, Object> findAllMenus(PMenus_ pmenus);
 	
 	public Integer getCaiwushRoleId();
+	
+	public boolean getCaiwushRoleId(Integer urole);
 
 	public Map<String, Object> findMenus(PMenus_ pmenus);
 

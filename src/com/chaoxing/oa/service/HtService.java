@@ -15,6 +15,8 @@ import com.chaoxing.oa.entity.po.hetong.Fahuo;
 import com.chaoxing.oa.entity.po.hetong.ItemPrice;
 import com.chaoxing.oa.entity.po.view.RenshiUserName;
 import com.chaoxing.oa.entity.po.view.Usercontracts;
+import com.chaoxing.oa.entity.po.view.Usercontracts2;
+import com.chaoxing.oa.entity.po.hetong.Area;
 import com.chaoxing.oa.entity.po.hetong.CompanyInfo;
 
 public interface HtService {
@@ -29,12 +31,12 @@ public interface HtService {
 			int page, int size);
 	
 	//根据搜索条件获取合同列表(测试)
-	public List<Contract> getContractListConditionTest(String purchaseCom, String gongsi, String danwei, String product, String province,String group,String responsibility,Integer userId,Integer state, int page, int size );
+	public List<Usercontracts2> getContractListConditionTest(String purchaseCom, String gongsi, String danwei,String group,String responsibility,Integer userId,Integer state, int page, int size );
 	
 	//获取满足搜索条件的合同数量
-	public int getConditionCountContract(String purchaseCom, String gongsi, String danwei, String product, String province, String group, String responsibility, Integer userId, Integer state);
+	public int getConditionCountContract(String purchaseCom, String gongsi, String danwei, String group, String responsibility, Integer userId, Integer state);
 	//分页获取合同列表(无搜索条件)
-	public List<Contract> getContractList(int page, int size);
+	public List<Usercontracts2> getContractList(int page, int size);
 	
     //创建一个新合同
 	public void addContractNomal(Contract contract);
@@ -47,7 +49,7 @@ public interface HtService {
 	//根据合同ID查询出该合同
 	public Contract getContracDetailById(int id);
 	//获取未处理合同列表
-	public List<Contract> getUnHandledContract(int page,int size);
+	public List<Usercontracts2> getUnHandledContract(int page,int size);
 	
 	public List<Contract> getPropertyList();
 	
@@ -63,7 +65,7 @@ public interface HtService {
 	public void updateContractSave(Integer id, String gongsi, String depart, Integer cid, Integer didNum,
 			Float contractMoney, String agreementNumber, Date endTime, String agreementText, String remarksText,
 			String payMethod, Integer dealConditon,String gangweiXingzhi, String bumenmingcheng,
-			String shengfen, String xibaohe,Date submitTime,String danweixingzhi,String yonghuxingzhi);
+			String shengfen, String xibaohe,Date submitTime,String danweixingzhi,String yonghuxingzhi,String productName,Float f);
 	
 //-----------------------产品
 	
@@ -86,6 +88,12 @@ public interface HtService {
 	public void updateContract(Integer id, String company, String depart, Integer cid, Integer didNum,
 			Float contractMoney, String agreementNumber, Date endTime, String agreementText, String remarksText,
 			String payMethod);
+	//由暂存改为未处理
+	public void updateZanCunContract(Integer id, String company, String depart, Integer cid, Integer didNum,
+			Float contractMoney, String agreementNumber, Date endTime, String agreementText, String remarksText,
+			String payMethod,Integer changeStatus);
+	
+	
 //--------------------------------发票	
 	//获取该合同下的所有发票
 	public List<FaPiao> getfaPiaoList(String htNum);
@@ -101,7 +109,7 @@ public interface HtService {
 	
 	//更新发票
 	public void updateFapiao(BigDecimal money, String capitalMoney, String company, String departMement, String type,
-			String name, Date date1, String remark, Integer fapiaoID);
+			String name, Date date1, String remark, Integer fapiaoID,Date receivedpaymentsdate,BigDecimal huiKuan,String fundType,String account);
 
 //------------------------------快递
 	public List<Fahuo> getFaHuoList(String htNum);
@@ -116,7 +124,7 @@ public interface HtService {
 	public Fahuo selectFahuo(Integer fahuoId);
 
 	//更新快递信息
-	public void updateFahuo(String mailno, String d_contact, String d_tel, String d_company, 
+	public void updateFahuo(String mailno, String d_contact, String d_tel, 
 			String d_address,  String jDate, String postMethod, String content,
 			Integer fahuoId);
 
@@ -134,7 +142,7 @@ public interface HtService {
 
 	
 	//获取下拉公司列表
-	public List<Contract> getCompanyList();
+	public List<CompanyInfo> getCompanyList();
 //	public List<Object> getCompanyList();
 	
 	
@@ -271,7 +279,7 @@ public interface HtService {
 	public Customer getyonghuById(Integer id2);
 
 	//行政人员更新合同信息
-	public void updateContractXingzheng(String yinhuashui, String guidangDate, Float huaizhangAmount,String guidangCode,Integer contractId);
+	public void updateContractXingzheng(String yinhuashui, String guidangDate, Float huaizhangAmount,String guidangCode,Integer contractId,String guidangNum);
 
 	//获取单位对应代码
 	public String getdanweicode(String company);
@@ -283,6 +291,21 @@ public interface HtService {
 
 	//获取归档最大编号
 	public String getguidangMaxNum(String code);
+
+	//根据邮箱查出人事username对象
+	public RenshiUserName getTelephoneByEmail(String email);
+
+	//更新回款金额和日期
+	public void updateHuikuanAndDate(Integer contractId, String total, Date latestDate);
+
+	//由审核通过状态改为合同完结状态
+	public void updateDealCondition(Integer contractId);
+
+	//获取账户
+	public List<Area> getZhanghu(String substringCompany);
+
+	//获取以公司代码开头的合同列表
+	public List<Contract> getCompanyNum(String code);
 
 	
 

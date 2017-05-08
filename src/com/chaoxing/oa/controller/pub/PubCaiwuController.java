@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.chaoxing.oa.entity.page.caiwu.PUserBank;
 import com.chaoxing.oa.entity.page.common.Json;
 import com.chaoxing.oa.entity.page.common.Page;
 import com.chaoxing.oa.entity.page.pub.caiwu.PBaoxiao;
@@ -85,6 +86,12 @@ public class PubCaiwuController {
 //		pbaoxiao.setEmail(sessinfo.getEmail());
 //		pbaoxiao.setCellCoreEmail(sessinfo.getCellCoreEmail());
 		pbaoxiao.setStatus(SysConfig.CW_BX_BEGIN);
+		String account = pbaoxiao.getAccount();
+		Integer id = sessinfo.getId();
+		String bank = pbaoxiao.getBank();
+		if(null!=account && null != bank){
+			publicCaiwuService.addUserBank(id, bank, account);
+		}
 		Serializable sid = publicCaiwuService.addBaoxiao(pbaoxiao);
 		if(null!=sid){
 			result.setSuccess(true);
@@ -147,73 +154,6 @@ public class PubCaiwuController {
 		return result;
 	}
 	
-//	@RequestMapping(value="/testAnno")
-//	@ResponseBody
-//	public Json testAnno(){
-//		class S{
-//			private String type;
-//			private String name;
-//			private String anno;
-//			private Object obj;
-//			
-//			public String getType() {
-//				return type;
-//			}
-//			public String getName() {
-//				return name;
-//			}
-//			public String getAnno() {
-//				return anno;
-//			}
-//			public Object getObj(){
-//				return obj;
-//			}
-//			public void setType(String type) {
-//				this.type = type;
-//			}
-//			public void setName(String name) {
-//				this.name = name;
-//			}
-//			public void setAnno(String anno) {
-//				this.anno = anno;
-//			}
-//			public void setObj(Object obj){
-//				this.obj = obj;
-//			}
-//			
-//		}
-//		Json result = new Json();
-//		Field[] fields = Baoxiao.class.getDeclaredFields();
-//		Baoxiao.class.getMethods();
-//		List<S> lis = new ArrayList<S>();
-//		S s;
-//		Method method;
-//		String mes;
-//		for (Field field : fields) {
-//			s = new S();
-//			s.setType(field.getType().getSimpleName());
-//			s.setName(field.getName());
-//			mes = "get" + field.getName().substring(0, 1).toUpperCase() + field.getName().substring(1);
-//			try {
-//				if(!"getJTime".equals(mes)){
-//					method = Baoxiao.class.getMethod(mes);
-//					if(null != method.getAnnotation(javax.persistence.Column.class)){
-//						s.setObj(method.getAnnotation(javax.persistence.Column.class));
-//						if(!method.getAnnotation(javax.persistence.Column.class).updatable())
-//							s.setAnno("MethodAnno:" +false);
-//					}
-//				}
-//				if(null != field.getAnnotation(javax.persistence.Column.class))
-//					if(field.getAnnotation(javax.persistence.Column.class).updatable())
-//						s.setAnno("@Column.updatable:" + true);
-//				lis.add(s);
-//			} catch (Exception e) {
-//				continue;
-//			}
-//		}
-//		result.setObj(lis);
-//		return result;
-//	}
 	
 	/**
 	 * 查询待审批记录
@@ -328,15 +268,6 @@ public class PubCaiwuController {
 		pbaoxiao.setStatus(SysConfig.CW_BX_APPROVE_AGREE);
 		Map<String, Object> results = publicCaiwuService.findBaoxiao(pbaoxiao, page);
 		results.put("success", true);
-//		Calendar cal = Calendar.getInstance();
-//		cal.set(cal.get(Calendar.YEAR), 0, 1, 0, 0, 0);//2017.01.01 00:00:00
-//		Date thisYear = cal.getTime();
-//		cal.add(Calendar.YEAR, 1);
-//		Date afterYear = cal.getTime();//2018.01.01
-//		cal.add(Calendar.YEAR, -2);
-//		Date lastYear = cal.getTime();
-//		results.put("lastYearTotal", publicCaiwuService.getBaoxiaoTotal(pbaoxiao, lastYear, thisYear));
-//		results.put("thisYearTotal", publicCaiwuService.getBaoxiaoTotal(pbaoxiao, thisYear, afterYear));
 		return results;
 	}
 	
@@ -394,15 +325,6 @@ public class PubCaiwuController {
 		pbaoxiao.setStatus(SysConfig.CW_BX_RECIVED_AGREE);
 		Map<String, Object> results = publicCaiwuService.findBaoxiao(pbaoxiao, page);
 		results.put("success", true);
-//		Calendar cal = Calendar.getInstance();
-//		cal.set(cal.get(Calendar.YEAR), 0, 1, 0, 0, 0);//2017.01.01 00:00:00
-//		Date thisYear = cal.getTime();
-//		cal.add(Calendar.YEAR, 1);
-//		Date afterYear = cal.getTime();//2018.01.01
-//		cal.add(Calendar.YEAR, -2);
-//		Date lastYear = cal.getTime();
-//		results.put("lastYearTotal", publicCaiwuService.getBaoxiaoTotal(pbaoxiao, lastYear, thisYear));
-//		results.put("thisYearTotal", publicCaiwuService.getBaoxiaoTotal(pbaoxiao, thisYear, afterYear));
 		return results;
 	}
 	@RequestMapping(value="/queryDaiShenheTotal")
@@ -462,15 +384,6 @@ public class PubCaiwuController {
 		pbaoxiao.setStatus(SysConfig.CW_BX_CHECK_AGREE);
 		Map<String, Object> results = publicCaiwuService.findBaoxiao(pbaoxiao, page);
 		results.put("success", true);
-//		Calendar cal = Calendar.getInstance();
-//		cal.set(cal.get(Calendar.YEAR), 0, 1, 0, 0, 0);//2017.01.01 00:00:00
-//		Date thisYear = cal.getTime();
-//		cal.add(Calendar.YEAR, 1);
-//		Date afterYear = cal.getTime();//2018.01.01
-//		cal.add(Calendar.YEAR, -2);
-//		Date lastYear = cal.getTime();
-//		results.put("lastYearTotal", publicCaiwuService.getBaoxiaoTotal(pbaoxiao, lastYear, thisYear));
-//		results.put("thisYearTotal", publicCaiwuService.getBaoxiaoTotal(pbaoxiao, thisYear, afterYear));
 		return results;
 	}
 	
@@ -748,10 +661,8 @@ public class PubCaiwuController {
 	public Json baoxiaoHuikuan(PBaoxiao pbaoxiao, Boolean agree, Page page, HttpSession session){
 		Json result = new Json();
 		Integer numbers = publicCaiwuService.updateBaoxiaoHuikuan();
-		if(numbers>0){
-			result.setSuccess(true);
-			result.setMsg("批量更新成功，已修改数据[" + numbers + "]条数据。");
-		}
+		result.setSuccess(true);
+		result.setMsg("批量更新成功，已修改数据[" + numbers + "]条数据。");
 		return result;
 	}
 	
@@ -760,13 +671,31 @@ public class PubCaiwuController {
 	 * @param pbaoxiao
 	 * @param page
 	 * @param session
-	 * @return
+	 * @return  queryYihuikuanTotal
 	 */
 	@RequestMapping(value="/queryYihuikuan")
 	@ResponseBody
 	public Map<String, Object> findYihuikuan(PBaoxiao pbaoxiao, Page page){
 		pbaoxiao.setStatus(SysConfig.CW_BX_YIHUIKUAN);
 		Map<String, Object> results = publicCaiwuService.findBaoxiao(pbaoxiao, page);
+		results.put("success", true);
+		return results;
+	}
+	
+	@RequestMapping(value="/queryYihuikuanTotal")
+	@ResponseBody
+	public Map<String, Object> queryYihuikuanTotal(PBaoxiao pbaoxiao, Page page){
+		pbaoxiao.setStatus(SysConfig.CW_BX_YIHUIKUAN);
+		Map<String, Object> results = new HashMap<String, Object>();
+		Calendar cal = Calendar.getInstance();
+		cal.set(cal.get(Calendar.YEAR), 0, 1, 0, 0, 0);//2017.01.01 00:00:00
+		Date thisYear = cal.getTime();
+		cal.add(Calendar.YEAR, 1);
+		Date afterYear = cal.getTime();//2018.01.01
+		cal.add(Calendar.YEAR, -2);
+		Date lastYear = cal.getTime();
+		results.put("lastYearTotal", publicCaiwuService.getBaoxiaoTotal(pbaoxiao, lastYear, thisYear));
+		results.put("thisYearTotal", publicCaiwuService.getBaoxiaoTotal(pbaoxiao, thisYear, afterYear));
 		results.put("success", true);
 		return results;
 	}
@@ -802,4 +731,21 @@ public class PubCaiwuController {
 	private SessionInfo getSessInfo(HttpSession session){
 		return (SessionInfo) session.getAttribute(ResourceUtil.getSessionInfoName());
 	}
+	
+	@RequestMapping(value="/getBxBanks")
+	@ResponseBody
+	public Json getBxBanks(HttpSession session){
+		Json result = new Json();
+		SessionInfo sessionInfo = getSessInfo(session);
+		Integer id = sessionInfo.getId();
+		List<PUserBank> pubanks = publicCaiwuService.findBxBanks(id);
+		result.setSuccess(true);
+		result.setObj(pubanks);
+		return result;
+	}
+	
+//	@RequestMapping(value="/test")
+//	public void test(Test ts){
+//		System.out.println(ts.getId() + "," + ts.getDate() + "," + ts.getDte());
+//	}
 }

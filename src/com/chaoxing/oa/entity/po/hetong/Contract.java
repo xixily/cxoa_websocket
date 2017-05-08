@@ -78,6 +78,7 @@ public class Contract implements Serializable{
 	@DateTimeFormat(pattern="yyyy-MM-dd")
 	private Date submitTime;//提交时间
 	private String product;//所含产品
+	private String guidangNum;//归档份数
 	@Id
 	@Column(name = "合同编号")
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -461,6 +462,15 @@ public class Contract implements Serializable{
 	public void setProduct(String product) {
 		this.product = product;
 	}
+	@Column(name = "归档份数")
+	public String getGuidangNum() {
+		return guidangNum;
+	}
+	public void setGuidangNum(String guidangNum) {
+		this.guidangNum = guidangNum;
+	}
+	
+	
 	
 	
 }

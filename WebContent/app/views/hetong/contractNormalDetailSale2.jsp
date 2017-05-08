@@ -13,8 +13,12 @@
 .pop_product {
     height: 380px;
 }
+.popwindow {
+	height: initial;2
+}
 </style>
 <div class="main">
+<<!-- input  type="button" name="button" value="返回" class="bnt"/> -->
 	<!-- <div class="location">首页 &gt; <a href="#">合同信息</a></div> -->
 	<div class="contract">
     <form id="form1" name="form1" method="post" action="">
@@ -205,7 +209,7 @@
 			  <tr>
 				<th width="5%">序号</th>
 				<th width="6%">收件人</th>
-				<th width="10%">收件单位</th>
+				<!-- <th width="10%">收件单位</th> -->
 				<th width="8%">收件地址</th>
 				<th width="11%">联系电话</th>
 				<th width="9%">发件日期</th>
@@ -218,7 +222,7 @@
 			  <tr>
 				<td>${f.orderid}</td>
 				<td>${f.d_contact}</td>
-				<td>${f.d_company}</td>
+				<%-- <td>${f.d_company}</td> --%>
 				<td>${f.d_address}</td>
 				<td>${f.d_tel}</td>
 				<td>${f.jDate}</td>
@@ -421,10 +425,10 @@
        		<label>联系电话：</label>
 			<input id="tel" type="text" name="textfield" class="fidtext" />
         </li>
-    	<li class="li01">
+    	<!-- <li class="li01">
        		<label>收件单位：</label>
 			<input id="receiveCom" type="text" name="textfield" class="fidtext" />
-        </li>
+        </li> -->
     	<!-- <li class="li01">
        		<label>邮　　编：</label>
 			<input id="email" type="text" name="textfield" class="fidtext" />
@@ -446,10 +450,25 @@
 			<!-- <input id="postDate" type="text" name="textfield" class="fidtext" /> -->
 			<input type="text" onClick="WdatePicker({dateFmt:'yyyy-MM-dd'})" id="postDate" name="textfield" class="fidtext"></input>
         </li>
-    	<li class="li02">
+    	<!-- <li class="li02">
        		<label>快递公司：</label>
 			<input id="expressCom" type="text" name="textfield" class="fidtext" />
-        </li> 
+        </li>  -->
+        <li class="li02">
+      	<label>快递公司：</label>
+		<select id="expressCom" name="xuanze" class="leftF" >
+			  <option value="EMS">EMS</option>
+			  <option value="EMS">申通快递</option>
+			  <option value="EMS">圆通快递</option>
+			  <option value="EMS">中通快递</option>
+			  <option value="EMS">韵达快递</option>
+			  <option value="EMS">顺丰快递</option>
+			  <option value="EMS">汇通快递</option>
+			  <option value="EMS">天天快递</option>
+			  <option value="EMS">宅急送</option>
+		</select>
+        </li>
+        
         <%-- <li class="li06">
        		<label>快递公司：</label>
 			<select id="expressCom" name="xuanze" class="leftF" >
@@ -485,7 +504,7 @@
     	<a class="bnt" href="#">取消</a></li> 
     </ul>
    <!--  </form> -->
-   
+ <input style="display:none;" id="state" type="text" name="textfield" class="fidtext" value="${state }"/>  
 </div>
 
 
@@ -504,7 +523,7 @@
 				/* var depart = $("#danwei .select-button").val(); */
 				var yonghuId = $($("#danwei").children("input").get(0)).val()
 				var data ={"yonghuId":yonghuId};
-				  $.get('ht/getUserAndDepartId.action',data,function(res){
+				  $.post('public/ht/getUserAndDepartId.action',data,function(res){
 					        var customerDepart = res.obj;
 					        var userId = customerDepart.dId;
 					        var danweiId = customerDepart.id;
@@ -603,7 +622,7 @@ $("#addFahuo").click(function(){
 	//获取所属公司
 	var company = $("#company").val();
 	
-	$.get('ht/getFajiandi.action',{"company":company},function(res){
+	$.post('public/ht/getFajiandi.action',{"company":company},function(res){
 		 if(res.success==true){
 			var companyInfo = res.obj;
 			$("#postAddress").val(companyInfo.address);
@@ -618,6 +637,8 @@ $("#addFahuo").click(function(){
 
 	//更新合同
 	$("#saleSubmitAgain").click(function(){
+		var state = $("#state").val();
+		
 		var id = $("#htNum").text();
 		var company = $("#company").val();
 		var depart = $("#danwei .select-button").val();
@@ -639,12 +660,12 @@ $("#addFahuo").click(function(){
 						"agreementNumber":agreementNumber,"endTime":endTime,"agreementText":agreementText,
 						"remarksText":remarksText,"payMethod":payMethod}; */	
 				//,"agreementText":agreementText,"remarksText":remarksText,"payMethod":payMethod
-	    var data={"id":id,"company":company,"depart":depart,"cid":cid,"didNum":didNum,"contractMoney":contractMoney,"agreementNumber":agreementNumber,"endTime":endTime,"agreementText":agreementText,"remarksText":remarksText,"payMethod":payMethod}		
+	    var data={"id":id,"company":company,"depart":depart,"cid":cid,"didNum":didNum,"contractMoney":contractMoney,"agreementNumber":agreementNumber,"endTime":endTime,"agreementText":agreementText,"remarksText":remarksText,"payMethod":payMethod,"state":state}		
 				
-		 $.get('ht/updateContractNormal.action',data,function(res){
+		 $.post('public/ht/updateContractNormal.action',data,function(res){
 				if(res.success==true){
 					$.messager.alert('提示：',res.msg);
-					$.get('ht/contractListSale.action',function(result){
+					$.get('public/ht/contractListSale.action',function(result){
 						$('#container').html(result);
 						})
 				}else{
@@ -690,7 +711,7 @@ function validateContractAmount(){
 			 return false;
 		 }
 		
-			/* 	 $.get('ht/getTotalFapiaoAmount.action',{"id":id},function(res){
+			/* 	 $.get('public/ht/getTotalFapiaoAmount.action',{"id":id},function(res){
 		 if(res.success==true){
 			var a = res.obj;
 			debugger;

@@ -48,13 +48,12 @@ public class PUlList implements Comparable<PUlList>{
 	}
 	@Override
 	public int compareTo(PUlList o) {
-		if(this.sortCode!=null && o.getSortCode()!= null){
-			return this.sortCode.compareTo(o.getSortCode());
-		}else{
-			return -1;
-		}
-//		return this.domId.compareTo(o.getDomId());
-//		return this.text.compareTo(o.getText());
+		return null != this.sortCode ? this.sortCode.compareTo(o.getSortCode() + o.hashCode()) : 1;
+//		if(this.sortCode!=null && o.getSortCode()!= null){
+//			return this.sortCode.compareTo(o.getSortCode());
+//		}else{
+//			return -1;
+//		}
 	}
 	
 }

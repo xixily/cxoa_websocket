@@ -5,6 +5,7 @@ import com.chaoxing.oa.entity.page.caiwu.PCNUsername;
 import com.chaoxing.oa.entity.page.common.QueryForm;
 import com.chaoxing.oa.entity.page.employee.PUserName;
 import com.chaoxing.oa.entity.page.system.SessionInfo;
+import com.chaoxing.oa.entity.po.employee.UserName;
 
 import java.util.List;
 
@@ -31,5 +32,7 @@ public interface UserServiceI {
 	public long updatePassword(QueryForm queryForm);
 
 	public PUserName findUserByEmail(String email);
+
+	public UserName getUserById(Integer id);
 
 }

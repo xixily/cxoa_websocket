@@ -229,4 +229,11 @@ public class UserServiceImpl implements UserServiceI {
 		return pu;
 	}
 	
+	@Override
+	public UserName getUserById(Integer id) {
+		return usernameDao.get(UserName.class, id);
+	}
+	
+	
+	
 }

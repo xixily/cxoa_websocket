@@ -46,17 +46,19 @@
 				<th width="8%">合同编号</th>
 				<th width="8%">单位名称</th>
 				<th width="6%">用户性质</th>
-				<th width="8%">单位性质</th>
+				<th width="4%">单位性质</th>
 				<th width="9%">登记时间</th>
 				<th width="12%">所含产品</th>
 				<th width="8%">所属公司</th>
 				<th width="6%">合同金额</th>
 				<th width="6%">回款金额</th>
+				<th width="6%">回款时间</th>
+				<th width="6%">开票金额</th>
 				<th width="8%">处理状态</th>
 				<th width="4%">详情</th>
 				<th width="4%">操作</th>
 			  </tr>
-			  
+			
 			   
 			  <c:forEach var="c" items="${pageBean.list }" varStatus="cs">
 			  <c:if test="${c.dealConditon!='1'}">
@@ -67,15 +69,20 @@
 				<td>${c.user_property }</td>
 				<td>${c.xingzhi }</td>
 				<td>${c.submitTime }</td>
-				<td>${c.pingming }</td>
+				<td>${c.product }</td>
 				<td>${c.company }</td>
 				<td>${c.contractMoney }</td>
 				<td>${c.receivedAmount }</td>
+				<td>${c.receiveTime}</td>
+				<td>${c.kaipiaoMoney }</td>
 				<c:if test="${c.dealConditon=='0'}"><td>未处理</td></c:if>
                 <%-- <c:if test="${c.dealConditon=='1'}"><td>审核未通过</td></c:if> --%>
                 <c:if test="${c.dealConditon=='2'}"><td>审核已通过</td></c:if>
                 <c:if test="${c.dealConditon=='3'}"><td>合同完结</td></c:if>
                 <c:if test="${c.dealConditon=='4'}"><td>暂存</td></c:if>
+                <c:if test="${c.dealConditon==null}"><td>无</td></c:if>
+                <%-- <c:if test="${c.dealConditon==''}"><td>无</td></c:if> --%>
+								
                 <td ><a class="detail" id="${c.id }" href="javascript:void(0)">详情</a></td>
                 <c:if test="${c.dealConditon=='0'}"><td><a class="delete" id="${c.id }" href="javascript:void(0)">删除</a></td></c:if>
                 <c:if test="${c.dealConditon=='4'}"><td><a class="delete" id="${c.id }" href="javascript:void(0)">删除</a></td></c:if>
@@ -90,10 +97,12 @@
 				<td bgcolor="#dcfcd3">${c.user_property }</td>
 				<td bgcolor="#dcfcd3">${c.xingzhi }</td>
 				<td bgcolor="#dcfcd3">${c.submitTime }</td>
-				<td bgcolor="#dcfcd3">${c.pingming }</td>
+				<td bgcolor="#dcfcd3">${c.product }</td>
 				<td bgcolor="#dcfcd3">${c.company }</td>
 				<td bgcolor="#dcfcd3">${c.contractMoney }</td>
 				<td bgcolor="#dcfcd3">${c.receivedAmount } </td>
+				<td bgcolor="#dcfcd3">${c.receiveTime}</td>
+				<td bgcolor="#dcfcd3">${c.kaipiaoMoney }</td>
 				<td bgcolor="#dcfcd3">审核未通过</td>
 				<%-- <c:if test="${c.dealConditon=='0'}"><td>未处理</td></c:if> --%>
                 <%-- <c:if test="${c.dealConditon=='1'}"><td>审核未通过</td></c:if> --%>
@@ -144,6 +153,10 @@
 		
 		</div>
 	</div>
+	
+	  <c:if test="${empty pageBean.list}">  
+         <span class="leftF"><b class="cet icons"></b>没有相关合同信息</span>                     
+      </c:if> 
 </div>
 
 <script type="text/javascript" src="/app/views/hetong/js/selectlist.js"></script>
@@ -171,9 +184,9 @@ $(document).ready(function(){
 	
 		
 function changeMethod(nextPage){
-			/* location.href="/ht/contractList.action?page="+nextPage; */
+			/* location.href="/public/ht/contractList.action?page="+nextPage; */
 			
-			$.get('ht/contractListSale.action',{page:nextPage},function(result){
+			$.get('public/ht/contractListSale.action',{page:nextPage},function(result){
 				$('#container').html(result);
 				})
 		}
@@ -182,10 +195,10 @@ $(".delete").click(function(){
 	var id = $(this).attr("id");
 	
 	$.messager.confirm("提示","您确认要删除当前合同吗？",function(){
-		  $.post('ht/deleteContract.action',{"id":id},function(res){
+		  $.post('public/ht/deleteContract.action',{"id":id},function(res){
 			   /* debugger; */
 			   if(res.success==true){
-					$.get('ht/contractListSale.action',function(result){
+					$.get('public/ht/contractListSale.action',function(result){
 					$('#container').html(result);
 					})
 				 }else{
@@ -199,13 +212,18 @@ $(".delete").click(function(){
 $(".detail").click(function(){
 	var id = $(this).attr("id");
 	var dealCondition = $(this).parent().prev().text();
+	if(dealCondition=="暂存"){
+		var state = 4;
+	}else if(dealCondition=="审核未通过"){
+		var state = 1;
+	}else{}
 	if(dealCondition=='未处理'||dealCondition=='审核已通过'||dealCondition=='合同完结'){
-		$.get('ht/contractDetailForSale.action',{id:id},function(result){
+		$.get('public/ht/contractDetailForSale.action',{id:id},function(result){
 			$('#container').html(result);
 			})
 	}else{
 		//审核未通过  暂存
-		$.get('ht/contractDetailForSale2.action',{id:id},function(result){
+		$.get('public/ht/contractDetailForSale2.action',{"id":id,"state":state},function(result){
 			$('#container').html(result);
 			})
 	}

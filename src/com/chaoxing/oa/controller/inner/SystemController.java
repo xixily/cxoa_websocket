@@ -4,12 +4,10 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 
-import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -19,7 +17,6 @@ import com.chaoxing.oa.entity.page.system.PMenus;
 import com.chaoxing.oa.entity.page.system.PMenus_;
 import com.chaoxing.oa.entity.page.system.PUserRole;
 import com.chaoxing.oa.entity.page.system.SessionInfo;
-import com.chaoxing.oa.entity.po.system.UserRole;
 import com.chaoxing.oa.service.SystemService;
 import com.chaoxing.oa.util.system.ResourceUtil;
 
@@ -145,7 +142,7 @@ public class SystemController {
 	public Json addRole(PUserRole purole, HttpSession session){
 		Json result = new Json();
 		if(null != purole.getPreId() && null != purole.getRoleLevel() && null != purole.getRoleName()){
-			if(purole.getRoleLevel()>4){
+			if(purole.getRoleLevel()>3){
 				result.setMsg("角色级别低于最低级别限制，不能添加。");
 				return result;
 			}
@@ -232,7 +229,6 @@ public class SystemController {
 	@ResponseBody
 	public Json addRoleMenus(@RequestParam(required = true, value = "ids[]") List<Integer> ids,@RequestParam(required=true) Integer roleId,@RequestParam(required=true) Integer sid,HttpSession session){
 		Json result = new Json();
-//		System.out.println(ids);
 		SessionInfo sessionInfo = (SessionInfo) session.getAttribute(ResourceUtil.getSessionInfoName());
 		Integer sroleId = sessionInfo.getRoleId();
 		if(null != roleId && null != ids && null!= sid){
