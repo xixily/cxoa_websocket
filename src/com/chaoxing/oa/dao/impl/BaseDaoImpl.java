@@ -12,7 +12,6 @@ import org.hibernate.Query;
 import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
 import org.springframework.stereotype.Repository;
 
 import com.chaoxing.oa.dao.BaseDaoI;
@@ -288,6 +287,7 @@ public class BaseDaoImpl<T> implements BaseDaoI<T> {
 				}
 			} catch (Exception e) {
 //				tx.rollback();
+				return 0;
 			}
 			
 		}

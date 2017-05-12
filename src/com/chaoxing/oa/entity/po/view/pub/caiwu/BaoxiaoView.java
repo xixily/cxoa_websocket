@@ -52,6 +52,7 @@ public class BaoxiaoView implements Serializable{
 	private String cellCoreEmail;//细胞核邮箱
 	private String guidanceEmail;//指导邮箱
 	private Long cpNumber;//汇款批次号
+	private Date cpTime;//出票时间
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	public Long getId() {
@@ -204,6 +205,13 @@ public class BaoxiaoView implements Serializable{
 	@Column
 	public Long getCpNumber() {
 		return cpNumber;
+	}
+	@Column(name = "出票时间")
+	public Date getCpTime() {
+		return cpTime;
+	}
+	public void setCpTime(Date cpTime) {
+		this.cpTime = cpTime;
 	}
 	public void setCpNumber(Long cpNumber) {
 		this.cpNumber = cpNumber;

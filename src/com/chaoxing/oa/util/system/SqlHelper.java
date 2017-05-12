@@ -145,6 +145,8 @@ public class SqlHelper {
 			sql.append("and " + tableName + "." + name + "=:" + name +" ");
 			params.put(name,(BigDecimal) value);
 		}else if("Date".equalsIgnoreCase(type)){
+//			sql.append("and " + tableName + ".str(" + name + ") like :" + name +" ");
+//			params.put(name, "%" + value + "%");
 			sql.append("and " + tableName + "." + name + "=:" + name +" ");
 			params.put(name,(Date) value);
 		}else{

@@ -82,9 +82,6 @@ public class PubCaiwuController {
 		Json result = new Json();
 		SessionInfo sessinfo = getSessInfo(session);
 		pbaoxiao.setUid(sessinfo.getId());
-//		pbaoxiao.setUsername(sessinfo.getUsername());
-//		pbaoxiao.setEmail(sessinfo.getEmail());
-//		pbaoxiao.setCellCoreEmail(sessinfo.getCellCoreEmail());
 		pbaoxiao.setStatus(SysConfig.CW_BX_BEGIN);
 		String account = pbaoxiao.getAccount();
 		Integer id = sessinfo.getId();
@@ -154,6 +151,29 @@ public class PubCaiwuController {
 		return result;
 	}
 	
+	/**
+	 * 删除个人报销信息
+	 * @param psbaoxiao
+	 * @param session
+	 * @return
+	 */
+	@RequestMapping(value="/deleteSelfBx")
+	@ResponseBody
+	public Json deleteSelfBx(@RequestParam(required=true) Long id, HttpSession session){
+		Json result = new Json();
+		SessionInfo sessionInfo = getSessInfo(session);
+		if(null != id){
+			int count = publicCaiwuService.deleteBaoxiao(id, sessionInfo.getId());
+			result.setObj(count);
+			if(count>0){
+				result.setSuccess(true);
+			}else{
+				result.setMsg("没有删除任何报销记录，可能该报销记录不存在，或该申请已出票");
+			}
+		}
+		return result;
+	}
+	
 	
 	/**
 	 * 查询待审批记录
@@ -200,12 +220,7 @@ public class PubCaiwuController {
 	@ResponseBody
 	public Map<String, Object> findYipizhun(PBaoxiao pbaoxiao, Page page, HttpSession session){
 		SessionInfo sessionInfo = getSessInfo(session);
-		pbaoxiao.setStatus(SysConfig.CW_BX_APPROVE_AGREE);
-		Map<String, Object> results = publicCaiwuService.findBaoxiaoByLeader(pbaoxiao, page, sessionInfo.getEmail());
-//		Double lastyear = publicCaiwuService.getLastYear(sessionInfo.getEmail());
-//		Double thisyear = publicCaiwuService.getThisYear(sessionInfo.getEmail());
-//		results.put("lastYearTotal", lastyear);
-//		results.put("thisYearTotal", thisyear);
+		Map<String, Object> results = publicCaiwuService.findBxByApprover(pbaoxiao, page, sessionInfo.getId());
 		results.put("success", true);
 		return results;
 	}
@@ -216,8 +231,8 @@ public class PubCaiwuController {
 		SessionInfo sessionInfo = getSessInfo(session);
 		pbaoxiao.setStatus(SysConfig.CW_BX_APPROVE_AGREE);
 		Map<String, Object> results = new HashMap<String, Object>();
-		Double lastyear = publicCaiwuService.getLastYear(sessionInfo.getEmail());
-		Double thisyear = publicCaiwuService.getThisYear(sessionInfo.getEmail());
+		Double lastyear = publicCaiwuService.getLastYearYpz(sessionInfo.getId());
+		Double thisyear = publicCaiwuService.getThisYearYpz(sessionInfo.getId());
 		results.put("lastYearTotal", lastyear);
 		results.put("thisYearTotal", thisyear);
 		results.put("success", true);
@@ -327,6 +342,7 @@ public class PubCaiwuController {
 		results.put("success", true);
 		return results;
 	}
+	
 	@RequestMapping(value="/queryDaiShenheTotal")
 	@ResponseBody
 	public Map<String, Object> queryDaiShenheTotal(PBaoxiao pbaoxiao, Page page){
@@ -439,11 +455,16 @@ public class PubCaiwuController {
 	public Json addBaoxiaoKjk(PKoukuan pkk){
 		Json result = new Json();
 		if(null != pkk.getBxid() && null != pkk.getMoney()){
-			Serializable sab = publicCaiwuService.addKouJk(pkk);
-			if(!sab.equals(0)){
-				result.setSuccess(true);
-				result.setObj(sab);
-				result.setMsg("添加成功");
+			PBaoxiao pbx = publicCaiwuService.getBaoxiao(pkk.getBxid());
+			if(SysConfig.CW_BX_CHECK_AGREE.equals(pbx.getStatus())){//确认是在待审核状态
+				Serializable sab = publicCaiwuService.addKouJk(pkk);
+				if(!sab.equals(0)){
+					result.setSuccess(true);
+					result.setObj(sab);
+					result.setMsg("添加成功");
+				}
+			}else{
+				result.setMsg("只有待审核状态才可以添加扣借款。");
 			}
 		}else{
 			result.setMsg("请检查您的必填项是否都数据。");
@@ -479,16 +500,69 @@ public class PubCaiwuController {
 		return result;
 	}
 	
+	@RequestMapping(value="/querySelfjk")
+	@ResponseBody
+	public Json querySelfjk(@RequestParam(value="bxid",required=true)Long bxid, HttpSession session){
+		Json result = new Json();
+		SessionInfo sessionInfo = getSessInfo(session);
+		Integer id = sessionInfo.getId();
+		if(null != bxid && bxid != 0){
+			PBaoxiao pbx = publicCaiwuService.getBaoxiao(bxid);
+			if(id.equals(pbx.getUid())){
+				List<PKoukuan> pks = publicCaiwuService.findJiekoukuan(bxid);
+				result.setSuccess(true);
+				result.setObj(pks);
+			}else{
+				result.setMsg("你没有查询该报销单的权限。");
+			}
+		}else{
+			result.setMsg("报销批次号不存在。");
+		}
+		return result;
+	}
+	
+	/**
+	 * 细胞核查看扣借款
+	 * @param bxid
+	 * @param session
+	 * @return
+	 */
+	@RequestMapping(value="/queryCellKjk")
+	@ResponseBody
+	public Json queryCellKjk(@RequestParam(value="bxid",required=true)Long bxid, HttpSession session){
+		Json result = new Json();
+		SessionInfo sessionInfo = getSessInfo(session);
+		String email = sessionInfo.getEmail();
+		if(null != bxid && bxid != 0){
+			PBaoxiao pbx = publicCaiwuService.getBaoxiao(bxid);
+			if(email.equals(pbx.getCellCoreEmail()) || email.equals(pbx.getGuidanceEmail())){
+				List<PKoukuan> pks = publicCaiwuService.findJiekoukuan(bxid);
+				result.setSuccess(true);
+				result.setObj(pks);
+			}else{
+				result.setMsg("你没有查询该报销单的权限。");
+			}
+		}else{
+			result.setMsg("报销批次号不存在。");
+		}
+		return result;
+	}
+	
 	@RequestMapping(value="/deleteKoujiekuan")
 	@ResponseBody
 	public Json deleteBaoxiaoKjk(PKoukuan pkk){
 		Json result = new Json();
 		if(null != pkk.getId()){
-			if(publicCaiwuService.deleteKouJk(pkk.getId())>0){
-				result.setSuccess(true);
-				result.setMsg("删除成功！");
+			PBaoxiao pbx = publicCaiwuService.getBaoxiao(pkk.getBxid());
+			if(SysConfig.CW_BX_CHECK_AGREE.equals(pbx.getStatus())){//确认是在待审核状态
+				if(publicCaiwuService.deleteKouJk(pkk.getId())>0){
+					result.setSuccess(true);
+					result.setMsg("删除成功！");
+				}else{
+					result.setMsg("删除失败！");
+				}
 			}else{
-				result.setMsg("删除失败！");
+				result.setMsg("只有待审核状态才可以删除扣借款。");
 			}
 		}else{
 			result.setMsg("对不起，借款id不存在。");
@@ -501,8 +575,13 @@ public class PubCaiwuController {
 	public Json removeAllKjk(@RequestParam(value="bxid", required=true)Long bxid){
 		Json result = new Json();
 		if(null != bxid && bxid!=0){
-			result.setSuccess(true);
-			result.setMsg("已经删除了[" + publicCaiwuService.deleteKjkByBxid(bxid) + "]条记录。");
+			PBaoxiao pbx = publicCaiwuService.getBaoxiao(bxid);
+			if(SysConfig.CW_BX_CHECK_AGREE.equals(pbx.getStatus())){//确认是在待审核状态
+				result.setSuccess(true);
+				result.setMsg("已经删除了[" + publicCaiwuService.deleteKjkByBxid(bxid) + "]条记录。");
+			}else{
+				result.setMsg("只有待审核状态才可以删除扣借款。");
+			}
 		}else{
 			result.setMsg("报销id不存在，无法删除。");
 		}
@@ -635,15 +714,16 @@ public class PubCaiwuController {
 	public Map<String, Object> queryDaihuikuanTotal(PBaoxiao pbaoxiao, Page page){
 		pbaoxiao.setStatus(SysConfig.CW_BX_CHUPIAO);
 		Map<String, Object> results = new HashMap<String, Object>();
-		Calendar cal = Calendar.getInstance();
-		cal.set(cal.get(Calendar.YEAR), 0, 1, 0, 0, 0);//2017.01.01 00:00:00
-		Date thisYear = cal.getTime();
-		cal.add(Calendar.YEAR, 1);
-		Date afterYear = cal.getTime();//2018.01.01
-		cal.add(Calendar.YEAR, -2);
-		Date lastYear = cal.getTime();
-		results.put("lastYearTotal", publicCaiwuService.getBaoxiaoTotal(pbaoxiao, lastYear, thisYear));
-		results.put("thisYearTotal", publicCaiwuService.getBaoxiaoTotal(pbaoxiao, thisYear, afterYear));
+//		Calendar cal = Calendar.getInstance();
+//		cal.set(cal.get(Calendar.YEAR), 0, 1, 0, 0, 0);//2017.01.01 00:00:00
+//		Date thisYear = cal.getTime();
+//		cal.add(Calendar.YEAR, 1);
+//		Date afterYear = cal.getTime();//2018.01.01
+//		cal.add(Calendar.YEAR, -2);
+//		Date lastYear = cal.getTime();
+		results.put("dhkTotal", publicCaiwuService.gethuikuanTotal(pbaoxiao));
+//		results.put("lastYearTotal", publicCaiwuService.getBaoxiaoTotal(pbaoxiao, lastYear, thisYear));
+//		results.put("thisYearTotal", publicCaiwuService.getBaoxiaoTotal(pbaoxiao, thisYear, afterYear));
 		results.put("success", true);
 		return results;
 	}
@@ -660,7 +740,7 @@ public class PubCaiwuController {
 	@ResponseBody
 	public Json baoxiaoHuikuan(PBaoxiao pbaoxiao, Boolean agree, Page page, HttpSession session){
 		Json result = new Json();
-		Integer numbers = publicCaiwuService.updateBaoxiaoHuikuan();
+		Integer numbers = publicCaiwuService.updateBaoxiaoHuikuan(pbaoxiao);
 		result.setSuccess(true);
 		result.setMsg("批量更新成功，已修改数据[" + numbers + "]条数据。");
 		return result;
@@ -744,8 +824,10 @@ public class PubCaiwuController {
 		return result;
 	}
 	
-//	@RequestMapping(value="/test")
-//	public void test(Test ts){
+	@RequestMapping(value="/test")
+	public void test(String bank, String account, HttpSession session){
+		SessionInfo sessionInfo = getSessInfo(session);
+		publicCaiwuService.addUserBank(sessionInfo.getId(), bank, account);
 //		System.out.println(ts.getId() + "," + ts.getDate() + "," + ts.getDte());
-//	}
+	}
 }

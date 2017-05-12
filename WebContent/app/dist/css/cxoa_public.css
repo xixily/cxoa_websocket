@@ -501,3 +501,9 @@ table.dataTable thead .sorting:after {
 .item.edit .save{
   display: inline-block !important;
 }
+.igroup-margin{
+  margin-bottom: 6px;
+}
+.igroup-margin input,select,textarea{
+  margin-bottom: 6px;
+}

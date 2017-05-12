@@ -1,6 +1,7 @@
 package com.chaoxing.oa.service.impl;
 
 import java.io.Serializable;
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -10,9 +11,11 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.log4j.Logger;
+import org.hibernate.HibernateException;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import com.chaoxing.oa.dao.BaseDaoI;
 import com.chaoxing.oa.entity.page.caiwu.PUserBank;
@@ -45,6 +48,8 @@ public class PubCaiwuServiceImpl implements PubCaiwuService {
 	@Autowired
 	private BaseDaoI<RenshiUserName> userNameDao;
 	@Autowired
+	private BaseDaoI<UserName> userDao;
+	@Autowired
 	private BaseDaoI<BaoxiaoStatus> bxStatusDao;
 	@Autowired
 	private BaseDaoI<KoukuanItem> koukuanDao;
@@ -75,10 +80,11 @@ public class PubCaiwuServiceImpl implements PubCaiwuService {
 		Map<String, Object> params = new HashMap<String, Object>();
 		StringBuffer hql = new StringBuffer("from BaoxiaoView t where ");
 		try {
-			hql.append(SqlHelper.prepareAndSql(pbaoxiao, params, true));
+			hql.append(SqlHelper.prepareAndSql(pbaoxiao, params, true, "createTime", "aproTime", "jtime", "baoxTime", "reciveTime","cpTime"));
 		} catch (Exception e) {
 			System.out.println(e);
 		}
+		addTimeLike(pbaoxiao, params, hql);
 		String sort = "id";
 		String order = SysConfig.DESC;
 		if(page.getSort() != null){
@@ -90,6 +96,7 @@ public class PubCaiwuServiceImpl implements PubCaiwuService {
 		hql.append(" order by t." + sort + " " + order);
 		int intPage = null != page.getPage() ? page.getPage():0;
 		int pageSize = null!=page.getRows() ? page.getRows():10;
+//		hql = new StringBuffer("from BaoxiaoView t where  1=1 and t.status=:status and str(t.createTime) like :createTime  order by t.id desc");
 		baoxiaos = baoxiaoViewDao.find(hql.toString(),params,intPage,pageSize);
 		Iterator<BaoxiaoView> it = baoxiaos.iterator();
 		BaoxiaoView bx = null;
@@ -105,6 +112,33 @@ public class PubCaiwuServiceImpl implements PubCaiwuService {
 		results.put("rows", pbs);
 		results.put("total", getCount(hql.toString(),params));
 		return results;
+	}
+
+	private void addTimeLike(PBaoxiao pbaoxiao, Map<String, Object> params, StringBuffer hql) {
+		if(null != pbaoxiao.getCreateTime()){
+			hql.append(" and str(createTime) like :createTime");
+			params.put("createTime", "" + pbaoxiao.getCreateTime() + "%");
+		}
+		if(null != pbaoxiao.getAproTime()){
+			hql.append(" and str(aproTime) like :aproTime");
+			params.put("aproTime", "" + pbaoxiao.getAproTime() + "%");
+		}
+		if(null != pbaoxiao.getJtime()){
+			hql.append(" and str(jtime) like :jtime");
+			params.put("jtime", "%" + pbaoxiao.getJtime() + "%");
+		}
+		if(null != pbaoxiao.getBaoxTime()){
+			hql.append(" and str(baoxTime) like :baoxTime");
+			params.put("baoxTime", "%" + pbaoxiao.getBaoxTime() + "%");
+		}
+		if(null != pbaoxiao.getReciveTime()){
+			hql.append(" and str(reciveTime) like :reciveTime");
+			params.put("reciveTime", "%" + pbaoxiao.getReciveTime() + "%");
+		}
+		if(null != pbaoxiao.getCpTime()){
+			hql.append(" and str(cpTime) like :cpTime");
+			params.put("cpTime", "%" + pbaoxiao.getReciveTime() + "%");
+		}
 	}
 
 	private void copyE2P(BaoxiaoView bx, PBaoxiao pbx) {
@@ -144,6 +178,7 @@ public class PubCaiwuServiceImpl implements PubCaiwuService {
 		pbx.setFourthLevel(bx.getFourthLevel());
 		pbx.setCellCoreEmail(bx.getCellCoreEmail());
 		pbx.setGuidanceEmail(bx.getGuidanceEmail());
+		pbx.setCpTime(DateUtil.format(bx.getCpTime(),"yyyy-MM-dd"));
 	}
 	
 	@Override
@@ -155,10 +190,11 @@ public class PubCaiwuServiceImpl implements PubCaiwuService {
 		StringBuffer hql = new StringBuffer("from BaoxiaoView t WHERE (cellCoreEmail=:email OR guidanceEmail=:email) AND ");
 		params.put("email", email);
 		try {
-			hql.append(SqlHelper.prepareAndSql(pbaoxiao, params, true));
+			hql.append(SqlHelper.prepareAndSql(pbaoxiao, params, true, "createTime", "aproTime", "jtime", "baoxTime", "reciveTime","cpTime"));
 		} catch (Exception e) {
 			System.out.println(e);
 		}
+		addTimeLike(pbaoxiao, params, hql);
 		String sort = "id";
 		String order = SysConfig.DESC;
 		if(page.getSort() != null){
@@ -233,6 +269,7 @@ public class PubCaiwuServiceImpl implements PubCaiwuService {
 		baoxiao.setStatus(pbaoxiao.getStatus());
 		baoxiao.setKunhao(pbaoxiao.getKunhao());
 		baoxiao.setCreateTime((null!=pbaoxiao.getCreateTime() ? DateUtil.format(pbaoxiao.getCreateTime()):null));
+		baoxiao.setCpTime((null!=pbaoxiao.getCpTime() ? DateUtil.format(pbaoxiao.getCpTime()):null));
 	}
 
 	@Override
@@ -262,7 +299,17 @@ public class PubCaiwuServiceImpl implements PubCaiwuService {
 
 	@Override
 	public int deleteBaoxiao(Long id, Integer uid) {
-		// TODO Auto-generated method stub
+		String hql = "delete from Baoxiao where id=:id and uid=:uid and status<:status";
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("id", id);
+		params.put("uid", uid);
+		params.put("status", SysConfig.CW_BX_CHUPIAO);
+		try {
+			return baoxiaoDao.executeHql(hql, params);
+		} catch (HibernateException e) {
+			logger.error("[publicCaiwuServiceImpl.deleteBaoxiao] with an error :" + e);
+			e.printStackTrace();
+		}
 		return 0;
 	}
 
@@ -274,7 +321,27 @@ public class PubCaiwuServiceImpl implements PubCaiwuService {
 		cal.add(Calendar.YEAR, -1);
 		Date lastYear = cal.getTime();
 		Map<String, Object> params = new HashMap<String, Object>();
-		StringBuffer hql = new StringBuffer("select sum(t.baoxMoney) from Baoxiao t where t.uid=:id and t.baoxTime>=:lastYear and t.baoxTime<:thisYear");
+		StringBuffer hql = new StringBuffer("select sum(t.money) from Baoxiao t where t.uid=:id and t.baoxTime>=:lastYear and t.baoxTime<:thisYear");
+		params.put("thisYear", thisYear);
+		params.put("lastYear", lastYear);
+		params.put("id", id);
+		List<Object> lis = objectDao.find(hql.toString(), params);
+		Double value1 = 0.0d;
+		if(null!=lis && lis.size()>0){
+			value1 = (Double) ((null!=lis.get(0)) ? lis.get(0):0.0d);
+		}
+		return value1;
+	}
+	
+	@Override
+	public Double getLastYearYpz(int id) {
+		Calendar cal = Calendar.getInstance();
+		cal.set(cal.get(Calendar.YEAR), 0, 1, 0, 0, 0);//2016.01.01 00:00:00
+		Date thisYear = cal.getTime();
+		cal.add(Calendar.YEAR, -1);
+		Date lastYear = cal.getTime();
+		Map<String, Object> params = new HashMap<String, Object>();
+		StringBuffer hql = new StringBuffer("select sum(t.money) from Baoxiao t where t.approid=:id and t.baoxTime>=:lastYear and t.baoxTime<:thisYear");
 		params.put("thisYear", thisYear);
 		params.put("lastYear", lastYear);
 		params.put("id", id);
@@ -294,7 +361,7 @@ public class PubCaiwuServiceImpl implements PubCaiwuService {
 		cal.add(Calendar.YEAR, -1);
 		Date lastYear = cal.getTime();
 		Map<String, Object> params = new HashMap<String, Object>();
-		StringBuffer hql = new StringBuffer("select sum(baoxMoney) from BaoxiaoView t where (cellCoreEmail=:email OR guidanceEmail=:email) AND t.baoxTime>=:lastYear and t.baoxTime<:thisYear");
+		StringBuffer hql = new StringBuffer("select sum(money) from BaoxiaoView t where (cellCoreEmail=:email OR guidanceEmail=:email) AND t.baoxTime>=:lastYear and t.baoxTime<:thisYear");
 		params.put("thisYear", thisYear);
 		params.put("lastYear", lastYear);
 		params.put("email", email);
@@ -314,7 +381,27 @@ public class PubCaiwuServiceImpl implements PubCaiwuService {
 		cal.add(Calendar.YEAR, 1);
 		Date afterYear = cal.getTime();
 		Map<String, Object> params = new HashMap<String, Object>();
-		StringBuffer hql = new StringBuffer("select sum(t.baoxMoney) from Baoxiao t where t.uid=:id and t.baoxTime>=:thisYear and t.baoxTime<:afterYear");
+		StringBuffer hql = new StringBuffer("select sum(t.money) from Baoxiao t where t.uid=:id and t.baoxTime>=:thisYear and t.baoxTime<:afterYear");
+		params.put("thisYear", thisYear);
+		params.put("afterYear", afterYear);
+		params.put("id", id);
+		List<Object> lis = objectDao.find(hql.toString(), params);
+		Double value1 = 0.0d;
+		if(lis.size()>0){
+			value1 = (Double) ((null!=lis.get(0)) ? lis.get(0):0.0d);
+		}
+		return value1;
+	}
+	
+	@Override
+	public Double getThisYearYpz(int id) {
+		Calendar cal = Calendar.getInstance();
+		cal.set(cal.get(Calendar.YEAR), 0, 1, 0, 0, 0);//2016.01.01 00:00:00
+		Date thisYear = cal.getTime();
+		cal.add(Calendar.YEAR, 1);
+		Date afterYear = cal.getTime();
+		Map<String, Object> params = new HashMap<String, Object>();
+		StringBuffer hql = new StringBuffer("select sum(t.money) from Baoxiao t where t.approid=:id and t.baoxTime>=:thisYear and t.baoxTime<:afterYear");
 		params.put("thisYear", thisYear);
 		params.put("afterYear", afterYear);
 		params.put("id", id);
@@ -334,7 +421,7 @@ public class PubCaiwuServiceImpl implements PubCaiwuService {
 		cal.add(Calendar.YEAR, 1);
 		Date afterYear = cal.getTime();
 		Map<String, Object> params = new HashMap<String, Object>();
-		StringBuffer hql = new StringBuffer("select sum(t.baoxMoney) from BaoxiaoView t where (cellCoreEmail=:email OR guidanceEmail=:email) AND t.baoxTime>=:thisYear and t.baoxTime<:afterYear");
+		StringBuffer hql = new StringBuffer("select sum(t.money) from BaoxiaoView t where (cellCoreEmail=:email OR guidanceEmail=:email) AND t.baoxTime>=:thisYear and t.baoxTime<:afterYear");
 		params.put("thisYear", thisYear);
 		params.put("afterYear", afterYear);
 		params.put("email", email);
@@ -352,11 +439,12 @@ public class PubCaiwuServiceImpl implements PubCaiwuService {
 	public Long getBaoxiaoTotal(PBaoxiao pbaoxiao, Date min, Date max) {
 		Map<String, Object> params = new HashMap<String, Object>();
 //		String sql = "select sum(t.baoxMoney) from BaoxiaoView t where ";
-		StringBuffer hql = new StringBuffer("select sum(t.baoxMoney) from BaoxiaoView t where (t.baoxTime>=:min and t.baoxTime<:max) and ");
+		StringBuffer hql = new StringBuffer("select sum(t.money) from BaoxiaoView t where (t.baoxTime>=:min and t.baoxTime<:max) and ");
 		params.put("min", min);
 		params.put("max", max);
 		try {
-			hql.append(SqlHelper.prepareAndSql(pbaoxiao, params, true));
+			hql.append(SqlHelper.prepareAndSql(pbaoxiao, params, true, "createTime", "aproTime", "jtime", "baoxTime", "reciveTime","cpTime"));
+			addTimeLike(pbaoxiao, params, hql);
 			List<Object> bxvs = objectDao.find(hql.toString(), params);
 			if(null!=bxvs && bxvs.size()>0){
 				Double value = (Double) bxvs.get(0);
@@ -403,7 +491,9 @@ public class PubCaiwuServiceImpl implements PubCaiwuService {
 	 */
 	@Override
 	public int updateApprove(PBaoxiao pbaoxiaos, boolean agree) {
-		String sql = "UPDATE 报销表 t,人事username r  SET t.status = :nstatus,t.批准人id = :approId,t.批准人 = :approver, t.批准人邮箱 = :email, t.领导意见 = :approRemark,t.批准时间  = CURRENT_TIMESTAMP  WHERE t.id=:id AND t.报销人id=r.id AND (r.细胞核邮箱=:email or r.指导邮箱=:email) and status=:status";
+		String sql = "UPDATE 报销表 t,人事username r  SET t.status = :nstatus,t.批准人id = :approId,t.批准人 = :approver, "
+				+ "t.批准人邮箱 = :email, t.领导意见 = :approRemark,t.批准时间  = CURRENT_TIMESTAMP  WHERE t.id=:id AND "
+				+ "t.报销人id=r.id AND (r.细胞核邮箱=:email or r.指导邮箱=:email) and status=:status";
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("nstatus", agree ? SysConfig.CW_BX_APPROVE_AGREE : SysConfig.CW_BX_APPROVE_DISAGREE );
 		params.put("status", getPreStep(SysConfig.CW_BX_APPROVE_AGREE));
@@ -441,7 +531,7 @@ public class PubCaiwuServiceImpl implements PubCaiwuService {
 
 	@Override
 	public int updateBaoxiaoChupiao(PBaoxiao pbaoxiaos) {
-		String hql = "update Baoxiao set cpid=:cpid,tuipiao=:tuipiao,caiwuRemarks=:caiwuRemarks,huikuan=:huikuan,baoxMoney=:baoxMoney,status=:nstatus where id=:id and status=:status";
+		String hql = "update Baoxiao set cpid=:cpid,tuipiao=:tuipiao,caiwuRemarks=:caiwuRemarks,huikuan=:huikuan,baoxMoney=:baoxMoney,status=:nstatus,kunhao=:kunhao,cpTime=:cpTime where id=:id and status=:status";
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("cpid", pbaoxiaos.getCpid());
 		params.put("tuipiao", pbaoxiaos.getTuipiao());
@@ -452,24 +542,32 @@ public class PubCaiwuServiceImpl implements PubCaiwuService {
 		params.put("nstatus", SysConfig.CW_BX_CHUPIAO);
 		params.put("status", getPreStep(SysConfig.CW_BX_CHUPIAO));
 		params.put("id", pbaoxiaos.getId());
+		params.put("kunhao", pbaoxiaos.getKunhao());
+		params.put("cpTime", DateUtil.format(pbaoxiaos.getCpTime()));
 		return baoxiaoDao.executeHql(hql,params);
 	}
 	
 	@Override
-	public int updateBaoxiaoHuikuan() {
+	public int updateBaoxiaoHuikuan(PBaoxiao pbaoxiao) {
 		String hqq = "select new Baoxiao(max(cpNumber)) from Baoxiao ";
 		List<Baoxiao> lb = baoxiaoDao.find(hqq);
 		Long max = 0l;
 		if(!lb.isEmpty()){
-			max = lb.get(0).getCpNumber() + 1;
-			max = null != max ? max : 0;
+			max = (null != lb.get(0).getCpNumber()) ?  (lb.get(0).getCpNumber()) + 1 : 0;
 		}
-		String hql = "update Baoxiao set status=:nstatus,cpNumber=:max where status=:status";
+		StringBuffer hql = new StringBuffer("update Baoxiao t set t.status=:nstatus,t.cpNumber=:max,baoxTime=CURRENT_TIMESTAMP where t.status=:status and ");
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("status", SysConfig.CW_BX_CHUPIAO);
 		params.put("nstatus", SysConfig.CW_BX_YIHUIKUAN);
 		params.put("max", max);
-		return baoxiaoDao.executeHql(hql,params);
+		try {
+			hql.append(SqlHelper.prepareAndSql(pbaoxiao, params, true, "createTime", "aproTime", "jtime", "baoxTime", "reciveTime","cpTime"));
+			addTimeLike(pbaoxiao, params, hql);
+		} catch (Exception e) {
+			logger.error("PubCaiwuServiceImpl.updateBaoxiaoHuikuan with an error:" + e);
+			e.printStackTrace();
+		}
+		return baoxiaoDao.executeHql(hql.toString(), params);
 	}
 
 	@Override
@@ -635,14 +733,22 @@ public class PubCaiwuServiceImpl implements PubCaiwuService {
 
 	@Override
 	public Serializable addUserBank(Integer id, String bank, String account) {
-		UserBank ub = new UserBank();
-		ub.setUser(new UserName(id));
-		ub.setAccount(account);
-		ub.setBank(bank);
-		try {
-			return userBankDao.save(ub);
-		} catch (Exception e) {
-			logger.info("报销默认卡号已经存在:" + e);
+		String sql = "select id from userbank where uid=:id";
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("id", id);
+		List<Object> ubs = objectDao.findSql(sql, params);
+		if(ubs.size()<=0){
+			UserBank ub = new UserBank();
+//			UserName user = userDao.get(UserName.class, id);
+			UserName user = new UserName(id);
+			ub.setUser(user);
+			ub.setAccount(account);
+			ub.setBank(bank);
+			try {
+				return userBankDao.save(ub);
+			} catch (Exception e) {
+				logger.info("报销默认卡号已经存在:" + e);
+			}
 		}
 		return null;
 	}
@@ -664,7 +770,67 @@ public class PubCaiwuServiceImpl implements PubCaiwuService {
 		}
 		return pubs;
 	}
-	
-	
+
+	@Override
+	public Map<String, Object> findBxByApprover(PBaoxiao pbaoxiao, Page page, Integer aid) {
+		List<BaoxiaoView> baoxiaos = new ArrayList<BaoxiaoView>();
+		List<PBaoxiao> pbs = new ArrayList<PBaoxiao>();
+		Map<String, Object> results = new HashMap<String, Object>();
+		Map<String, Object> params = new HashMap<String, Object>();
+		StringBuffer hql = new StringBuffer("from BaoxiaoView t WHERE approid=:aid AND ");
+		params.put("aid", aid);
+		try {
+			hql.append(SqlHelper.prepareAndSql(pbaoxiao, params, true, "createTime", "aproTime", "jtime", "baoxTime", "reciveTime","cpTime"));
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		addTimeLike(pbaoxiao, params, hql);
+		String sort = "id";
+		String order = SysConfig.DESC;
+		if(page.getSort() != null){
+			sort = page.getSort();
+			if(page.getOrder() != null){
+				order = page.getOrder();
+			}
+		}
+		hql.append(" order by t." + sort + " " + order);
+		int intPage = null != page.getPage() ? page.getPage():0;
+		int pageSize = null!=page.getRows() ? page.getRows():10;
+		baoxiaos = baoxiaoViewDao.find(hql.toString(),params,intPage,pageSize);
+		Iterator<BaoxiaoView> it = baoxiaos.iterator();
+		BaoxiaoView bx = null;
+		PBaoxiao pbx = null;
+		if(null!=baoxiaos && baoxiaos.size()>0){
+			while(it.hasNext()){
+				bx = it.next();
+				pbx = new PBaoxiao();
+				copyE2P(bx, pbx);
+				pbs.add(pbx);
+			}
+		}
+		results.put("rows", pbs);
+		results.put("total", getCount(hql.toString(),params));
+		return results;
+	}
+
+	@Override
+	public Double gethuikuanTotal(PBaoxiao pbaoxiao) {
+		Map<String, Object> params = new HashMap<String, Object>();
+//		String sql = "select sum(t.baoxMoney) from BaoxiaoView t where ";
+		StringBuffer hql = new StringBuffer("select sum(t.huikuan) from BaoxiaoView t where ");
+		try {
+			hql.append(SqlHelper.prepareAndSql(pbaoxiao, params, true, "createTime", "aproTime", "jtime", "baoxTime", "reciveTime","cpTime"));
+			addTimeLike(pbaoxiao, params, hql);
+			List<Object> bxvs = objectDao.find(hql.toString(), params);
+			if(null!=bxvs && bxvs.size()>0){
+				Double value = (Double) bxvs.get(0);
+				return value;
+			}
+		} catch (Exception e) {
+			logger.error("PubCaiwuServiceImpl.getBaoxiaoTotal:" + e);
+			System.out.println(e);
+		}
+		return null;
+	}
 
 }

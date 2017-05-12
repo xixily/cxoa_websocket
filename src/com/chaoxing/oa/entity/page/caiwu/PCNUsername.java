@@ -2,9 +2,9 @@ package com.chaoxing.oa.entity.page.caiwu;
 
 
 public class PCNUsername {
-	private int id;//ID
+	private Integer id;//ID
 	private String username;//用户姓名
-	private int departmentId;//部门ID
+	private Integer departmentId;//部门ID
 	private String position;//职位
 	private String sex;//性别
 	private String identityCard;//身份号
@@ -33,13 +33,13 @@ public class PCNUsername {
 	private String guidance;//指导
 	private String guidanceEmail;//指导邮箱
 	private String managementSystem;//管理制度
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 	public String getUsername() {
 		return username;
 	}
-	public int getDepartmentId() {
+	public Integer getDepartmentId() {
 		return departmentId;
 	}
 	public String getPosition() {
@@ -126,13 +126,13 @@ public class PCNUsername {
 	public String getManagementSystem() {
 		return managementSystem;
 	}
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 	public void setUsername(String username) {
 		this.username = username;
 	}
-	public void setDepartmentId(int departmentId) {
+	public void setDepartmentId(Integer departmentId) {
 		this.departmentId = departmentId;
 	}
 	public void setPosition(String position) {

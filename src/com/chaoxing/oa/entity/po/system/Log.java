@@ -26,6 +26,7 @@ public class Log implements Serializable {
 	private String content;
 	private String method;
 	private String result;
+	private Integer status;
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
@@ -65,6 +66,15 @@ public class Log implements Serializable {
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+
+	@Column(name="status_")
+	public Integer getStatus() {
+		return status;
+	}
+
+	public void setStatus(Integer status) {
+		this.status = status;
 	}
 
 	public void setUserId(Integer userId) {

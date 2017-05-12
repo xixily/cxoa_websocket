@@ -234,6 +234,4 @@ public class UserServiceImpl implements UserServiceI {
 		return usernameDao.get(UserName.class, id);
 	}
 	
-	
-	
 }

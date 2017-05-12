@@ -1,9 +1,7 @@
 package com.chaoxing.oa.entity.po.caiwu;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -46,7 +44,8 @@ public class UserBank {
 	public void setBank(String bank) {
 		this.bank = bank;
 	}
-	@ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+	@ManyToOne()
+//	@ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
 	/**
 	 * 设置我们的关联列，在hibernate中，对象关系映射的关联体现在数据库表间就是主键的关联，
 	 * 它在Article表中保存了对应user对象的主键来建立映射关系，而且名称即为"属性名_id"，

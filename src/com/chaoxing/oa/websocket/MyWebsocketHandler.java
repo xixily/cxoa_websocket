@@ -149,7 +149,9 @@ public class MyWebsocketHandler implements WebSocketHandler {
 	private void getShListMessages(PMessages msg,WebSocketSession webSocketSession) {
 		SessionInfo sessionInfo = getSessionInfo(webSocketSession);
 //		boolean isChecker = sysService.getCaiwushRoleId(sessionInfo.getRoleId());
-		boolean isChecker = sysService.getCaiwushRoleId() == sessionInfo.getRoleId() ? true : false;
+		Integer ck = sysService.getCaiwushRoleId();
+		boolean isChecker = (null!=ck && ck == sessionInfo.getRoleId()) ? true : false;
+//		boolean isChecker = sysService.getCaiwushRoleId() == sessionInfo.getRoleId() ? true : false;
 		if(null != sessionInfo){
 			List<Messages> messages = chatService.findShChatRecordBylisId(msg.getLis_id(), sessionInfo.getId(), isChecker);
 			Map<String,Object> results = new HashMap<String, Object>();

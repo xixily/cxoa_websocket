@@ -33,6 +33,8 @@ public class SessionInfo implements java.io.Serializable {
 	List<String> resourceUrls;
 	private Object response;
 	private boolean loginMethod=true;//默认登录方式是账户密码登录，否则是学习通跳转。
+	
+	
 	public int getId() {
 		return id;
 	}

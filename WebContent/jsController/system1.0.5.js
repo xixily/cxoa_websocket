@@ -201,12 +201,15 @@ var system = {
 				data.ids = menus;
 				data.sid = selected.menuId;
 				if(data.roleId && data.sid ){
+					$('#menu2role_btn').linkbutton('disable');
 					$.post('system/addRoleMenus.action', data, function(result){
 						if(result.success){
 							system.roleMange.addPreNodes(selected);
 							system.roleMange.appendNodes(selected._parentId, [selected]);
+						}else{
+							$.messager.alert("提示：", result.msg);
 						}
-						$.messager.alert("提示：", result.msg);
+						$('#menu2role_btn').linkbutton('enable');
 					})
 				}else{
 					$.messager.alert("提示：", "获取角色信息失败，请确认。");
@@ -224,11 +227,14 @@ var system = {
 				data.ids = menus;
 				data.roleId = $("#role_id").val();
 				if(data.roleId){
+					$('#remove_role_menu').linkbutton('disable');
 					$.post('system/removeRoleMenus.action', data, function(result){
 						if(result.success){
 							$('#' + roleId).treegrid('remove', selected.menuId);
+						}else{
+							$.messager.alert("提示：", result.msg);
 						}
-						$.messager.alert("提示：", result.msg);
+						$('#remove_role_menu').linkbutton('enable');
 					})
 				}
 			}else{

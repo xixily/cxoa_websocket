@@ -56,6 +56,9 @@
 		var $this = jq ? $(jq) : this;
 		var serializeObj={},
 		array=$this.serializeArray();
+		$(':disabled[name]', $this).each(function () {
+			array.push({ name: this.name, value: $(this).val() });
+		});
 		$(array).each(function(){
 			if(serializeObj[this.name]){
 				serializeObj[this.name]+=';'+this.value;

@@ -23,11 +23,11 @@
                     <div class="input-group">
                         <div id="bx_find_btn" class="input-group-btn">
                             <button class="btn btn-default fropdown-toggle" data-toggle="dropdown" type="button">
-                                <span id="bx_find_type" target="text"><input type="hidden" name="type" value="explain"/>说明</span><span class="caret"></span>
+                                <span id="bx_find_type" target="text"><input type="hidden" name="type" value="explain"/>备注</span><span class="caret"></span>
                             </button>
                             <ul class="dropdown-menu" role="menu">
                                 <li><a><span class="sr-only">id</span>批次号</a></li>
-                                <li><a><span class="sr-only">jTime</span>邮寄时间</a></li>
+                                <li><a><span class="sr-only">createTime</span>创建时间</a></li>
                                 <li><a><span class="sr-only">username</span>报销人</a></li>
                                 <li><a><span class="sr-only">number</span>报销张数</a></li>
                                 <li><a><span class="sr-only">money</span>报销金额</a></li>
@@ -36,7 +36,7 @@
                                 <li><a><span class="sr-only">bank</span>银行</a></li>
                                 <li><a><span class="sr-only">explain</span>说明</a></li>
                                 <li><a><span class="sr-only">reciveTime</span>收票时间</a></li>
-                                <li><a><span class="sr-only">baoxTime</span>报销时间</a></li>
+                                <li><a><span class="sr-only">cpTime</span>出票时间</a></li>
                                 <li><a><span class="sr-only">status</span>报销情况</a></li>
                                 <li><a><span class="sr-only">tuipiao</span>退票金额</a></li>
                                 <li><a><span class="sr-only">caiwuRemarks</span>财务备注</a></li>
@@ -51,6 +51,20 @@
 
                     </div>
                 </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- 按钮组 -->
+    <div id="bx_btn_group">
+        <div class="row">
+            <div class="col-xs-12 col-md-12" style="padding-top: 6px;">
+                <div class="btn-group" role="group" aria-label="Default button group">
+                    <!--<button type="button" class="btn btn-default" onclick="caiwu.baoxiaoCheck.submitDaihuikuan()">操作 <i-->
+                            <!--class="glyphicon glyphicon-arrow-down"></i></button>-->
+                    <!--<button type="button" class="btn btn-default">Middle</button>-->
+                    <!--<button type="button" class="btn btn-default">Right</button>-->
+                </div>
             </div>
         </div>
     </div>
@@ -74,47 +88,102 @@
                         <a class="media-left" href="#">
                             <img src="" alt="响应式图片" width="132" height="132" app-img="img">
                         </a>
-                        <a href="javascript:void(0)" class="media-body" style="">
-                            <div class="container">
+                        <div class="media-body" style="width: 100%">
+                            <!--<h4 class="media-heading">发票单</h4>-->
+                            <a href="javascript:void(0)">
                                 <div class="row">
-                                    <div class="col-xs-12 col-lg-12">
-                                        <i class="fa fa-slack"></i> 报销批次：
-                                        <span class="t-input" app-data="id"></span>
-                                        <!--<span class="badge">审核通过</span>-->
+                                    <div class="col-xs-9 col-md-10">
+                                        <div>
+                                            <i class="fa fa-slack"></i> 报销批次：
+                                            <span class="t-input" app-data="id"></span>
+                                        </div>
+                                        <div>
+                                            <i class="fa fa-user"></i> 报销人：
+                                            <span class="t-input" app-data="username"></span>
+                                        </div>
+                                        <div>
+                                            <i class="fa fa-user"></i> 细胞核邮箱：
+                                            <span class="t-input" app-data="cellCoreEmail"></span>
+                                        </div>
+                                        <div>
+                                            <i class="fa fa-rmb"></i> 金额：
+                                            <span class="t-input" app-data="money"></span>元
+                                        </div>
+                                        <div>
+                                            <i class="fa fa-clock-o"></i> 汇款时间：
+                                            <span class="t-input" app-data="baoxTime"></span>
+                                        </div>
+                                        <div>
+                                            <i class="fa fa-comments-o"></i> 备注：
+                                            <span class="t-input" app-data="explain"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-3 col-md-2 bx-check">
+                                        <br/>
+                                        <button class="btn btn-danger btn-sm btn-circle"  onclick="
+                                        caiwu.baoxiao.deleteBaoxiaoOnlist(event)
+                                        "><i class="fa fa-times"></i></button>
                                     </div>
                                 </div>
-                                <div class="row">
-                                    <div class="col-xs-12 col-lg-12">
-                                        <i class="fa fa-user"></i> 报销人：
-                                        <span class="t-input" app-data="username"></span>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-xs-12 col-lg-12">
-                                        <i class="fa fa-user"></i> 细胞核：
-                                        <span class="t-input" app-data="cellCore"></span>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-xs-12 col-lg-12">
-                                        <i class="fa fa-rmb"></i> 金额：
-                                        <span class="t-input" app-data="money"></span>元
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-xs-12 col-lg-12">
-                                        <i class="fa fa-clock-o"></i> 汇款时间：
-                                        <span class="t-input" app-data="baoxTime"></span>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-xs-12 col-lg-12">
+                               <!-- <div class="row">
+                                    <div class="col-xs-12 col-md-12">
                                         <i class="fa fa-comments-o"></i> 备注：
                                         <span class="t-input" app-data="explain"></span>
                                     </div>
-                                </div>
-                            </div>
-                        </a>
+                                </div>-->
+                            </a>
+
+                        </div>
+                        <!--<a href="javascript:void(0)" class="media-body" style="">-->
+                            <!--<div class="row">-->
+                                <!--<div class="col-xs-9 col-md-10">-->
+                                    <!--<div class="row">-->
+                                        <!--<div class="col-xs-12 col-lg-12">-->
+                                            <!--<i class="fa fa-slack"></i> 报销批次：-->
+                                            <!--<span class="t-input" app-data="id"></span>-->
+                                            <!--&lt;!&ndash;<span class="badge">审核通过</span>&ndash;&gt;-->
+                                        <!--</div>-->
+                                    <!--</div>-->
+                                    <!--<div class="row">-->
+                                        <!--<div class="col-xs-12 col-lg-12">-->
+                                            <!--<i class="fa fa-user"></i> 报销人：-->
+                                            <!--<span class="t-input" app-data="username"></span>-->
+                                        <!--</div>-->
+                                    <!--</div>-->
+                                    <!--<div class="row">-->
+                                        <!--<div class="col-xs-12 col-lg-12">-->
+                                            <!--<i class="fa fa-user"></i> 细胞核邮箱：-->
+                                            <!--<span class="t-input" app-data="cellCoreEmail"></span>-->
+                                        <!--</div>-->
+                                    <!--</div>-->
+                                    <!--<div class="row">-->
+                                        <!--<div class="col-xs-12 col-lg-12">-->
+                                            <!--<i class="fa fa-rmb"></i> 金额：-->
+                                            <!--<span class="t-input" app-data="money"></span>元-->
+                                        <!--</div>-->
+                                    <!--</div>-->
+                                    <!--<div class="row">-->
+                                        <!--<div class="col-xs-12 col-lg-12">-->
+                                            <!--<i class="fa fa-clock-o"></i> 汇款时间：-->
+                                            <!--<span class="t-input" app-data="baoxTime"></span>-->
+                                        <!--</div>-->
+                                    <!--</div>-->
+                                    <!--<div class="row">-->
+                                        <!--<div class="col-xs-12 col-lg-12">-->
+                                            <!--<i class="fa fa-comments-o"></i> 备注：-->
+                                            <!--<span class="t-input" app-data="explain"></span>-->
+                                        <!--</div>-->
+                                    <!--</div>-->
+                                <!--</div>-->
+                                <!--<div class="col-xs-3 col-md-2 bx-check">-->
+                                    <!--<div class="col-xs-3 col-md-2 bx-check">-->
+                                        <!--&lt;!&ndash;<button class="btn btn-success btn-sm btn-circle" onclick="caiwu.baoxiaoAppro.agree(event)"><i class="fa fa-check"></i></button>-->
+                                        <!--<br/>&ndash;&gt;-->
+                                        <!--<button class="btn btn-warning btn-sm btn-circle"  onclick="caiwu.caiwu.deleteBaoxiao(event)"><i class="fa fa-times"></i></button>-->
+                                    <!--</div>-->
+                                <!--</div>-->
+                            <!--</div>-->
+                        <!--</a>-->
                         <!--<a href="javascript:showbxInfo()">-->
                         </a>
                     </li>
@@ -124,6 +193,7 @@
                     </li>
                 </ul>
             </div>
+
             <!-- 报销信息-->
             <div id="bx_info" class="col-md-10" style="height:0;overflow: hidden;">
                 <form id="bx_sq" class="form-horizontal" role="form">
@@ -144,17 +214,25 @@
                         </span>
                         <span class="hide">
                         <button type="button" class="btn btn-default btn-sm" app-action="caiwu.baoxiao.updateInfo"  style="margin:10px 10px 0px;" onclick="
-                        var parent = $(this).parent();
-                        parent.toggleClass('hide');
-//                        parent.siblings().toggleClass('hide');
+                         $('#bx_msg_btn').find('>span').toggleClass('hide');
+//                        var parent = $(this).parent();
+//                        parent.toggleClass('hide');
                         ">
                             <i class="fa fa-check"></i>
                             提交申请
                         </button>
+                        <button type="button" class="btn btn-default btn-sm" app-action="caiwu.baoxiao.deleteBaoxiao" style="margin:10px 10px 0px;" onclick="
+                        $('#bx_msg_btn').find('>span').toggleClass('hide')
+//                        var parent = $(this).parent();
+//                        parent.toggleClass('hide');
+//                        parent.siblings().toggleClass('hide');
+                        ">
+                                <i class="fa fa-times"></i>删除</button>
                         <button type="button" class="btn btn-default btn-sm"  style="margin:10px 10px 0px;" onclick="
-                        var parent = $(this).parent();
-                        parent.toggleClass('hide');
-                        parent.siblings().toggleClass('hide');
+                        $('#bx_msg_btn').find('>span').toggleClass('hide')
+//                        var parent = $(this).parent();
+//                        parent.toggleClass('hide');
+//                        parent.siblings().toggleClass('hide');
                         $('#bx_msg_info').attr('disabled','true');
                         ">
                             <i class="fa fa-times"></i>
@@ -164,7 +242,7 @@
                         </div>
                     </legend>
                     <fieldset id="bx_msg_info" disabled>
-                        <div class="form-group">
+                        <div class="form-group igroup-margin ">
                             <label class="col-xs-4 col-sm-2 control-label" for="username">报销人:</label>
                             <div class="col-xs-8 col-sm-4">
                                 <input type="text" class="form-control input-sm" id="username" name="username" placeholder="报销人..." readonly>
@@ -175,7 +253,7 @@
                             </div>
 
                         </div>
-                        <div class="form-group">
+                        <div class="form-group igroup-margin ">
                             <label class="col-xs-4 col-sm-2 control-label" for="email">报销人邮箱:</label>
                             <div class="col-xs-8 col-sm-4">
                                 <input type="email" class="form-control input-sm" id="email" name="email" placeholder="报销人邮箱..." readonly>
@@ -185,7 +263,7 @@
                                 <input type="number" max="30" min="0" id="number" class="form-control input-sm" name="number" placeholder="报销张数...">
                             </div>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group igroup-margin ">
                             <label class="col-xs-4 col-sm-2 control-label" for="money">报销金额:</label>
                             <div class="col-xs-8 col-sm-4">
                                 <input type="number"  class="form-control input-sm" id="money" name="money" placeholder="报销金额...">
@@ -195,7 +273,7 @@
                                 <input type="number" class="form-control input-sm" name="huankuan" placeholder="还款金额...">
                             </div>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group igroup-margin ">
                             <label class="col-xs-4 col-sm-2  control-label" for="bx_bank2">银行:</label>
                             <div class="col-xs-8 col-sm-4">
                                 <select name="bank" id="bx_bank2" class="form-control input-sm">
@@ -213,18 +291,18 @@
                                 <input type="text" class="form-control input-sm" name="account" placeholder="卡号...">
                             </div>
                         </div>
-                        <div class="form-group">
-                            <label class="col-xs-4 col-sm-2 control-label">邮寄时间:</label>
+                        <div class="form-group igroup-margin ">
+                            <label class="col-xs-4 col-sm-2 control-label">创建时间:</label>
                             <div class="col-xs-8 col-sm-4">
-                                <!--<input type="date" class="form-control input-sm" name="jtime" placeholder="邮寄时间...">-->
-                                <input type="text" class="form-control input-sm jquery-ui-date" name="jtime" placeholder="邮寄时间..." app-target="jquery-ui-date"/>
+                                <!--<input type="date" class="form-control input-sm" name="jtime" placeholder="创建时间...">-->
+                                <input type="text" class="form-control input-sm jquery-ui-date" name="createTime" placeholder="创建时间..." app-target="jquery-ui-date"/>
                             </div>
                             <label class="col-xs-4 col-sm-2 control-label" for="kdno2">快递单号:</label>
                             <div class="col-xs-8 col-sm-4">
                                 <input type="text" class="form-control input-sm" id="kdno2" name="kdno" placeholder="快递单号...">
                             </div>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group igroup-margin ">
                             <label class="col-xs-4 col-sm-2 control-label" for="explain">说明:</label>
                             <div class="col-xs-8 col-sm-4">
                                 <textarea name="explain" id="explain" cols="30" rows="3" class="form-control"></textarea>
@@ -236,7 +314,7 @@
                         <span>批准人信息</span>
                     </legend>
                     <fieldset disabled>
-                        <div class="form-group">
+                        <div class="form-group igroup-margin ">
                             <label class="col-xs-4 col-sm-2 control-label" for="approver">批准人:</label>
                             <div class="col-xs-8 col-sm-4">
                                 <input type="text" class="form-control input-sm" id="approver" name="approver" placeholder="批准人...">
@@ -246,11 +324,11 @@
                                 <input type="email" class="form-control input-sm" id="aproEmail" name="aproEmail" placeholder="批准人邮箱...">
                             </div>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group igroup-margin ">
                             <label class="col-xs-4 col-sm-2 control-label" for="approTime">批准时间:</label>
                             <div class="col-xs-8 col-sm-4">
                                 <!--<input type="date" class="form-control input-sm" id="approTime" placeholder="批准时间...">-->
-                                <input type="text" class="form-control input-sm jquery-ui-date" id="approTime" placeholder="批准时间...">
+                                <input type="text" class="form-control input-sm jquery-ui-date" name="aproTime" id="approTime" placeholder="批准时间...">
                             </div>
                             <label class="col-xs-4 col-sm-2 control-label" for="approRemark">备注:</label>
                             <div class="col-xs-8 col-sm-4">
@@ -262,45 +340,50 @@
                         <span>财务信息</span>
                     </legend>
                     <fieldset disabled>
-                        <div class="form-group">
+                        <div class="form-group igroup-margin ">
                             <label class="col-xs-4 col-sm-2 control-label" for="receiveTime">收票时间:</label>
                             <div class="col-xs-8 col-sm-4">
                                 <input type="text" class="form-control input-sm jquery-ui-date" id="receiveTime" name="reciveTime" placeholder="收票时间...">
                               <!--  <input type="date" class="form-control input-sm" id="receiveTime" name="reciveTime" placeholder="收票时间...">-->
                             </div>
-                            <label class="col-xs-4 col-sm-2 control-label" for="bxTime">报销时间:</label>
+                            <label class="col-xs-4 col-sm-2 control-label" for="bxTime">出票时间:</label>
                             <div class="col-xs-8 col-sm-4">
-                                <input type="text" class="form-control input-sm jquery-ui-date" id="bxTime" placeholder="报销时间...">
-                                <!--<input type="date" class="form-control input-sm" id="bxTime" placeholder="报销时间...">-->
+                                <input type="text" class="form-control input-sm jquery-ui-date" id="bxTime" name="cpTime" placeholder="出票时间...">
+                                <!--<input type="date" class="form-control input-sm" id="bxTime" placeholder="出票时间...">-->
                             </div>
                             <!--<label class="col-xs-4 col-sm-2 control-label" for="kdno">快递单号:</label>-->
                             <!--<div class="col-xs-8 col-sm-4">-->
                                 <!--<input type="date" class="form-control input-sm" id="kdno" name="kdno" placeholder="快递单号...">-->
                             <!--</div>-->
                         </div>
-                        <div class="form-group">
-                            <label class="col-xs-4 col-sm-2 control-label" for="baoxMoney">报销金额:</label>
+                        <!--//TODO  待讨论-->
+                        <!--<div class="form-group igroup-margin  hide">-->
+                            <!--&lt;!&ndash;<label class="col-xs-4 col-sm-2 control-label" for="baoxMoney">报销金额:</label>-->
+                            <!--<div class="col-xs-8 col-sm-4">-->
+                                <!--<input type="text" class="form-control input-sm" id="baoxMoney" name="money" placeholder="报销金额...">-->
+                            <!--</div>-->
+                            <!--<label class="col-xs-4 col-sm-2 control-label" for="tuipiao">还借款金额:</label>-->
+                            <!--<div class="col-xs-8 col-sm-4">-->
+                                <!--<input type="number" class="form-control input-sm" id="huankuan" name="tuipiao" placeholder="还借款金额...">-->
+                            <!--</div>&ndash;&gt;-->
+                        <!--</div>-->
+                        <div class="form-group igroup-margin ">
+                            <label class="col-xs-4 col-sm-2 control-label" for="cp_kjk"><a onclick="caiwu.baoxiaoCheck.openKoukuan(event)">扣除借款金额:</a></label>
                             <div class="col-xs-8 col-sm-4">
-                                <input type="text" class="form-control input-sm" id="baoxMoney" name="baoxMoney" placeholder="报销金额...">
+                                <input type="number" class="form-control input-sm bx-relavtive" id="cp_kjk" name="koujk"
+                                       placeholder="扣除借款金额..." readonly>
                             </div>
                             <label class="col-xs-4 col-sm-2 control-label" for="tuipiao">退票金额:</label>
                             <div class="col-xs-8 col-sm-4">
                                 <input type="number" class="form-control input-sm" id="tuipiao" name="tuipiao" placeholder="退票金额...">
                             </div>
                         </div>
-                        <div class="form-group">
-                            <label class="col-xs-4 col-sm-2 control-label" for="cp_kjk"><a onclick="caiwu.baoxiaoCheck.openKoukuan(event)">扣除借款金额:</a></label>
-                            <div class="col-xs-8 col-sm-4">
-                                <input type="number" class="form-control input-sm bx-relavtive" id="cp_kjk" name="koujk"
-                                       placeholder="扣除借款金额..." readonly>
-                            </div>
+                        <div class="form-group igroup-margin ">
                             <label class="col-xs-4 col-sm-2 control-label" for="huikuan2">汇款金额:</label>
                             <div class="col-xs-8 col-sm-4">
                                 <input type="text" class="form-control input-sm" id="huikuan2" name="huikuan"
                                        placeholder="汇款金额..." readonly>
                             </div>
-                        </div>
-                        <div class="form-group">
                             <label class="col-xs-4 col-sm-2 control-label" for="caiwuRemarks">财务备注:</label>
                             <div class="col-xs-8 col-sm-4">
                                 <textarea name="caiwuRemarks" id="caiwuRemarks" cols="30" rows="3" class="form-control" placeholder="财务备注..."></textarea>
@@ -332,17 +415,17 @@
                             <!--<span>报销信息</span>-->
                         <!--</legend>-->
                         <fieldset>
-                            <div class="form-group">
+                            <div class="form-group igroup-margin ">
                                 <label class="col-xs-4 col-sm-2 control-label" for="_money">报销金额:</label>
                                 <div class="col-xs-8 col-sm-4">
-                                    <input type="number"  class="form-control input-sm" id="_money" name="money" placeholder="报销金额...">
+                                    <input type="number"  class="form-control input-sm" step="0.01" id="_money" name="money" placeholder="报销金额...">
                                 </div>
                                 <label class="col-xs-4 col-sm-2  control-label">还借款金额:</label>
                                 <div class="col-xs-8 col-sm-4">
                                     <input type="number" class="form-control input-sm" name="huankuan" placeholder="还款金额...">
                                 </div>
                             </div>
-                            <div class="form-group">
+                            <div class="form-group igroup-margin ">
                                 <label class="col-xs-4 col-sm-2  control-label" for="_bx_bank">银行:</label>
                                 <div class="col-xs-8 col-sm-4">
                                     <select name="bank" id="_bx_bank" class="form-control input-sm" disabled>
@@ -359,17 +442,17 @@
                                    <input type="text" class="form-control input-sm" name="account" placeholder="卡号...">
                                 </div>
                             </div>
-                            <div class="form-group">
+                            <div class="form-group igroup-margin ">
                                 <label class="col-xs-4 col-sm-2 control-label" for="_number">报销张数:</label>
                                 <div class="col-xs-8 col-sm-4">
-                                    <input type="number" step="1" max="30" min="0" id="_number" class="form-control input-sm" name="number" placeholder="报销张数...">
+                                    <input type="number" step="1" max="100" min="0" id="_number" class="form-control input-sm" name="number" placeholder="报销张数...">
                                 </div>
                                 <label for="_kdn" class="col-xs-4 col-sm-2 control-label"></label>
                                 <div class="col-xs-8 col-sm-4">
                                     <input id="_kdn" type="text" class="form-control input-sm" name="kdno" placeholder="快递单号..."/>
                                 </div>
                             </div>
-                            <div class="form-group">
+                            <div class="form-group igroup-margin ">
                                 <label class="col-xs-4 col-sm-2 control-label" for="_explain">说明:</label>
                                 <div class="col-xs-8 col-sm-4">
                                     <textarea name="explain" id="_explain" cols="30" rows="3" class="form-control"></textarea>

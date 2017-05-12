@@ -43,7 +43,47 @@ public class LogInterceptor implements HandlerInterceptor {
 		String requestUri = request.getRequestURI();
 		String contextPath = request.getContextPath();
 		String url = requestUri.substring(contextPath.length());
-		if (!excludeUrls.contains(url)) {
+		if (null != url && url.contains("/file") || url.contains("/update") || url.contains("/delete") || url.contains("/add") || url.contains("/remove") || excludeUrls.contains(url)) {
+			if(request.isRequestedSessionIdValid()){
+				SessionInfo sessionInfo = (SessionInfo) request.getSession().getAttribute(ResourceUtil.getSessionInfoName());
+				if(null == sessionInfo){
+					return ;
+				}
+				Enumeration<?> enu = request.getParameterNames();
+				StringBuffer str1 = new StringBuffer("queryForm:[");
+				PLog log = new PLog();
+				while(enu.hasMoreElements()){
+					String paraName = (String) enu.nextElement();
+					str1.append("{" + paraName + ":" + request.getParameter(paraName) + "}, ");
+				}
+				String str = "";
+				if(str1.length()> 11){
+					System.out.println(str);
+					str = str1.substring(0, str1.length()-2) + "]";
+				}else{
+					str = str1.toString() + "]";
+				}
+				log.setContent(str);
+				log.setMethod(url);
+				log.setRequestIp(request.getRemoteAddr());
+				log.setUserId(sessionInfo.getId());
+				log.setStatus(response.getStatus());
+//				if (excludeUrls.contains(url)) {
+////					System.out.println("文件下载，文件下载");
+//					return;
+//				}
+				if(null != sessionInfo.getResponse()){
+					if(sessionInfo.getResponse().toString().length()>1024){
+						log.setResult(sessionInfo.getResponse().toString().substring(0,1024));
+					}else{
+						log.setResult(sessionInfo.getResponse().toString());
+					}
+				}
+				sessionInfo.setResponse(null);
+				logService.addlog(log);
+//				System.out.println(str);
+			}
+		}else{
 			if(request.isRequestedSessionIdValid()){
 				SessionInfo sessionInfo = (SessionInfo) request.getSession().getAttribute(ResourceUtil.getSessionInfoName());
 				if(null != sessionInfo){
@@ -51,44 +91,6 @@ public class LogInterceptor implements HandlerInterceptor {
 				}
 			}
 			return ;
-		}
-		if(request.isRequestedSessionIdValid()){
-			SessionInfo sessionInfo = (SessionInfo) request.getSession().getAttribute(ResourceUtil.getSessionInfoName());
-			if(null == sessionInfo){
-				return ;
-			}
-			Enumeration<?> enu = request.getParameterNames();
-			StringBuffer str1 = new StringBuffer("queryForm:[");
-			PLog log = new PLog();
-			while(enu.hasMoreElements()){
-				String paraName = (String) enu.nextElement();
-				str1.append("{" + paraName + ":" + request.getParameter(paraName) + "}, ");
-			}
-			String str = "";
-			if(str1.length()> 11){
-				System.out.println(str);
-				str = str1.substring(0, str1.length()-2) + "]";
-			}else{
-				str = str1.toString() + "]";
-			}
-			log.setContent(str);
-			log.setMethod(url);
-			log.setRequestIp(request.getRemoteAddr());
-			log.setUserId(sessionInfo.getId());
-			if (excludeUrls.contains(url)) {
-//				System.out.println("文件下载，文件下载");
-				return;
-			}
-			if(null != sessionInfo.getResponse()){
-				if(sessionInfo.getResponse().toString().length()>1024){
-					log.setResult(sessionInfo.getResponse().toString().substring(0,1024));
-				}else{
-					log.setResult(sessionInfo.getResponse().toString());
-				}
-			}
-			sessionInfo.setResponse(null);
-			logService.addlog(log);
-//			System.out.println(str);
 		}
 
 	}

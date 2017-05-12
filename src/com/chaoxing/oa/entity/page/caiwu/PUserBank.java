@@ -6,7 +6,6 @@ public class PUserBank {
 	private Integer id;
 	private String bank;
 	private String account;
-//	private Integer uid;
 	private Integer uid;
 	
 	public Integer getId() {

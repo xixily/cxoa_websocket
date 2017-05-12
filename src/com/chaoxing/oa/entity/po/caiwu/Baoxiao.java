@@ -49,6 +49,7 @@ public class Baoxiao implements Serializable{
 	private String kunhao;//捆号
 	private Date createTime;//创建时间
 	private Long cpNumber;//汇款批次号
+	private Date cpTime;//出票时间
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	public Long getId() {
@@ -162,13 +163,20 @@ public class Baoxiao implements Serializable{
 	public String getKunhao() {
 		return kunhao;
 	}
-	@Column(name="创建时间")
+	@Column(name="创建时间", insertable=false)
 	public Date getCreateTime() {
 		return createTime;
 	}
 	@Column
 	public Long getCpNumber() {
 		return cpNumber;
+	}
+	@Column(name="出票时间")
+	public Date getCpTime() {
+		return cpTime;
+	}
+	public void setCpTime(Date cpTime) {
+		this.cpTime = cpTime;
 	}
 	public void setCpNumber(Long cpNumber) {
 		this.cpNumber = cpNumber;

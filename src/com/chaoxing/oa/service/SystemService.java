@@ -7,7 +7,6 @@ import java.util.Map;
 import com.chaoxing.oa.entity.page.system.PMenus;
 import com.chaoxing.oa.entity.page.system.PMenus_;
 import com.chaoxing.oa.entity.page.system.PUserRole;
-import com.chaoxing.oa.entity.po.system.UserRole;
 
 public interface SystemService {
 	public List<PMenus> getMenus(PMenus pmenu);

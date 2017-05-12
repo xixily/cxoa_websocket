@@ -10,6 +10,7 @@ public class PLog {
 	private String content;
 	private String method;
 	private String result;
+	private Integer status;
 	
 	public Long getId() {
 		return id;
@@ -53,6 +54,11 @@ public class PLog {
 	public void setResult(String result) {
 		this.result = result;
 	}
-	
+	public Integer getStatus() {
+		return status;
+	}
+	public void setStatus(Integer status) {
+		this.status = status;
+	}
 	
 }

@@ -1,6 +1,5 @@
 package com.chaoxing.oa.entity.page.pub.caiwu;
 
-
 public class PBaoxiao {
 	private Long id;
 	private Integer uid;//报销人ID
@@ -15,6 +14,7 @@ public class PBaoxiao {
 	private Integer approid;//批准人ID
 	private String approver;//批准人
 	private String aproEmail;//批准人邮箱
+	
 	private String aproTime;//批准时间
 	private String approRemark;//领导意见
 	private String jtime;//邮寄时间
@@ -32,6 +32,7 @@ public class PBaoxiao {
 	private String baoxTime;//汇款时间
 	private Integer status;//状态
 	private String kunhao;//捆号
+//	@DateTimeFormat(pattern="yyyy-MM-dd")
 	private String createTime;//创建时间
 	//架构信息
 	private String firstLevel;//一级
@@ -41,6 +42,7 @@ public class PBaoxiao {
 	private String cellCoreEmail;//细胞核邮箱
 	private String guidanceEmail;//指导邮箱
 	private Long cpNumber;//汇款批次号
+	private String cpTime;//出票时间
 	
 	public Long getId() {
 		return id;
@@ -270,5 +272,12 @@ public class PBaoxiao {
 	public void setCpNumber(Long cpNumber) {
 		this.cpNumber = cpNumber;
 	}
+	public String getCpTime() {
+		return cpTime;
+	}
+	public void setCpTime(String cpTime) {
+		this.cpTime = cpTime;
+	}
+	
 	
 }

@@ -9,6 +9,7 @@ encoding//WebContent/app/views/hetong/users.html=UTF-8
 encoding//WebContent/login.jsp=UTF-8
 encoding//WebContent/tabs/employee/jiagou.html=UTF-8
 encoding//WebContent/tabs/system/menus.html=UTF-8
+encoding//WebContent/tabs/system/roleManager.html=UTF-8
 encoding//src/com/chaoxing/oa/interceptors/SecurityInterceptor.java=UTF-8
 encoding//src/com/chaoxing/oa/interceptors/TestAspect.java=UTF-8
 encoding/<project>=UTF-8

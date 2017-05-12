@@ -114,14 +114,22 @@ public class LogAspect {
 //    }
 	
 	private HttpServletRequest getRequest(){
-		HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
+		HttpServletRequest request = null;
+		ServletRequestAttributes httpRequest = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
+		if(null != httpRequest){
+			request = httpRequest.getRequest();
+		}
 		return request;
 	}
 	
 	private SessionInfo getSessionInfo(){
 		HttpServletRequest request = getRequest();
-		HttpSession session = request.getSession();
-		SessionInfo sessionInfo = (SessionInfo) session.getAttribute(ResourceUtil.getSessionInfoName());
+		HttpSession session = null;
+		SessionInfo sessionInfo = null;
+		if(null != request){
+			session = request.getSession();
+			sessionInfo = (SessionInfo) session.getAttribute(ResourceUtil.getSessionInfoName());
+		}
 		return sessionInfo;
 	}
 	

@@ -158,6 +158,6 @@ http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
 		<aop:advisor advice-ref="druid-stat-interceptor" pointcut-ref="druid-stat-pointcut" />
 	</aop:config>
 	<!-- 自动注解AspectJ , 这个切面拿去做别的事情吧，比如说自动维护缓存  -->
-	<!-- <aop:aspectj-autoproxy />
-	<bean id="mylog" class="com.chaoxing.oa.log.LogAspect"></bean> -->
+	<aop:aspectj-autoproxy />
+	<bean id="mylog" class="com.chaoxing.oa.log.LogAspect"></bean>
 </beans>

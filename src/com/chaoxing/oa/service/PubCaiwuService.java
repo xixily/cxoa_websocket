@@ -15,9 +15,11 @@ import com.chaoxing.oa.entity.page.pub.caiwu.PKoukuan;
 public interface PubCaiwuService {
 
 	/**
-	 * 报销
+	 * 获得报销信息
+	 * @param bxid
+	 * @return
 	 */
-	public PBaoxiao getBaoxiao(Long long1);
+	public PBaoxiao getBaoxiao(Long bxid);
 	
 	public Map<String, Object> findBaoxiaoByUid(PBaoxiao pbaoxiao, Page page, Integer id);
 
@@ -27,6 +29,12 @@ public interface PubCaiwuService {
 
 	public Serializable addBaoxiao(PBaoxiao pbaoxiao);
 
+	/**
+	 * 
+	 * @param id required
+	 * @param uid required
+	 * @return
+	 */
 	public int deleteBaoxiao(Long id, Integer uid);
 	
 	public long updateBaoxiao(PBaoxiao pBaoxiao);
@@ -46,7 +54,10 @@ public interface PubCaiwuService {
 	 * @param max 区间上限
 	 */
 	public Long getBaoxiaoTotal(PBaoxiao pbaoxiao, Date min, Date max);
-
+	/**
+	 * @param pbaoxiaos 报销信息
+	 * @param agree <strong>true</strong>为批准<strong>false<strong>为拒绝批准
+	 */
 	public int updateApprove(PBaoxiao pbaoxiaos, boolean agree);
 
 	public int updateBaoxiaoReceive(Long id, boolean agree, String spRemarks, Integer uid);
@@ -55,7 +66,7 @@ public interface PubCaiwuService {
 
 	public int updateBaoxiaoChupiao(PBaoxiao pbaoxiaos);
 
-	public int updateBaoxiaoHuikuan();
+	public int updateBaoxiaoHuikuan(PBaoxiao pbaoxiao);
 	
 	public Serializable addKouJk(PKoukuan pkk);
 	
@@ -71,6 +82,11 @@ public interface PubCaiwuService {
 //
 //	public int deleteKouJKList(List<PKoukuan> addLis);
 	
+	/**
+	 * 查询口借款
+	 * @param bxid
+	 * @return
+	 */
 	public List<PKoukuan> findJiekoukuan(Long bxid);
 	
 	public int getNextStep(Integer statu, int st);
@@ -97,6 +113,35 @@ public interface PubCaiwuService {
 	public Serializable addUserBank(Integer id, String bank, String account);
 
 	public List<PUserBank> findBxBanks(Integer uid);
+
+	/**
+	 * 通过批准人id查询报销信息
+	 * @param pbaoxiao
+	 * @param page
+	 * @param email
+	 * @return
+	 */
+	public Map<String, Object> findBxByApprover(PBaoxiao pbaoxiao, Page page, Integer aid);
+
+	/**
+	 * 细胞核获取去年已批准
+	 * @param id
+	 * @return
+	 */
+	public Double getLastYearYpz(int id);
+
+	/**
+	 * 细胞核获取今年已批准
+	 * @param id
+	 * @return
+	 */
+	public Double getThisYearYpz(int id);
+
+	/**
+	 * 获得当前条件下的待汇款总额
+	 * @param pbaoxiao
+	 */
+	public Double gethuikuanTotal(PBaoxiao pbaoxiao);
 
 
 }

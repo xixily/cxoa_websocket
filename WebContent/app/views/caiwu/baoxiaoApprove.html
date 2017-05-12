@@ -1,7 +1,7 @@
 <div id="bx">
     <ul class="nav nav-tabs" role="tablist" style="margin-top: 16px;">
-        <li role="presentation" class="active"><a href="#bx_approving" data-toggle="tab">未审批</a></li>
-        <li role="presentation"><a href="#bx_approved" data-toggle="tab" onclick="caiwu.baoxiaoAppro.ypzInit()">已审批</a></li>
+        <li role="presentation" class="active"><a href="#bx_approving" data-toggle="tab" onclick="$('#sp_find_btn_').trigger('click');">未审批</a></li>
+        <li role="presentation"><a href="#bx_approved" data-toggle="tab" onclick="caiwu.baoxiaoAppro.ypzInit()">已批准</a></li>
         <div id="cw_cells_toggle" class="btn-group pull-right">
             <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">
                 <form id="cw_toggle_form">
@@ -60,7 +60,7 @@
                                     </button>
                                     <ul class="dropdown-menu" role="menu">
                                         <li><a><span class="sr-only">id</span>批次号</a></li>
-                                        <li><a><span class="sr-only">jTime</span>邮寄时间</a></li>
+                                        <li><a><span class="sr-only">createTime</span>邮寄时间</a></li>
                                         <li><a><span class="sr-only">username</span>报销人</a></li>
                                         <li><a><span class="sr-only">number</span>报销张数</a></li>
                                         <li><a><span class="sr-only">money</span>报销金额</a></li>
@@ -69,7 +69,7 @@
                                         <li><a><span class="sr-only">bank</span>银行</a></li>
                                         <li><a><span class="sr-only">explain</span>说明</a></li>
                                         <li><a><span class="sr-only">reciveTime</span>收票时间</a></li>
-                                        <li><a><span class="sr-only">baoxTime</span>报销时间</a></li>
+                                        <li><a><span class="sr-only">cpTime</span>出票时间</a></li>
                                         <!--<li><a><span class="sr-only">status</span>报销情况</a></li>-->
                                         <li><a><span class="sr-only">tuipiao</span>退票金额</a></li>
                                         <li><a><span class="sr-only">caiwuRemarks</span>财务备注</a></li>
@@ -77,7 +77,7 @@
                                 </div>
                                 <input type="text" class="form-control" name="value" placeholder="您想查找什么？"/>
                         <span class="input-group-btn">
-                            <button class="btn btn-default do_action" type="button" app-action="caiwu.baoxiaoAppro.find" app-init = "caiwu.baoxiaoAppro.init">
+                            <button id="sp_find_btn_" class="btn btn-default do_action" type="button" app-action="caiwu.baoxiaoAppro.find" app-init = "caiwu.baoxiaoAppro.init">
                                 <i class="glyphicon glyphicon-search"></i>
                             </button>
                         </span>
@@ -120,8 +120,8 @@
                                             <span class="t-input" app-data="username"></span>
                                         </div>
                                         <div>
-                                            <i class="fa fa-user"></i> 细胞核：
-                                            <span class="t-input" app-data="cellCore"></span>
+                                            <i class="fa fa-user"></i> 细胞核邮箱：
+                                            <span class="t-input" app-data="cellCoreEmail"></span>
                                         </div>
                                         <div>
                                             <i class="fa fa-rmb"></i> 金额：
@@ -131,6 +131,10 @@
                                             <i class="fa fa-clock-o"></i> 汇款时间：
                                             <span class="t-input" app-data="baoxTime"></span>
                                         </div>
+                                        <div>
+                                            <i class="fa fa-comments-o"></i> 备注：
+                                            <span class="t-input" app-data="explain"></span>
+                                        </div>
                                     </div>
                                     <div class="col-xs-3 col-md-2 bx-check">
                                         <button class="btn btn-success btn-sm btn-circle" onclick="caiwu.baoxiaoAppro.agree(event)"><i class="fa fa-check"></i></button>
@@ -138,12 +142,12 @@
                                         <button class="btn btn-warning btn-sm btn-circle"  onclick="caiwu.baoxiaoAppro.disAgree(event)"><i class="fa fa-times"></i></button>
                                     </div>
                                 </div>
-                                <div class="row">
+                               <!-- <div class="row">
                                     <div class="col-xs-12 col-md-12">
                                         <i class="fa fa-comments-o"></i> 备注：
                                         <span class="t-input" app-data="explain"></span>
                                     </div>
-                                </div>
+                                </div>-->
                             </a>
 
                         </div>
@@ -164,17 +168,17 @@
                                 <span>报销信息</span>
                             </legend>
                             <fieldset disabled>
-                                <div class="form-group">
-                                    <label class="col-xs-4 col-sm-2 control-label" for="_id">批次号:</label>
+                                <div class="form-group igroup-margin ">
+                                    <label class="col-xs-4 col-sm-2 control-label" for="appro_id">批次号:</label>
                                     <div class="col-xs-8 col-sm-4">
-                                        <input type="number" class="form-control input-sm" id="_id" name="id" placeholder="批次号..." readonly>
+                                        <input type="number" class="form-control input-sm" id="appro_id" name="id" placeholder="批次号..." readonly>
                                     </div>
                                     <label class="col-xs-4 col-sm-2 control-label" for="number">报销张数:</label>
                                     <div class="col-xs-8 col-sm-4">
                                         <input type="number" max="30" min="0" id="number" class="form-control input-sm" name="number" placeholder="报销张数...">
                                     </div>
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group igroup-margin ">
                                     <label class="col-xs-4 col-sm-2 control-label" for="username">报销人:</label>
                                     <div class="col-xs-8 col-sm-4">
                                         <input type="text" class="form-control input-sm" id="username" name="username" placeholder="报销人...">
@@ -184,7 +188,7 @@
                                         <input type="email" class="form-control input-sm" id="email" name="email" placeholder="报销人...">
                                     </div>
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group igroup-margin ">
                                     <label class="col-xs-4 col-sm-2 control-label" for="money">报销金额:</label>
                                     <div class="col-xs-8 col-sm-4">
                                         <input type="number"  class="form-control input-sm" id="money" name="money" placeholder="报销金额...">
@@ -194,7 +198,7 @@
                                         <input type="number" class="form-control input-sm" name="huankuan" placeholder="还款金额...">
                                     </div>
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group igroup-margin ">
                                     <label class="col-xs-4 col-sm-2 control-label">卡号:</label>
                                     <div class="col-xs-8 col-sm-4">
                                         <input type="text" class="form-control input-sm" name="account" placeholder="卡号...">
@@ -212,17 +216,17 @@
                                         <!--<input type="text" class="form-control input-sm" placeholder="银行...">-->
                                     </div>
                                 </div>
-                                <div class="form-group">
-                                    <label class="col-xs-4 col-sm-2 control-label">邮寄时间:</label>
-                                    <div class="col-xs-8 col-sm-4">
-                                        <input type="date" class="form-control input-sm" name="jtime" placeholder="邮寄时间...">
-                                    </div>
+                                <div class="form-group igroup-margin ">
+                                    <!--<label class="col-xs-4 col-sm-2 control-label">邮寄时间:</label>-->
+                                    <!--<div class="col-xs-8 col-sm-4">-->
+                                        <!--<input type="date" class="form-control input-sm" name="jtime" placeholder="邮寄时间...">-->
+                                    <!--</div>-->
                                     <label class="col-xs-4 col-sm-2 control-label" for="kdno3">快递单号:</label>
                                     <div class="col-xs-8 col-sm-4">
                                         <input type="text" class="form-control input-sm" id="kdno3" name="kdno" placeholder="快递单号...">
                                     </div>
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group igroup-margin ">
                                     <label class="col-xs-4 col-sm-2 control-label" for="explain">说明:</label>
                                     <div class="col-xs-8 col-sm-4">
                                         <textarea name="explain" id="explain" cols="30" rows="3" class="form-control"></textarea>
@@ -274,7 +278,7 @@
                                 </div>
                             </legend>
                             <fieldset id="apro_msg_info" disabled>
-                                <div class="form-group">
+                                <div class="form-group igroup-margin ">
                                     <label class="col-xs-4 col-sm-2 control-label" for="approver">批准人:</label>
                                     <div class="col-xs-8 col-sm-4">
                                         <input type="hidden"name="id">
@@ -285,7 +289,7 @@
                                         <input type="email" class="form-control input-sm" id="aproEmail" name="aproEmail" placeholder="批准人邮箱..." readonly>
                                     </div>
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group igroup-margin ">
                                     <label class="col-xs-4 col-sm-2 control-label" for="approTime">批准时间:</label>
                                     <div class="col-xs-8 col-sm-4">
                                         <input type="date" class="form-control input-sm" id="approTime" placeholder="批准时间..." readonly>
@@ -300,39 +304,43 @@
                                 <span>财务信息</span>
                             </legend>
                             <fieldset disabled>
-                                <div class="form-group">
+                                <div class="form-group igroup-margin ">
                                     <label class="col-xs-4 col-sm-2 control-label" for="receiveTime">收票时间:</label>
                                     <div class="col-xs-8 col-sm-4">
                                         <input type="date" class="form-control input-sm" id="receiveTime" name="reciveTime" placeholder="收票时间...">
                                     </div>
-                                    <label class="col-xs-4 col-sm-2 control-label" for="bxTime">报销时间:</label>
+                                    <label class="col-xs-4 col-sm-2 control-label" for="bxTime">:</label>
                                     <div class="col-xs-8 col-sm-4">
                                         <input type="date" class="form-control input-sm" id="bxTime" placeholder="报销时间...">
                                     </div>
                                 </div>
-                                <div class="form-group">
-                                    <label class="col-xs-4 col-sm-2 control-label" for="baoxMoney">报销金额:</label>
+                                <!--<div class="form-group igroup-margin  hide">
+                                   &lt;!&ndash; <label class="col-xs-4 col-sm-2 control-label" for="baoxMoney">报销金额:</label>
                                     <div class="col-xs-8 col-sm-4">
-                                        <input type="text" class="form-control input-sm" id="baoxMoney" name="baoxMoney" placeholder="报销金额...">
+                                        <input type="text" class="form-control input-sm" id="baoxMoney" name="money" placeholder="报销金额...">
+                                    </div>
+                                    <label class="col-xs-4 col-sm-2 control-label" for="hk">还借款金额:</label>
+                                    <div class="col-xs-8 col-sm-4">
+                                        <input type="number" class="form-control input-sm" id="hk" name="huankuan" placeholder="还借款金额...">
+                                    </div>&ndash;&gt;
+                                </div>-->
+                                <div class="form-group igroup-margin ">
+                                    <label class="col-xs-4 col-sm-2 control-label" for="cp_kjk"><a onclick="caiwu.baoxiaoCheck.openKoukuan(event)">扣除借款金额:</a></label>
+                                    <div class="col-xs-8 col-sm-4">
+                                        <input type="number" class="form-control input-sm bx-relavtive" id="cp_kjk" name="koujk"
+                                               placeholder="扣除借款金额..." readonly>
                                     </div>
                                     <label class="col-xs-4 col-sm-2 control-label" for="tuipiao">退票金额:</label>
                                     <div class="col-xs-8 col-sm-4">
                                         <input type="number" class="form-control input-sm" id="tuipiao" name="tuipiao" placeholder="退票金额...">
                                     </div>
                                 </div>
-                                <div class="form-group">
-                                    <label class="col-xs-4 col-sm-2 control-label" for="cp_kjk"><a onclick="caiwu.baoxiaoCheck.openKoukuan(event)">扣除借款金额:</a></label>
-                                    <div class="col-xs-8 col-sm-4">
-                                        <input type="number" class="form-control input-sm bx-relavtive" id="cp_kjk" name="koujk"
-                                               placeholder="扣除借款金额..." readonly>
-                                    </div>
+                                <div class="form-group igroup-margin ">
                                     <label class="col-xs-4 col-sm-2 control-label" for="huikuan2">汇款金额:</label>
                                     <div class="col-xs-8 col-sm-4">
                                         <input type="text" class="form-control input-sm" id="huikuan2" name="huikuan"
                                                placeholder="汇款金额..." readonly>
                                     </div>
-                                </div>
-                                <div class="form-group">
                                     <label class="col-xs-4 col-sm-2 control-label" for="caiwuRemarks">财务备注:</label>
                                     <div class="col-xs-8 col-sm-4">
                                         <textarea name="caiwuRemarks" id="caiwuRemarks" cols="30" rows="3" class="form-control" placeholder="财务备注..."></textarea>
@@ -363,7 +371,7 @@
                                     </button>
                                     <ul class="dropdown-menu" role="menu">
                                         <li><a><span class="sr-only">id</span>批次号</a></li>
-                                        <li><a><span class="sr-only">jTime</span>邮寄时间</a></li>
+                                        <li><a><span class="sr-only">createTime</span>创建时间</a></li>
                                         <li><a><span class="sr-only">username</span>报销人</a></li>
                                         <li><a><span class="sr-only">number</span>报销张数</a></li>
                                         <li><a><span class="sr-only">money</span>报销金额</a></li>
@@ -372,7 +380,7 @@
                                         <li><a><span class="sr-only">bank</span>银行</a></li>
                                         <li><a><span class="sr-only">explain</span>说明</a></li>
                                         <li><a><span class="sr-only">reciveTime</span>收票时间</a></li>
-                                        <li><a><span class="sr-only">baoxTime</span>报销时间</a></li>
+                                        <li><a><span class="sr-only">baoxTime</span>出票时间</a></li>
                                         <li><a><span class="sr-only">status</span>报销情况</a></li>
                                         <li><a><span class="sr-only">tuipiao</span>退票金额</a></li>
                                         <li><a><span class="sr-only">caiwuRemarks</span>财务备注</a></li>
@@ -424,8 +432,8 @@
                                                     <span class="t-input" app-data="username"></span>
                                                 </div>
                                                 <div>
-                                                    <i class="fa fa-user"></i> 细胞核：
-                                                    <span class="t-input" app-data="cellCore"></span>
+                                                    <i class="fa fa-user"></i> 细胞核邮箱：
+                                                    <span class="t-input" app-data="cellCoreEmail"></span>
                                                 </div>
                                                 <div>
                                                     <i class="fa fa-rmb"></i> 金额：
@@ -463,7 +471,7 @@
                                 <span>报销信息</span>
                             </legend>
                             <fieldset disabled>
-                                <div class="form-group">
+                                <div class="form-group igroup-margin ">
                                     <label class="col-xs-4 col-sm-2 control-label" for="y_id">批次号:</label>
                                     <div class="col-xs-8 col-sm-4">
                                         <input type="number" class="form-control input-sm" id="y_id" name="id" placeholder="批次号..." readonly>
@@ -473,7 +481,7 @@
                                         <input type="number" max="30" min="0" id="ybx_number" class="form-control input-sm" name="number" placeholder="报销张数...">
                                     </div>
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group igroup-margin ">
                                     <label class="col-xs-4 col-sm-2 control-label" for="ybx_username">报销人:</label>
                                     <div class="col-xs-8 col-sm-4">
                                         <input type="text" class="form-control input-sm" id="ybx_username" name="username" placeholder="报销人...">
@@ -483,7 +491,7 @@
                                         <input type="email" class="form-control input-sm" id="ybx_email" name="email" placeholder="报销人...">
                                     </div>
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group igroup-margin ">
                                     <label class="col-xs-4 col-sm-2 control-label" for="ybx_money">报销金额:</label>
                                     <div class="col-xs-8 col-sm-4">
                                         <input type="number"  class="form-control input-sm" id="ybx_money" name="money" placeholder="报销金额...">
@@ -493,7 +501,7 @@
                                         <input type="number" class="form-control input-sm" id="ybx_huankuan" name="huankuan" placeholder="还款金额...">
                                     </div>
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group igroup-margin ">
                                     <label class="col-xs-4 col-sm-2 control-label">卡号:</label>
                                     <div class="col-xs-8 col-sm-4">
                                         <input type="text" class="form-control input-sm" name="account" placeholder="卡号...">
@@ -511,17 +519,17 @@
                                         <!--<input type="text" class="form-control input-sm" placeholder="银行...">-->
                                     </div>
                                 </div>
-                                <div class="form-group">
-                                    <label class="col-xs-4 col-sm-2 control-label" for="ybx_jTime">邮寄时间:</label>
+                                <div class="form-group igroup-margin ">
+                                    <label class="col-xs-4 col-sm-2 control-label" for="ybx_jTime">创建时间:</label>
                                     <div class="col-xs-8 col-sm-4">
-                                        <input type="date" class="form-control input-sm" id="ybx_jTime" name="jtime" placeholder="邮寄时间...">
+                                        <input type="date" class="form-control input-sm" id="ybx_jTime" name="createTime" placeholder="创建时间...">
                                     </div>
                                     <label class="col-xs-4 col-sm-2 control-label" for="kdno2">快递单号:</label>
                                     <div class="col-xs-8 col-sm-4">
                                         <input type="text" class="form-control input-sm" id="kdno2" name="kdno" placeholder="快递单号...">
                                     </div>
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group igroup-margin ">
                                     <label class="col-xs-4 col-sm-2 control-label" for="ybx_explain">说明:</label>
                                     <div class="col-xs-8 col-sm-4">
                                         <textarea name="explain" id="ybx_explain" cols="30" rows="3" class="form-control"></textarea>
@@ -534,7 +542,7 @@
                                 <span>批准人信息</span>
                             </legend>
                             <fieldset disabled>
-                                <div class="form-group">
+                                <div class="form-group igroup-margin ">
                                     <label class="col-xs-4 col-sm-2 control-label" for="ybx_approver">批准人:</label>
                                     <div class="col-xs-8 col-sm-4">
                                         <input type="hidden"name="id">
@@ -545,10 +553,10 @@
                                         <input type="email" class="form-control input-sm" id="ybx_aproEmail" name="aproEmail" placeholder="批准人邮箱..." readonly>
                                     </div>
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group igroup-margin ">
                                     <label class="col-xs-4 col-sm-2 control-label" for="ybx_approTime">批准时间:</label>
                                     <div class="col-xs-8 col-sm-4">
-                                        <input type="date" class="form-control input-sm" id="ybx_approTime" placeholder="批准时间..." readonly>
+                                        <input type="date" class="form-control input-sm" id="ybx_approTime" name="aproTime" placeholder="批准时间..." readonly>
                                     </div>
                                     <label class="col-xs-4 col-sm-2 control-label" for="ybx_approRemark">备注:</label>
                                     <div class="col-xs-8 col-sm-4">
@@ -560,17 +568,17 @@
                                 <span>财务信息</span>
                             </legend>
                             <fieldset disabled>
-                                <div class="form-group">
+                                <div class="form-group igroup-margin ">
                                     <label class="col-xs-4 col-sm-2 control-label" for="ybx_receiveTime">收票时间:</label>
                                     <div class="col-xs-8 col-sm-4">
                                         <input type="date" class="form-control input-sm" id="ybx_receiveTime" name="" placeholder="收票时间...">
                                     </div>
-                                    <label class="col-xs-4 col-sm-2 control-label" for="ybx_bxTime">报销时间:</label>
+                                    <label class="col-xs-4 col-sm-2 control-label" for="ybx_bxTime">出票时间:</label>
                                     <div class="col-xs-8 col-sm-4">
-                                        <input type="date" class="form-control input-sm" id="ybx_bxTime" placeholder="报销时间...">
+                                        <input type="date" class="form-control input-sm" id="ybx_bxTime" name="cpTime" placeholder="出票时间...">
                                     </div>
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group igroup-margin ">
                                     <label class="col-xs-4 col-sm-2 control-label" for="ybx_baoxMoney">报销金额:</label>
                                     <div class="col-xs-8 col-sm-4">
                                         <input type="text" class="form-control input-sm" id="ybx_baoxMoney" name="baoxMoney" placeholder="报销金额...">
@@ -580,7 +588,7 @@
                                         <input type="number" class="form-control input-sm" id="ybx_tuipiao" name="tuipiao" placeholder="退票金额...">
                                     </div>
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group igroup-margin ">
                                     <label class="col-xs-4 col-sm-2 control-label" for="cp_kjk"><a onclick="caiwu.baoxiaoCheck.openKoukuan(event)">扣除借款金额:</a></label>
                                     <div class="col-xs-8 col-sm-4">
                                         <input type="number" class="form-control input-sm bx-relavtive" id="cp_kjk2" name="koujk"
@@ -592,7 +600,7 @@
                                                placeholder="汇款金额..." readonly>
                                     </div>
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group igroup-margin ">
                                     <label class="col-xs-4 col-sm-2 control-label" for="caiwuRemarks">财务备注:</label>
                                     <div class="col-xs-8 col-sm-4">
                                         <textarea name="caiwuRemarks" id="ybx_caiwuRemarks" cols="30" rows="3" class="form-control" placeholder="财务备注..."></textarea>
@@ -620,7 +628,7 @@
                 <div class="modal-body">
                     <form id="agree_form" class="form-horizontal" role="form">
                         <fieldset>
-                            <div class="form-group">
+                            <div class="form-group igroup-margin ">
                                 <label class="col-xs-3 col-sm-2 control-label" for="approRemark_">意见:</label>
                                 <div class="col-xs-9 col-sm-10">
                                     <input type="hidden"name="id">

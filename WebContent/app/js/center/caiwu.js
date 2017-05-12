@@ -3,6 +3,9 @@
  */
 var caiwu = {
     baoxiao: {
+        clickFind: function(){
+            $('[app-action="caiwu.baoxiao.find"]').trigger('click');//重新查找
+        },
         pageData:{
             url: 'caiwu/baoxiaoManager',
             action: 'public/caiwu/queryBaoxiao.action',
@@ -19,7 +22,7 @@ var caiwu = {
             chat_id: 'bx_manage_chat',
         },
         init: function () {
-            $(document).on("click",'#bx_media_li a.media-body',function(event){
+            $(document).on("click",'#bx_media_li .media-body>a',function(event){
                 event.preventDefault();//关闭默认事件
                 event.stopImmediatePropagation();
 //                caiwu.baoxiao.showInfo($(this));
@@ -194,6 +197,7 @@ var caiwu = {
             bootstrapValidator.validate();
             if(bootstrapValidator.isValid()){
                var data =  $('#add_form').serializeJson();
+                data.bank = $('#bx_bank2').val();
                 data.account.replace(/\ +/g,"");
                 $.post("public/caiwu/addBaoxiao.action",data,function(result){
 //                    result = eval("("+ result +")");
@@ -216,6 +220,8 @@ var caiwu = {
             $.post("public/caiwu/updateSelfBaoxiao.action",data,function(result){
                 if(!result.success){
                 	$.messager.alert("提示：", result.msg);
+                }else{
+
                 }
             })
         },
@@ -247,6 +253,7 @@ var caiwu = {
         },
         openApplication: function(){
             $('#add_form').form('clear');
+            $('#_bx_bank').prop('value','jtyh');
             $.post('public/caiwu/getBxBanks.action', {},function(result){
                 if(result.success){
                     var objs = result.obj;
@@ -255,6 +262,29 @@ var caiwu = {
                     }
                 }
                 $('#bx_apply_dialog').modal('toggle')
+            })
+        },
+        deleteBaoxiaoOnlist: function(e){
+            e.stopPropagation();
+//            e.preventBubble();
+            var dom = $(e.currentTarget);
+            var id = Number(dom.closest('a').find('[app-data=\"id\"]').text());
+            caiwu.baoxiao.deleteBaoxiao({id: id});
+        },
+        deleteBaoxiao: function (data) {
+            $('#bx_msg_info').attr('disabled','true');
+            data = data ? data : {};
+            if(!data.id || data.id == ''){
+                $.messager.alert("提示：", "批次号不存在，请刷新页面后重试。")
+            }
+            $.messager.confirm('提示：','您确定要删除批次号为[' + data.id +']的记录吗？',function(){
+                $.post("public/caiwu/deleteSelfBx.action",{id: data.id},function(result){
+                    if(!result.success){
+                         $.messager.alert("删除提示：", result.msg);
+                     }else{
+                        caiwu.baoxiao.clickFind();
+                    }
+                })
             })
         }
     },
@@ -429,7 +459,7 @@ var caiwu = {
 //            $('#bx_appro_true').removeClass('hide');
 //            $('#bx_appro_false').addClass('hide');
 //            $('#bx_appro_dialog').modal('toggle');
-            caiwu.baoxiaoAppro.submitAgree(data);
+            caiwu.baoxiaoAppro.updateInfo(data);
         },
         disAgree: function(event){
             var data = {};
@@ -615,7 +645,7 @@ var caiwu = {
                 $.post("public/caiwu/checkBaoxiao.action",{id:Number(data.id),agree:agree},function(result){
                     if(result.success){
                         $('#cw_check_btn').toggleClass("hide");
-//                        $('[app-action="caiwu.baoxiaoCheck.find"]').trigger('click');
+                        $('[app-action="caiwu.baoxiaoCheck.find"]').trigger('click');
                     }else{
                     	$.messager.alert("提示：",result.msg);
                     }
@@ -707,16 +737,17 @@ var caiwu = {
             $('#bx_sh_dialog').modal('toggle');
 
         },
-        openShouPiao: function(event, checked){
+        openShouPiao: function(event, checked, id){
 //            event.preventDefault();//关闭默认事件
             event.stopImmediatePropagation();
             var src = $(event.currentTarget);
-            var id = src.parent().parent().find('[app-data="id"]').html();
+            id = id || Number(src.closest('a').find('[app-data="id"]').text());
             checked = checked ? true : false;
             var data = {};
             data.id = id;
             data.agree = checked;
             $('#bx_dsp_form').form('clear');
+            $('#bx_dsp_dialog').find('input[name="reciveTime"]').val(new Date().format("yyyy-MM-dd"))
             $('#bx_dsp_form').form('setForm',data);
             if(checked){
                 $('#bx_dsp_true').removeClass('hide');
@@ -726,7 +757,6 @@ var caiwu = {
                 $('#bx_dsp_false').removeClass('hide');
             }
             $('#bx_dsp_dialog').modal('toggle');
-
         },
         openKoukuan: function(event, checked){
             event.preventDefault();//关闭默认事件
@@ -824,10 +854,12 @@ var caiwu = {
 //            }
         },
         submitDaihuikuan: function(){
+        	var data = $('#dhk_find').serializeJson()
+        	data[data.type] = data.value;
             $.messager.confirm("下载提示","执行下载操作同时会直接汇款操作，之后您可以在已汇款查询这些信息，你确定要执行吗？",function(result){
-                $.post('public/caiwu/baoxiaoHuikuan.action',{},function(result){
+                $.post('public/caiwu/baoxiaoHuikuan.action', data,function(result){
                     if(result.success){
-                        app.downloadForm.download('public/file/daihuikuanExport.action',{});
+                        app.downloadForm.download('public/file/daihuikuanExport.action', data);
                         $('#dhk_find_btn_').trigger('click');
                     }else{
                     	$.messager.alert('操作提示：',result.msg);
@@ -1171,6 +1203,7 @@ var caiwu = {
                 if(result.success){
                     $('#' + pageData.source + 'sum span[app-data="thisYearTotal"]').html(result.thisYearTotal);
                     $('#' + pageData.source + 'sum span[app-data="lastYearTotal"]').html(result.lastYearTotal);
+                    $('#' + pageData.source + 'sum span[app-data="dhkTotal"]').html(result.dhkTotal);
                 }
             });
             
