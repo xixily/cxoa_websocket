@@ -1,5 +1,7 @@
 package com.chaoxing.oa.entity.page.pub.caiwu;
 
+import java.util.Date;
+
 public class PBaoxiao {
 	private Long id;
 	private Integer uid;//报销人ID
@@ -43,6 +45,10 @@ public class PBaoxiao {
 	private String guidanceEmail;//指导邮箱
 	private Long cpNumber;//汇款批次号
 	private String cpTime;//出票时间
+	private Float tuikuan;//退款金额，补借款金额
+	private Float kouchu;//扣除金额
+	private Date updateTime;//最近更新时间
+	private Integer specifyId;//指定批准人id
 	
 	public Long getId() {
 		return id;
@@ -277,6 +283,30 @@ public class PBaoxiao {
 	}
 	public void setCpTime(String cpTime) {
 		this.cpTime = cpTime;
+	}
+	public Float getTuikuan() {
+		return tuikuan;
+	}
+	public void setTuikuan(Float tuikuan) {
+		this.tuikuan = tuikuan;
+	}
+	public Float getKouchu() {
+		return kouchu;
+	}
+	public void setKouchu(Float kouchu) {
+		this.kouchu = kouchu;
+	}
+	public Date getUpdateTime() {
+		return updateTime;
+	}
+	public void setUpdateTime(Date updateTime) {
+		this.updateTime = updateTime;
+	}
+	public Integer getSpecifyId() {
+		return specifyId;
+	}
+	public void setSpecifyId(Integer specifyId) {
+		this.specifyId = specifyId;
 	}
 	
 	

@@ -12,11 +12,14 @@ import org.springframework.stereotype.Service;
 
 import com.chaoxing.oa.dao.BaseDaoI;
 import com.chaoxing.oa.entity.page.caiwu.PCNUsername;
+import com.chaoxing.oa.entity.page.common.POStruct;
 import com.chaoxing.oa.entity.page.common.QueryForm;
 import com.chaoxing.oa.entity.page.employee.PUserName;
+import com.chaoxing.oa.entity.page.pub.PLeader;
 import com.chaoxing.oa.entity.page.system.SessionInfo;
 import com.chaoxing.oa.entity.po.commmon.OrganizationStructure;
 import com.chaoxing.oa.entity.po.employee.UserName;
+import com.chaoxing.oa.entity.po.view.Leader;
 import com.chaoxing.oa.entity.po.view.RenshiUserName;
 import com.chaoxing.oa.entity.po.view.RoleResourcesV;
 import com.chaoxing.oa.service.UserServiceI;
@@ -31,6 +34,10 @@ public class UserServiceImpl implements UserServiceI {
 	private BaseDaoI<RenshiUserName> renshiUsernameDao;
 	private BaseDaoI<OrganizationStructure> ogsDao;
 	private BaseDaoI<RoleResourcesV> roleReDao;
+	@Autowired
+	private BaseDaoI<Leader> leaderDao;
+	@Autowired
+	private BaseDaoI<OrganizationStructure> ostructDao;
 	
 	public BaseDaoI<RoleResourcesV> getRoleReDao() {
 		return roleReDao;
@@ -232,6 +239,62 @@ public class UserServiceImpl implements UserServiceI {
 	@Override
 	public UserName getUserById(Integer id) {
 		return usernameDao.get(UserName.class, id);
+	}
+	
+	@Override
+	public List<PLeader> findLearByname(String name) {
+		String hql = "from Leader t where username like :name";
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("name", "%" + name + "%");
+		List<Leader> leaders = leaderDao.find(hql, params);
+		List<PLeader> plds = new ArrayList<PLeader>();
+		if(leaders.size()>0){
+			PLeader pld = null;
+			for(int i = 0; i < leaders.size(); i++){
+				Leader ld = leaders.get(i);
+				pld = new PLeader();
+				BeanUtils.copyProperties(ld, pld);
+				plds.add(pld);
+			}
+		}
+		return plds;
+	}
+	
+	@Override
+	public PLeader getCellCoreInfo(int departmentId) {
+		String hql = "from Leader t where did=:did and email=cellCoreEmail";
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("did", departmentId);
+		Leader ld = leaderDao.get(hql, params);
+		PLeader pld = new PLeader();
+		if(null != ld){
+			BeanUtils.copyProperties(ld, pld);
+		}
+		return pld;
+	}
+	
+	@Override
+	public void findCellsByemail(String email, String level) {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	@Override
+	public List<POStruct>  findostructByEmail(String email) {
+		String hql = "from OrganizationStructure where guidanceEmail=:guidanceEmail";
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("guidanceEmail", email);
+		List<OrganizationStructure> osts= ostructDao.find(hql, params);
+		OrganizationStructure os = null;
+		POStruct pos = null;
+		List<POStruct> poslist = new ArrayList<POStruct>();
+		for (int i = 0; i < osts.size(); i++) {
+			os = osts.get(i);
+			pos = new POStruct();
+			BeanUtils.copyProperties(os, pos);
+			poslist.add(pos);
+		}
+		return poslist;
 	}
 	
 }

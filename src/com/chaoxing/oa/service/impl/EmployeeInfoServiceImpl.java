@@ -921,6 +921,7 @@ public class EmployeeInfoServiceImpl implements EmployeeInfoService {
 					p.setPerformanceRelatedPay(null);
 					p.setRemarks("");
 					p.setLishiSalary(null);
+					p.setTiaoxinRecord(null);
 				}
 				pwages.add(p);
 			}

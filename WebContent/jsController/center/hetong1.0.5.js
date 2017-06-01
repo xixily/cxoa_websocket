@@ -35,9 +35,28 @@ var hetong = {
 					},
 					pageList:[10,15,20,30,50,200],
 					toolbar : '#fahuo_toolbar',
-//					onDblClickRow : function(){$.messager.alert('TODO','TODO');},
-//					onClickCell : function(){$.messager.alert('TODO','TODO');},
-//					onEndEdit: function(){$.messager.alert('TODO','TODO');}
+					onClickCell : function(index,field,value){
+					if(field === 'send' && /打印/.test(value)){
+						$('#datagrid_fahuo').datagrid('selectRow', index);
+						var data = $('#datagrid_fahuo').datagrid('getSelected');
+						if(data && data.hetongCode && data.mailno){
+							$.post('hetong/getEmailByCt.action', {id: data.hetongCode}, function(result){
+								result = eval("(" + result + ")");
+								if(result.success){
+									var content = (data.d_company + "用户的" + data.content + "今日用顺丰邮寄，" +
+											"邮寄凭证号为 " + data.mailno + ",你可以通过www.sf-express.com 查询邮寄情况，及时和老师联系");
+									var href = "mailto:" + result.obj +"?subject="+encodeURI(content)+"&body="+encodeURI(content);
+									window.location.href = href;
+								}else{
+									$.messager.alert("提示：", result.msg);
+								}
+							})
+						}else{
+							$.messager.alert("提示：", "获取负责人邮箱失败。");
+						}
+//						var data = $('#datagrid_fahuo').datagrid('getData', index);
+					}
+				},
 				})
 			},
 			queryFahuo : function(data, src){

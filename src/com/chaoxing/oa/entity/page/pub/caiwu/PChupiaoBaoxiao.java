@@ -12,6 +12,8 @@ public class PChupiaoBaoxiao {
 //	private String baoxTime;//汇款时间
 //	private Integer status;//状态
 	private String kunhao;//捆号
+	private Float tuikuan;//退款金额，补借款金额
+	private Float kouchu;//扣除金额
 	
 	public Long getId() {
 		return id;
@@ -60,6 +62,18 @@ public class PChupiaoBaoxiao {
 	}
 	public void setCpTime(String cpTime) {
 		this.cpTime = cpTime;
+	}
+	public Float getTuikuan() {
+		return tuikuan;
+	}
+	public void setTuikuan(Float tuikuan) {
+		this.tuikuan = tuikuan;
+	}
+	public Float getKouchu() {
+		return kouchu;
+	}
+	public void setKouchu(Float kouchu) {
+		this.kouchu = kouchu;
 	}
 	
 	

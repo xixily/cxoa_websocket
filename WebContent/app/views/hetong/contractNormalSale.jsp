@@ -16,6 +16,37 @@
 .popwindow {
 	height: initial;
 }
+.selectNew {
+    z-index: 1;
+}
+p {
+    margin: 0 0 ;
+}
+.selectNav ul li {
+    padding: 2px 0 0 6px;
+    border-bottom: 1px solid #d4c6cb;
+}
+
+.courier_list li.li09 {
+    width: 423px;
+}
+
+.selectNav {
+    width: 228px;
+    background: url(/app/views/hetong/images/icons.png) no-repeat 210px 0;
+}
+
+.selectNew {
+    width: 226px;
+}
+
+.courier_list li.li05 {
+    width: 423px;
+}
+
+.courier_list li.li08 {
+    width: inherit;
+}
 </style>
 <div class="main">
 	<!-- <div class="location">首页 &gt; <a href="#">合同信息</a></div> -->
@@ -44,6 +75,7 @@
 				<select id="danwei" name="danwei" class="leftF" style="width: 130px;height: 18px">
 				<c:forEach var="c" items="${companyList }">
 					<option value="${c.id}">${c.customerName }</option>
+					<!-- c.id是单位ID -->
 				</c:forEach>
 				</select>
 				<!-- <input type="text" name="textfield" class="fidtext" /> -->
@@ -95,7 +127,7 @@
 			</td> -->
 			<td valign="top">
 				<div class="quy_tit">合同金额：</div>
-				<input  id="contractAmount" type="text" name="textfield" class="fidtext" onBlur="validateContractAmount();"/>
+				<input  id="contractAmount" type="text" autocomplete="off" name="textfield" class="fidtext" onBlur="validateContractAmount();"/>
 				<p class="text" id="contractAmountError"></p>
 			</td>
 			<!-- <td valign="top">
@@ -108,12 +140,12 @@
 		  <tr>
 			
 			<td valign="top">
-				<div class="quy_tit">合同份数：</div>
-				<input id="contractCount" type="text" name="textfield" class="fidtext" />
+				<div class="quy_tit">合同份数:</div>
+				<input id="contractCount" type="text" autocomplete="off" name="textfield" class="fidtext" />
 			</td>
 			
 			<td valign="top">
-				<div class="quy_tit">项目结束时间：</div>
+				<div class="quy_tit">合同到期时间:</div>
 				<!-- <input id="endTime" type="text" name="textfield" class="fidtext" /> -->
 				<input type="text" onClick="WdatePicker({dateFmt:'yyyy-MM-dd'})" id="endTime" name="textfield" class="fidtext"></input>
 			</td>
@@ -143,15 +175,6 @@
 				<th width="76">截止日期</th>
 				<th width="57">操作</th>
 			  </tr>
-			 <!--  <tr>
-				<td bgcolor="#f5f6f6">1023</td>
-				<td bgcolor="#f5f6f6">读秀学术搜索</td>
-				<td bgcolor="#f5f6f6">100000.00</td>
-				<td bgcolor="#f5f6f6">2年</td>
-				<td bgcolor="#f5f6f6">2017-3-31</td>
-				<td bgcolor="#f5f6f6">2018-3-31</td>
-				<td bgcolor="#f5f6f6"><a class="dele" href="#">修改</a></td>
-			  </tr> -->
 			</table>
 		</div>
 		<div class="tareaTable">
@@ -171,20 +194,6 @@
 				<th width="7%">备注</th>
 				<th width="6%">操作</th>
 			  </tr>
-			
-			  <!-- <tr>
-				<td bgcolor="#f5f6f6">1023</td>
-				<td bgcolor="#f5f6f6">2018-3-31</td>
-				<td bgcolor="#f5f6f6">世纪超星</td>
-				<td bgcolor="#f5f6f6">广西财经学院</td>
-				<td bgcolor="#f5f6f6">服务业发票</td>
-				<td bgcolor="#f5f6f6">超星中文发现</td>
-				<td bgcolor="#f5f6f6">20000元</td>
-				<td bgcolor="#f5f6f6">20000元</td>
-				<td bgcolor="#f5f6f6">王微微</td>
-				<td bgcolor="#f5f6f6">2017-3-31</td>
-				<td bgcolor="#f5f6f6"><a class="dele" href="#">删除</a></td>
-			  </tr> -->
 			</table>
 		</div>
 		<div class="tareaTable">
@@ -202,32 +211,7 @@
 				<th width="15%">快递单号</th>
 				<th width="6%">操作</th>
 			  </tr>
-			 <!--  <tr>
-				<td bgcolor="#f5f6f6">1023</td>
-				<td bgcolor="#f5f6f6">王微微</td>
-				<td bgcolor="#f5f6f6">世纪超星</td>
-				<td bgcolor="#f5f6f6">上地七街</td>
-				<td bgcolor="#f5f6f6">17800000000</td>
-				<td bgcolor="#f5f6f6">2017-3-31</td>
-				<td bgcolor="#f5f6f6">画册</td>
-				<td bgcolor="#f5f6f6">申通快递</td>
-				<td bgcolor="#f5f6f6">001290993021901</td>
-				<td bgcolor="#f5f6f6"><a class="dele" href="#">修改</a></td>
-			  </tr> -->
-			  <!-- <tr>
-				<td>1023</td>
-				<td>王微微</td>
-				<td>世纪超星</td>
-				<td>上地七街</td>
-				<td>17800000000</td>
-				<td>2017-3-31</td>
-				<td>李松宋</td>
-				<td>上帝五街</td>
-				<td>画册</td>
-				<td>申通快递</td>
-				<td>001290993021901</td>
-				<td><a class="dele" href="#">删除</a></td>
-			  </tr> -->
+			
 			</table>
 		</div>
 		<div class="tareaTable">
@@ -271,18 +255,20 @@
 			<select id="chooseProduct" name="xuanze" class="leftF" >
 			   <c:forEach var="p" items="${productList}">
 				  <option value="${p }">${p }</option>
-				  
 			   </c:forEach>
 			</select>
         </li>
-        
+       <li class="li06" id="disanfangLi" style="display:none;">
+      		<label>合同概要：</label>
+		    <textarea id="disanfangChanpin" placeholder="请输入单位名称、产品、金额、联系人电话" style="width:200px"></textarea>
+       </li>
          <li class="li06">
        		<label>产品金额：</label>
-			<input id="productMoney" type="text" name="textfield" class="fidtext" />
+			<input id="productMoney" type="number" name="textfield" autocomplete="off" class="fidtext" />
         </li> 
     	<li class="li06">
        		<label>时间/数量：</label>
-			<input id="productAmount" type="text" name="textfield" class="fidtext" />
+			<input id="productAmount" type="number" name="textfield" autocomplete="off" class="fidtext" />
         </li>
     	<li class="li06">
        		<label>生效日期：</label>
@@ -291,10 +277,11 @@
         </li>
     	<li class="li06">
        		<label>截止日期：</label>
-<!-- 			<input id="endDate" type="text" name="textfield" class="fidtext" />
- -->			<input type="text" onClick="WdatePicker({dateFmt:'yyyy-MM-dd'})" id="endDate" name="textfield" class="fidtext"></input>
+ 			<!-- <input id="endDate" type="text" name="textfield" class="fidtext" /> -->
+			<input type="text" onClick="WdatePicker({dateFmt:'yyyy-MM-dd'})" id="endDate" name="textfield" class="fidtext"></input>
         </li>
-          
+        
+   		
          <input style="display:none;" id="productID" type="text" name="textfield" class="fidtext" value=""/>
     	<li class="li04">
     	<input id="sureAboutProduct" type="button" name="button" value="确定" class="bnt"/>
@@ -306,9 +293,7 @@
 </div>
 
 
-
-
-<div class="popwindow pop_invoice" style="display:none;">
+<div id="windowAboutFapiao" class="popwindow pop_invoice" style="display:none;">
     <h3>新增 / 编辑 / 查看发票</h3>
     <form id="form1" name="form1" method="post" action="">
     <ul class="courier_list">
@@ -320,8 +305,8 @@
         </li>
     	
     	<li class="li02">
-       		<label>开票金额 ：</label>
-			<input id="kaipiaoAmount" type="text" name="textfield" class="fidtext" onBlur="validateFapiaoAmount()"/>
+       		<label>开票金额：</label>
+			<input id="kaipiaoAmount" type="text" name="textfield" autocomplete="off" class="fidtext" onBlur="validateFapiaoAmount()"/>
             <p id="kaipiaoAmountError" class="text"></p>
         </li>
     	<li class="li02">
@@ -349,24 +334,29 @@
 			</select>
         </li>
         
-    	<li class="li05">
+       	<li class="li09">
        		<label>发票品名：</label>
-			<input id="pinming" type="text" name="textfield" class="fidtext" />
-        </li>
-        
+      	<div class="selectNav" id="nav">
+              <p id="pinming" class="selectSet">点击选择栏目</p>
+              <div class="selectNew">
+                  <div style="margin-left:6px;"><input id="pinmingSearch" type="text" name="textfield" class="fidtext" style="width:200px; float:none;" placeholder="搜索..." /></div>
+                  <ul id="pinmingUl">
+                  </ul>
+              </div>
+          </div>
+         </li>
+          
     	<li class="li02">
        		<label>开票日期：</label>
 			<input type="text" onClick="WdatePicker({dateFmt:'yyyy-MM-dd'})" id="kaipiaoDate" name="textfield" class="fidtext"></input>
-			
         </li>
-    	<li class="li02">
-       		<label>回款日期：</label>
-			<input id="huikuanDate" type="text" name="textfield" class="fidtext" disabled='disabled'/>
+        
+        <li class="li08">
+       		<label style="width:128px">开票预计回款时间：</label>
+			<input type="text" onClick="WdatePicker({dateFmt:'yyyy-MM-dd'})" id="yujihuikuanDate" name="textfield" class="fidtext"></input>
         </li>
-    	<li class="li02">
-       		<label>回款金额：</label>
-			<input id="huikuanAmount" type="text" name="textfield" class="fidtext" disabled='disabled'/>
-        </li>
+    	
+    	
     	<!-- <li class="li02">
        		<label>资金类型：</label>
 			<select id="zijin" name="zijin" class="leftF" >
@@ -381,10 +371,7 @@
 				<option value="1">教图湖北市场</option>
 			</select>
         </li>  -->
-    <!-- 	 <li class="li02">
-       		<label>财务月份：</label>
-			<input id ="" type="text" name="textfield" class="fidtext" disabled='disabled'/>
-        </li>  -->
+   
     	<li class="li03">
        		<label>备　　注：</label>
 			<textarea id="remarkAboutFapiao"></textarea>
@@ -412,11 +399,11 @@
         </li>
     	<li class="li01">
        		<label>收 件 人：</label>
-			<input id="receiver" type="text" name="textfield" class="fidtext" />
+			<input id="receiver" type="text" name="textfield" autocomplete="off" class="fidtext" />
         </li>
     	<li class="li01">
        		<label>联系电话：</label>
-			<input id="tel" type="text" name="textfield" class="fidtext" />
+			<input id="tel" type="text" name="textfield" autocomplete="off" class="fidtext" />
         </li>
     	<!-- <li class="li01">
        		<label>收件单位：</label>
@@ -428,7 +415,7 @@
         </li> -->
     	<li class="li03">
        		<label>收件地址：</label>
-			<input id="receiveAddress" type="text" name="textfield" class="fidtext" />
+			<input id="receiveAddress" type="text" autocomplete="off" name="textfield" class="fidtext" />
         </li>
     	<!-- <li class="li02">
        		<label>发 件 人：</label>
@@ -451,27 +438,11 @@
        		<label>快递公司：</label>
 			<select id="expressCom" name="xuanze" class="leftF" >
 				  <option value="EMS">EMS</option>
-				  <option value="EMS">申通快递</option>
-				  <option value="EMS">圆通快递</option>
-				  <option value="EMS">中通快递</option>
-				  <option value="EMS">韵达快递</option>
 				  <option value="EMS">顺丰快递</option>
-				  <option value="EMS">汇通快递</option>
-				  <option value="EMS">天天快递</option>
-				  <option value="EMS">宅急送</option>
+				  <option value="EMS">中铁快运</option>
 			</select>
         </li> 
-        
-        
-    	<li class="li02">
-       		<label>快递编号：</label>
-			<input id="expressNum" type="text" name="mailno" class="fidtext" />
-        </li> 
-        
-       <!--  <li class="li02">
-       		<label>快递内容：</label>
-			<input id="expressContent" type="text" name="textfield" class="fidtext" />
-        </li>  -->
+       
          <li class="li03">
      		<label>快递内容：</label>
      	<textarea id="expressContent"></textarea>
@@ -490,372 +461,9 @@
     	<a class="bnt" href="#">取消</a></li> 
     </ul>
    <!--  </form> -->
-   
 </div>
 
-
-<script type="text/javascript" src="/app/views/hetong/js/popwindow.js"></script>
+<script type="text/javascript" src="/app/views/hetong/js/popwindow2.js"></script>
 <script type="text/javascript" src="/app/views/hetong/js/selectlist.js"></script>
-<script type="text/javascript" src="/app/views/hetong/js/hetongCreate.js?i=5"></script>
+<script type="text/javascript" src="/app/views/hetong/js/hetongCreateSale.js?i=5"></script>
 <script  type="text/javascript" src="/app/views/hetong/My97DatePicker/WdatePicker.js"></script>
-<script type="text/javascript">
-
-	$(function(){
-		$('#danwei').selectlist({
-			width: 130,
-			height: 18,
-			//选择项目单位携带出对应的用户ID和单位ID
-		 	onChange: function(){
-				/* var depart = $("#danwei .select-button").val(); */
-				var yonghuId = $($("#danwei").children("input").get(0)).val()
-				var data ={"yonghuId":yonghuId};
-				  $.get('public/ht/getUserAndDepartId.action',data,function(res){
-					        var customerDepart = res.obj;
-					        var userId = customerDepart.dId;
-					        var danweiId = customerDepart.id;
-					        $("#userId").val(userId);
-					        $("#danweiId").val(danweiId);
-				});  
-			} 
-		});		
-	})
-	
-	$(function(){
-		$('select').selectlist({
-			width: 130,
-			height: 18,
-			
-		});		
-	})
-	
-	
-	//创建合同(保存,仅销售人员可见)
-	$("#contractSave").click(function(){
-		var flag = true;
-		var b = validateContractAmount();
-		if(b==false){
-			flag = false;
-		}
-		if(flag == false){
-			return;
-		}
-		
-		var id = $("#htNum").text();//合同编号
-		var company = $("#company").val();
-		var depart = $("#danwei .select-button").val();
-		var cid = $("#userId").val();
-		var didNum = $("#danweiId").val();
-		/* var telephone = $("#telephone").val(); */
-		var contractMoney = $("#contractAmount").val();
-		var agreementNumber = $("#contractCount").val();
-		var endTime = $("#endTime").val();
-		var agreementText = $("#contractContent").val(); //合同内容
-		var remarksText = $("#remark").val();  //备注
-		var payMethod = $("#payMethod").val();
-		var yonghuId = $($("#danwei").children("input").get(0)).val();//用户ID
-		
-		/* var data ={"company":company,"depart":depart,"cid":cid,"didNum":didNum,"contractMoney":contractMoney,
-				"agreementNumber":agreementNumber,"endTime":endTime}; */
-		var data={"id":id,"company":company,"depart":depart,"cid":cid,"didNum":didNum,
-						"contractMoney":contractMoney,
-						"agreementNumber":agreementNumber,"endTime":endTime,"agreementText":agreementText,
-						"remarksText":remarksText,"payMethod":payMethod,"yonghuId":yonghuId};		
-		 $.post('public/ht/addContractNormal.action',data,function(res){
-				if(res.success==true){
-					$.messager.alert('提示：',res.msg);
-					$.get('public/ht/contractListSale.action',function(result){
-						$('#container').html(result);
-						})
-				}else{
-					$.messager.alert('提示：',res.msg);
-				 }
-		}); 
-		
-	})
-	
-	
-	
-		//创建合同(提交)
-	$("#contractSubmit").click(function(){
-		var flag = true;
-		var b = validateContractAmount();
-		if(b==false){
-			flag = false;
-		}
-		if(flag == false){
-			return;
-		}
-		
-		
-		var id = $("#htNum").text();//合同编号
-		
-		var company = $("#company").val();
-		var depart = $("#danwei .select-button").val();
-		
-		var cid = $("#userId").val();
-		var didNum = $("#danweiId").val();
-		/* var telephone = $("#telephone").val(); */
-		var contractMoney = $("#contractAmount").val();
-		var agreementNumber = $("#contractCount").val();
-		var endTime = $("#endTime").val();
-		var agreementText = $("#contractContent").val(); //合同内容
-		var remarksText = $("#remark").val();  //备注
-		var payMethod = $("#payMethod").val();
-		var yonghuId = $($("#danwei").children("input").get(0)).val();//用户ID
-		/* var data ={"company":company,"depart":depart,"cid":cid,"didNum":didNum,"contractMoney":contractMoney,
-				"agreementNumber":agreementNumber,"endTime":endTime}; */
-		var data={"id":id,"company":company,"depart":depart,"cid":cid,"didNum":didNum,
-						"contractMoney":contractMoney,
-						"agreementNumber":agreementNumber,"endTime":endTime,"agreementText":agreementText,
-						"remarksText":remarksText,"payMethod":payMethod,"yonghuId":yonghuId};		
-		 $.post('public/ht/addContractNomalSubmit.action',data,function(res){
-				if(res.success==true){
-					$.messager.alert('提示：',res.msg);
-					$.get('public/ht/contractListSale.action',function(result){
-						$('#container').html(result);
-						})
-				}else{
-					$.messager.alert('提示：',res.msg);
-				 } 
-		}); 
-		
-	})
-	
-	//取消按钮
-	$("#contractCancel").click(function(){
-		var id = $("#htNum").text();//合同编号
-		
-		$.messager.confirm("提示","您确认要放弃当前操作吗？",function(){
-			
-			//如果没有生成合同，直接回到合同列表页面;如果已经生成合同，提示 要放弃当前操作吗?  删除当前合同和合同所属的产品,发票,快递
-			if(id!=null&&id!=""){
-				var data = {"id":id};
-				$.post('public/ht/contractNormalCancel.action',data,function(res){
-					if(res.success==true){
-						$.get('public/ht/contractListSale.action',function(result){
-							$('#container').html(result);
-							})
-					   }
-					})
-			}else{
-				$.get('public/ht/contractListSale.action',function(result){
-					$('#container').html(result);
-					})
-			 }
-		  })
-	  })
-	
-	
-//点添加产品时，创建合同对象
-$("#addProduct").click(function(){
-	$("#sureAboutProduct").attr("style","display:inline;"); 
-	$("#updateProduct").attr("style","display:none;");
-	$("#deleteProduct").attr("style","display:none;");
-	
-	$("#productMoney").val("");
-	$("#productAmount").val("");
-	$("#effectiveDate").val("");
-	$("#endDate").val("");
-	
-	
-	var id = $("#htNum").text();//合同编号
-	if(id==""||null==id){
-		 $.get('public/ht/addRealContract.action',function(res){
-			 if(res.success==true){
-				var htId =  res.obj;
-				console.log(htId);
-				$("#htNum").text(htId);
-			 }
-			 
-		}); 
-	}else{
-	}
-})
-//点击新增快递	
-$("#addFahuo").click(function(){
-	$("#sureAboutFaHuo").attr("style","display:inline;");
-	$("#updateFahuo").attr("style","display:none;");
-	$("#deleteFahuo").attr("style","display:none;");
-	
-	$("#receiver").val("");
-	$("#tel").val("");
-	/* $("#receiveCom").val(""); */
-	$("#email").val("");
-	$("#receiveAddress").val("");
-	$("#post").val("");
-	$("#postAddress").val("");
-	$("#postDate").val("");
-	$("#expressCom .select-button").val("EMS");
-	$("#expressNum").val("");
-	$("#expressContent").val("");
-	//$("#remarkAboutExpress").val("");
-})	
-
-//点击增开发票
-$("#addFapiao").click(function(){
-
-	
-	$("#sureAboutFapiao").attr("style","display:inline;");
-	$("#updateFapiao").attr("style","display:none;");
-	$("#deleteFapiao").attr("style","display:none;");
-	
-	$("#kaipiaoAmount").val("");
-	$("#daxieAmount").val("");
-	$("#kaipiaoCompany").val("");
-	$("#kaipiaodDanwei").val("");
-	$("#fapiaoType").val("");
-	$("#pinming").val("");
-	$("#kaipiaoDate").val("");
-	$("#remarkAboutFapiao").val("");
-	$("#kaipiaoAmountError").text("");
-})	
-
-
-	
-	
-$("#addFapiao").click(function(){
-	//合同编号
-	var id = $("#htNum").text();
-	var date = new Date();
-	var currentTime = date.Format("yyyy-MM-dd");
-	//所属公司
-	var company = $("#company").val();
-	//单位名称
-	var danwei = $("#danwei .select-button").val();
-	$("#HtForFapiao").text(id);
-	$("#applicationTimeAboutFapiao").text(currentTime);
-	$("#kaipiaoCompany").val(company);
-	$("#kaipiaodDanwei").val(danwei);
-
-})
-
-
-$("#addFahuo").click(function(){
-	//合同编号
-	var id = $("#htNum").text();
-	var date = new Date();
-	var currentTime = date.Format("yyyy-MM-dd");
-	//获取发件地
-	//获取所属公司
-	var company = $("#company").val();
-	if(company!=""){
-		$.post('public/ht/getFajiandi.action',{"company":company},function(res){
-			 if(res.success==true){
-				
-				var companyInfo = res.obj;
-				$("#postAddress").val(companyInfo.address);
-			 }else{
-				$("#postAddress").val("");
-			 }
-			 
-		}); 
-	}
-	
-	
-	$("#htNumRelationFaHuo").text(id);
-	$("#applicationTimeAboutFahuo").text(currentTime);
-})	
-
-//验证合同金额是否合法
-function validateContractAmount(){
-     var reg = new RegExp("^[0-9]*$");
-     var contractAmount = $("#contractAmount").val();
-     if(reg.test(contractAmount)){
-    	 $("#contractAmountError").text("");
-     }else{
-    	 $("#contractAmountError").text("合同金额请输入阿拉伯数字");
-    	 return false;
-     }
-		
-	}
-
-	//验证发票金额是否合法
-	function validateFapiaoAmount(){
-	    var reg = new RegExp("^[0-9]*$");
-	 	var id = $("#htNum").text();//合同编号
-		var kaipiaoAmount = $("#kaipiaoAmount").val();//开票金额
-		var htTotalAmount = $("#contractAmount").val();//合同总金额
-		
-	     var total = 0;
-		 var trList = $("#tableAboutFapiao").find("tr");
-		    for (var i=0;i<trList.length;i++) {
-		        var tdArr = trList.eq(i).find("td");
-		        var fapiaoAmount = tdArr.eq(6).text();
-		        var total = Number(fapiaoAmount)+Number(total);
-		    }
-		 
-		 if(Number(kaipiaoAmount)+Number(total)>Number(htTotalAmount)){
-			 $("#kaipiaoAmountError").text("*开票总金额不能大于合同金额");
-			 return false;
-		 }
-		
-			/* 	 $.get('public/ht/getTotalFapiaoAmount.action',{"id":id},function(res){
-		 if(res.success==true){
-			var a = res.obj;
-			debugger;
-			var total = Number(a)+Number(kaipiaoAmount);
-			 if(parseInt(total)>parseInt(htTotalAmount)){
-				 $("#kaipiaoAmountError").text("*开票总金额不能大于合同金额");
-				 return false;
-			 }
-		 }
-		 
-	}); */ 
-		
-		
-	     if(reg.test(kaipiaoAmount)){
-	    	 $("#kaipiaoAmountError").text("");
-	     }else{
-	    	 $("#kaipiaoAmountError").text("*开票金额请输入阿拉伯数字");
-	    	 return false;
-	     }
-	     
-	     if(parseInt(kaipiaoAmount)>parseInt(contractAmount)){
-	    	 $("#kaipiaoAmountError").text("*开票金额不能大于合同金额");
-	    	 return false;
-	     }
-		}	
-
-</script>
-<script type="text/javascript">
-Date.prototype.Format = function(format){ 
-
-	var o = { 
-
-	"M+" : this.getMonth()+1, //month 
-
-	"d+" : this.getDate(), //day 
-
-	"h+" : this.getHours(), //hour 
-
-	"m+" : this.getMinutes(), //minute 
-
-	"s+" : this.getSeconds(), //second 
-
-	"q+" : Math.floor((this.getMonth()+3)/3), //quarter 
-
-	"S" : this.getMilliseconds() //millisecond 
-
-	}
-
-	if(/(y+)/.test(format)) { 
-
-	format = format.replace(RegExp.$1, (this.getFullYear()+"").substr(4 - RegExp.$1.length)); 
-
-	}
-
-	for(var k in o) { 
-
-	if(new RegExp("("+ k +")").test(format)) { 
-
-	format = format.replace(RegExp.$1, RegExp.$1.length==1 ? o[k] : ("00"+ o[k]).substr((""+ o[k]).length)); 
-
-	 } 
-
-	} 
-
-	return format; 
-
-	}
-</script>
-

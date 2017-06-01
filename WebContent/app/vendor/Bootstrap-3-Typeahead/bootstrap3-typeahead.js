@@ -212,6 +212,10 @@
         items.push(this.options.addItem);
       }
 
+      //add by dengxuefeng
+//      this.$menu.off('click', $.proxy(this.click, this));
+//      this.$menu.on('click', $.proxy(this.click, this));
+
       return this.render(items).show();
     },
 
@@ -358,6 +362,7 @@
     },
 
     listen: function () {
+//      this.$menu.on('click', $.proxy(this.click, this));
       this.$element
         .on('focus',    $.proxy(this.focus, this))
         .on('blur',     $.proxy(this.blur, this))
@@ -511,6 +516,8 @@
     },
 
     click: function (e) {
+      console.log('you are trigger click events!');
+      this.mouseddown = true;
       e.preventDefault();
       this.skipShowHintOnFocus = true;
       this.select();
@@ -557,7 +564,8 @@
       var $this = $(this);
       var data = $this.data('typeahead');
       var options = typeof option == 'object' && option;
-      if (!data) $this.data('typeahead', (data = new Typeahead(this, options)));
+      if (!data || data.destroyed) $this.data('typeahead', (data = new Typeahead(this, options)));
+      else{data = $.extend(data, options)}
       if (typeof option == 'string' && data[option]) {
         if (arg.length > 1) {
           data[option].apply(data, Array.prototype.slice.call(arg, 1));

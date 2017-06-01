@@ -29,7 +29,8 @@ public class Messages implements Serializable {
 	private static final long serialVersionUID = -2744046558124905576L;
 	
 	private Integer id;
-	private String lis_id;
+	private Long lis_id;
+//	private String lis_id;
 	private String sender;
 	private Integer sid;
 	private Integer to;
@@ -106,11 +107,19 @@ public class Messages implements Serializable {
 		this.status = status;
 	}
 	@Column
-	public String getLis_id() {
+	public Long getLis_id() {
 		return lis_id;
 	}
-	public void setLis_id(String lis_id) {
+	public void setLis_id(Long lis_id) {
 		this.lis_id = lis_id;
 	}
+	
+//	@Column
+//	public String getLis_id() {
+//		return lis_id;
+//	}
+//	public void setLis_id(String lis_id) {
+//		this.lis_id = lis_id;
+//	}
 	
 }

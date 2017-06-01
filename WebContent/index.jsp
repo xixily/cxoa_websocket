@@ -2,6 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%
 	String version = "1.0.5";
+	String v = "?v=" + System.currentTimeMillis();
 %>
 <!DOCTYPE html>
 <html>
@@ -13,15 +14,15 @@
 <meta charset="UTF-8">
 <jsp:include page="inc.jsp"></jsp:include>
  <!-- 自己定义的样式和JS扩展 -->
-<link rel="stylesheet" href="${pageContext.request.contextPath}/style/oaCss<%=version %>.css" type="text/css"></link>
-<script type="text/javascript" src="${pageContext.request.contextPath}/jslib/util<%=version %>.js" charset="utf-8"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath}/jsController/app<%=version %>.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath}/jsController/north<%=version %>.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath}/jsController/west<%=version %>.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath}/jsController/center/employee<%=version %>.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath}/jsController/system<%=version %>.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath}/jsController/wagesCalculate<%=version %>.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath}/jsController/center/hetong<%=version %>.js"></script>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/style/oaCss<%=version %>.css<%=v %>" type="text/css"></link>
+<script type="text/javascript" src="${pageContext.request.contextPath}/jslib/util<%=version %>.js<%=v %>" charset="utf-8"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/jsController/app<%=version %>.js<%=v %>"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/jsController/north<%=version %>.js<%=v %>"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/jsController/west<%=version %>.js<%=v %>"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/jsController/center/employee<%=version %>.js<%=v %>"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/jsController/system<%=version %>.js"<%=v %>></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/jsController/wagesCalculate<%=version %>.js<%=v %>"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/jsController/center/hetong<%=version %>.js<%=v %>"></script>
 <script type="text/javascript">
 $(document).ready(function () {
 	init();

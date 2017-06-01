@@ -22,12 +22,15 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.chaoxing.oa.entity.page.caiwu.PUserBank;
 import com.chaoxing.oa.entity.page.common.Json;
 import com.chaoxing.oa.entity.page.common.Page;
+import com.chaoxing.oa.entity.page.pub.PLeader;
 import com.chaoxing.oa.entity.page.pub.caiwu.PBaoxiao;
 import com.chaoxing.oa.entity.page.pub.caiwu.PChupiaoBaoxiao;
 import com.chaoxing.oa.entity.page.pub.caiwu.PKoukuan;
 import com.chaoxing.oa.entity.page.pub.caiwu.PSelfBaoxiao;
 import com.chaoxing.oa.entity.page.system.SessionInfo;
 import com.chaoxing.oa.service.PubCaiwuService;
+import com.chaoxing.oa.service.UserServiceI;
+import com.chaoxing.oa.service.impl.UserServiceImpl;
 import com.chaoxing.oa.system.SysConfig;
 import com.chaoxing.oa.util.system.ResourceUtil;
 
@@ -36,6 +39,8 @@ import com.chaoxing.oa.util.system.ResourceUtil;
 public class PubCaiwuController {
 	@Autowired
 	private PubCaiwuService publicCaiwuService;
+	@Autowired
+	private UserServiceI userService;
 	
 	/**
 	 * 个人报销信息查询ypzInit
@@ -86,15 +91,29 @@ public class PubCaiwuController {
 		String account = pbaoxiao.getAccount();
 		Integer id = sessinfo.getId();
 		String bank = pbaoxiao.getBank();
-		if(null!=account && null != bank){
-			publicCaiwuService.addUserBank(id, bank, account);
-		}
-		Serializable sid = publicCaiwuService.addBaoxiao(pbaoxiao);
-		if(null!=sid){
-			result.setSuccess(true);
-			result.setMsg("添加成功，批次号为：" + sid.toString());
+		Float money = pbaoxiao.getMoney();
+		if(null != money &&  money>0 && null != bank && null!=account){
+			if(null == pbaoxiao.getSpecifyId()){
+				PLeader pld = userService.getCellCoreInfo(sessinfo.getDepartmentId());
+				if(null!=pld){
+					pbaoxiao.setSpecifyId(pld.getId());
+				}else{
+					result.setMsg("部门架构表里面没有找到您的默认批准人，请确认。");
+					return result;
+				}
+			}
+			if(null!=account && null != bank){
+				publicCaiwuService.addUserBank(id, bank, account);
+			}
+			Serializable sid = publicCaiwuService.addBaoxiao(pbaoxiao);
+			if(null!=sid){
+				result.setSuccess(true);
+				result.setMsg("添加成功，批次号为：" + sid.toString());
+			}else{
+				result.setMsg("抱歉，添加失败。");
+			}
 		}else{
-			result.setMsg("抱歉，添加失败。");
+			result.setMsg("您输入的信息有误，请重新输入。");
 		}
 		return result;
 	}
@@ -143,7 +162,7 @@ public class PubCaiwuController {
 				result.setSuccess(true);
 				result.setMsg("更新成功！");
 			}else{
-				result.setMsg("更新失败，可能是批次号对应的报销人不匹配。");
+				result.setMsg("更新失败，可能是批次号对应的报销人不匹配或现在的状态无法修改。");
 			}
 		}else{
 			result.setMsg("没有批次号。");
@@ -187,7 +206,8 @@ public class PubCaiwuController {
 	public Map<String, Object> findDaiShenpi(PBaoxiao pbaoxiao, Page page, HttpSession session){
 		SessionInfo sessionInfo = getSessInfo(session);
 		pbaoxiao.setStatus(SysConfig.CW_BX_BEGIN);
-		Map<String, Object> results = publicCaiwuService.findBaoxiaoByLeader(pbaoxiao, page, sessionInfo.getEmail());
+		Map<String, Object> results = publicCaiwuService.findBaoxiaoByLeader(pbaoxiao, page, sessionInfo.getId());
+//		Map<String, Object> results = publicCaiwuService.findBaoxiaoByLeader(pbaoxiao, page, sessionInfo.getEmail());
 //		Double lastyear = publicCaiwuService.getLastYear(sessionInfo.getEmail());
 //		Double thisyear = publicCaiwuService.getThisYear(sessionInfo.getEmail());
 //		results.put("lastYearTotal", lastyear);
@@ -829,5 +849,36 @@ public class PubCaiwuController {
 		SessionInfo sessionInfo = getSessInfo(session);
 		publicCaiwuService.addUserBank(sessionInfo.getId(), bank, account);
 //		System.out.println(ts.getId() + "," + ts.getDate() + "," + ts.getDte());
+	}
+	
+	@RequestMapping(value="/updateKunhao")
+	@ResponseBody
+	public Json updateKunhao(@RequestParam(required=true) Long id, String kunhao){
+		Json result = new Json();
+		PBaoxiao pbx = new PBaoxiao();
+		pbx.setId(id);
+		pbx.setKunhao(kunhao);
+		if(publicCaiwuService.updateBaoxiao(pbx, null)>0){
+			result.setSuccess(true);
+		}else{
+			result.setMsg("更新失败。");
+		}
+		return result;
+	}
+	
+	@RequestMapping(value="/findLeader")
+	@ResponseBody
+	public List<PLeader> findLeader(@RequestParam(required=true) String name){
+		if(name!=""){
+			return userService.findLearByname(name);
+		}
+		return null;
+	}
+	
+	@RequestMapping(value="/getCellCoreInfo")
+	@ResponseBody
+	public PLeader  getCellcoreMsg(HttpSession session){
+		SessionInfo sinfo = (SessionInfo) session.getAttribute(ResourceUtil.getSessionInfoName());
+		return userService.getCellCoreInfo(sinfo.getDepartmentId());
 	}
 }

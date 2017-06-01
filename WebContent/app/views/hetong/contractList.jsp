@@ -27,6 +27,7 @@
 .divtable {
 	width: inherit;
 }
+
 </style>
 <div app-data="body">
 	<div class="main">
@@ -100,43 +101,7 @@
 						   </select>
 						   
 						</li> --%>
-						<!-- <li>
-							<div class="quy_tit">省 份：</div> 
-							<select id="shengfen" name="shengfen" class="leftF">
-								<option value="0">全国</option> 
-								<option value="2">北京</option>  	
-								<option value="13">湖北</option>
-								<option value="30">内蒙古</option>                                    
-								<option value="1">广东</option>
-								<option value="3">天津</option>
-								<option value="4">黑龙江</option>   
-								<option value="14">江西</option>
-								<option value="15">安徽</option>
-								<option value="16">浙江</option>
-								<option value="17">江苏</option>
-								<option value="18">福建</option>
-								<option value="19">广西</option>
-								<option value="20">新疆</option>
-								<option value="21">青海</option>
-								<option value="22">甘肃</option>
-								<option value="23">宁夏</option>
-								<option value="24">陕西</option>
-								<option value="25">西藏</option>
-								<option value="26">四川</option>
-								<option value="27">云南</option>
-								<option value="28">贵州</option>
-								<option value="29">重庆</option>
-								<option value="5">上海</option>
-								<option value="6">吉林</option>
-								<option value="7">辽宁</option>
-								<option value="8">河南</option>
-								<option value="9">河北</option>
-								<option value="10">山西</option>
-								<option value="11">山东</option>
-								<option value="12">湖南</option>
-							
-						</select>
-						</li> -->
+						
 						<li>
 							<div class="quy_tit">小组/细胞核：</div> <input id="group" type="text"
 							name="textfield" class="fidtext" />
@@ -158,7 +123,7 @@
 						<li> 
 							<div class="quy_tit">合同状态：</div> 
 							<select id="zhuangtai" name="zhuangtai" class="leftF">
-								<option value="-1">全部</option>
+								<option value="-10">全部</option>
 								<option value="0"> 未处理</option>
 								<option value="1">审核未通过</option>
 								<option value="2">审核已通过</option>
@@ -193,7 +158,7 @@
 					 <label class="leftF"><input id="undeal" type="checkbox" name="checkbox" />只显示未处理</label>
 			</div>
 			<div class="divtable">
-				<div style="width: 1500px;">
+				<div style="/*width: 1500px;*/">
 					<table width="100%" border="0" cellspacing="0" cellpadding="0">
 						<tr>
 							<th width="4%">序号</th>
@@ -206,13 +171,14 @@
 							<th width="6%">提交日期</th>
 							<th width="10%">所含产品</th>
 							<th width="5%">所属公司</th>
-							<th width="7%">合同金额</th>
-							<th width="7%">回款金额</th>
+							<th width="6%">合同金额</th>
+							<th width="6%">回款金额</th>
 							<th width="7%">回款时间</th>
 							<th width="7%">开票总金额</th>
 							<th width="5%">坏账</th>
 							<th width="6%">处理状态</th>
 							<th width="4%">详情</th>
+							<th width="4%">操作</th>
 						</tr>
 
 					<c:forEach var="c" items="${pageBean.list }" varStatus="cs">
@@ -235,6 +201,7 @@
 					<td bgcolor="#dcfcd3">${c.year }</td>
 				    <td bgcolor="#dcfcd3">未处理</td>
 				    <td bgcolor="#dcfcd3"><a class="detail" id="${c.id }"	href="javascript:void(0)">详情</a></td>
+				    <td bgcolor="#dcfcd3"></td>
 			        </tr>
 				    </c:if> 
  
@@ -269,6 +236,20 @@
 								</c:if>
 								<td><a class="detail" id="${c.id }"	href="javascript:void(0)">详情</a></td>
 								
+								<c:if test="${c.dealConditon=='1'}">
+								     <td></td>
+								</c:if>
+								
+								<c:if test="${c.dealConditon=='3'}">
+								     <td></td>
+								</c:if>
+								
+								
+								<c:if test="${c.dealConditon=='2'}">
+								     <td><a class="wanjie" id="${c.id }"href="javascript:void(0)">完结</a></td>
+								</c:if>
+								
+								
 							</tr>
                            </c:if> 
 						</c:forEach>
@@ -282,7 +263,6 @@
 	</div>
 </div>
 
-<!-- <script type="text/javascript" src="/app/views/hetong/js/jquery-1.7.2.min.js"></script> -->
 <script type="text/javascript" src="/app/views/hetong/js/selectlist.js"></script>
 <script type="text/javascript" src="/app/views/hetong/js/pageUtil.js"></script>
 <script type="text/javascript">
@@ -301,7 +281,6 @@ $(document).ready(function(){
 		
 		
 function changeMethod(nextPage){
- 
 	var danwei = $("#danwei .select-button").val();//单位性质
 	var gongsi = $("#gongsi .select-button").val();//所属公司
 	/* var chanpin = $("#chanpin .select-button").val();//产品 */
@@ -339,9 +318,6 @@ function changeMethod(nextPage){
  				$("#gongsi").val(gongsi);
  			}
  			/* $("#gongsi .select-button").val(gongsi); */
- 			
- 			
- 			
  			
  			if(zhuangtai!='全部'){
  				$("#zhuangtai").val(zhuangtai);
@@ -431,7 +407,6 @@ $(".detail").click(function(){
 
 	
 $("#search").click(function(){
- 	
     var purchaseCom = $("#purchaseCom").val();//购买单位
 	var danwei = $("#danwei .select-button").val();//单位性质
 	var gongsi = $("#gongsi .select-button").val();//所属公司
@@ -486,13 +461,13 @@ $("#search").click(function(){
 		$("#userId").val("");
 		$("#gongsi .select-button").val("全部");
 		$("#danwei .select-button").val("全部");
-		$("#zhuangtai .select-button").val("全部");
-		
+	 	$("#zhuangtai .select-button").val("全部"); 
+		$("#zhuangtai .selected").attr("data-value","-10");//重置为全部
 	})
 	//由审核已通过到合同完结
-	$(".dealCondition").click(function(){
-	var id = $(this).parent().children('td').eq(1).text();
-	
+	$(".wanjie").click(function(){
+	/* var id = $(this).parent().children('td').eq(1).text(); */
+	var id = $(this).attr("id");
 	$.messager.confirm("提示","您确认要改为合同完结状态吗？",function(){
 		  $.post('public/ht/updateDealCondition.action',{"id":id},function(res){
 			 
@@ -506,6 +481,10 @@ $("#search").click(function(){
 			   }
 	       })
 	   })
-});
-	
+   });
+   
+   $(function(){
+	   $("input").attr("autocomplete","off");
+   }); 
+   
 </script>

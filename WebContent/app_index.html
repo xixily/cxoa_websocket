@@ -14,6 +14,8 @@
 
     <title>超星OA办公平台</title>
 
+    <script type="text/javascript" src="app/vendor/LAB/LAB.min.js"></script>
+
     <!-- Bootstrap Core CSS -->
     <link href="app/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
@@ -28,7 +30,7 @@
     <!--<link href="app/vendor/datatables-responsive/dataTables.responsive.css" rel="stylesheet">-->
 
     <!-- bootstrap Combobox css-->
-    <link rel="stylesheet" href="app/vendor/bootstrap-combobox/bootstrap-combobox.js"/>
+    <link rel="stylesheet" href="app/vendor/bootstrap-combobox/css/bootstrap-combobox.css"/>
 
     <!-- bootstrap jquery-ui css-->
     <link rel="stylesheet" href="app/vendor/jquery-ui/jquery-ui.min.css"/>
@@ -44,6 +46,9 @@
 
     <!-- bootstrapValidator CSS-->
     <link href="app/vendor/bootstrapvalidator-master/bootstrapValidator.min.css" rel="stylesheet" type="text/css">
+
+    <!-- bootstrap time picker CSS-->
+    <link href="app/vendor/bootstrap-datetimepicker-master/css/bootstrap-datetimepicker.min.css" rel="stylesheet" media="screen">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -73,7 +78,7 @@
     <nav id="nav_bar" class="navbar navbar-default" role="navigation" style="margin-bottom: 0">
         <!--<div class="container">-->
             <div class="navbar-header">
-                <button type="button" class="navbar-toggle " data-toggle="collapse" data-target=".navbar-collapse">
+                <button id="navbar_toggle" type="button" class="navbar-toggle " data-toggle="collapse" data-target=".navbar-collapse">
                     <span class="sr-only">导航切换</span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
@@ -317,10 +322,12 @@
             <div class="col-lg-12">
             </div>
         </div> -->
-        <!-- 主div -->
+        <!-- 加载等待区域 -->
         <div id="loading" class="loading hide">
             <span>正在加载数据,请稍后...<img style="display: inline-block" src="app/images/loading.gif" alt="正在加载..." class="img-responsive" width="16"/></span>
         </div>
+
+        <!-- 主体内容区域 -->
         <div id="container">
 
         </div>
@@ -330,7 +337,7 @@
         <a href="#" title="返回顶部" style="display: inline-block;"> <i class="glyphicon glyphicon-arrow-up"></i></a>
         <!--<li class="divider"></li>-->
         <div style="height: 1px;border: 0px;margin: 0px;background-color:#abb9d3;width: 100%"></div>
-        <a href="javascript:void(0)" title="添加" class="" style="display: inline-block;"> <i class="glyphicon glyphicon-pencil" style="margin: 3px 3px;"></i></a>
+        <a href="javascript:void(0)" onclick="app_write()" title="添加" class="" style="display: inline-block;"> <i class="glyphicon glyphicon-pencil" style="margin: 3px 3px;"></i></a>
         <div style="height: 1px;border: 0px;margin: 0px;background-color:#abb9d3;width: 100%"></div>
 <!--
         <a href="javascript:void(0)" title="返回" onclick="try{$('[app-abck='+ session.app_back +']').trigger('click');}catch(e){alert('返回失败')}" title="添加" class="" style="display: inline-block;"> <i class="fa  fa-reply" style="margin: 3px 3px;"></i></a>
@@ -357,10 +364,25 @@
 
 <!-- Custom Theme JavaScript -->
 <!--<script src="../dist/js/app.js"></script>-->
-<script src="app/js/app.js"></script>
-<script src="app/js/utils/formHelp.js"></script>
-<script src="app/js/center/caiwu.js"></script>
-<script src="app/js/center/hetong1.0.0.js"></script>
+<!--<script src="app/js/app.js"></script>-->
+<script type="text/javascript">
+    var appVersion = "";//暂时不设置系统版本
+    var v = "?v=" + (new Date().valueOf());
+    $LAB.script("app/js/app" + appVersion + ".js" + v)
+            .wait()
+            .script("app/js/utils/formHelp" + appVersion + ".js" + v)
+            .script("app/js/utils/BootstrapChat" + appVersion + ".js" + v)
+//            .script("app/js/center/CXJSBridge" + appVersion + ".js" + v) //学习通js bridge
+            .script("app/js/center/hetong" + appVersion + ".js" + v)
+            .script("app/js/center/caiwu" + appVersion + ".js" + v)
+            .script("app/js/center/head" + appVersion + ".js" + v)
+
+
+</script>
+
+<!--<script src="app/js/utils/formHelp.js"></script>-->
+<!--<script src="app/js/center/caiwu.js"></script>-->
+<!--<script src="app/js/center/hetong.js"></script>-->
 <!-- bootstrap-table -->
 <script src="app/vendor/bt-table/dist/bootstrap-table.js"></script>
 <script src="app/vendor/bt-table/dist/locale/bootstrap-table-zh-CN.min.js"></script>
@@ -369,10 +391,38 @@
 <!-- bootstrap Combobox start-->
 <script src="app/vendor/bootstrap-combobox/bootstrap-combobox.js"></script>
 <!-- bootstrap combobox end-->
+<!-- bootstrap typeahead start-->
+<!--<script src="app/vendor/Bootstrap-3-Typeahead/bootstrap3-typeahead.js"></script>-->
+<script src="app/vendor/Bootstrap-3-Typeahead/bootstrap3-typeahead.min.js"></script>
+<!-- bootstrap typeahead end-->
+<!-- bootstrap dateTimePicker start-->
+<script type="text/javascript" src="app/vendor/bootstrap-datetimepicker-master/js/bootstrap-datetimepicker.js" charset="UTF-8"></script>
+<script type="text/javascript" src="app/vendor/bootstrap-datetimepicker-master/js/locales/bootstrap-datetimepicker.zh-CN.js" charset="UTF-8"></script>
+<!-- bootstrap dateTimePicker end-->
+
 <!-- bootstrap chat.js developing-->
-<script src="app/js/utils/BootstrapChat.js"></script>
+<!--<script src="app/js/utils/BootstrapChat.js"></script>-->
 
 <script>
+    $.fn.typeahead.Constructor.prototype.blur = function (e) { //重写blur事件，解决点击bug
+        if(e && e.relatedTarget && e.relatedTarget.className === 'dropdown-item'){//避免点击下拉菜单时隐藏可选项。
+            this.$menu.find('.active').removeClass('active');
+            $(e.relatedTarget).closest('li').addClass('active');
+            this.$menu.trigger('click')
+        }else{
+            if (!this.mousedover && !this.mouseddown && this.shown) {
+                this.hide();
+                this.focused = false;
+                this.keyPressed = false;
+            } else if (this.mouseddown) {
+                // This is for IE that blurs the input when user clicks on scroll.
+                // We set the focus back on the input and prevent the lookup to occur again
+                this.skipShowHintOnFocus = true;
+                this.$element.focus();
+                this.mouseddown = false;
+            }
+        }
+    };
     function app_back(){
         try{
             $('[app-back="'+ session.app_back +'"]').trigger('click');
@@ -380,7 +430,23 @@
             alert('返回失败，请尝试其他方式。');
         }
     }
-
+    function app_write(){
+        try{
+            $('[app-write="true"]').trigger('click');
+        }catch(e){
+            alert('打开添加失败，请尝试其他方式。');
+        }
+    }
+    $(document).ready(function(){
+    	if(!(/in/gi.test($('#app_sidebar').find('.sidebar-nav')[0].className))){
+            $('#navbar_toggle').trigger('click');
+        }
+    	/*  setTimeout(function(){
+    	        if(!(/in/gi.test($('#app_sidebar').find('.sidebar-nav')[0].className))){
+    	            $('#navbar_toggle').trigger('click');
+    	        }
+    	    },150); */
+    })
 //自动隐藏导航头，现在已经取消。
 //    $("#nav_bar").autoHidingNavbar({animationDuration:200,navbarOffset:-82});
 </script>

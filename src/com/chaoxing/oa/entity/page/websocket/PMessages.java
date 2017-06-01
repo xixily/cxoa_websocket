@@ -12,7 +12,8 @@ public class PMessages {
 	public final static int HEART_BEAT = 1;
 	public final static int GET_SH_MESSAGES = 114;
 	
-	private String lis_id;
+//	private String lis_id;
+	private Long lis_id;
 	private String sender;
 	private Integer sid;
 	private Integer to;
@@ -22,10 +23,11 @@ public class PMessages {
 	private Integer ownerId;
 	private Integer status;
 	
-	public String getLis_id() {
+	
+	public Long getLis_id() {
 		return lis_id;
 	}
-	public void setLis_id(String lis_id) {
+	public void setLis_id(Long lis_id) {
 		this.lis_id = lis_id;
 	}
 	public String getSender() {

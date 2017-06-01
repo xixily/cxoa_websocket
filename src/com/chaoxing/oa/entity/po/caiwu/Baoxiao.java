@@ -9,6 +9,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
@@ -50,6 +52,10 @@ public class Baoxiao implements Serializable{
 	private Date createTime;//创建时间
 	private Long cpNumber;//汇款批次号
 	private Date cpTime;//出票时间
+	private Float tuikuan;//退款金额，补借款金额
+	private Float kouchu;//扣除金额
+	private Date updateTime;//最近更新时间
+	private Integer specifyId;//指定批准人id
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	public Long getId() {
@@ -59,11 +65,11 @@ public class Baoxiao implements Serializable{
 	public Integer getUid() {
 		return uid;
 	}
-	@Column(name="申报金额")
+	@Column(name="申报金额", columnDefinition="DECIMAL(12,2) ")
 	public Float getMoney() {
 		return money;
 	}
-	@Column(name="还借款金额")
+	@Column(name="还借款金额", columnDefinition="DECIMAL(12,2) ")
 	public Float getHuankuan() {
 		return huankuan;
 	}
@@ -131,7 +137,7 @@ public class Baoxiao implements Serializable{
 	public Integer getCpid() {
 		return cpid;
 	}
-	@Column(name="退票金额")
+	@Column(name="退票金额", columnDefinition="DECIMAL(12,2) ")
 	public Float getTuipiao() {
 		return tuipiao;
 	}
@@ -143,11 +149,11 @@ public class Baoxiao implements Serializable{
 //	public Float getKoujk() {
 //		return koujk;
 //	}
-	@Column(name="报销金额")
+	@Column(name="报销金额", columnDefinition="DECIMAL(12,2) ")
 	public Float getBaoxMoney() {
 		return baoxMoney;
 	}
-	@Column(name="汇款金额")
+	@Column(name="汇款金额", columnDefinition="DECIMAL(12,2) ")
 	public Float getHuikuan() {
 		return huikuan;
 	}
@@ -174,6 +180,37 @@ public class Baoxiao implements Serializable{
 	@Column(name="出票时间")
 	public Date getCpTime() {
 		return cpTime;
+	}
+	@Column(name="补借款金额", columnDefinition="DECIMAL(12,2) ")
+	public Float getTuikuan() {
+		return tuikuan;
+	}
+	@Column(name = "扣除金额", columnDefinition="DECIMAL(12,2) ")
+	public Float getKouchu() {
+		return kouchu;
+	}
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name="updateTime", columnDefinition=" timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP",insertable = false, updatable = false)
+//	@Column(insertable = false, updatable = false)
+	@org.hibernate.annotations.Generated(org.hibernate.annotations.GenerationTime.ALWAYS)
+	public Date getUpdateTime() {
+		return updateTime;
+	}
+	@Column(name = "specifyId")
+	public Integer getSpecifyId() {
+		return specifyId;
+	}
+	public void setSpecifyId(Integer specifyId) {
+		this.specifyId = specifyId;
+	}
+	public void setUpdateTime(Date updateTime) {
+		this.updateTime = updateTime;
+	}
+	public void setKouchu(Float kouchu) {
+		this.kouchu = kouchu;
+	}
+	public void setTuikuan(Float tuikuan) {
+		this.tuikuan = tuikuan;
 	}
 	public void setCpTime(Date cpTime) {
 		this.cpTime = cpTime;

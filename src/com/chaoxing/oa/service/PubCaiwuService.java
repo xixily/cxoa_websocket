@@ -25,7 +25,8 @@ public interface PubCaiwuService {
 
 	public Map<String, Object> findBaoxiao(PBaoxiao pbaoxiao, Page page);
 	
-	public Map<String, Object> findBaoxiaoByLeader(PBaoxiao pbaoxiao, Page page, String email);
+	public Map<String, Object> findBaoxiaoByLeader(PBaoxiao pbaoxiao, Page page, Integer uid);
+//	public Map<String, Object> findBaoxiaoByLeader(PBaoxiao pbaoxiao, Page page, String email);
 
 	public Serializable addBaoxiao(PBaoxiao pbaoxiao);
 
@@ -38,7 +39,9 @@ public interface PubCaiwuService {
 	public int deleteBaoxiao(Long id, Integer uid);
 	
 	public long updateBaoxiao(PBaoxiao pBaoxiao);
-	//跟人报销更新
+	//报销部分更新
+	public int updateBaoxiao(PBaoxiao value, PBaoxiao conditions);
+	//个人报销更新
 	public int updateSeltBaoxiao(PBaoxiao psbaoxiao);
 	//去年总报销额
 	public Double getLastYear(int id);

@@ -50,7 +50,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				            <label for="password" class="control-label">密码：</label>
 				            <div class="templatemo-input-icon-container">
 				            	<i class="fa fa-lock"></i>
-				            	<input type="password" name="password" pattern="^(?![a-zA-z]+$)(?!\d+$)(?![!@#$%^&*]+$)[a-zA-Z\d!@#$%^&*]{6,14}$" class="form-control" id="password" placeholder="密码（非纯数字或纯字符型，长度大于6）..." required />
+				            	<input type="password" name="password" pattern="^(?![a-zA-z]+$)(?!\d+$)(?![!@#$%^&*]+$)[a-zA-Z\d!_@#$%^&*]{6,14}$" class="form-control" id="password" placeholder="密码（非纯数字或纯字符型，长度大于6）..." required />
 				            	<span style="color:red;">${login_check_error }</span>
 				            </div>
 				          </div>

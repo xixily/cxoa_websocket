@@ -10,8 +10,13 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.annotations.DynamicUpdate;
+
 @Entity
 @Table(name = "报销视图")
+@DynamicInsert(false)
+@DynamicUpdate(false)
 public class BaoxiaoView implements Serializable{
 	private static final long serialVersionUID = 653847779415412260L;
 	private Long id;
@@ -53,6 +58,10 @@ public class BaoxiaoView implements Serializable{
 	private String guidanceEmail;//指导邮箱
 	private Long cpNumber;//汇款批次号
 	private Date cpTime;//出票时间
+	private Float tuikuan;//退款金额，补借款金额
+	private Float kouchu;//扣除金额
+	private Date updateTime;//最近更新时间
+	private Integer specifyId;//指定批准人id
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	public Long getId() {
@@ -209,6 +218,34 @@ public class BaoxiaoView implements Serializable{
 	@Column(name = "出票时间")
 	public Date getCpTime() {
 		return cpTime;
+	}
+	@Column(name="补借款金额")
+	public Float getTuikuan() {
+		return tuikuan;
+	}
+	public void setTuikuan(Float tuikuan) {
+		this.tuikuan = tuikuan;
+	}
+	@Column(name = "扣除金额")
+	public Float getKouchu() {
+		return kouchu;
+	}
+	@Column()
+	public Date getUpdateTime() {
+		return updateTime;
+	}
+	@Column()
+	public Integer getSpecifyId() {
+		return specifyId;
+	}
+	public void setSpecifyId(Integer specifyId) {
+		this.specifyId = specifyId;
+	}
+	public void setUpdateTime(Date updateTime) {
+		this.updateTime = updateTime;
+	}
+	public void setKouchu(Float kouchu) {
+		this.kouchu = kouchu;
 	}
 	public void setCpTime(Date cpTime) {
 		this.cpTime = cpTime;

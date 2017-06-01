@@ -52,6 +52,11 @@ $(function () {//监听屏幕变化，重组slider 导航条
         if (width < 768) {
             $('div.navbar-collapse').addClass('collapse');
             topOffset = 112; // 2-row-menu
+            setTimeout(function(){
+                if(!(/in/gi.test($('#app_sidebar').find('.sidebar-nav')[0].className))){
+                    $('#navbar_toggle').trigger('click');
+                }
+            },150);
         } else {
             $('div.navbar-collapse').removeClass('collapse');
         }

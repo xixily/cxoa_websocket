@@ -29,13 +29,17 @@ public class PubFileOperatorServiceImpl implements com.chaoxing.oa.service.PubFi
 				pb = it.next();
 				sxffWriter.createRow();
 				sxffWriter.createCell();
-				sxffWriter.setStringData(pb.getBank());
+				sxffWriter.setStringData(getBank(pb.getBank()));
 				sxffWriter.createCell();
 				sxffWriter.setStringData(pb.getAccount());
 				sxffWriter.createCell();
 				sxffWriter.setStringData(pb.getUsername());
 				sxffWriter.createCell();
-				sxffWriter.setNumbericData(new BigDecimal(pb.getHuikuan()));
+				sxffWriter.setNumbericData(new BigDecimal(pb.getKoujk()).setScale(2, BigDecimal.ROUND_HALF_UP));//扣借款
+				sxffWriter.createCell();
+				sxffWriter.setNumbericData(new BigDecimal(pb.getHuikuan()).setScale(2, BigDecimal.ROUND_HALF_UP));
+				sxffWriter.createCell();
+				sxffWriter.setStringData(pb.getCaiwuRemarks());
 			}
 		} catch (IOException e) {
 			logger.error("PubFileOperatorServiceImpl.getDaihuiKuanExcel:" + e);
@@ -61,7 +65,25 @@ public class PubFileOperatorServiceImpl implements com.chaoxing.oa.service.PubFi
 		sxffWriter.createCell();
 		sxffWriter.setStringData("报销人");
 		sxffWriter.createCell();
+		sxffWriter.setStringData("还款金额");
+		sxffWriter.createCell();
 		sxffWriter.setStringData("汇款金额");
+		sxffWriter.createCell();
+		sxffWriter.setStringData("财务备注");
+	}
+	
+	private String getBank(String bcode){
+		if(null != bcode){
+			if(bcode.equals("jtyh"))return "交通银行";
+			if(bcode.equals("gs"))return "工商银行";
+			if(bcode.equals("gd"))return "光大银行";
+			if(bcode.equals("js"))return "建设银行";
+			if(bcode.equals("zs"))return "招商银行";
+			if(bcode.equals("nh"))return "农业银行";
+			if(bcode.equals("ms"))return "民生银行";
+			if(bcode.equals("gk"))return "国家开放银行";
+		}
+		return "";
 	}
 
 }

@@ -90,8 +90,13 @@
 
 
 
+.selectNav{width:128px;height:18px;line-height:18px;display:inline-block;border:1px solid #eee;background:url(../images/icons.png) no-repeat 110px 0;}
+.selectNav p{display:block;padding:0 24px 0 6px;cursor:pointer;white-space:nowrap;text-overflow:ellipsis;overflow:hidden;}
 
-
+.selectNew{width:126px;position:absolute;border:1px solid #eee;display:none; background:#FFF; padding:6px 0 0 0;}
+.selectNav ul li{line-height:18px;padding:0 0 0 6px; cursor:pointer; float:none;}
+.selectNav ul li:hover{background:#55b3f1;color:#FFF;}
+.selectNav ul{ height:200px;overflow:hidden;overflow-y:auto;}
 
 
 

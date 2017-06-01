@@ -7,6 +7,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
 @Table(name = "usercontracts")
@@ -157,7 +158,7 @@ public class Usercontracts implements Serializable{
 	public Float getYear() {
 		return year;
 	}
-	@Column(name = "开票总金额")
+	@Transient
 	public Float getKaipiaoMoney() {
 		return kaipiaoMoney;
 	}
@@ -400,7 +401,7 @@ public class Usercontracts implements Serializable{
 	public void setUser_property(String user_property) {
 		this.user_property = user_property;
 	}
-	@Column(name = "回款金额")
+	@Transient
 	public String getReceivedAmount() {
 		return receivedAmount;
 	}
@@ -428,7 +429,7 @@ public class Usercontracts implements Serializable{
 	public void setEndTime(Date endTime) {
 		this.endTime = endTime;
 	}
-	@Column(name = "回款时间")
+	@Transient
 	public Date getReceiveTime() {
 		return receiveTime;
 	}

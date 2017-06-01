@@ -39,7 +39,7 @@
 			<span class="leftF"><b class="cet icons"></b>未通过合同</span>
 		</div>
 		<div class="divtable">
-			<div style="width:1500px;">
+			<div style="/* width:1500px; */">
 			<table width="100%" border="0" cellspacing="0" cellpadding="0">
 			  <tr>
 				<th width="4%">序号</th>
@@ -68,7 +68,7 @@
 				<td>${c.depart }</td>
 				<td>${c.user_property }</td>
 				<td>${c.xingzhi }</td>
-				<td>${c.submitTime }</td>
+				<td>${c.dengjiTime }</td>
 				<td>${c.product }</td>
 				<td>${c.company }</td>
 				<td>${c.contractMoney }</td>
@@ -86,6 +86,7 @@
                 <td ><a class="detail" id="${c.id }" href="javascript:void(0)">详情</a></td>
                 <c:if test="${c.dealConditon=='0'}"><td><a class="delete" id="${c.id }" href="javascript:void(0)">删除</a></td></c:if>
                 <c:if test="${c.dealConditon=='4'}"><td><a class="delete" id="${c.id }" href="javascript:void(0)">删除</a></td></c:if>
+                <c:if test="${c.dealConditon=='2'}"><td></td></c:if>
 			  </tr>
 			  </c:if> 
 			  
@@ -96,7 +97,7 @@
 				<td bgcolor="#dcfcd3">${c.depart }</td>
 				<td bgcolor="#dcfcd3">${c.user_property }</td>
 				<td bgcolor="#dcfcd3">${c.xingzhi }</td>
-				<td bgcolor="#dcfcd3">${c.submitTime }</td>
+				<td bgcolor="#dcfcd3">${c.dengjiTime }</td>
 				<td bgcolor="#dcfcd3">${c.product }</td>
 				<td bgcolor="#dcfcd3">${c.company }</td>
 				<td bgcolor="#dcfcd3">${c.contractMoney }</td>
@@ -109,6 +110,7 @@
                 <%-- <c:if test="${c.dealConditon=='2'}"><td>审核已通过</td></c:if> --%>
                 <%-- <c:if test="${c.dealConditon=='3'}"><td>合同完结</td></c:if> --%>
                 <td bgcolor="#dcfcd3"><a class="detail" id="${c.id }" href="javascript:void(0)">详情</a></td>
+                <td bgcolor="#dcfcd3"></td>
                 <%-- <c:if test="${c.dealConditon=='0'}"><td bgcolor="#dcfcd3"><a class="delete" id="${c.id }" href="javascript:void(0)">删除</a></td></c:if>
                 <c:if test="${c.dealConditon=='4'}"><td bgcolor="#dcfcd3"><a class="delete" id="${c.id }" href="javascript:void(0)">删除</a></td></c:if> --%>
 			  </tr>

@@ -62,7 +62,6 @@ public class ContractVO implements Serializable{
 	private String endTime;//项目预计结束时间
 	
 	@Column(name = "合同编号")
-	@GeneratedValue(strategy = GenerationType.AUTO)
 	public Integer getId() {
 		return id;
 	}

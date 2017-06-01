@@ -7,7 +7,7 @@
         </div>
         <div class="col-xs-3 col-md-4">
             <div id="bx_sp_cells" class="dropdown pull-right" style="padding-top: 5px;margin-right: 20px;">
-                <button class="btn btn-default" onclick="caiwu.baoxiao.openApplication()">
+                <button class="btn btn-default" onclick="caiwu.baoxiao.openApplication()" app-write="true">
                     <i class="fa fa-pencil"></i>
                 </button>
             </div>
@@ -44,7 +44,7 @@
                         </div>
                         <input type="text" class="form-control" name="value" placeholder="您想查找什么？"/>
                         <span class="input-group-btn">
-                            <button class="btn btn-default do_action" type="button" app-action="caiwu.baoxiao.find" app-init = "caiwu.baoxiao.init">
+                            <button id="self_bx_find" class="btn btn-default do_action" type="button" app-action="caiwu.baoxiao.find" app-init = "caiwu.baoxiao.init">
                                 <i class="glyphicon glyphicon-search"></i>
                             </button>
                         </span>
@@ -346,15 +346,10 @@
                                 <input type="text" class="form-control input-sm jquery-ui-date" id="receiveTime" name="reciveTime" placeholder="收票时间...">
                               <!--  <input type="date" class="form-control input-sm" id="receiveTime" name="reciveTime" placeholder="收票时间...">-->
                             </div>
-                            <label class="col-xs-4 col-sm-2 control-label" for="bxTime">出票时间:</label>
+                            <label class="col-xs-4 col-sm-2 control-label" for="rcRemarks">收票信息:</label>
                             <div class="col-xs-8 col-sm-4">
-                                <input type="text" class="form-control input-sm jquery-ui-date" id="bxTime" name="cpTime" placeholder="出票时间...">
-                                <!--<input type="date" class="form-control input-sm" id="bxTime" placeholder="出票时间...">-->
+                                <input type="text" class="form-control input-sm" id="rcRemarks" name="rcRemarks" placeholder="收票信息..." readonly="">
                             </div>
-                            <!--<label class="col-xs-4 col-sm-2 control-label" for="kdno">快递单号:</label>-->
-                            <!--<div class="col-xs-8 col-sm-4">-->
-                                <!--<input type="date" class="form-control input-sm" id="kdno" name="kdno" placeholder="快递单号...">-->
-                            <!--</div>-->
                         </div>
                         <!--//TODO  待讨论-->
                         <!--<div class="form-group igroup-margin  hide">-->
@@ -368,22 +363,41 @@
                             <!--</div>&ndash;&gt;-->
                         <!--</div>-->
                         <div class="form-group igroup-margin ">
+                            <label class="col-xs-4 col-sm-2 control-label" for="bxTime">出票时间:</label>
+                            <div class="col-xs-8 col-sm-4">
+                                <input type="text" class="form-control input-sm jquery-ui-date" id="bxTime" name="cpTime" placeholder="出票时间...">
+                                <!--<input type="date" class="form-control input-sm" id="bxTime" placeholder="出票时间...">-->
+                            </div>
                             <label class="col-xs-4 col-sm-2 control-label" for="cp_kjk"><a onclick="caiwu.baoxiaoCheck.openKoukuan(event)">扣除借款金额:</a></label>
                             <div class="col-xs-8 col-sm-4">
                                 <input type="number" class="form-control input-sm bx-relavtive" id="cp_kjk" name="koujk"
                                        placeholder="扣除借款金额..." readonly>
                             </div>
+                        </div>
+                        <div class="form-group igroup-margin ">
+                            <label class="col-xs-4 col-sm-2 control-label" for="tuikuan5">退款金额:</label>
+                            <div class="col-xs-8 col-sm-4">
+                                <input type="number" class="form-control input-sm" id="tuikuan5" name="tuikuan"
+                                       placeholder="退款金额...">
+                            </div>
+                            <label class="col-xs-4 col-sm-2 control-label " for="kouchu5">扣除金额:</label>
+                            <div class="col-xs-8 col-sm-4">
+                                <input type="number" class="form-control input-sm" id="kouchu5" name="kouchu"
+                                       placeholder="扣除金额...">
+                            </div>
+                        </div>
+                        <div class="form-group igroup-margin ">
                             <label class="col-xs-4 col-sm-2 control-label" for="tuipiao">退票金额:</label>
                             <div class="col-xs-8 col-sm-4">
                                 <input type="number" class="form-control input-sm" id="tuipiao" name="tuipiao" placeholder="退票金额...">
                             </div>
-                        </div>
-                        <div class="form-group igroup-margin ">
                             <label class="col-xs-4 col-sm-2 control-label" for="huikuan2">汇款金额:</label>
                             <div class="col-xs-8 col-sm-4">
                                 <input type="text" class="form-control input-sm" id="huikuan2" name="huikuan"
                                        placeholder="汇款金额..." readonly>
                             </div>
+                        </div>
+                        <div class="form-group igroup-margin">
                             <label class="col-xs-4 col-sm-2 control-label" for="caiwuRemarks">财务备注:</label>
                             <div class="col-xs-8 col-sm-4">
                                 <textarea name="caiwuRemarks" id="caiwuRemarks" cols="30" rows="3" class="form-control" placeholder="财务备注..."></textarea>
@@ -418,7 +432,7 @@
                             <div class="form-group igroup-margin ">
                                 <label class="col-xs-4 col-sm-2 control-label" for="_money">报销金额:</label>
                                 <div class="col-xs-8 col-sm-4">
-                                    <input type="number"  class="form-control input-sm" step="0.01" id="_money" name="money" placeholder="报销金额...">
+                                    <input type="number"  class="form-control input-sm" step="0.01" id="_money" name="money" placeholder="本次申报总金额...">
                                 </div>
                                 <label class="col-xs-4 col-sm-2  control-label">还借款金额:</label>
                                 <div class="col-xs-8 col-sm-4">
@@ -428,7 +442,7 @@
                             <div class="form-group igroup-margin ">
                                 <label class="col-xs-4 col-sm-2  control-label" for="_bx_bank">银行:</label>
                                 <div class="col-xs-8 col-sm-4">
-                                    <select name="bank" id="_bx_bank" class="form-control input-sm" disabled>
+                                    <select name="bank" id="_bx_bank" class="form-control input-sm">
                                         <option value="jtyh" selected>交通银行</option>
                                         <option value="gs">工商银行</option>
                                         <option value="gd">光大银行</option>
@@ -447,7 +461,7 @@
                                 <div class="col-xs-8 col-sm-4">
                                     <input type="number" step="1" max="100" min="0" id="_number" class="form-control input-sm" name="number" placeholder="报销张数...">
                                 </div>
-                                <label for="_kdn" class="col-xs-4 col-sm-2 control-label"></label>
+                                <label for="_kdn" class="col-xs-4 col-sm-2 control-label">快递单号：</label>
                                 <div class="col-xs-8 col-sm-4">
                                     <input id="_kdn" type="text" class="form-control input-sm" name="kdno" placeholder="快递单号..."/>
                                 </div>
@@ -455,13 +469,36 @@
                             <div class="form-group igroup-margin ">
                                 <label class="col-xs-4 col-sm-2 control-label" for="_explain">说明:</label>
                                 <div class="col-xs-8 col-sm-4">
-                                    <textarea name="explain" id="_explain" cols="30" rows="3" class="form-control"></textarea>
-                                    <!--<input type="text" class="form-control input-sm" name="account" placeholder="说明...">-->
+                                    <textarea name="explain" id="_explain" cols="30" rows="3" class="form-control" placeholder="详细说明报销内容..."></textarea>
+                                </div>
+                            </div>
+                            <div class="form-group igroup-margin ">
+                                <a class="pull-right" style=" margin-right: 20px;" href="javascript:void(0)" onclick="$('#specify_approver').toggleClass('hide');$(this).find('>i').toggleClass('hide')">
+                                    指定批准人（有签字权的）<i class="glyphicon glyphicon-hand-down "></i><i class="glyphicon glyphicon-hand-up hide"></i>
+                                </a>
+                                <span class="clearfix"></span>
+                            </div>
+                        </fieldset>
+                        <fieldset id="specify_approver" class="hide">
+                            <legend></legend>
+                            <div class="form-group igroup-margin">
+                                <label class="col-xs-4 col-sm-2 control-label" for="spapprover">审批人:</label>
+                                <div class="col-xs-8 col-sm-4">
+                                    <input id="spapprover" type="text" name="spapprover" autocomplete="off" class="form-control input-sm" placeholder="查找审批人...">
+                                    <!--<div class="input-group">-->
+                                        <!--<input id="spapprover" type="text" name="spapprover" autocomplete="off" class="form-control input-sm" placeholder="审批人...">-->
+                                        <!--<span class="input-group-btn">-->
+                                            <!--<button class="btn btn-sm" type="button">查</button>-->
+                                        <!--</span>-->
+                                    <!--</div>-->
+                                </div>
+                                <label class="col-xs-4 col-sm-2 control-label" for="apEmail">已选择审批人邮箱:</label>
+                                <div class="col-xs-8 col-sm-4">
+                                    <input id="luid" type="hidden" name="specifyId"/>
+                                    <input id="apEmail" type="text" class="form-control input-sm" name="apEmail" placeholder="审批人邮箱..." readonly="true">
                                 </div>
                             </div>
                         </fieldset>
-                        <div class="row">
-                        </div>
                     </form>
                 </div>
                 <div class="modal-footer">
@@ -472,7 +509,7 @@
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
     </div>
-
+    <!--data-source='["史昊", "郭玉", "李晓娟"]'-->
     <script type="text/javascript">
         $(document).ready(function() {
             $('#bx_find_btn a').bind('click',function(event){
@@ -482,6 +519,23 @@
                 var closest = $($(this).closest("div")).find('[target="text"]');
                 closest.html(text);
                 closest.append(hidden[0]);
+            })
+            $('#spapprover').typeahead({
+                source: function(query, process){
+                    $.post('public/caiwu/findLeader.action',{name: query},function(result){
+                        $.each(result, function(i, obj){
+                            obj.name = obj.username;
+                        })
+                        return process(result);
+                    });
+                },
+                autoSelect: true,
+                delay: 300,
+                afterSelect: function(obj){
+                    obj = obj || {};
+                    $('#luid').val(obj.id);
+                    $('#apEmail').val(obj.email);
+                }
             })
         });
     </script>

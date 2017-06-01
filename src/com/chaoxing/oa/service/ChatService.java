@@ -30,7 +30,7 @@ public interface ChatService {
 	 * @param isChecker 当前查询用户为审核人的时候为true，否则为fals
 	 * @return
 	 */
-	public List<Messages> findShChatRecordBylisId(String lisId, int sid, boolean isChecker);
+	public List<Messages> findShChatRecordBylisId(Long lisId, int sid, boolean isChecker);
 
 	public int updateToRead(int id);
 

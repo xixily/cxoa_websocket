@@ -184,6 +184,16 @@ var caiwu = {
                                 },
                             }
                         },
+                        kunhao: {
+                            validators: {
+                                notEmpty: {
+                                    message: '请填写捆号'
+                                },
+                                stringLength:{
+                                    min:8
+                                }
+                            }
+                        },
                     }
                 })
             }
@@ -197,17 +207,19 @@ var caiwu = {
             bootstrapValidator.validate();
             if(bootstrapValidator.isValid()){
                var data =  $('#add_form').serializeJson();
-                data.bank = $('#bx_bank2').val();
+//                data.bank = $('#bx_bank2').val();
                 data.account.replace(/\ +/g,"");
-                $.post("public/caiwu/addBaoxiao.action",data,function(result){
+                if(Number(data.money) > 0){
+                	$.post("public/caiwu/addBaoxiao.action",data,function(result){
 //                    result = eval("("+ result +")");
-                    if(result.success){
-                        $('#bx_apply_dialog').modal('toggle')
-                        caiwu.listRefresh();
-                    }else{
-                    	$.messager.alert("添加提示：",result.msg);
-                    }
-                })
+                		if(result.success){
+                			$('#bx_apply_dialog').modal('toggle')
+                			caiwu.listRefresh();
+                		}else{
+                			$.messager.alert("添加提示：",result.msg);
+                		}
+                	})
+                }
             }
         },
         updateInfo: function(data){
@@ -221,7 +233,7 @@ var caiwu = {
                 if(!result.success){
                 	$.messager.alert("提示：", result.msg);
                 }else{
-
+                    $('#self_bx_find').trigger('click');
                 }
             })
         },
@@ -258,10 +270,17 @@ var caiwu = {
                 if(result.success){
                     var objs = result.obj;
                     if(objs && objs[0]){
-                        $('#add_form').form('setForm',{account:objs[0].account})
+                        $('#add_form').form('setForm',{account:objs[0].account,bank:objs[0].bank})
                     }
                 }
-                $('#bx_apply_dialog').modal('toggle')
+                $.post('public/caiwu/getCellCoreInfo.action', {},function(res){
+                    if(res && res.id){
+                        $('#spapprover').val(res.username);
+                        $('#luid').val(res.id);
+                        $('#apEmail').val(res.email);
+                    }
+                    $('#bx_apply_dialog').modal('toggle')
+                })
             })
         },
         deleteBaoxiaoOnlist: function(e){
@@ -298,7 +317,7 @@ var caiwu = {
             infoSelector: '#bx_info',
             listSelector: '#bx_list',
             btnSelector: '#bx_msg_btn',
-            media_li_selector: '#bx_media_li',
+            media_li_selector: '#bx_leader_media_li',
             app_back: 'cw_baoxiaoManager',
             appendSelector:'#cw_bx_append'
         },
@@ -314,7 +333,7 @@ var caiwu = {
             appendSelector:'#cw_ypz_append'
         },
         init: function () {
-            $(document).on("click",'#bx_media_li .media-body>a',function(event){
+            $(document).on("click",'#bx_leader_media_li .media-body>a',function(event){
                 event.preventDefault();//关闭默认事件
                 event.stopImmediatePropagation();
                 caiwu.baoxiaoAppro.showInfo($(this));
@@ -442,17 +461,18 @@ var caiwu = {
 //               caiwu.baoxiaoAppro.updateInfo(data);
 //            }
 //        },
-        agree: function(event){
+        agree: function(event, id){
             var data = {};
             data.agree = true;
+            data.id = id || undefined;
             if(!event){
                 $('#bx_msg_info').attr('disabled','true');
-                data.id = $('#bx_info').find('#_id').val();
+                data.id = data.id || $('#bx_info').find('#appro_id').val();
             }else{
                 event.preventDefault();//关闭默认事件
                 event.stopImmediatePropagation();
                 var src = $(event.currentTarget);
-                data.id = src.parent().parent().find('[app-data="id"]').html();
+                data.id =  data.id ||src.parent().parent().find('[app-data="id"]').html();
             }
 //            $('#agree_form').form('clear');
 //            $('#agree_form').form('setForm',data);
@@ -461,12 +481,13 @@ var caiwu = {
 //            $('#bx_appro_dialog').modal('toggle');
             caiwu.baoxiaoAppro.updateInfo(data);
         },
-        disAgree: function(event){
+        disAgree: function(event, id){
             var data = {};
             data.agree = false;
+            data.id = id || undefined;
             if(!event){
                 $('#bx_msg_info').attr('disabled','true');
-                data.id = $('#bx_info').find('#_id').val();
+                data.id = data.id || $('#bx_info').find('#appro_id').val();
             }else{
                 event.preventDefault();//关闭默认事件
                 event.stopImmediatePropagation();
@@ -507,7 +528,7 @@ var caiwu = {
             infoSelector: '#bx_info',
             listSelector: '#bx_list',
             btnSelector: '#bx_msg_btn',
-            media_li_selector: '#bx_media_li',
+            media_li_selector: '#dsh_media_li',
             app_back: 'cw_baoxiaoManager',
             appendSelector:'#cw_bx_append',
             chat: true,
@@ -564,8 +585,34 @@ var caiwu = {
             app_back: 'yhk_baoxiaoManager',
             appendSelector:'#cw_yhk_append'
         },
+        cpvalidator: function(dom){
+            if(dom){
+                dom.bootstrapValidator({
+                    container: 'tooltip',
+                    message: '您输入的值无效。',
+                    feedbackIcons: {
+                        valid: 'glyphicon glyphicon-ok',
+                        invalid: 'glyphicon glyphicon-remove',
+                        validating: 'glyphicon glyphicon-refresh'
+                    },
+                    fields: {
+                        kunhao: {
+                            validators: {
+                                notEmpty: {
+                                    message: '请填写捆号'
+                                },
+                                stringLength:{
+                                    min: 10,
+                                    message: "请输入10位以上的捆号"
+                                }
+                            }
+                        }
+                    }
+                })
+            }
+        },
         init: function () {
-            $(document).on("click",'#bx_media_li .media-body>a',function(event){
+            $(document).on("click",'#dsh_media_li .media-body>a',function(event){
                 event.preventDefault();//关闭默认事件
                 event.stopImmediatePropagation();
                 caiwu.showInfo($(this), $.extend({},caiwu.baoxiaoCheck.pageData));
@@ -604,6 +651,7 @@ var caiwu = {
             })
         },
         find:function(data){
+            $('#dsp_find_btn_').trigger('click');
             caiwu.find(data, $.extend({},caiwu.baoxiaoCheck.pageData));
         },
         find_dsp:function(data){
@@ -633,6 +681,14 @@ var caiwu = {
         append_yhk:function(){
             caiwu.append(caiwu.baoxiaoCheck.pageData_yhk);
         },
+        sh_click_agree: function(event, agree){
+            event.stopImmediatePropagation;
+            event.stopPropagation()
+            var src = $(event.currentTarget);
+            var data = {};
+            data.id = src.closest('div.row').find('[app-data="id"]').text();
+            caiwu.baoxiaoCheck.sh_agree(data, undefined, agree);
+        },
         sh_disagree: function(data, src){
           caiwu.baoxiaoCheck.sh_agree(data, src, false)
         },
@@ -641,7 +697,7 @@ var caiwu = {
             if(ag !== undefined){
                 agree = ag;
             }
-            $.messager.confirm('提示：','您确定要通过该条审核记录吗？',function(){
+            $.messager.confirm('提示：','您确定要' + (agree ? '通过' : '退回') +'该条审核记录吗？',function(){
                 $.post("public/caiwu/checkBaoxiao.action",{id:Number(data.id),agree:agree},function(result){
                     if(result.success){
                         $('#cw_check_btn').toggleClass("hide");
@@ -657,9 +713,9 @@ var caiwu = {
 //            event.stopImmediatePropagation();
             var msg = {
                 img:{
-                    alt:'邓雪锋'
+                    alt:'图片'
                 },
-                username:'邓雪锋',
+                username:'姓名',
                 time: caiwu.getNowFormatDate()
             };
             msg.comments = data.comments;
@@ -747,7 +803,7 @@ var caiwu = {
             data.id = id;
             data.agree = checked;
             $('#bx_dsp_form').form('clear');
-            $('#bx_dsp_dialog').find('input[name="reciveTime"]').val(new Date().format("yyyy-MM-dd"))
+            $('#bx_dsp_dialog').find('input[name="reciveTime"]').val(new Date().format("yyyy-MM-dd HH:mm:ss "))
             $('#bx_dsp_form').form('setForm',data);
             if(checked){
                 $('#bx_dsp_true').removeClass('hide');
@@ -785,16 +841,34 @@ var caiwu = {
             })
         },
         cpConfirm: function(data, src){
-            $.messager.confirm('提示：','您确定要通过该条审核记录吗？',function(){
-                $.post("public/caiwu/baoxiaoChupiao.action", data, function(result){
-                    if(result.success){
-                        $('#cw_cp_btn').toggleClass("hide");
-                        $('.do_action[app-action="caiwu.baoxiaoCheck.find_dcp"]').trigger('click');
-                    }else{
-                    	$.messager.alert("提示：",result.msg);
-                    }
+            var bootstrapValidator = $("#dcp_sq").data('bootstrapValidator');
+            if(bootstrapValidator.isValid()){
+                $.messager.confirm('提示：','您确定要通过该条审核记录吗？',function(){
+                    $.post("public/caiwu/baoxiaoChupiao.action", data, function(result){
+                        if(result.success){
+                            $('#cw_cp_btn').toggleClass("hide");
+                            $('.do_action[app-action="caiwu.baoxiaoCheck.find_dcp"]').trigger('click');
+                        }else{
+                            $.messager.alert("提示：",result.msg);
+                        }
+                    })
                 })
-            })
+            }
+        },
+        hkConfirm: function(data, src){
+            var bootstrapValidator = $("#dhk_sq").data('bootstrapValidator');
+            if(bootstrapValidator.isValid()){
+                $.messager.confirm('提示：','您确定要修改捆号吗？',function(){
+                    $.post("public/caiwu/updateKunhao.action", data, function(result){
+                        if(result.success){
+                            $('#cw_hk_btn').toggleClass("hide");
+                            $('.do_action[app-action="caiwu.baoxiaoCheck.find_dcp"]').trigger('click');
+                        }else{
+                            $.messager.alert("提示：",result.msg);
+                        }
+                    })
+                })
+            }
         },
         submitCheck: function(){
             var bootstrapValidator = $("#bx_shenhe_form").data('bootstrapValidator');
@@ -858,15 +932,20 @@ var caiwu = {
         	data[data.type] = data.value;
             $.messager.confirm("下载提示","执行下载操作同时会直接汇款操作，之后您可以在已汇款查询这些信息，你确定要执行吗？",function(result){
                 $.post('public/caiwu/baoxiaoHuikuan.action', data,function(result){
-                    if(result.success){
-                        app.downloadForm.download('public/file/daihuikuanExport.action', data);
-                        $('#dhk_find_btn_').trigger('click');
-                    }else{
-                    	$.messager.alert('操作提示：',result.msg);
-                    }
+//                    if(result.success){
+//                        app.downloadForm.download('public/file/daihuikuanExport.action', data);
+//                        $('#dhk_find_btn_').trigger('click');
+//                    }else{
+//                    }
+                    $.messager.alert('操作提示：',result.msg);
 
                 })
             })
+        },
+        exportExcel: function(){
+            var data = $('#dhk_find').serializeJson()
+            data[data.type] = data.value;
+            app.downloadForm.download('public/file/daihuikuanExport.action', data);
         },
         chupiao_add: function(e,obj){
             var dom = e ? e.closest('tr'):$('#cp_add_tr');
@@ -1056,7 +1135,7 @@ var caiwu = {
         3: "2_ypz_dyj.png",
         4: "3_yyj_dsp.png",
         5: "4_ysp_dsh.png",
-        6: "5_ysh_wtg.png",
+        6: "9_sp_wtg.png",
         7: "5_ysh_dcp.png",
         8: "5_ysh_wtg.png",
         9: "6_ycp_dhk.png",
@@ -1093,6 +1172,17 @@ var caiwu = {
             var formData = caiwu.getDataById(id, data);
             var ownerId = formData.uid;
             $(pageData.infoSelector + ' form').form('clear');
+            $('.form_datetime').datetimepicker({//时间控件
+                language:  'zh-CN',
+                format: "yyyy-mm-dd hh:ii",
+                weekStart: 1,
+                todayBtn:  1,
+                autoclose: 1,
+                todayHighlight: 1,
+                startView: 2,
+                forceParse: 0,
+                showMeridian: 1
+            });
             if(formData){
                 if(data && data.rows) {
                     if (data.index) {
@@ -1349,6 +1439,16 @@ var caiwu = {
                             },
                         }
                     },
+                    kunhao: {
+                        validators: {
+                            notEmpty: {
+                                message: '请填写捆号'
+                            },
+                            stringLength:{
+                                min:8
+                            }
+                        }
+                    }
                 }
             })
         }

@@ -15,7 +15,6 @@ import org.hibernate.HibernateException;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import com.chaoxing.oa.dao.BaseDaoI;
 import com.chaoxing.oa.entity.page.caiwu.PUserBank;
@@ -47,8 +46,6 @@ public class PubCaiwuServiceImpl implements PubCaiwuService {
 	private BaseDaoI<Object> objectDao;
 	@Autowired
 	private BaseDaoI<RenshiUserName> userNameDao;
-	@Autowired
-	private BaseDaoI<UserName> userDao;
 	@Autowired
 	private BaseDaoI<BaoxiaoStatus> bxStatusDao;
 	@Autowired
@@ -179,16 +176,21 @@ public class PubCaiwuServiceImpl implements PubCaiwuService {
 		pbx.setCellCoreEmail(bx.getCellCoreEmail());
 		pbx.setGuidanceEmail(bx.getGuidanceEmail());
 		pbx.setCpTime(DateUtil.format(bx.getCpTime(),"yyyy-MM-dd"));
+		pbx.setTuikuan(bx.getTuikuan());
+		pbx.setKouchu(bx.getKouchu());
+		pbx.setSpecifyId(bx.getSpecifyId());
 	}
 	
 	@Override
-	public Map<String, Object> findBaoxiaoByLeader(PBaoxiao pbaoxiao, Page page, String email) {
+	public Map<String, Object> findBaoxiaoByLeader(PBaoxiao pbaoxiao, Page page, Integer uid) {
+//	public Map<String, Object> findBaoxiaoByLeader(PBaoxiao pbaoxiao, Page page, String email) {
 		List<BaoxiaoView> baoxiaos = new ArrayList<BaoxiaoView>();
 		List<PBaoxiao> pbs = new ArrayList<PBaoxiao>();
 		Map<String, Object> results = new HashMap<String, Object>();
 		Map<String, Object> params = new HashMap<String, Object>();
-		StringBuffer hql = new StringBuffer("from BaoxiaoView t WHERE (cellCoreEmail=:email OR guidanceEmail=:email) AND ");
-		params.put("email", email);
+		StringBuffer hql = new StringBuffer("from BaoxiaoView t WHERE specifyId=:uid AND ");
+//		StringBuffer hql = new StringBuffer("from BaoxiaoView t WHERE (cellCoreEmail=:email OR guidanceEmail=:email) AND ");
+		params.put("uid", uid);
 		try {
 			hql.append(SqlHelper.prepareAndSql(pbaoxiao, params, true, "createTime", "aproTime", "jtime", "baoxTime", "reciveTime","cpTime"));
 		} catch (Exception e) {
@@ -248,7 +250,7 @@ public class PubCaiwuServiceImpl implements PubCaiwuService {
 		baoxiao.setNumber(pbaoxiao.getNumber());
 		baoxiao.setExplain(pbaoxiao.getExplain());
 		baoxiao.setBank(pbaoxiao.getBank());
-		baoxiao.setAccount(pbaoxiao.getAccount().replace(" ", ""));
+		baoxiao.setAccount(null!=pbaoxiao.getAccount() ? pbaoxiao.getAccount().replace(" ", "") : null);
 		baoxiao.setApproid(pbaoxiao.getApproid());
 		baoxiao.setApprover(pbaoxiao.getApprover());
 		baoxiao.setAproEmail(pbaoxiao.getAproEmail());;
@@ -270,6 +272,9 @@ public class PubCaiwuServiceImpl implements PubCaiwuService {
 		baoxiao.setKunhao(pbaoxiao.getKunhao());
 		baoxiao.setCreateTime((null!=pbaoxiao.getCreateTime() ? DateUtil.format(pbaoxiao.getCreateTime()):null));
 		baoxiao.setCpTime((null!=pbaoxiao.getCpTime() ? DateUtil.format(pbaoxiao.getCpTime()):null));
+		baoxiao.setTuikuan(pbaoxiao.getTuikuan());
+		baoxiao.setKouchu(pbaoxiao.getKouchu());
+		baoxiao.setSpecifyId(pbaoxiao.getSpecifyId());
 	}
 
 	@Override
@@ -285,14 +290,38 @@ public class PubCaiwuServiceImpl implements PubCaiwuService {
 		}
 	}
 	
+	
+	
+	@Override
+	public int updateBaoxiao(PBaoxiao pBaoxiao, PBaoxiao conditions) {
+		StringBuffer hql = new StringBuffer("update Baoxiao t set");
+		Map<String, Object> params = new HashMap<String, Object>();
+		Baoxiao baoxiao = new Baoxiao();
+		copyP2E(pBaoxiao, baoxiao);
+		hql.append(SqlHelper.prepareSetSql(baoxiao, params, "t", "uid"));
+		if(null != conditions){
+			try {
+				hql.append(" and ").append(SqlHelper.prepareAndSql(conditions, params, true));
+			} catch (NoSuchMethodException | SecurityException | IllegalAccessException | IllegalArgumentException
+					| InvocationTargetException e) {
+				e.printStackTrace();
+			}
+		}
+		return baoxiaoDao.executeHql(hql.toString(), params);
+	}
+
 	@Override
 	public int updateSeltBaoxiao(PBaoxiao pbaoxiao) {
 		StringBuffer hql = new StringBuffer("update Baoxiao t set");
 		Baoxiao baoxiao = new Baoxiao();
 		copyP2E(pbaoxiao, baoxiao);
 		Map<String, Object> params = new HashMap<String, Object>();
-		hql.append(SqlHelper.prepareSetSql(baoxiao, params, "t", "uid")).append(" and t.uid=:uid");
+		hql.append(SqlHelper.prepareSetSql(baoxiao, params, "t", "uid")).append(" and t.uid=:uid")
+		.append(" and (status=:status1 or status=:status2 or status=:status3 )");
 		params.put("uid", pbaoxiao.getUid());
+		params.put("status1", 2);
+		params.put("status2", 6);
+		params.put("status3", 8);
 		System.out.println(hql);
 		return baoxiaoDao.executeHql(hql.toString(), params);
 	}
@@ -491,19 +520,25 @@ public class PubCaiwuServiceImpl implements PubCaiwuService {
 	 */
 	@Override
 	public int updateApprove(PBaoxiao pbaoxiaos, boolean agree) {
-		String sql = "UPDATE 报销表 t,人事username r  SET t.status = :nstatus,t.批准人id = :approId,t.批准人 = :approver, "
+//		String sql = "UPDATE 报销表 t,人事username r  SET t.status = :nstatus,t.批准人id = :approId,t.批准人 = :approver, "
+//				+ "t.批准人邮箱 = :email, t.领导意见 = :approRemark,t.批准时间  = CURRENT_TIMESTAMP  WHERE t.id=:id AND "
+//				+ "t.报销人id=r.id AND  and status=:status";
+		/*		String sql = "UPDATE 报销表 t,人事username r  SET t.status = :nstatus,t.批准人id = :approId,t.批准人 = :approver, "
 				+ "t.批准人邮箱 = :email, t.领导意见 = :approRemark,t.批准时间  = CURRENT_TIMESTAMP  WHERE t.id=:id AND "
-				+ "t.报销人id=r.id AND (r.细胞核邮箱=:email or r.指导邮箱=:email) and status=:status";
-		Map<String, Object> params = new HashMap<String, Object>();
+				+ "t.报销人id=r.id AND (r.细胞核邮箱=:email or r.指导邮箱=:email) and status=:status";*/	
+	String hql = "update Baoxiao t set t.status = :nstatus,approid=:specifyId,t.approver=:approver,t.aproEmail=:aproEmail,t.approRemark=:approRemark,"
+				+ "t.aproTime=CURRENT_TIMESTAMP where t.id=:id and t.specifyId=:specifyId and t.status=:status ";
+	Map<String, Object> params = new HashMap<String, Object>();
 		params.put("nstatus", agree ? SysConfig.CW_BX_APPROVE_AGREE : SysConfig.CW_BX_APPROVE_DISAGREE );
 		params.put("status", getPreStep(SysConfig.CW_BX_APPROVE_AGREE));
-		params.put("approId", pbaoxiaos.getApproid());
-		params.put("id", pbaoxiaos.getId());
-		params.put("email", pbaoxiaos.getAproEmail());
+		params.put("specifyId", pbaoxiaos.getApproid());
 		params.put("approver", pbaoxiaos.getApprover());
-//		params.put("email", email);
+		params.put("aproEmail", pbaoxiaos.getAproEmail());
 		params.put("approRemark", pbaoxiaos.getApproRemark());
-		return baoxiaoDao.prepareCall(sql, params);
+		params.put("id", pbaoxiaos.getId());
+//		params.put("email", email);
+//		return baoxiaoDao.prepareCall(sql, params);
+		return baoxiaoDao.executeHql(hql, params);
 	}
 	
 
@@ -531,7 +566,8 @@ public class PubCaiwuServiceImpl implements PubCaiwuService {
 
 	@Override
 	public int updateBaoxiaoChupiao(PBaoxiao pbaoxiaos) {
-		String hql = "update Baoxiao set cpid=:cpid,tuipiao=:tuipiao,caiwuRemarks=:caiwuRemarks,huikuan=:huikuan,baoxMoney=:baoxMoney,status=:nstatus,kunhao=:kunhao,cpTime=:cpTime where id=:id and status=:status";
+		String hql = "update Baoxiao set cpid=:cpid,tuipiao=:tuipiao,caiwuRemarks=:caiwuRemarks,huikuan=:huikuan,baoxMoney=:baoxMoney,"
+				+ "status=:nstatus,kunhao=:kunhao,cpTime=:cpTime,tuikuan=:tuikuan,kouchu=:kouchu where id=:id and status=:status";
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("cpid", pbaoxiaos.getCpid());
 		params.put("tuipiao", pbaoxiaos.getTuipiao());
@@ -544,6 +580,8 @@ public class PubCaiwuServiceImpl implements PubCaiwuService {
 		params.put("id", pbaoxiaos.getId());
 		params.put("kunhao", pbaoxiaos.getKunhao());
 		params.put("cpTime", DateUtil.format(pbaoxiaos.getCpTime()));
+		params.put("tuikuan", pbaoxiaos.getTuikuan());
+		params.put("kouchu", pbaoxiaos.getKouchu());
 		return baoxiaoDao.executeHql(hql,params);
 	}
 	
@@ -766,6 +804,7 @@ public class PubCaiwuServiceImpl implements PubCaiwuService {
 			ub = ubs.get(i);
 			pub = new PUserBank();
 			BeanUtils.copyProperties(ub, pub);
+			pub.setUid(uid);
 			pubs.add(pub);
 		}
 		return pubs;

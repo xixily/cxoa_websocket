@@ -33,7 +33,7 @@ public class PubfileOperateController {
 		pbaoxiao.setCpNumber(max);
 		Map<String, Object> results = publicCaiwuService.findBaoxiao(pbaoxiao, new Page(1, 30000));
 		List<PBaoxiao> pbs = (List<PBaoxiao>) results.get("rows");
-		if(pbs!=null && pbs.size()>0){
+		if(pbs!=null){
 			String storeName = pubfileOpertor.getDaihuiKuanExcel(pbs);  
     		String realName = "交行自汇模板.xlsx";  
     		String contentType = "application/octet-stream";  

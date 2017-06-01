@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.log4j.Logger;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.chaoxing.oa.entity.page.common.Json;
+import com.chaoxing.oa.entity.page.common.POStruct;
 import com.chaoxing.oa.entity.page.common.QueryForm;
 import com.chaoxing.oa.entity.page.employee.PUserName;
 import com.chaoxing.oa.entity.page.pub.AppUser;
@@ -35,6 +37,7 @@ public class PubUserManagerController {
 	private UserServiceI userService;
 	@Autowired
 	private RoleMenuService menuService;
+	Logger logger = Logger.getLogger(this.getClass());
 	
 	@RequestMapping(value = "/logout", method = RequestMethod.POST)
 	public String logout(HttpSession session) {
@@ -78,7 +81,7 @@ public class PubUserManagerController {
 						sessionInfo.setIp(IpUtil.getIpAddr(request));
 						sessionInfo.setLoginMethod(false);
 						session.setAttribute(ResourceUtil.getSessionInfoName(), sessionInfo);
-						System.out.println(sessionInfo);
+						logger.info(sessionInfo);
 						modelView.setViewName("redirect:/app_index.html");
 					}else{
 						modelView = new ModelAndView("error/app_nosession");
@@ -123,5 +126,22 @@ public class PubUserManagerController {
 		result.setObj(pmenus);
 		result.setSuccess(true);
 		return result;
+	}
+
+	public void findCells(HttpSession session){
+		SessionInfo sessionInfo = (SessionInfo) session.getAttribute(ResourceUtil.getSessionInfoName()); 
+		String level = sessionInfo.getLevel();
+		String email = sessionInfo.getEmail();
+		
+		userService.findCellsByemail(email, level);
+	}
+	
+	@RequestMapping(value = "/findostruct")
+	@ResponseBody
+	public List<POStruct>  findostruct(HttpSession session, String email){
+		SessionInfo sessionInfo = (SessionInfo) session.getAttribute(ResourceUtil.getSessionInfoName());
+		email = null!=email ? email : sessionInfo.getEmail();
+//		String email = sessionInfo.getEmail();
+		return userService.findostructByEmail(email);
 	}
 }

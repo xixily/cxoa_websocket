@@ -1,12 +1,16 @@
 //添加产品
 $("#sureAboutProduct").click(function(){
-	
-	var name = $("#chooseProduct .select-button").val();
+	var name;
+	name = $("#chooseProduct .select-button").val();
 	var money = $("#productMoney").val();
 	var amount =$("#productAmount").val();
 	var begain =$("#effectiveDate").val();
 	var end =$("#endDate").val();
 	var ctid =$("#htNum").text();
+	var disanfangChanpin = $("#disanfangChanpin").val();
+	if(name=='第三方产品'){
+		name = '第三方产品('+disanfangChanpin+')';
+	}
 	var data = {"name":name,"amount":amount,"begain":begain,
 			"end":end,"ctid":ctid,"money":money}
 	  $.post('public/ht/addItemPrice.action',data,function(res){
@@ -39,20 +43,13 @@ $("#sureAboutFaHuo").click(function(){
 	var mailno = $("#expressNum").val();
 	/*var hetongCode = $("htNumRelationFaHuo").text();*/
 	var hetongCode = $("#htNum").text();
-	
 	var d_contact = $("#receiver").val();
 	var d_tel = $("#tel").val();
-	/*var d_company = $("#receiveCom").val();*/
-	/*var d_post_code = $("#email").val();*/
 	var d_address = $("#receiveAddress").val();
-	/*var sender = $("#post").val();*/
 	var jDate = $("#postDate").val();
-	/*var postMethod = $("#expressCom").val();*/
 	var postMethod = $("#expressCom .select-button").val();
-	/*var remark = $("#remarkAboutExpress").val();*/
-	var content = $("#expressContent").val();
-	var postAddress = $("#postAddress").val();
-	
+	var content = $("#expressContent").val();//快递内容
+	var postAddress = $("#postAddress").val();//发件地
 	var applicationDate = $("#applicationTimeAboutFahuo").text();
 	if(hetongCode==""){
 		$.messager.alert('提示：','请填写完合同和产品信息再添加快递');
@@ -70,14 +67,30 @@ $("#sureAboutFaHuo").click(function(){
 	$.messager.alert('提示：','请填写收件地址');
 	return;	
 	}
+	if(postAddress==""){
+		$.messager.alert('提示：','请填写发件地');
+		return;	
+	}
+	if(jDate==""){
+		$.messager.alert('提示：','请填写邮寄日期');
+		return;	
+	}
+	if(content==""){
+		$.messager.alert('提示：','请填写快递内容');
+		return;	
+	}
 	
 	var data = {"mailno":mailno,"hetongCode":hetongCode,"d_contact":d_contact,"d_tel":d_tel,
 			"d_address":d_address,
 			"jDate":jDate,"postMethod":postMethod,"content":content,"applicationDate":applicationDate,"postAddress":postAddress}
 	  $.post('public/ht/addFaHuo.action',data,function(res){
 			if(res.success==true){
+				var a = res.obj.mailno;
+				if(a==null){
+					 a ="";
+				}
 			var tr = "<tr><td>"+res.obj.orderid+"</td><td>"+res.obj.d_contact+"</td><td>"+res.obj.d_address+"</td><td>"+res.obj.d_tel+"</td><td>"+res.obj.jDate+"</td>" +
-					"<td>"+res.obj.content+"</td><td>"+res.obj.postMethod+"</td><td>"+res.obj.mailno+"</td><td><a id="+res.obj.orderid+" class='dele' href='javascript:;' onclick='updateFahuo("+res.obj.orderid+",this)'>修改</a></td></tr>";	
+					"<td>"+res.obj.content+"</td><td>"+res.obj.postMethod+"</td><td>"+a+"</td><td><a id="+res.obj.orderid+" class='dele' href='javascript:;' onclick='updateFahuo("+res.obj.orderid+",this)'>修改</a></td></tr>";	
 			$("#tableAboutFahuo").append(tr);	
 			$(".pop_courier").hide();	
 			$(".maskLayer").hide();
@@ -87,29 +100,48 @@ $("#sureAboutFaHuo").click(function(){
 			})
 })
 
-
-
-
 //添加发票
 $("#sureAboutFapiao").click(function(){
 	var hetongNumber =$("#htNum").text();//合同编号
 	var money =$("#kaipiaoAmount").val();
-	var flag = true;
+	var company = $("#kaipiaoCompany").val();
+	var kaipiaodDanwei = $("#kaipiaodDanwei").val();
+	var pinming = $("#pinming").text();
+	var yujihuikuanDate = $("#yujihuikuanDate").val();
 	var b = validateFapiaoAmount();
 	if(b==false){
-		flag = false;
+		return;
 	}
+	
 	if(hetongNumber==""){
 		flag = false;
 		$.messager.alert('提示：','请填写完合同和产品信息再添加发票');
 		return;
 	}
+	
 	if(money==""){
 		flag = false;
 		$.messager.alert('提示：','请填写发票金额');
+		return;
 	}
-	
-	if(flag == false){
+	if(company==""){
+		flag = false;
+		$.messager.alert('提示：','请填写开票公司');
+		return;
+	}
+	if(kaipiaodDanwei==""){
+		flag = false;
+		$.messager.alert('提示：','请填写开票单位');
+		return;
+	}
+	if(pinming=="点击选择栏目"){
+		flag = false;
+		$.messager.alert('提示：','请选择发票品名');
+		return;
+	}
+	if(yujihuikuanDate==""){
+		flag = false;
+		$.messager.alert('提示：','请选择开票预计回款时间');
 		return;
 	}
 	
@@ -120,12 +152,14 @@ $("#sureAboutFapiao").click(function(){
 	var departMement =$("#kaipiaodDanwei").val();
 	/*$("#fapiaoType").val();*/
 	var type = $("#fapiaoType .select-button").val();
-	var name =$("#pinming").val();
+	/*var name =$("#pinming").val();*/
+	var name = $("#pinming").text()
 	var date =$("#kaipiaoDate").val();
 	var remark = $("#remarkAboutFapiao").val();
+	var yujihuikuanDate = $("#yujihuikuanDate").val();
 	
 	
-	var data ={"hetongNumber":hetongNumber,"applicationDate":applicationDate,"money":money,"capitalMoney":capitalMoney,"company":company,"departMement":departMement,"type":type,"name":name,"date":date,"remark":remark};
+	var data ={"hetongNumber":hetongNumber,"applicationDate":applicationDate,"money":money,"capitalMoney":capitalMoney,"company":company,"departMement":departMement,"type":type,"name":name,"date":date,"remark":remark,"yujihuikuanDate":yujihuikuanDate};
 	  $.post('public/ht/addFaPiao.action',data,function(res){
 			if(res.success==true){
 				var date = res.obj.date;
@@ -149,7 +183,7 @@ $("#sureAboutFapiao").click(function(){
 		})
 })
 
-//更新产品
+//更新产品(回显)
 var tr;
 function updateProduct(id,obj){
     tr = $(obj).parent().parent();
@@ -160,17 +194,30 @@ function updateProduct(id,obj){
 	$("#deleteProduct").attr("style","display:inline");
 	var data ={"itemPriceId":id}
 	
+	
 	$.post('public/ht/toUpdateItemPrice.action',data,function(res){
-		
+		//第三方产品(999)
 		 if(res.success==true){
 			var ItemPrice = res.obj;
-			
+			var name = ItemPrice.name;
+			var subName = name.substring(6,name.length-1);
+			var start = name.indexOf("第三方产品");
+			//是第三方产品
+			if(start==0){
+				$("#disanfangLi").attr("style","display:block;");
+				$("#disanfangChanpin").val(subName);
+				
+			}else{
+			//非第三方产品
+				$("#disanfangLi").attr("style","display:none;");
+			}
+			$("#chooseProduct .select-button").attr("value",ItemPrice.name);
 	        $("#productMoney").val(ItemPrice.money);
 			$("#productAmount").val(ItemPrice.amount);
 			$("#effectiveDate").val(ItemPrice.begain);
 			$("#endDate").val(ItemPrice.end);
 			$("#productID").attr("value",ItemPrice.id);
-			$("#chooseProduct .select-button").attr("value",ItemPrice.name)
+			
 		 }
 	}); 
 	
@@ -193,12 +240,18 @@ return false;
 //修改产品
 $("#updateProduct").click(function(){
 	var productID = $("#productID").val();
-	
-	var name = $("#chooseProduct .select-button").val();
+	var name;
+	name = $("#chooseProduct .select-button").val();
 	var money = $("#productMoney").val();
 	var amount =$("#productAmount").val();
 	var begain =$("#effectiveDate").val();
 	var end =$("#endDate").val();
+	
+	var disanfangChanpin = $("#disanfangChanpin").val();
+	if(disanfangChanpin!=''){
+		name = '第三方产品('+disanfangChanpin+')';
+	}
+	
 	
 	var data = {"name":name,"amount":amount,"begain":begain,
 			"end":end,"money":money,"productID":productID}
@@ -252,7 +305,8 @@ function updateFapiao(id,obj){
 	$("#updateFapiao").attr("style","display:inline");
 	$("#deleteFapiao").attr("style","display:inline");
 	var data ={"fapiaoId":id}
-	
+	//清空错误消息
+	$("#kaipiaoAmountError").text("");
 	//合同编号
 	var id = $("#htNum").text();
 	var date = new Date();
@@ -265,25 +319,40 @@ function updateFapiao(id,obj){
 	$("#applicationTimeAboutFapiao").text(currentTime);
 	/*$("#kaipiaoCompany").val(company);
 	$("#kaipiaodDanwei").val(danwei);*/
-
+	
+	//发票品名选项
+ 	var company = $("#kaipiaoCompany").val();	
+ 	if(kaipiaoCompany!=""){
+		$.post('public/ht/getKaipiaoOption.action',{"company":company},function(res){
+			var kaipiaoList = res.obj;
+			for(var i=0;i<kaipiaoList.length;i++){
+				var option = "<li>"+kaipiaoList[i]+"</li>";
+				$("#pinmingUl").append(option);
+			}
+		});
+	} 
 	$.post('public/ht/toUpdateFaPiao.action',data,function(res){
 		
 		 if(res.success==true){
 		 var fapiao = res.obj;
+		 var fapiaoId = fapiao.id;
+		 addOrUpdateFapiao = fapiaoId;//通过addOrUpdateFapiao的值判断是增加还是修改
 		 var date2 = new Date(fapiao.date).Format("yyyy-MM-dd")
+		 var yujihuikuanDate2 = new Date(fapiao.yujihuikuanDate).Format("yyyy-MM-dd")
 			/*var hetongNumber =$("#htNum").text();//合同编号
 			var applicationDate =$("#applicationTimeAboutFapiao").text(); //申请时间*/
 			$("#kaipiaoAmount").val(fapiao.money);
 			$("#daxieAmount").val(fapiao.capitalMoney);
 			$("#kaipiaoCompany").val(fapiao.company);
 			$("#kaipiaodDanwei").val(fapiao.departMement);
-			$("#fapiaoType").val(fapiao.type);
-			$("#pinming").val(fapiao.name);
 			$("#kaipiaoDate").val(date2);
 			$("#remarkAboutFapiao").val(fapiao.remark);
 			$("#fapiaoId").attr("value",fapiao.id);
 			$("#fapiaoType .select-button").attr("value",fapiao.type);
+			$("#pinming").text(fapiao.name);
+			$("#yujihuikuanDate").val(yujihuikuanDate2);
 			
+			$("#kaipiaoAmount").attr("onBlur","validateFapiaoAmount("+fapiaoId+")");
 		 }
 	}); 
 	
@@ -304,15 +373,6 @@ return false;
 
 //修改发票
 $("#updateFapiao").click(function(){
-	/*var flag = true;
-	var b = validateFapiaoAmount();
-	if(b==false){
-		flag = false;
-	}
-	if(flag == false){
-		return;
-	}*/
-	
 	/*var hetongNumber =$("#htNum").text();//合同编号
 	var applicationDate =$("#applicationTimeAboutFapiao").text(); //申请时间*/
 	var fapiaoID = $("#fapiaoId").val();
@@ -321,7 +381,7 @@ $("#updateFapiao").click(function(){
 	var company =$("#kaipiaoCompany").val();
 	var departMement =$("#kaipiaodDanwei").val();
 	var type =$("#fapiaoType .select-button").val();
-	var name =$("#pinming").val();
+	var name =$("#pinming").text();
 	var date =$("#kaipiaoDate").val();
 	var remark = $("#remarkAboutFapiao").val();
 	var receivedpaymentsdate = $("#huikuanDate").val();//回款日期
@@ -329,6 +389,7 @@ $("#updateFapiao").click(function(){
 	
 	var fundType = $("#zijin .select-button").val();//资金类型
 	var account = $("#zhanghu .select-button").val();//账户
+	var yujihuikuanDate = $("#yujihuikuanDate").val();//开票预计回款时间
 	
 	if(fundType==undefined){
 		fundType = "";
@@ -338,10 +399,15 @@ $("#updateFapiao").click(function(){
 		account = "";
 	}
 	console.log(account);
-
+	
+	var b = validateFapiaoAmount();
+	if(b==false){
+		return;
+	}
+    debugger;
 	var data ={"money":money,"capitalMoney":capitalMoney,
 			"company":company,"departMement":departMement,"type":type,"name":name,"date":date,
-			"remark":remark,"fapiaoID":fapiaoID,"receivedpaymentsdate":receivedpaymentsdate,"huiKuan":huiKuan,"fundType":fundType,"account":account};
+			"remark":remark,"fapiaoID":fapiaoID,"receivedpaymentsdate":receivedpaymentsdate,"huiKuan":huiKuan,"fundType":fundType,"account":account,"yujihuikuanDate":yujihuikuanDate};
 	
 	$.post('public/ht/doUpdateFapiao.action',data,function(res){
 		
@@ -474,7 +540,6 @@ $("#updateFahuo").click(function(){
 			 
 			 tr.children('td').eq(0).text(fahuoId);
 			 tr.children('td').eq(1).text(d_contact);
-			 /*tr.children('td').eq(2).text(d_company);*/
 			 tr.children('td').eq(2).text(d_address);
 			 tr.children('td').eq(3).text(d_tel);
 			 tr.children('td').eq(4).text(jDate);

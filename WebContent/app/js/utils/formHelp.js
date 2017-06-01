@@ -174,36 +174,34 @@
 
     //方法调用规则（参照easyui）
     $.fn.form = function(options, params){
-        if (typeof options == 'string'){
-//            this.each(function(){
-//                initForm(this);
-//            });
-            return $.fn.form.methods[options](this,params);
-        }
+//		this.each(function(){
+			if (typeof options == 'string' && $.fn.form.methods[options]) {
+				return $.fn.form.methods[options](this,params);
+			}
+//		})
 
-        return this.each(function(){
-            initForm(this, options);
-            setForm(this);
-        });
+//        return this.each(function(){
+//            initForm(this, options);
+//            setForm(this);
+//        });
     };
+
+	var Form = function(options){
+
+	}
+
 
     //方法定义
     $.fn.form.methods = {
         serializeJson: function(jq,params){
-			jq.each(function(){
-				serializeJson(this,params);
-			})
+			return serializeJson(jq,params);
 		},
         setForm: function(jq,params){
-			jq.each(function(){
-				setForm(this,params);
-			})
+			return setForm(jq,params);
 		},
         validate: validate,
 		clear: function(jq){
-			return jq.each(function(){
-				clear(this);
-			});
+			return clear(jq);
 		},
         submit:submit
     };

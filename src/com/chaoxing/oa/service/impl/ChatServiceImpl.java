@@ -120,7 +120,7 @@ public class ChatServiceImpl implements ChatService {
 	}
 	
 	@Override
-	public List<Messages> findShChatRecordBylisId(String lisId, int sid, boolean isChecker) {
+	public List<Messages> findShChatRecordBylisId(Long lisId, int sid, boolean isChecker) {
 		String hql = "from Messages t where t.lis_id=:lisId and (t.sid=:id or t.to=:id) order by t.date asc";
 		Map<String, Object> params = new HashMap<String,Object>();
 		params.put("lisId", lisId);

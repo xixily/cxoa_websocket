@@ -42,7 +42,7 @@ public class Contract implements Serializable{
 	private String agreementText;//合同内容
 	private String remarksText;//备注
 	private Float year;//年代
-	private Float kaipiaoMoney;//开票金额
+	//private Float kaipiaoMoney;//开票金额
 	private Date toCaiwuTime;//转财务时间
 	private String payMethod;//付款方式
 	private Integer cid;//用户单位表外键  用户编号
@@ -68,17 +68,18 @@ public class Contract implements Serializable{
 	//yang add
 	/*private String company_property;//单位性质
 */	private String user_property;//用户性质
-	private String receivedAmount;//回款金额
-	private Integer expressCondition;//快递情况   1 已发 0 未发
-	private Integer dealConditon;//处理状态   0 未处理 1 审核未通过 2 审核已通过 3 合同完结 4 保存    023不能修改  14能修改
+	/*private String receivedAmount;//回款金额
+*/	private Integer expressCondition;//快递情况   1 已发 0 未发
+	private Integer dealConditon;//处理状态   -1 垃圾合同  0 未处理 1 审核未通过 2 审核已通过 3 合同完结 4 保存(暂存)        023不能修改  14能修改
 	@DateTimeFormat(pattern="yyyy-MM-dd")
-	private Date endTime;//项目预计结束时间
-	@DateTimeFormat(pattern="yyyy-MM-dd")
+	private Date endTime;//项目预计结束时间(合同到期时间)
+/*	@DateTimeFormat(pattern="yyyy-MM-dd")
 	private Date receiveTime;//回款时间
-	@DateTimeFormat(pattern="yyyy-MM-dd")
+*/	@DateTimeFormat(pattern="yyyy-MM-dd")
 	private Date submitTime;//提交时间
 	private String product;//所含产品
 	private String guidangNum;//归档份数
+	private String kuaijifenlei;//会计分类
 	@Id
 	@Column(name = "合同编号")
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -170,10 +171,10 @@ public class Contract implements Serializable{
 	public Float getYear() {
 		return year;
 	}
-	@Column(name = "开票总金额")
+	/*@Column(name = "开票总金额")
 	public Float getKaipiaoMoney() {
 		return kaipiaoMoney;
-	}
+	}*/
 	@Column(name = "转财务时间")
 	public Date getToCaiwuTime() {
 		return toCaiwuTime;
@@ -328,9 +329,9 @@ public class Contract implements Serializable{
 	public void setYear(Float year) {
 		this.year = year;
 	}
-	public void setKaipiaoMoney(Float kaipiaoMoney) {
+/*	public void setKaipiaoMoney(Float kaipiaoMoney) {
 		this.kaipiaoMoney = kaipiaoMoney;
-	}
+	}*/
 	public void setToCaiwuTime(Date toCaiwuTime) {
 		this.toCaiwuTime = toCaiwuTime;
 	}
@@ -413,13 +414,13 @@ public class Contract implements Serializable{
 	public void setUser_property(String user_property) {
 		this.user_property = user_property;
 	}
-	@Column(name = "回款金额")
+/*	@Column(name = "回款金额")
 	public String getReceivedAmount() {
 		return receivedAmount;
 	}
 	public void setReceivedAmount(String receivedAmount) {
 		this.receivedAmount = receivedAmount;
-	}
+	}*/
 	@Column(name = "快递情况")
 	public Integer getExpressCondition() {
 		return expressCondition;
@@ -441,13 +442,13 @@ public class Contract implements Serializable{
 	public void setEndTime(Date endTime) {
 		this.endTime = endTime;
 	}
-	@Column(name = "回款时间")
+	/*@Column(name = "回款时间")
 	public Date getReceiveTime() {
 		return receiveTime;
 	}
 	public void setReceiveTime(Date receiveTime) {
 		this.receiveTime = receiveTime;
-	}
+	}*/
 	@Column(name = "提交时间")
 	public Date getSubmitTime() {
 		return submitTime;
@@ -469,8 +470,12 @@ public class Contract implements Serializable{
 	public void setGuidangNum(String guidangNum) {
 		this.guidangNum = guidangNum;
 	}
-	
-	
-	
+	@Column(name = "会计分类")
+	public String getKuaijifenlei() {
+		return kuaijifenlei;
+	}
+	public void setKuaijifenlei(String kuaijifenlei) {
+		this.kuaijifenlei = kuaijifenlei;
+	}
 	
 }

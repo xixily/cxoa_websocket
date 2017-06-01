@@ -42,7 +42,7 @@ public class KoukuanItem implements Serializable {
 	public String getItem() {
 		return item;
 	}
-	@Column
+	@Column(name="money", columnDefinition="DECIMAL(12,2)")
 	public Float getMoney() {
 		return money;
 	}

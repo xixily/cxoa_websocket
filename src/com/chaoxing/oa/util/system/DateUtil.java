@@ -131,6 +131,10 @@ public class DateUtil {
 		try {
 			d = new java.text.SimpleDateFormat(pattern).parse(date);
 		} catch (ParseException pe) {
+			try {
+				d = new java.text.SimpleDateFormat("yyyy-MM-dd").parse(date);
+			} catch (Exception e) {
+			}
 		}
 		return d;
 	}
