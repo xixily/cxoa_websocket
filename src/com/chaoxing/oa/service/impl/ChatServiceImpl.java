@@ -3,7 +3,6 @@ package com.chaoxing.oa.service.impl;
 import java.io.Serializable;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -16,7 +15,6 @@ import org.springframework.stereotype.Service;
 import com.chaoxing.oa.dao.BaseDaoI;
 import com.chaoxing.oa.entity.page.common.Page;
 import com.chaoxing.oa.entity.page.websocket.PMessages;
-import com.chaoxing.oa.entity.po.employee.UserName;
 import com.chaoxing.oa.entity.po.websocket.Messages;
 import com.chaoxing.oa.service.ChatService;
 import com.chaoxing.oa.system.SysConfig;
@@ -51,8 +49,6 @@ public class ChatServiceImpl implements ChatService {
 		}
 		return 0;
 	}
-
-
 
 	@Override
 	public int updateChatRecord(PMessages pmsg) {

@@ -544,6 +544,10 @@ public class ExportExcelServiceImpl implements ExportExcelService {
 				sxffWriter.setData(pMonthWage.getDegree());
 				sxffWriter.createCell();
 				sxffWriter.setData(pMonthWage.getSex());
+				sxffWriter.createCell();
+				sxffWriter.setData(pMonthWage.getWorkSpace());
+				sxffWriter.createCell();
+				sxffWriter.setData(pMonthWage.getTiaoxinRecord());
 			}
 //			insertCell(PKaoQin.class,pKaoqins);
 			sxffWriter.flush();
@@ -888,8 +892,14 @@ public class ExportExcelServiceImpl implements ExportExcelService {
 					sxffWriter.createCell();
 					sxffWriter.setStringData(yidong.getBumentiaozhengReport());
 				}else{
+					if("318".equals(type)){
+						sxffWriter.createCell();
+						sxffWriter.setStringData(yidong.getFirstLevel());
+					}
 					sxffWriter.createCell();
 					sxffWriter.setStringData(yidong.getFourthLevel());
+					sxffWriter.createCell();
+					sxffWriter.setStringData(yidong.getCemail());
 					sxffWriter.createCell();
 					sxffWriter.setStringData(yidong.getPosition());
 					if("211".equals(type) || "311".equals(type)){
@@ -900,7 +910,7 @@ public class ExportExcelServiceImpl implements ExportExcelService {
 						sxffWriter.setStringData(yidong.getHiredate());
 						sxffWriter.createCell();
 						sxffWriter.setStringData(yidong.getLizhiDate());
-					}else if("213".equals(type) || "313".equals(type)){
+					}else if("213".equals(type) || "313".equals(type) || "318".equals(type)){
 						sxffWriter.createCell();
 						if(null!=yidong.getTotalSalary() && yidong.getTotalSalary()==-1){
 							sxffWriter.setStringData("<工资保密>");
@@ -920,15 +930,15 @@ public class ExportExcelServiceImpl implements ExportExcelService {
 						if(null!=yidong.getTotalSalary() && yidong.getTotalSalary().equals("-1")){
 							sxffWriter.setStringData("<工资保密>");
 						}else{
-							if(salaryCode.size()>1){
+							if(salaryCode.size()>=1){
 								sxffWriter.setStringData(salaryCode.get(0));
 							}
 //							sxffWriter.setStringData(String.valueOf(yidong.getTotalSalary()));
 						}
 					}
-					if("211".equals(type) || "213".equals(type) || "311".equals(type) || "313".equals(type)){
+					if("211".equals(type) || "213".equals(type) || "311".equals(type) || "313".equals(type) || "318".equals(type)){
 						sxffWriter.createCell();
-						if("211".equals(type)||"311".equals(type)){
+						if("211".equals(type)||"311".equals(type)||"318".equals(type)){
 							if(salaryCode.size()>1){
 								sxffWriter.setStringData(salaryCode.get(1));
 							}else{
@@ -940,13 +950,19 @@ public class ExportExcelServiceImpl implements ExportExcelService {
 						sxffWriter.createCell();
 						sxffWriter.setStringData(yidong.getS_remarks());
 					}
-					if("211".equals(type) || "213".equals(type) || "311".equals(type) || "313".equals(type)){
+					if("211".equals(type) || "213".equals(type) || "311".equals(type) || "313".equals(type)|| "318".equals(type)){
 						sxffWriter.createCell();
 						sxffWriter.setStringData(yidong.getCompany());
 					}
-					if("213".equals(type) || "313".equals(type)){
+					if("213".equals(type) || "313".equals(type)|| "318".equals(type)){
+						sxffWriter.createCell();
+						sxffWriter.setStringData(yidong.getHiredate());
 						sxffWriter.createCell();
 						sxffWriter.setStringData(yidong.getZhuanzhengDate());
+						sxffWriter.createCell();
+						sxffWriter.setStringData(yidong.getLizhiDate());
+						sxffWriter.createCell();
+						sxffWriter.setStringData(yidong.getLizhiReport());
 					}
 					sxffWriter.createCell();
 					sxffWriter.setStringData(yidong.getRemarks());
@@ -1105,8 +1121,14 @@ public class ExportExcelServiceImpl implements ExportExcelService {
 			sxffWriter.createCell();
 			sxffWriter.setStringData("部门调整报表");
 		}else{
+			if("318".equals(type)){
+				sxffWriter.createCell();
+				sxffWriter.setStringData("一级");
+			}
 			sxffWriter.createCell();
 			sxffWriter.setStringData("部门");
+			sxffWriter.createCell();
+			sxffWriter.setStringData("细胞核邮箱");
 			sxffWriter.createCell();
 			sxffWriter.setStringData("职位");
 			if("211".equals(type) || "311".equals(type)){
@@ -1117,29 +1139,35 @@ public class ExportExcelServiceImpl implements ExportExcelService {
 				sxffWriter.setStringData("入职时间");
 				sxffWriter.createCell();
 				sxffWriter.setStringData("离职时间");
-			}else if("213".equals(type) || "313".equals(type)){
+			}else if("213".equals(type) || "313".equals(type) || "318".equals(type)){
 				sxffWriter.createCell();
 				sxffWriter.setStringData("转正前工资");
 			}
-			if("211".equals(type) || "311".equals(type)){
+			if("211".equals(type) || "311".equals(type) || "311".equals(type)){
 				sxffWriter.createCell();
 				sxffWriter.setStringData("转正时间");
 				sxffWriter.createCell();
 				sxffWriter.setStringData("试用期工资");
 			}
-			if("211".equals(type) || "213".equals(type) || "311".equals(type) || "313".equals(type)){
+			if("211".equals(type) || "213".equals(type) || "311".equals(type) || "313".equals(type) || "318".equals(type)){
 				sxffWriter.createCell();
 				sxffWriter.setStringData("转正工资");
 				sxffWriter.createCell();
 				sxffWriter.setStringData("涨薪记录");
 			}
-			if("211".equals(type) || "213".equals(type) || "311".equals(type) || "313".equals(type)){
+			if("211".equals(type) || "213".equals(type) || "311".equals(type) || "313".equals(type)|| "318".equals(type)){
 				sxffWriter.createCell();
 				sxffWriter.setStringData("公司名称");
 			}
-			if("213".equals(type) || "313".equals(type)){
+			if("213".equals(type) || "313".equals(type)|| "318".equals(type)){
+				sxffWriter.createCell();
+				sxffWriter.setStringData("入职时间");
 				sxffWriter.createCell();
 				sxffWriter.setStringData("转正时间");
+				sxffWriter.createCell();
+				sxffWriter.setStringData("离职时间");
+				sxffWriter.createCell();
+				sxffWriter.setStringData("离职报表");
 			}
 			sxffWriter.createCell();
 			sxffWriter.setStringData("备注");
@@ -1695,6 +1723,10 @@ public class ExportExcelServiceImpl implements ExportExcelService {
 			sxffWriter.setStringData("学历");
 			sxffWriter.createCell();
 			sxffWriter.setStringData("性别");
+			sxffWriter.createCell();
+			sxffWriter.setStringData("工作地点");
+			sxffWriter.createCell();
+			sxffWriter.setStringData("调薪报表");
 		}
 		if(isMonthWages==0){
 			sxffWriter.createCell();

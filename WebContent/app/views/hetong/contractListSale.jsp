@@ -8,8 +8,8 @@
 -->
 
 <link href="/app/views/hetong/css/global.css" rel="stylesheet" type="text/css" />
-<link href="/app/views/hetong/css/space.css" rel="stylesheet" type="text/css" />
-<link href="/app/views/hetong/css/selectlist.css" rel="stylesheet" type="text/css" />
+<!-- <link href="/app/views/hetong/css/space.css" rel="stylesheet" type="text/css" />
+<link href="/app/views/hetong/css/selectlist.css" rel="stylesheet" type="text/css" /> -->
 
 <style>
 .main * {
@@ -25,6 +25,10 @@
 .divtable {
     width: inherit;
 }
+.divcheck span .cet {
+    background: #dcfcd3;
+}
+
 </style>
 
 <!-- 
@@ -61,7 +65,7 @@
 			
 			   
 			  <c:forEach var="c" items="${pageBean.list }" varStatus="cs">
-			  <c:if test="${c.dealConditon!='1'}">
+			  <c:if test="${c.dealConditon!='1'&&c.dealConditon!='6'}">
 			  <tr>
 				<td>${cs.index + 1}</td>
 				<td>${c.id }</td>
@@ -80,17 +84,22 @@
                 <c:if test="${c.dealConditon=='2'}"><td>审核已通过</td></c:if>
                 <c:if test="${c.dealConditon=='3'}"><td>合同完结</td></c:if>
                 <c:if test="${c.dealConditon=='4'}"><td>暂存</td></c:if>
+                <c:if test="${c.dealConditon=='5'}"><td>未处理(修改)</td></c:if>
+                <c:if test="${c.dealConditon=='7'}"><td>废弃</td></c:if>
                 <c:if test="${c.dealConditon==null}"><td>无</td></c:if>
                 <%-- <c:if test="${c.dealConditon==''}"><td>无</td></c:if> --%>
 								
                 <td ><a class="detail" id="${c.id }" href="javascript:void(0)">详情</a></td>
                 <c:if test="${c.dealConditon=='0'}"><td><a class="delete" id="${c.id }" href="javascript:void(0)">删除</a></td></c:if>
+                <c:if test="${c.dealConditon=='2'}"><td><a class="forupdate" id="${c.id }" href="javascript:void(0)">申请修改</a></td></c:if>
+                <c:if test="${c.dealConditon=='3'}"><td></td></c:if>
                 <c:if test="${c.dealConditon=='4'}"><td><a class="delete" id="${c.id }" href="javascript:void(0)">删除</a></td></c:if>
-                <c:if test="${c.dealConditon=='2'}"><td></td></c:if>
+                <c:if test="${c.dealConditon=='5'}"><td></td></c:if>
+                <c:if test="${c.dealConditon=='7'}"><td></td></c:if>
 			  </tr>
 			  </c:if> 
 			  
-			  <c:if test="${c.dealConditon =='1'}">
+			  <c:if test="${c.dealConditon =='1'||c.dealConditon =='6'}">
 			   <tr>
 			   <td bgcolor="#dcfcd3">${cs.index + 1}</td>
 				<td bgcolor="#dcfcd3">${c.id }</td>
@@ -101,15 +110,21 @@
 				<td bgcolor="#dcfcd3">${c.product }</td>
 				<td bgcolor="#dcfcd3">${c.company }</td>
 				<td bgcolor="#dcfcd3">${c.contractMoney }</td>
-				<td bgcolor="#dcfcd3">${c.receivedAmount } </td>
+				<td bgcolor="#dcfcd3">${c.receivedAmount } </td>  
 				<td bgcolor="#dcfcd3">${c.receiveTime}</td>
 				<td bgcolor="#dcfcd3">${c.kaipiaoMoney }</td>
+				<c:if test="${c.dealConditon=='1'}">
 				<td bgcolor="#dcfcd3">审核未通过</td>
+				<td bgcolor="#dcfcd3"><a class="detail" id="${c.id }" href="javascript:void(0)">详情</a></td>
+				</c:if>
+				<c:if test="${c.dealConditon=='6'}">
+				<td bgcolor="#dcfcd3">审核未通过(修改)</td>
+				<td bgcolor="#dcfcd3"><a class="detail" id="${c.id }" href="javascript:void(0)">详情</a></td>
+				</c:if>
 				<%-- <c:if test="${c.dealConditon=='0'}"><td>未处理</td></c:if> --%>
                 <%-- <c:if test="${c.dealConditon=='1'}"><td>审核未通过</td></c:if> --%>
                 <%-- <c:if test="${c.dealConditon=='2'}"><td>审核已通过</td></c:if> --%>
                 <%-- <c:if test="${c.dealConditon=='3'}"><td>合同完结</td></c:if> --%>
-                <td bgcolor="#dcfcd3"><a class="detail" id="${c.id }" href="javascript:void(0)">详情</a></td>
                 <td bgcolor="#dcfcd3"></td>
                 <%-- <c:if test="${c.dealConditon=='0'}"><td bgcolor="#dcfcd3"><a class="delete" id="${c.id }" href="javascript:void(0)">删除</a></td></c:if>
                 <c:if test="${c.dealConditon=='4'}"><td bgcolor="#dcfcd3"><a class="delete" id="${c.id }" href="javascript:void(0)">删除</a></td></c:if> --%>
@@ -117,36 +132,6 @@
 			  
 			  </c:if> 
 			   </c:forEach>
-	<!-- 		  <tr>
-				<td bgcolor="#dcfcd3"><input type="checkbox" name="checkbox" /></td>
-				<td bgcolor="#dcfcd3">1</td>
-				<td bgcolor="#dcfcd3">cx10285</td>
-				<td bgcolor="#dcfcd3">吉大尔雅项目</td>
-				<td bgcolor="#dcfcd3">吉林大学</td>
-				<td bgcolor="#dcfcd3">教图</td>
-				<td bgcolor="#dcfcd3">吉林</td>
-				<td bgcolor="#dcfcd3">王允亚</td>
-				<td bgcolor="#dcfcd3">王允亚</td>
-				<td bgcolor="#dcfcd3">2017-3-31</td>
-				<td bgcolor="#dcfcd3">中文发现、读秀</td>
-				<td bgcolor="#dcfcd3">世纪超星</td>
-				<td bgcolor="#dcfcd3">300，000</td>
-			  </tr>
-			  <tr>
-				<td bgcolor="#fbd3d3"><input type="checkbox" name="checkbox" /></td>
-				<td bgcolor="#fbd3d3">1</td>
-				<td bgcolor="#fbd3d3">cx10285</td>
-				<td bgcolor="#fbd3d3">吉大尔雅项目</td>
-				<td bgcolor="#fbd3d3">吉林大学</td>
-				<td bgcolor="#fbd3d3">教图</td>
-				<td bgcolor="#fbd3d3">吉林</td>
-				<td bgcolor="#fbd3d3">王允亚</td>
-				<td bgcolor="#fbd3d3">王允亚</td>
-				<td bgcolor="#fbd3d3">2017-3-31</td>
-				<td bgcolor="#fbd3d3">中文发现、读秀</td>
-				<td bgcolor="#fbd3d3">世纪超星</td>
-				<td bgcolor="#fbd3d3">300，000</td>
-			  </tr> -->
 			  
 			</table>
 			</div>
@@ -214,22 +199,44 @@ $(".delete").click(function(){
 $(".detail").click(function(){
 	var id = $(this).attr("id");
 	var dealCondition = $(this).parent().prev().text();
-	if(dealCondition=="暂存"){
+	/*if(dealCondition=="暂存"){
 		var state = 4;
 	}else if(dealCondition=="审核未通过"){
 		var state = 1;
-	}else{}
-	if(dealCondition=='未处理'||dealCondition=='审核已通过'||dealCondition=='合同完结'){
-		$.get('public/ht/contractDetailForSale.action',{id:id},function(result){
+	} */ 
+	if(dealCondition=='未处理'||dealCondition=='审核已通过'||dealCondition=='合同完结'||dealCondition=='废弃'){
+		$.get('public/ht/contractDetailForSale.action',{"id":id},function(result){
 			$('#container').html(result);
-			})
+		})
+	}else if(dealCondition=='未处理(修改)'||dealCondition=='审核未通过(修改)'){
+		$.ajax({ 
+	          type : "post", 
+	           url : "public/ht/getCopyContract.action", 
+	          data : "copyId=" + id,  
+	          success : function(data){ 
+	            /* data = eval("(" + data + ")"); 
+	            aDataSet = data;  */
+	            $.get('public/ht/contractDetailForSale.action',{"id":data.obj.id},function(result){
+	    			$('#container').html(result);
+	    		})
+	          } 
+	    }); 
 	}else{
 		//审核未通过  暂存
-		$.get('public/ht/contractDetailForSale2.action',{"id":id,"state":state},function(result){
+		$.get('public/ht/contractDetailForSale2.action',{"id":id},function(result){
 			$('#container').html(result);
-			})
+		})
 	}
 	
+})
+
+//申请修改
+$(".forupdate").click(function(){
+	var id = $(this).attr("id");
+	var dealCondition = $(this).parent().prev().text();
+	$.get('public/ht/applyUpdate.action',{"id":id},function(result){
+		$('#container').html(result);
+	})
 })
 </script>
 

@@ -8,6 +8,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.hibernate.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,6 +20,8 @@ import com.chaoxing.oa.entity.po.hetong.ItemPrice;
 import com.chaoxing.oa.entity.po.view.RenshiUserName;
 import com.chaoxing.oa.entity.po.view.Usercontracts;
 import com.chaoxing.oa.entity.po.view.Usercontracts2;
+import com.chaoxing.oa.entity.po.commmon.OrganizationStructure;
+import com.chaoxing.oa.entity.po.employee.UserName;
 import com.chaoxing.oa.entity.po.hetong.Area;
 import com.chaoxing.oa.entity.po.hetong.CompanyInfo;
 import com.chaoxing.oa.entity.po.hetong.Contract;
@@ -44,8 +47,12 @@ public class HtServiceImpl implements HtService {
 	private BaseDaoI<Object> objDao;
 	@Autowired
 	private BaseDaoI<CompanyInfo> companyInfoDao;
+//	@Autowired
+//	private BaseDaoI<RenshiUserName> renshiUserNameDao;
 	@Autowired
-	private BaseDaoI<RenshiUserName> renshiUserNameDao;
+	private BaseDaoI<OrganizationStructure> organizationStructureDao;
+	@Autowired
+	private BaseDaoI<UserName> userNameDao;
 	@Autowired
 	private BaseDaoI<ContractVO> contractVODao;
 	@Autowired
@@ -93,7 +100,7 @@ public class HtServiceImpl implements HtService {
 	// 获取满足搜索条件的合同数量
 	@Override
 	public int getConditionCountContract(String depart, String company, String xingzhi, String fourthLevel,
-			String operator, Integer cid, Integer dealConditon) {
+			String charger, Integer cid, Integer dealConditon) {
 		Map<String, Object> params = new HashMap<String, Object>();
 		/* String dengjiTime1 = "%"+dengjiTime+"%"; */
 		/* params.put("dengjiTime", dengjiTime1); */
@@ -108,9 +115,9 @@ public class HtServiceImpl implements HtService {
 			params.put("fourthLevel", fourthLevel1);
 		}
 
-		if (operator != null && !"".equals(operator)) {
-			String operator1 = "%" + operator + "%";
-			params.put("operator", operator1);
+		if (charger != null && !"".equals(charger)) {
+			String charger1 = "%" + charger + "%";
+			params.put("charger", charger1);
 		}
 
 		if (dealConditon != -10) {
@@ -132,8 +139,8 @@ public class HtServiceImpl implements HtService {
 			params.put("cid", cid);
 		}
 
-		List<Usercontracts2> contractList = contractDao.queryResultList(Usercontracts2.class, params);
-		int count = contractList.size();
+		int count = usercontracts2Dao.queryResultList(Usercontracts2.class, params);
+	//	int count = contractList.size();
 		return count;
 		/*
 		 * Map<String, Object> params = new HashMap<String, Object>();
@@ -146,7 +153,7 @@ public class HtServiceImpl implements HtService {
 
 	@Override
 	public List<Usercontracts2> getContractListConditionTest(String depart, String company, String xingzhi,
-			String fourthLevel, String operator, Integer cid, Integer dealConditon, int page, int size) {
+			String fourthLevel, String charger, Integer cid, Integer dealConditon, int page, int size) {
 		Map<String, Object> params = new HashMap<String, Object>();
 		/* String dengjiTime1 = "%"+dengjiTime+"%"; */
 		/* params.put("dengjiTime", dengjiTime1); */
@@ -161,9 +168,9 @@ public class HtServiceImpl implements HtService {
 			params.put("fourthLevel", fourthLevel1);
 		}
 		
-		if (operator != null && !"".equals(operator)) {
-			String operator1 = "%" + operator + "%";
-			params.put("operator", operator1);
+		if (charger != null && !"".equals(charger)) {
+			String charger1 = "%" + charger + "%";
+			params.put("charger", charger1);
 		}
 
 		if (dealConditon != -10) {  //-10表示全部
@@ -203,7 +210,7 @@ public class HtServiceImpl implements HtService {
 	@Override
 	public void updateContract(Integer id, String company, String depart, Integer cid, Integer didNum,
 			Float contractMoney, String agreementNumber, Date endTime, String agreementText, String remarksText,
-			String payMethod) {
+			String payMethod, Integer dealConditon) {
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("id", id);
 		params.put("company", company);
@@ -216,12 +223,13 @@ public class HtServiceImpl implements HtService {
 		params.put("agreementText", agreementText);
 		params.put("remarksText", remarksText);
 		params.put("payMethod", payMethod);
-		String hql = "update Contract set company=:company,depart=:depart,cid=:cid,didNum=:didNum,contractMoney=:contractMoney,agreementNumber=:agreementNumber,endTime=:endTime,agreementText=:agreementText,remarksText=:remarksText,payMethod=:payMethod where id=:id";
+		params.put("changeStatus", dealConditon);
+		String hql = "update Contract set company=:company,depart=:depart,cid=:cid,didNum=:didNum,contractMoney=:contractMoney,agreementNumber=:agreementNumber,endTime=:endTime,agreementText=:agreementText,remarksText=:remarksText,payMethod=:payMethod,dealConditon=:changeStatus where id=:id";
 		objDao.executeHql(hql, params);
 	}
 
 	// 由暂存改为未处理
-	@Override
+	/*@Override
 	public void updateZanCunContract(Integer id, String company, String depart, Integer cid, Integer didNum,
 			Float contractMoney, String agreementNumber, Date endTime, String agreementText, String remarksText,
 			String payMethod, Integer changeStatus) {
@@ -241,7 +249,7 @@ public class HtServiceImpl implements HtService {
 		
 		String hql = "update Contract set company=:company,depart=:depart,cid=:cid,didNum=:didNum,contractMoney=:contractMoney,agreementNumber=:agreementNumber,endTime=:endTime,agreementText=:agreementText,remarksText=:remarksText,payMethod=:payMethod,dealConditon=:changeStatus where id=:id";
 		objDao.executeHql(hql, params);
-	}
+	}*/
 
 	@Override
 	public int getUnhandledContract() {
@@ -310,6 +318,15 @@ public class HtServiceImpl implements HtService {
 		String sql = "UPDATE 合同情况 SET 处理状态=2 WHERE 合同编号= :contractId";
 		contractDao.executeSql(sql, params);
 	}
+	
+	@Override
+	public void updateDealConditon(int contractId, int dealConditon) {
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("contractId", contractId);
+		params.put("dealConditon", dealConditon);
+		String sql = "UPDATE 合同情况 SET 处理状态= :dealConditon WHERE 合同编号= :contractId";
+		contractDao.executeSql(sql, params);
+	}
 
 	@Override
 	public void updatecontractNoPass(int contractId) {
@@ -324,6 +341,16 @@ public class HtServiceImpl implements HtService {
 	public void addItemPrice(ItemPrice itemprice) {
 		try {
 			itemPriceDao.save(itemprice);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	// 更新产品
+	@Override
+	public void updateItemPrice(ItemPrice itemprice) {
+		try {
+			itemPriceDao.update(itemprice);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -384,6 +411,16 @@ public class HtServiceImpl implements HtService {
 	public void addFaPiao(FaPiao faPiao) {
 		try {
 			fapiaoDao.save(faPiao);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	// 更新发票
+	@Override
+	public void updateFaPiao(FaPiao faPiao) {
+		try {
+			fapiaoDao.update(faPiao);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -470,6 +507,16 @@ public class HtServiceImpl implements HtService {
 			e.printStackTrace();
 		}
 	}
+	
+	// 更新快递
+	@Override
+	public void updateFahuo(Fahuo fahuo) {
+		try {
+			fahuoDao.update(fahuo);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 
 	// 删除快递
 	@Override
@@ -489,32 +536,31 @@ public class HtServiceImpl implements HtService {
 	//更新快递信息(销售)
 	@Override
 	public void updateFahuo(String mailno, String d_contact, String d_tel, String d_address, String jDate,
-			String postMethod, String content, Integer orderid) {
+			String postMethod, String content, Integer orderid, String postAddress) {
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("d_contact", d_contact);
 		params.put("d_tel", d_tel);
-		/* params.put("d_company", d_company); */
-		// params.put("d_post_code", d_post_code);
 		params.put("d_address", d_address);
-		// params.put("sender", sender);
-		params.put("jDate", jDate);
 		params.put("postMethod", postMethod);
-		// params.put("remark", remark);
 		params.put("content", content);
+		params.put("postAddress", postAddress);
 		params.put("orderid", orderid);
-		String hql;
-		if(mailno!=null){
+		/*if(mailno!=null){
+			hql.append("mailno=:mailno").append(",");
 			params.put("mailno", mailno);
-			hql = "update Fahuo set mailno=:mailno,d_contact=:d_contact, d_tel=:d_tel,d_address=:d_address,jDate=:jDate,postMethod=:postMethod,content=:content where orderid=:orderid";
-		}else{
-			hql = "update Fahuo set d_contact=:d_contact, d_tel=:d_tel,d_address=:d_address,jDate=:jDate,postMethod=:postMethod,content=:content where orderid=:orderid";
+		//	hql = "update Fahuo set mailno=:mailno,d_contact=:d_contact, d_tel=:d_tel,d_address=:d_address,jDate=:jDate,postMethod=:postMethod,content=:content where orderid=:orderid";
 		}
-		itemPriceDao.executeHql(hql, params);
+		if(jDate!=null){
+			hql.append("jDate=:jDate").append(",");
+			params.put("jDate", jDate);
+		}*/
+		StringBuffer hql = new StringBuffer("update Fahuo set d_contact=:d_contact, d_tel=:d_tel,d_address=:d_address,postMethod=:postMethod,content=:content,postAddress=:postAddress where orderid=:orderid");
+		itemPriceDao.executeHql(hql.toString(), params);
 	}
      //更新快递信息(行政,合同编号可编辑)
 	@Override
 	public void updateFahuoXingzheng(String mailno, String d_contact, String d_tel, String d_address, String jDate,
-			String postMethod, String content,Integer orderid,Integer hetongCodeInt) {
+			String postMethod, String content,Integer orderid,Integer hetongCodeInt, String postAddress) {
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("mailno", mailno);
 		params.put("d_contact", d_contact);
@@ -525,7 +571,8 @@ public class HtServiceImpl implements HtService {
 		params.put("content", content);
 		params.put("orderid", orderid);
 		params.put("hetongCodeInt", hetongCodeInt);
-		String hql = "update Fahuo set mailno=:mailno,d_contact=:d_contact, d_tel=:d_tel,d_address=:d_address,jDate=:jDate,postMethod=:postMethod,content=:content,hetongCode=:hetongCodeInt where orderid=:orderid";
+		params.put("postAddress", postAddress);
+		String hql = "update Fahuo set mailno=:mailno,d_contact=:d_contact, d_tel=:d_tel,d_address=:d_address,jDate=:jDate,postMethod=:postMethod,content=:content,hetongCode=:hetongCodeInt,postAddress=:postAddress where orderid=:orderid";
 		itemPriceDao.executeHql(hql, params);
 	}
 	
@@ -599,7 +646,7 @@ public class HtServiceImpl implements HtService {
 	// ---------------------销售
 
 	@Override
-	public List<Usercontracts> getContractListSale(String email, int page, int size) {
+	public List<Usercontracts2> getContractListSale(String email, int page, int size) {
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("email", email);
 
@@ -615,26 +662,24 @@ public class HtServiceImpl implements HtService {
 		 * String sql =
 		 * "SELECT * FROM usercontracts WHERE 邮箱=:email  limit :begin,:size ";
 		 * List<Object> contractList = objDao.findSql(sql, params);
-		 */
-		String hql = "FROM Usercontracts where email=:email order by id desc";
-		List<Usercontracts> usercontractsList = usercontractsDao.find(hql, params, page, size);
-		return usercontractsList;
+		 */ 
+		//不查垃圾合同和副本合同 and dealConditon!=-1 and type=1
+		String hql = "FROM Usercontracts2 where email=:email order by id desc";
+		List<Usercontracts2> usercontracts2List = usercontracts2Dao.find(hql, params, page, size);
+		/*String hql = "FROM Contract where email=:email and dealConditon!=-1 and type=1 order by id desc";
+		List<Contract> contractList = contractDao.find(hql, params, page, size);*/
+		return usercontracts2List;
 	}
 
 	@Override
 	public int getTotalCountContractSale(String email) {
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("email", email);
-		String sql = "SELECT count(*) FROM usercontracts WHERE 邮箱=:email";
+		//and 处理状态!=-1 and 合同状态!=2
+		String sql = "SELECT count(*) FROM usercontracts2 WHERE 邮箱=:email ";
 		List<Object> contractList = objDao.findSql(sql, params);
 		BigInteger objs = (BigInteger) contractList.get(0);
 		int totalCountContractSale = objs.intValue();
-		// int totalCountContractSale = contractList.get(0);
-		/*
-		 * Long totalCountContractSale = contractDao.count(sql,params); int
-		 * totalCountContractSale1 =
-		 * Integer.parseInt(totalCountContractSale.toString());
-		 */
 		return totalCountContractSale;
 
 	}
@@ -702,7 +747,7 @@ public class HtServiceImpl implements HtService {
 	public void updateContractSave(Integer id, String company, String depart, Integer cid, Integer didNum,
 			Float contractMoney, String agreementNumber, Date endTime, String agreementText, String remarksText,
 			String payMethod, Integer dealConditon, String gangweiXingzhi, String bumenmingcheng, String shengfen,
-			String xibaohe, Date submitTime, String danweixingzhi, String yonghuxingzhi, String productName) {
+			String xibaohe, Date submitTime, String danweixingzhi, String yonghuxingzhi) {
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("id", id);
 		params.put("company", company);
@@ -723,12 +768,10 @@ public class HtServiceImpl implements HtService {
 		params.put("submitTime", submitTime);
 		params.put("danweixingzhi", danweixingzhi);
 		params.put("yonghuxingzhi", yonghuxingzhi);
-		params.put("productName", productName);
-		
 
 		String hql = "update Contract set company=:company,depart=:depart,cid=:cid,didNum=:didNum,contractMoney=:contractMoney,agreementNumber=:agreementNumber,endTime=:endTime,"
 				+ "agreementText=:agreementText,remarksText=:remarksText,payMethod=:payMethod,dealConditon=:dealConditon, "
-				+ "firstLevel=:gangweiXingzhi,secondLevel=:bumenmingcheng,thirdLevel=:shengfen,fourthLevel=:xibaohe,submitTime=:submitTime,xingzhi=:danweixingzhi,user_property=:yonghuxingzhi,product=:productName where id=:id";
+				+ "firstLevel=:gangweiXingzhi,secondLevel=:bumenmingcheng,thirdLevel=:shengfen,fourthLevel=:xibaohe,submitTime=:submitTime,xingzhi=:danweixingzhi,user_property=:yonghuxingzhi where id=:id";
 		objDao.executeHql(hql, params);
 
 	}
@@ -778,17 +821,33 @@ public class HtServiceImpl implements HtService {
 	}
 
 	@Override
-	public RenshiUserName getRenshiUserName(int saleId) {
+	public OrganizationStructure getOrgStructure(int saleId) {
+		//	String hql = "from RenshiUserName where id=:saleId";
+		//	String hql2 = "(`username` JOIN `组织结构图` ON ((`username`.`部门ID` = `组织结构图`.`id`)) as userOrag";
+		//	RenshiUserName renshiUserName = renshiUserNameDao.get(hql, params);
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("saleId", saleId);
-		String hql = "from RenshiUserName where id=:saleId";
-		RenshiUserName renshiUserName = renshiUserNameDao.get(hql, params);
-		return renshiUserName;
+		String hql = "from UserName where ID=:saleId";
+		UserName userName = userNameDao.get(hql, params);
+		Map<String, Object> params2 = new HashMap<String, Object>();
+		params2.put("orgId", userName.getDepartmentId());
+		String hql2 = "from OrganizationStructure where id=:orgId";
+		OrganizationStructure organizationStructure = organizationStructureDao.get(hql2, params2);
+		return organizationStructure;
+	}
+	
+	@Override
+	public OrganizationStructure getOrgStructureById(int orgId) {
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("orgId", orgId);
+		String hql2 = "from OrganizationStructure where id=:orgId";
+		OrganizationStructure organizationStructure = organizationStructureDao.get(hql2, params);
+		return organizationStructure;
 	}
 
 	@Override
 	public List<Object> getAllProduct() {
-		String sql = "select * from 产品名称  ";
+		String sql = "select 字段1 from 产品名称  ";
 		List<Object> productList = objDao.findSql(sql);
 		return productList;
 	}
@@ -884,13 +943,13 @@ public class HtServiceImpl implements HtService {
 	}
 
 	@Override
-	public RenshiUserName getTelephoneByEmail(String email) {
+	public UserName getTelephoneByEmail(String email) {
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("email", email);
-		String hql = "from RenshiUserName where email=:email";
+		String hql = "from UserName where email=:email";
 		// String hql ="FROM ItemPrice where ctid=:htid";
-		RenshiUserName renshiUserName = renshiUserNameDao.get(hql, params);
-		return renshiUserName;
+		UserName userName = userNameDao.get(hql, params);
+		return userName;
 
 	}
 
@@ -962,7 +1021,219 @@ public class HtServiceImpl implements HtService {
 		params.put("htgaiyaofinal", htgaiyaofinal);
 		String hql = "update Contract set agreementText=:htgaiyaofinal where id=:ctid";
 		objDao.executeHql(hql, params);
+	}
+
+	@Override
+	public List<Object> getCompanyInfo() {
+		String sql = "select name from company";
+		List<Object> companyList = objDao.findSql(sql);
+		return companyList;
 		
+	}
+
+	@Override
+	public Contract getCopyContract(int copyId) {
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("copyId", copyId);
+		String hql = "from Contract where copyId=:copyId and dealConditon!=-1 and type=2";
+		Contract contract = contractDao.get(hql, params);
+		return contract;
+	}
+	
+	@Override
+	public List<Customer> getCustomerList() {
+		String hql = "from Customer";
+		List<Customer> customerList =  customerDao.find(hql);
+		return customerList;
+	}
+	
+	//分页查询母单位	
+	@Override
+	public List<Customer> getCustomerList(Integer id, String remarks, String city, String province, String xingzhi, String customerName, String charger,int page, int size) {
+		Map<String, Object> params = new HashMap<String, Object>();
+		StringBuilder sql = new StringBuilder("select distinct b.自动编号, b.用户名称, b.曾用名称, b.代理公司, b.性质, b.省份, b.城市, b.备注  FROM 用户列表 b left join 用户单位 a on a.单位编号=b.自动编号  where 1=1 ");
+		if(id!=null){
+			sql.append("and b.自动编号=:id ");
+			params.put("id", id);
+		}
+		if(remarks!=null&&!"".equals(remarks)){
+			sql.append("and b.备注 like :remarks ");
+			params.put("remarks", "%"+remarks+"%");
+		}
+		if(city!=null&&!"".equals(city)){
+			sql.append("and b.城市 like :city ");
+			params.put("city", "%"+city+"%");
+		}
+		if(province!=null&&!"".equals(province)){
+			sql.append("and b.省份 like :province ");
+			params.put("province", "%"+province+"%");
+		}
+		if(xingzhi!=null&&!"".equals(xingzhi)){
+			sql.append("and b.性质 like :xingzhi ");
+			params.put("xingzhi", "%"+xingzhi+"%");
+		}
+		if(customerName!=null&&!"".equals(customerName)){
+			sql.append("and b.用户名称 like :customerName ");
+			params.put("customerName", "%"+customerName+"%");
+		}
+		if(charger!=null&&!"".equals(charger)){
+			sql.append("and a.负责人 like :charger ");
+			params.put("charger", "%"+charger+"%");
+		}
+		sql.append(" order by b.自动编号 desc limit :start, :size ");
+		params.put("start", (page-1)*size);
+		params.put("size", size);
+	//	String hql = "select distinct b.* FROM 用户单位 a left join 用户列表 b on a.单位编号=b.自动编号  where b order by b.id desc limit :start, :size";
+		List<Customer> customerList = customerDao.findSql(sql.toString(), params);
+		return customerList;
+	}
+	
+	@Override
+	public int getTotalCountCustomer(Integer id, String remarks, String city, String province, String xingzhi, String customerName, String charger) {
+		Map<String, Object> params = new HashMap<String, Object>();
+		StringBuilder sql = new StringBuilder("select COUNT(distinct b.自动编号) FROM 用户列表 b left join 用户单位 a on a.单位编号=b.自动编号  where 1=1 ");
+		if(id!=null){
+			sql.append("and b.自动编号=:id ");
+			params.put("id", id);
+		}
+		if(remarks!=null&&!"".equals(remarks)){
+			sql.append("and b.备注 like :remarks ");
+			params.put("remarks", "%"+remarks+"%");
+		}
+		if(city!=null&&!"".equals(city)){
+			sql.append("and b.城市 like :city ");
+			params.put("city", "%"+city+"%");
+		}
+		if(province!=null&&!"".equals(province)){
+			sql.append("and b.省份 like :province ");
+			params.put("province", "%"+province+"%");
+		}
+		if(xingzhi!=null&&!"".equals(xingzhi)){
+			sql.append("and b.性质 like :xingzhi ");
+			params.put("xingzhi", "%"+xingzhi+"%");
+		}
+		if(customerName!=null&&!"".equals(customerName)){
+			sql.append("and b.用户名称 like :customerName ");
+			params.put("customerName", "%"+customerName+"%");
+		}
+		if(charger!=null&&!"".equals(charger)){
+			sql.append("and a.负责人 like :charger ");
+			params.put("charger", "%"+charger+"%");
+		}
+		List<Object> customerList = objDao.findSql(sql.toString(), params);
+		BigInteger objs = (BigInteger) customerList.get(0);
+		return objs.intValue();
+
+	}
+
+	// 添加母单位
+	@Override
+	public void addCustomer(Customer customer) {
+		try {
+			customerDao.save(customer);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	// 删除母单位
+	@Override
+	public void deleteCustomer(Integer customerId) {
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("customerId", customerId);
+		String sql1 = "delete from 用户单位  WHERE 单位编号= :customerId";
+		itemPriceDao.executeSql(sql1, params);
+		Customer customer = new Customer();
+		customer.setId(customerId);
+		customerDao.delete(customer);
+	}
+	
+	// 更新母单位
+	@Override
+	public void updateCustomer(Customer customer) {
+		try {
+			customerDao.update(customer);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	//查询母单位
+	@Override
+	public Customer getCustomer(Integer id) {
+		Customer customer = customerDao.get(Customer.class, id);
+		return customer;
+	}
+	
+	// 添加子单位
+	@Override
+	public void addCustomerDepart(CustomerDepart customerDepart) {
+		try {
+			customerDepartDao.save(customerDepart);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	// 删除子单位
+	@Override
+	public void deleteCustomerDepart(Integer id) {
+		CustomerDepart customerDepart = new CustomerDepart();
+		customerDepart.setId(id);
+		customerDepartDao.delete(customerDepart);
+	}
+	
+	// 更新子单位
+	@Override
+	public void updateCustomerDepart(CustomerDepart customerDepart) {
+		try {
+			customerDepartDao.update(customerDepart);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	//查询子单位
+	@Override
+	public CustomerDepart getCustomerDepart(Integer id) {
+		CustomerDepart customerDepart = customerDepartDao.get(CustomerDepart.class, id);
+		return customerDepart;
+	}
+
+
+	@Override
+	public List<CustomerDepart> getCustomerDepartListByDid(Integer dId, int page, int size) {
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("dId", dId);
+		String hql = "from CustomerDepart where dId=:dId order by id desc";
+		List<CustomerDepart> CustomerDepartList = customerDepartDao.find(hql, params, page, size);
+		return CustomerDepartList;
+	}
+	
+	@Override
+	public int getTotalCountCustomerDepart(Integer dId) {
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("dId", dId);
+		String hql = "select count(*) from CustomerDepart where dId=:dId ";
+		long count = customerDepartDao.count(hql, params);
+		int count1 = Integer.parseInt(String.valueOf(count)); 
+		return count1;
+	}
+
+	@Override
+	public List<Object> getxingzhiList() {
+		String sql = "select 名称 from 单位性质";
+		List<Object> customerList = objDao.findSql(sql);
+		return customerList;
+	}
+	
+	@Override
+	public UserName getUseInfo(String email) {
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("email", email);
+		String hql = "from UserName where email=:email ";
+		UserName userName = userNameDao.get(hql, params);
+		return userName;
 	}
 
 	

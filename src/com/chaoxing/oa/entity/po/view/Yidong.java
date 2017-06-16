@@ -32,6 +32,7 @@ public class Yidong implements Serializable {
 	private Float totalSalary;//工资汇总
 	private String level;
 	private Float lishiSalary;
+	private String cemail;//细胞核邮箱
 	
 	@Id
 	@Column(name="职员编号")
@@ -117,6 +118,13 @@ public class Yidong implements Serializable {
 	@Column(name="历史工资")
 	public Float getLishiSalary() {
 		return lishiSalary;
+	}
+	@Column(name="细胞核邮箱")
+	public String getCemail() {
+		return cemail;
+	}
+	public void setCemail(String cemail) {
+		this.cemail = cemail;
 	}
 	public void setLishiSalary(Float lishiSalary) {
 		this.lishiSalary = lishiSalary;

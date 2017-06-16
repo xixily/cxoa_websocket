@@ -47,7 +47,7 @@ public class PBaoxiao {
 	private String cpTime;//出票时间
 	private Float tuikuan;//退款金额，补借款金额
 	private Float kouchu;//扣除金额
-	private Date updateTime;//最近更新时间
+	private String updateTime;//最近更新时间
 	private Integer specifyId;//指定批准人id
 	
 	public Long getId() {
@@ -296,10 +296,10 @@ public class PBaoxiao {
 	public void setKouchu(Float kouchu) {
 		this.kouchu = kouchu;
 	}
-	public Date getUpdateTime() {
+	public String getUpdateTime() {
 		return updateTime;
 	}
-	public void setUpdateTime(Date updateTime) {
+	public void setUpdateTime(String updateTime) {
 		this.updateTime = updateTime;
 	}
 	public Integer getSpecifyId() {

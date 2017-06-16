@@ -6,9 +6,9 @@
             <h4 style="text-align:center">个人报销管理</h4>
         </div>
         <div class="col-xs-3 col-md-4">
-            <div id="bx_sp_cells" class="dropdown pull-right" style="padding-top: 5px;margin-right: 20px;">
+            <div id="bx_sp_cells" class="dropdown pull-right" style="padding-top: 5px;">
                 <button class="btn btn-default" onclick="caiwu.baoxiao.openApplication()" app-write="true">
-                    <i class="fa fa-pencil"></i>
+                    <i class="fa fa-pencil"></i>新增报销
                 </button>
             </div>
             <div class="clearfix"></div>
@@ -28,7 +28,6 @@
                             <ul class="dropdown-menu" role="menu">
                                 <li><a><span class="sr-only">id</span>批次号</a></li>
                                 <li><a><span class="sr-only">createTime</span>创建时间</a></li>
-                                <li><a><span class="sr-only">username</span>报销人</a></li>
                                 <li><a><span class="sr-only">number</span>报销张数</a></li>
                                 <li><a><span class="sr-only">money</span>报销金额</a></li>
                                 <li><a><span class="sr-only">huankuan</span>还借款金额</a></li>
@@ -42,7 +41,7 @@
                                 <li><a><span class="sr-only">caiwuRemarks</span>财务备注</a></li>
                             </ul>
                         </div>
-                        <input type="text" class="form-control" name="value" placeholder="您想查找什么？"/>
+                        <input type="text" class="form-control" name="value" placeholder="查找内容？"/>
                         <span class="input-group-btn">
                             <button id="self_bx_find" class="btn btn-default do_action" type="button" app-action="caiwu.baoxiao.find" app-init = "caiwu.baoxiao.init">
                                 <i class="glyphicon glyphicon-search"></i>
@@ -430,7 +429,7 @@
                         <!--</legend>-->
                         <fieldset>
                             <div class="form-group igroup-margin ">
-                                <label class="col-xs-4 col-sm-2 control-label" for="_money">报销金额:</label>
+                                <label class="col-xs-4 col-sm-2 control-label" for="_money"><span style="color:red">*</span> 报销总额:</label>
                                 <div class="col-xs-8 col-sm-4">
                                     <input type="number"  class="form-control input-sm" step="0.01" id="_money" name="money" placeholder="本次申报总金额...">
                                 </div>
@@ -440,7 +439,7 @@
                                 </div>
                             </div>
                             <div class="form-group igroup-margin ">
-                                <label class="col-xs-4 col-sm-2  control-label" for="_bx_bank">银行:</label>
+                                <label class="col-xs-4 col-sm-2  control-label" for="_bx_bank"><span style="color:red">*</span> 银行:</label>
                                 <div class="col-xs-8 col-sm-4">
                                     <select name="bank" id="_bx_bank" class="form-control input-sm">
                                         <option value="jtyh" selected>交通银行</option>
@@ -451,13 +450,13 @@
                                         <option value="nh">农业银行</option>
                                     </select>
                                 </div>
-                                <label class="col-xs-4 col-sm-2 control-label">卡号:</label>
+                                <label class="col-xs-4 col-sm-2 control-label"><span style="color:red">*</span> 卡号:</label>
                                 <div class="col-xs-8 col-sm-4">
                                    <input type="text" class="form-control input-sm" name="account" placeholder="卡号...">
                                 </div>
                             </div>
                             <div class="form-group igroup-margin ">
-                                <label class="col-xs-4 col-sm-2 control-label" for="_number">报销张数:</label>
+                                <label class="col-xs-4 col-sm-2 control-label" for="_number"><span style="color:red">*</span> 报销张数:</label>
                                 <div class="col-xs-8 col-sm-4">
                                     <input type="number" step="1" max="100" min="0" id="_number" class="form-control input-sm" name="number" placeholder="报销张数...">
                                 </div>
@@ -469,12 +468,13 @@
                             <div class="form-group igroup-margin ">
                                 <label class="col-xs-4 col-sm-2 control-label" for="_explain">说明:</label>
                                 <div class="col-xs-8 col-sm-4">
-                                    <textarea name="explain" id="_explain" cols="30" rows="3" class="form-control" placeholder="详细说明报销内容..."></textarea>
+                                    <textarea name="explain" id="_explain" cols="30" rows="3" class="form-control" placeholder="本次每张报销单用途和其他特殊情况说明..."></textarea>
                                 </div>
                             </div>
                             <div class="form-group igroup-margin ">
+                                <span style="color: #ff1616;margin-left: 12px;filter: alpha(opacity=50);-moz-opacity:0.5;-khtml-opacity: 0.5;opacity: 0.8;">提示：带 * 的为必填项</span>
                                 <a class="pull-right" style=" margin-right: 20px;" href="javascript:void(0)" onclick="$('#specify_approver').toggleClass('hide');$(this).find('>i').toggleClass('hide')">
-                                    指定批准人（有签字权的）<i class="glyphicon glyphicon-hand-down "></i><i class="glyphicon glyphicon-hand-up hide"></i>
+                                    跨核报销选择批准人（有签字权的）<i class="glyphicon glyphicon-hand-down "></i><i class="glyphicon glyphicon-hand-up hide"></i>
                                 </a>
                                 <span class="clearfix"></span>
                             </div>

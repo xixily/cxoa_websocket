@@ -61,11 +61,11 @@ public class SecurityInterceptor implements HandlerInterceptor {
 				ipFlag = true;
 			}
 			if(!ipFlag){
-				if(ip.contains("192.168.") || ip.contains("127.0.") || ip.contains("118.186.227.46") || ip.contains("111.198.29.127") || ip.contains("localhost")){
+//				if(ip.contains("192.168.") || ip.contains("127.0.") || ip.contains("118.186.227.46") || ip.contains("111.198.29.127") || ip.contains("localhost")){
 					ipFlag = true;
-				}else{
-					ipFlag = false;
-				}
+//				}else{
+//					ipFlag = false;
+//				}
 			}
 			if(ipFlag){
 				SessionInfo sessionInfo = (SessionInfo) request.getSession().getAttribute(ResourceUtil.getSessionInfoName());

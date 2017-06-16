@@ -96,6 +96,9 @@ public class MonthWages implements Serializable{
 	private String registeredAddress;//户口地址
 	private String degree;//学历
 	private String sex;//性别
+	private String workSpace;//工作地
+	private String tiaoxinRecord;//调薪报表
+	
 	@Id
 	@Column
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -378,6 +381,13 @@ public class MonthWages implements Serializable{
 	public void setDegree(String degree) {
 		this.degree = degree;
 	}
+	@Column(name="工作地")
+	public String getWorkSpace() {
+		return workSpace;
+	}
+	public void setWorkSpace(String workSpace) {
+		this.workSpace = workSpace;
+	}
 	@Column(name="性别")
 	public String getSex() {
 		return sex;
@@ -638,5 +648,14 @@ public class MonthWages implements Serializable{
 	public void setRegisteredAddress(String registeredAddress) {
 		this.registeredAddress = registeredAddress;
 	}
+	@Column(name = "调薪报表")
+	public String getTiaoxinRecord() {
+		return tiaoxinRecord;
+	}
+	public void setTiaoxinRecord(String tiaoxinRecord) {
+		this.tiaoxinRecord = tiaoxinRecord;
+	}
+	
+	
 	
 }

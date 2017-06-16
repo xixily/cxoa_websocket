@@ -1,6 +1,6 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  <groupId>cxoa</groupId>
+  <groupId>com.chaoxing</groupId>
   <artifactId>cxoa</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <packaging>war</packaging>
@@ -364,7 +364,13 @@
 		    <artifactId>spring-session</artifactId>
 		    <version>1.2.2.RELEASE</version>
 		</dependency>
-
+		<!-- spring mail -->
+	    <dependency>
+	    <groupId>org.springframework.integration</groupId>
+	    <artifactId>spring-integration-mail</artifactId>
+	    <version>${spring.version}</version>
+		</dependency>
+	    <!-- spring websocket end -->
 		
 	<!-- spring end -->
 	
@@ -379,6 +385,13 @@
     <artifactId>sqljdbc4</artifactId>
     <version>4.0</version>
 	</dependency> -->
+	
+	<!-- java mail 包 -->
+	<dependency>
+    <groupId>com.sun.mail</groupId>
+    <artifactId>javax.mail</artifactId>
+    <version>1.5.2</version>
+	</dependency>
 	
 	<dependency>
 			<groupId>javax.servlet</groupId>

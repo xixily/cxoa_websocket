@@ -2005,7 +2005,7 @@ shebaoSummary : {
 				session.editKaoqinRow = $.extend({},row);
 			}
 			if (kaoqinEdit != index) {
-				if (employee.shebaoSummary.endEditing()) {
+				if (employee.kaoqin.endEditing()) {
 					$('#datagrid_kaoqin').datagrid('selectRow', index)
 							.datagrid('beginEdit', index);
 					kaoqinEdit = index;

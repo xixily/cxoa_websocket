@@ -6,8 +6,10 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> -->
 
 <link href="/app/views/hetong/css/global.css" rel="stylesheet" type="text/css" />
-<link href="/app/views/hetong/css/style.css" rel="stylesheet" type="text/css" />
-<link href="/app/views/hetong/css/selectlist.css" rel="stylesheet" type="text/css" />
+
+
+<!-- <link href="/app/views/hetong/css/style.css" rel="stylesheet" type="text/css" />
+<link href="/app/views/hetong/css/selectlist.css" rel="stylesheet" type="text/css" /> -->
 
 <style>
 .main * {

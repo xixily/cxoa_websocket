@@ -1305,7 +1305,7 @@
                     </div>
                     <div class="col-xs-6 col-md-6" style="padding-top: 6px;">
                         <div class="btn-group pull-right" role="group" aria-label="Default button group">
-                            <button type="button" class="btn btn-default" onclick="caiwu.baoxiaoCheck.exportExcel()">
+                            <button type="button" class="btn btn-default" onclick="caiwu.baoxiaoCheck.exportExcel(100, 'dhk_find')">
                                 汇款信息导出
                                 <i class="glyphicon glyphicon-arrow-down"></i>
                             </button>
@@ -1718,6 +1718,26 @@
 
                             </div>
                         </form>
+                    </div>
+                </div>
+            </div>
+            <div id="yhk_btn_group">
+                <div class="row">
+                    <div class="col-xs-6 col-md-6" style="padding-top: 6px;">
+                        <!--<div class="btn-group" role="group" aria-label="Default button group">-->
+                            <!--<button type="button" class="btn btn-default"-->
+                                    <!--onclick="caiwu.baoxiaoCheck.submitDaihuikuan()">已汇款确认-->
+                                <!--<i class="fa fa-check-square-o"></i>-->
+                            <!--</button>-->
+                        <!--</div>-->
+                    </div>
+                    <div class="col-xs-6 col-md-6" style="padding-top: 6px;">
+                        <div class="btn-group pull-right" role="group" aria-label="Default button group">
+                            <button type="button" class="btn btn-default" onclick="caiwu.baoxiaoCheck.exportExcel(101, 'yhk_find')">
+                                已汇款汇款信息导出
+                                <i class="glyphicon glyphicon-arrow-down"></i>
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>

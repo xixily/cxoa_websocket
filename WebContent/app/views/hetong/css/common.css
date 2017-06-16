@@ -1,0 +1,70 @@
+@charset "utf-8";
+/* CSS Document */
+
+/*格式化样式*/
+/* *{margin:0;padding:0} */
+/* body{font:12px/1.5 MIcrosoft YaHei,Arial, Helvetica, sans-serif;color:#333} */
+/* table{width:100%; border-collapse:collapse;border:none;border-spacing:0} */
+/* a{color:#202020;text-decoration:none;} */
+/* img{border:none} */
+/* input{vertical-align:middle;outline:none}
+textarea{outline:none;}
+ul,ol,dl{list-style:none;}
+b,em,i,u,strong{font-weight:normal;font-style:normal;text-decoration:none;}
+h1,h2,h3,h4,h5,h6{font-size:14px;font-weight:normal;}
+ */
+/*公共样式*/
+.fl{float:left;}
+.fr{float:right;}
+.clearfix{overflow:hidden;zoom:1}
+.clear{clear:both}
+
+
+.wrap1000{width:1000px;margin:0 auto}
+.tit{height:59px;line-height:59px;font-weight:bold}
+.addGroup{height:29px;line-height:29px;padding:0 10px;background:#81bd03;font-size:14px;color:#fff;border-radius:3px}
+.selectBox{ vertical-align:top; position:relative;cursor:pointer; background-color:#fff; width:148px; border:1px solid #cfcfcf; line-height:27px; height:27px;}
+.selectBox p{  vertical-align:top; padding:0 20px 0 10px; background:url(../images/searr.jpg) no-repeat right center;overflow:hidden;height:27px}
+.selectBox ul{ width:148px; border:1px solid #cfcfcf; border-top:0; position:absolute; z-index:1; top:27px; left:-1px; background-color:#fff; display:none;}
+.selectBox ul li a{ display:block; line-height:29px; padding:0 10px; color:#333; border-top:1px solid #f2f2f2;}
+.selectBox ul li a:hover{ background-color:#81bd03; color:#fff;}
+.oganizName{width:218px;height:27px;line-height:27px;border:solid 1px #ccc;padding:0 10px;margin:0 20px;}
+.query{width:75px;height:31px;text-align:center;line-height:31px;background:#4ea6f2;border:none;border-radius:5px;color:#fff;font-family:Microsoft YaHei;font-size:14px;cursor:pointer}
+.tabList{margin-top:20px;border:solid 1px #ccc;border-top:none}
+.tabList th,.tabList td{border:solid 1px #fff;padding:0 5px}
+.tabList th{background:#4ea6f2;height:40px;color:#fff;font-size:16px;font-weight:normal}
+.tabList td{padding:10px 5px;color:#666}
+.tabList th.nobor,.tabList td.nobor{border-left:none}
+.tabList th.nobor02,.tabList td.nobor02{border-right:none}
+.gray{color:#999}
+.tabList tr.trBg td{background:#f2f2f2}
+.tabList td a{color:#666}
+
+.page{padding:20px;text-align:center}
+.page a{display:inline-block;font-size:14px;padding:10px}
+
+.addBg{position:fixed;background:#000;filter:alpha(opacity=50);opacity:0.5;left:0;top:0;width:100%;height:100%;display:none}
+.addJg{position:fixed;width:600px;top:20%;left:30%;display:none}
+.addH3{height:42px;background:#4ea6f2;line-height:42px;color:#fff;font-size:16px;font-weight:bold;padding-left:10px}
+.gb{width:39px;height:42px;background:url(../images/gb.jpg) no-repeat;cursor:pointer}
+.addCon{padding:20px;background:#fff;border:solid 2px #e0e0e0}
+.addCon h3{font-size:18px;font-weight:bold;text-align:center;padding-bottom:10px;}
+.addCon table td{font-size:14px;padding:12px 5px}
+.addInp{border:solid 1px #ccc;width:278px;height:34px;line-height:34px;padding:0 10px;}
+.addArea{width:288px;height:68px;border:solid 1px #ccc;resize:none;padding:5px}
+.save{width:100px;height:36px;text-align:center;line-height:36px;color:#fff;border-radius:5px;background:#4ea6f2;border:none;font-size:16px;font-family:Microsoft YaHei;cursor:pointer}
+
+.wrap1180{width:1180px;margin:30px auto}
+.schoolName{font-weight:bold;font-size:14px;}
+
+
+
+
+
+
+
+
+
+
+
+

@@ -179,6 +179,9 @@ public class PubCaiwuServiceImpl implements PubCaiwuService {
 		pbx.setTuikuan(bx.getTuikuan());
 		pbx.setKouchu(bx.getKouchu());
 		pbx.setSpecifyId(bx.getSpecifyId());
+		pbx.setUpdateTime(DateUtil.format(bx.getUpdateTime(),"yyyy-MM-dd HH:mm:ss"));
+		pbx.setCpid(bx.getCpid());
+		pbx.setCpNumber(bx.getCpNumber());
 	}
 	
 	@Override
@@ -275,6 +278,7 @@ public class PubCaiwuServiceImpl implements PubCaiwuService {
 		baoxiao.setTuikuan(pbaoxiao.getTuikuan());
 		baoxiao.setKouchu(pbaoxiao.getKouchu());
 		baoxiao.setSpecifyId(pbaoxiao.getSpecifyId());
+		baoxiao.setCpNumber(baoxiao.getCpNumber());
 	}
 
 	@Override

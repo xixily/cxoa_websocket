@@ -1062,7 +1062,7 @@ $.extend($.fn.validatebox.defaults.rules, {
     }, 
     idcard : {// 验证身份证 
         validator : function(value) { 
-            return /(^[1-9]\d{5}[1,2]\d{3}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}([0-9]|X)$)|(^[A-Za-z]\d+$)/.test(value);
+            return /(^[1-9]\d{5}[1,2]\d{3}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}([0-9]|X)$)|(^[A-Za-z][0-9A-Za-z]+$)/.test(value);
 //            return /^[1-9]\d{5}[1-9]\d{3}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}([0-9]|X)$/i.test(value);
         },
         message : '身份证号码格式不正确'

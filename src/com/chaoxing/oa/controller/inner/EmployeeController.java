@@ -247,22 +247,31 @@ public class EmployeeController {
 	@ResponseBody
 	public Json updateShebaoWage(ShebaoWage shebaoWage){
 		Json result = new Json();
-		PSystemConfig ps = employeeInfoService.getSysconfig(shebaoWage.getCompany(), SysConfig.SHEBAO_SUMMARY);
-		if(ps==null || ps.getLocked()==0){
-			Pwages pwage = new Pwages();
-			BeanUtils.copyProperties(shebaoWage, pwage);
-			if(caculateWages(pwage)>0){
-				if(employeeInfoService.updateWageShebao(pwage)>0){
-					result.setSuccess(true);
-					result.setMsg("工资编号：[" + shebaoWage.getId() + "]更新成功。");
+		Pwages pw = employeeInfoService.getWages(shebaoWage.getId());
+		if(null != pw){
+			String company = pw.getCompany();
+			PSystemConfig ps = employeeInfoService.getSysconfig(company, SysConfig.SHEBAO_SUMMARY);
+			PSystemConfig ps2 = employeeInfoService.getSysconfig(shebaoWage.getCompany(), SysConfig.SHEBAO_SUMMARY);
+			if((ps==null || ps.getLocked()==0) && (ps2 ==null || ps2.getLocked()==0)){
+				Pwages pwage = new Pwages();
+				BeanUtils.copyProperties(shebaoWage, pwage);
+				if(caculateWages(pwage)>0){
+					if(employeeInfoService.updateWageShebao(pwage)>0){
+						result.setSuccess(true);
+						result.setMsg("工资编号：[" + shebaoWage.getId() + "]更新成功。");
+					}else{
+						result.setMsg("入库失败，请刷新后重试。");
+					}
 				}else{
-					result.setMsg("入库失败，请刷新后重试。");
+					result.setMsg("更新失败。");
 				}
 			}else{
-				result.setMsg("更新失败。");
+				result.setMsg("社保公司[" + shebaoWage.getCompany() +"]或["
+						+ company
+						+ "]已被锁定，您的更新没有保存，请刷新后再查看工资，请您联系社保管理员解锁！~");
 			}
 		}else{
-			result.setMsg("社保公司[" + shebaoWage.getCompany() +"]已被锁定，请您联系社保管理员解锁！~");
+			result.setMsg("没有此人信息。");
 		}
 		
 		return result;

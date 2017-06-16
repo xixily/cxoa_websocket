@@ -8,10 +8,10 @@
 
 <link href="/app/views/hetong/css/global.css" rel="stylesheet"
 	type="text/css" />
-<link href="/app/views/hetong/css/style.css" rel="stylesheet"
+<!-- <link href="/app/views/hetong/css/style.css" rel="stylesheet"
 	type="text/css" />
 <link href="/app/views/hetong/css/selectlist.css" rel="stylesheet"
-	type="text/css" />
+	type="text/css" /> -->
 
 <style>
 .main * {
@@ -28,6 +28,12 @@
 	width: inherit;
 }
 
+.query_list li .fidtext {
+    border: solid #ccc 1px;
+}
+/* .select-button {
+    padding: 0px 24px 0px 0px;
+} */
 </style>
 <div app-data="body">
 	<div class="main">
@@ -125,9 +131,12 @@
 							<select id="zhuangtai" name="zhuangtai" class="leftF">
 								<option value="-10">全部</option>
 								<option value="0"> 未处理</option>
+								<option value="5"> 未处理(修改)</option>
 								<option value="1">审核未通过</option>
+								<option value="6">审核未通过(修改)</option>
 								<option value="2">审核已通过</option>
 								<option value="3">合同完结</option>
+								<option value="7">合同废弃</option>
 						   </select>
 						</li>
 						<!-- <li>
@@ -161,7 +170,7 @@
 				<div style="/*width: 1500px;*/">
 					<table width="100%" border="0" cellspacing="0" cellpadding="0">
 						<tr>
-							<th width="4%">序号</th>
+							<th width="3%">序号</th>
 							<th width="4%">合同编号</th>
 							<th width="8%">单位名称</th>
 							<th width="4%">单位性质</th>
@@ -174,15 +183,15 @@
 							<th width="6%">合同金额</th>
 							<th width="6%">回款金额</th>
 							<th width="7%">回款时间</th>
-							<th width="7%">开票总金额</th>
+							<th width="5%">开票总金额</th>
 							<th width="5%">坏账</th>
 							<th width="6%">处理状态</th>
 							<th width="4%">详情</th>
-							<th width="4%">操作</th>
+							<th width="6%">操作</th>
 						</tr>
 
 					<c:forEach var="c" items="${pageBean.list }" varStatus="cs">
-					<c:if test="${c.dealConditon=='0'}">
+					<c:if test="${c.dealConditon=='0'||c.dealConditon=='5'}">
 				    <tr>
 					<td bgcolor="#dcfcd3">${cs.index + 1}</td>
 					<td bgcolor="#dcfcd3">${c.id }</td>
@@ -199,13 +208,19 @@
 					<td bgcolor="#dcfcd3">${c.receiveTime }</td>
 					<td bgcolor="#dcfcd3">${c.kaipiaoMoney}</td>
 					<td bgcolor="#dcfcd3">${c.year }</td>
+				    <c:if test="${c.dealConditon=='0'}">
 				    <td bgcolor="#dcfcd3">未处理</td>
 				    <td bgcolor="#dcfcd3"><a class="detail" id="${c.id }"	href="javascript:void(0)">详情</a></td>
+				    </c:if>
+				    <c:if test="${c.dealConditon=='5'}">
+				    <td bgcolor="#dcfcd3">未处理(修改)</td>
+				    <td bgcolor="#dcfcd3"><a class="detail2" id="${c.id }"	href="javascript:void(0)">详情</a></td>
+				    </c:if>
 				    <td bgcolor="#dcfcd3"></td>
 			        </tr>
 				    </c:if> 
  
-                    <c:if test="${c.dealConditon!='0'}"> 
+                    <c:if test="${c.dealConditon!='0'&&c.dealConditon!='5'}"> 
 							<tr>
 								<td>${cs.index + 1}</td>
 								<td>${c.id }</td>
@@ -231,6 +246,12 @@
 								<c:if test="${c.dealConditon=='3'}">
 									<td>合同完结</td>
 								</c:if>
+								<c:if test="${c.dealConditon=='6'}">
+									<td>审核未通过(修改)</td>
+								</c:if>
+								<c:if test="${c.dealConditon=='7'}">
+									<td>废弃</td>
+								</c:if>
 								<c:if test="${c.dealConditon==null}">
 									<td>无</td>
 								</c:if>
@@ -239,14 +260,16 @@
 								<c:if test="${c.dealConditon=='1'}">
 								     <td></td>
 								</c:if>
-								
 								<c:if test="${c.dealConditon=='3'}">
+								     <td></td>
+								</c:if>
+								<c:if test="${c.dealConditon=='7'}">
 								     <td></td>
 								</c:if>
 								
 								
 								<c:if test="${c.dealConditon=='2'}">
-								     <td><a class="wanjie" id="${c.id }"href="javascript:void(0)">完结</a></td>
+								     <td><a class="wanjie" id="${c.id }" href="javascript:void(0)">完结</a>&nbsp; <a class="abandon" id="${c.id }" href="javascript:void(0)">废弃</a></td>
 								</c:if>
 								
 								
@@ -266,12 +289,12 @@
 <script type="text/javascript" src="/app/views/hetong/js/selectlist.js"></script>
 <script type="text/javascript" src="/app/views/hetong/js/pageUtil.js"></script>
 <script type="text/javascript">
-		$(function(){
-			$('select').selectlist({
-				width: 130,
-				height: 18
-			});		
-		})
+$(function(){
+	$('select').selectlist({
+		width: 130,
+		height: 18
+	});		
+})
 		
  // 分页  
 $(document).ready(function(){
@@ -300,12 +323,12 @@ function changeMethod(nextPage){
      var data = {"purchaseCom":purchaseCom1,"danwei":danwei,"gongsi":gongsi,"group":group,"responsibility":responsibility,"zhuangtai":zhuangtai,"userId":userId,"page":nextPage};
     
      if($('input[id="undeal"]').prop("checked")){
- 		$.get('public/ht/getUndealcontractList.action',{page:nextPage},function(result){
+ 		$.get('public/ht/contractList.action',{zhuangtai:0,page:nextPage},function(result){
  			$('#container').html(result);
  			$('input[id="undeal"]').attr("checked","checked");
  			})
  	}else{
- 	   $.post_('public/ht/contractListCondition.action',data,function(result){
+ 	   $.post_('public/ht/contractList.action',data,function(result){
  			$('#container').empty();
  			
  			$('#container').html(result);
@@ -332,7 +355,7 @@ function changeMethod(nextPage){
  			$("#userId").val(userId);
  			$("#group").val(group);
  			$("#responsibility").val(responsibility);
- 			}) 
+ 		}) 
  	}
      
 /* 	if($('input[id="undeal"]').prop("checked")){
@@ -383,7 +406,7 @@ function changeMethod(nextPage){
 $("#undeal").click(function(){
 	var purchaseCom = $("#purchaseCom").val();
 	if($('input[id="undeal"]').prop("checked")){
-		$.get('public/ht/getUndealcontractList.action',function(result){
+		$.get('public/ht/contractList.action',{zhuangtai:0},function(result){
 			$("#container").empty();
 			$("#container").html(result);
 			$('input[id="undeal"]').attr("checked","checked");
@@ -399,10 +422,24 @@ $("#undeal").click(function(){
 })
 		
 $(".detail").click(function(){
-		var id = $(this).attr("id");
+	var dealCondition = $(this).parent().prev().text();
+	var id = $(this).attr("id");
+	if(dealCondition=='废弃'){
+		$.get('public/ht/contractDetailForSale.action',{id:id},function(result){
+			$('#container').html(result);
+		})
+	}else{
 		$.get('public/ht/contractDetail.action',{id:id},function(result){
 			$('#container').html(result);
-			})
+		})
+	}
+})
+//申请修改,进入对照页面
+$(".detail2").click(function(){
+	var id = $(this).attr("id");
+	$.get('public/ht/contractCompare.action',{id:id},function(result){
+		$('#container').html(result);
+	})
 })
 
 	
@@ -420,7 +457,7 @@ $("#search").click(function(){
 	/* var data = {"year":year,"purchaseCom":purchaseCom,"danwei":danwei,"gongsi":gongsi,"chanpin":chanpin,"shengfen":shengfen,"group":group,"responsibility":responsibility,
 		"zhuangtai":zhuangtai,"userId":userId};  */
 	var data = {"purchaseCom":purchaseCom,"danwei":danwei,"gongsi":gongsi,"group":group,"responsibility":responsibility,"zhuangtai":zhuangtai,"userId":userId};
-	   $.post_('public/ht/contractListCondition.action',data,function(result){
+	   $.post_('public/ht/contractList.action',data,function(result){
 		$('#container').empty();
 		$('#container').html(result);
 		$("#purchaseCom").val(purchaseCom);
@@ -470,6 +507,24 @@ $("#search").click(function(){
 	var id = $(this).attr("id");
 	$.messager.confirm("提示","您确认要改为合同完结状态吗？",function(){
 		  $.post('public/ht/updateDealCondition.action',{"id":id},function(res){
+			 
+			   if(res.success==true){
+					$.get('public/ht/contractList.action',function(result){
+						$('#container').html(result);
+					})
+				   $.messager.alert('提示:','操作成功');
+				 }else{
+					 $.messager.alert('提示：','操作失败');
+			   }
+	       })
+	   })
+   });
+   
+	$(".abandon").click(function(){
+	/* var id = $(this).parent().children('td').eq(1).text(); */
+	var id = $(this).attr("id");
+	$.messager.confirm("提示","您确认要废弃此合同吗？",function(){
+		  $.post('public/ht/abandonContract.action',{"id":id},function(res){
 			 
 			   if(res.success==true){
 					$.get('public/ht/contractList.action',function(result){

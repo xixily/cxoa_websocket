@@ -60,7 +60,7 @@ public interface BaseDaoI<T> {
 	
 	public <T> Query selectStatement(Class<T> className, Map<String,Object> varables, Session session,int page,int pageSize);
 	
-	public <T> List<T> queryResultList(Class<T> className, Map<String,Object> varables);
+	public Integer queryResultList(Class<T> className, Map<String,Object> varables);
 	
 	public <T> Query selectStatement(Class<T> className, Map<String,Object> varables, Session session);
 	

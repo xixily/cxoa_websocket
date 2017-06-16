@@ -5,10 +5,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head></head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
 <title>销售人员创建合同</title> -->
 <link href="/app/views/hetong/css/global.css" rel="stylesheet" type="text/css" />
-<link href="/app/views/hetong/css/space.css" rel="stylesheet" type="text/css" />
-<link href="/app/views/hetong/css/selectlist.css" rel="stylesheet" type="text/css" />
+
+<!-- <link href="/app/views/hetong/css/space.css" rel="stylesheet" type="text/css" />
+<link href="/app/views/hetong/css/selectlist.css" rel="stylesheet" type="text/css" /> -->
 <style>
 .pop_product {
     height: 380px;
@@ -16,10 +18,53 @@
 .popwindow {
 	height: initial;2
 }
+.selectNew {
+    z-index: 1;
+}
+p {
+    margin: 0 0 ;
+}
+.selectNav ul li {
+    padding: 2px 0 0 6px;
+    border-bottom: 1px solid #d4c6cb;
+}
+
+.courier_list li.li09 {
+    width: 423px;
+}
+
+.selectNav {
+    width: 228px;
+    background: url(/app/views/hetong/images/icons.png) no-repeat 210px 0;
+}
+
+.selectNew {
+    width: 226px;
+}
+
+.courier_list li.li05 {
+    width: 423px;
+}
+
+.courier_list li.li08 {
+    width: inherit;
+}
 .tract_list .quy_tit {
     width: 90px;
 }
+.main {
+    width: inherit;
+}
 </style>
+
+
+
+
+
+
+
+
+
 
 <div class="main">
 <!-- <input  type="button" name="button" value="返回" class="bnt"/> -->
@@ -171,19 +216,25 @@
 		
 		
 		<div class="tareaTable">
-			<h3>发票情况：<!-- <a class="invoice" href="#">增开发票</a> --></h3>
-			<table width="100%" border="0" cellspacing="0" cellpadding="0">
+			<h3>发票情况：<!-- <a id="addFapiao" class="invoice" href="javascript:void(0)">增补发票</a> --></h3>
+			<table id="tableAboutFapiao" width="100%" border="0" cellspacing="0" cellpadding="0">
 			  <tr>
 				<th width="5%">序号</th>
 				<th width="10%">开票日期</th>
-				<th width="9%">开票公司</th>
-				<th width="12%">开票单位</th>
-				<th width="12%">发票类型</th>
+				<th width="6%">开票公司</th>
+				<th width="10%">开票单位</th>
+				<th width="6%">发票类型</th>
 				<th width="12%">发票品名</th>
-				<th width="10%">金额</th>
-				<th width="9%">回款情况</th>
+				<th width="8%">金额</th>
+				<th width="8%">回款金额</th>
 				<th width="9%">回款日期</th>
-				<!-- <th width="6%">操作</th> -->
+				<th width="6%">资金类型</th>
+				<th width="4%">账户</th>
+				<th width="4%">预计回款时间</th>
+				<th width="6%">财务月份</th>
+				<th width="6%">备注</th>
+				<!-- <th width="9%">操作</th> -->
+				
 			  </tr>
 			  <c:forEach var="f" items="${faPiaoList }" >
 			  <tr>
@@ -196,6 +247,13 @@
 				<td>${f.money}</td>
 				<td>${f.huiKuan}</td>
 				<td>${f.receivedpaymentsdate}</td>
+				<td>${f.fundType}</td>
+				<td>${f.account}</td>
+				<td>${f.yujihuikuanDate}</td>
+				<td>${f.caiwuMonth}</td>
+				<td>${f.remark}</td>
+<%-- 				<td><a id='${f.id}' class='dele' href='javascript:;' onclick='updateFapiao2(${f.id},this)'>修改</a></td>
+ --%>
 				<!-- <td><a class="dele" href="#">修改</a></td> -->
 			  </tr>
 			  </c:forEach>
@@ -213,11 +271,12 @@
 				<!-- <th width="10%">收件单位</th> -->
 				<th width="8%">收件地址</th>
 				<th width="11%">联系电话</th>
-				<th width="9%">发件日期</th>
+				<!-- <th width="9%">发件日期</th> -->
 				<th width="7%">快递内容</th>
 				<th width="9%">快递公司</th>
 				<th width="15%">快递单号</th>
-				<!-- <th width="6%">操作</th> -->
+				<th width="15%">邮寄日期</th>
+				
 			  </tr>
 			  <c:forEach var="f" items="${fahuoList }" >
 			  <tr>
@@ -226,10 +285,11 @@
 				<%-- <td bgcolor="#f5f6f6">${f.d_company}</td> --%>
 				<td bgcolor="#f5f6f6">${f.d_address}</td>
 				<td bgcolor="#f5f6f6">${f.d_tel}</td>
-				<td bgcolor="#f5f6f6">${f.jDate}</td>
+				<%-- <td bgcolor="#f5f6f6">${f.jDate}</td> --%>
 				<td bgcolor="#f5f6f6">${f.content}</td>
 				<td bgcolor="#f5f6f6">${f.postMethod}</td>
 				<td bgcolor="#f5f6f6">${f.mailno}</td>
+				<td bgcolor="#f5f6f6">${f.jDate}</td>
 				<!-- <td bgcolor="#f5f6f6"><a class="dele" href="#">修改</a></td> -->
 			  </tr>
 			  </c:forEach>
@@ -237,29 +297,105 @@
 			</table>
 			<p class="text" style="color:red;">${ContractVO.youjiStatus }</p>
 		</div> 
-		
+		<div class="tareaTable">
+			<h3>合同概要：</h3>
+			<textarea id="contractContent" style="height:60px;">${contract.agreementText }</textarea>
+			<p class="text" style="color:red;">${ContractVO.agreementText }</p>
+		</div>
 		<div class="tareaTable">
 			<h3>付款方式：</h3>
 			<textarea id="payMethod">${contract.payMethod }</textarea>
 			<p class="text" style="color:red;">${ContractVO.payMethod }</p>
 		</div>
 		<div class="tareaTable">
-			<h3>合同概要：</h3>
-			<textarea id="contractContent" style="height:60px;">${contract.agreementText }</textarea>
-			<p class="text" style="color:red;">${ContractVO.agreementText }</p>
-		</div>
-		
-		<div class="tareaTable">
 			<h3>备　　注：</h3>
 			<textarea id="remark" style="height:60px;">${contract.remarksText }</textarea>
 		</div>
-        
-		
 	</form>
 	</div>
 	<div class="ract_bottom">
 	</div>
 </div>
+
+
+<div class="maskLayer"></div>
+<div id="windowAboutFapiao4" class="popwindow pop_invoice" style="display:none;">
+    <h3>新增 / 编辑 / 查看发票</h3>
+    <form id="form1" name="form1" method="post" action="">
+    <ul class="courier_list">
+    	<li class="li01">
+        	<label>合同编号：</label><div id="HtForFapiao"></div>
+        </li>
+    	<li class="li01">
+			<label>申请时间：</label><div id="applicationTimeAboutFapiao"></div>
+        </li>
+    	
+    	<li class="li02">
+       		<label>开票金额 ：</label>
+			<input id="kaipiaoAmount" type="text" name="textfield" autocomplete="off" class="fidtext" onBlur="validateFapiaoAmount()"/>
+            <p id="kaipiaoAmountError" class="text"></p>
+        </li>
+    	<li class="li02">
+       		<label>大写金额：</label>
+			<input id="daxieAmount" type="text" name="textfield" class="fidtext" />
+        </li>
+        
+    	<li class="li02">
+       		<label>开票公司：</label>
+			<input id="kaipiaoCompany" type="text" name="textfield" class="fidtext" />
+        </li>
+    	<li class="li05">
+       		<label>开票单位：</label>
+			<input id="kaipiaodDanwei" type="text" name="textfield" class="fidtext" />
+        </li>
+    	<!-- <li class="li02">
+       		<label>发票类型：</label>
+			<input id="fapiaoType" type="text" name="textfield" class="fidtext" />
+        </li> -->
+		<li class="li02">
+      		<label>发票类型：</label>
+			<select id="fapiaoType" name="fapiaoType" class="fidtext">
+				<option value="0">普票</option>
+				<option value="1">增票</option>
+			</select>
+        </li>
+        
+        <li class="li09">
+       		<label>发票品名：</label>
+      	<div class="selectNav" id="nav">
+              <p id="pinming" class="selectSet">点击选择栏目</p>
+              <div class="selectNew">
+                  <div style="margin-left:6px;"><input id="pinmingSearch" type="text" name="textfield" class="fidtext" style="width:200px; float:none;" placeholder="搜索..." /></div>
+                  <ul id="pinmingUl">
+                     
+                  </ul>
+              </div>
+          </div>
+         </li>
+    	<li class="li02">
+       		<label>开票日期：</label>
+			<!-- <input id="kaipiaoDate" type="text" name="textfield" class="fidtext" /> -->
+			<input type="text" onClick="WdatePicker({dateFmt:'yyyy-MM-dd'})" id="kaipiaoDate" name="textfield" class="fidtext"></input>
+        </li>
+        
+         <li class="li08">
+       		<label style="width:128px">开票预计回款时间：</label>
+			<input type="text" onClick="WdatePicker({dateFmt:'yyyy-MM-dd'})" id="yujihuikuanDate" name="textfield" class="fidtext"></input>
+        </li>
+    	
+    	<li class="li03">
+       		<label>备　　注：</label>
+			<textarea id="remarkAboutFapiao"></textarea>
+        </li>
+        <input style="display:none;" id="fapiaoId" type="text" name="textfield" class="fidtext" value=""/>
+    	<li class="li04"><input id="sureAboutFapiaoSale" type="button" name="button" value="确定" class="bnt" />
+    	<input id="updateFapiaoSale" type="button" name="button" value="修改" class="bnt" style="display:none;"/>
+    	<input id="deleteFapiao" type="button" name="button" value="删除" class="bnt" style="display:none;"/>
+    	<a class="bnt" href="#">取消</a></li>
+    </ul>
+    </form>
+</div>
+
 
 <script type="text/javascript" src="/app/views/hetong/js/popwindow.js"></script>
 <script type="text/javascript" src="/app/views/hetong/js/selectlist.js"></script>

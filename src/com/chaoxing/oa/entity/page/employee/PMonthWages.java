@@ -78,6 +78,8 @@ public class PMonthWages {
 	private String registeredAddress;//户口地址
 	private String degree;//学历
 	private String sex;//性别
+	private String workSpace;//工作地
+	private String tiaoxinRecord;//调薪报表
 	
 	public Integer getId() {
 		return id;
@@ -541,5 +543,18 @@ public class PMonthWages {
 	public void setSex(String sex) {
 		this.sex = sex;
 	}
+	public String getTiaoxinRecord() {
+		return tiaoxinRecord;
+	}
+	public void setTiaoxinRecord(String tiaoxinRecord) {
+		this.tiaoxinRecord = tiaoxinRecord;
+	}
+	public String getWorkSpace() {
+		return workSpace;
+	}
+	public void setWorkSpace(String workSpace) {
+		this.workSpace = workSpace;
+	}
+	
 	
 }

@@ -319,7 +319,8 @@ var caiwu = {
             btnSelector: '#bx_msg_btn',
             media_li_selector: '#bx_leader_media_li',
             app_back: 'cw_baoxiaoManager',
-            appendSelector:'#cw_bx_append'
+            appendSelector:'#cw_bx_append',
+            liIndex: 0
         },
         pageData_ypz:{
             url: 'caiwu/baoxiaoApprove',
@@ -330,7 +331,8 @@ var caiwu = {
             listSelector: '#ypz_list',
             media_li_selector: '#ypz_media_li',
             app_back: 'ypz_baoxiaoManager',
-            appendSelector:'#cw_ypz_append'
+            appendSelector:'#cw_ypz_append',
+            liIndex:1
         },
         init: function () {
             $(document).on("click",'#bx_leader_media_li .media-body>a',function(event){
@@ -474,12 +476,12 @@ var caiwu = {
                 var src = $(event.currentTarget);
                 data.id =  data.id ||src.parent().parent().find('[app-data="id"]').html();
             }
-//            $('#agree_form').form('clear');
-//            $('#agree_form').form('setForm',data);
-//            $('#bx_appro_true').removeClass('hide');
-//            $('#bx_appro_false').addClass('hide');
-//            $('#bx_appro_dialog').modal('toggle');
-            caiwu.baoxiaoAppro.updateInfo(data);
+            $('#agree_form').form('clear');
+            $('#agree_form').form('setForm',data);
+            $('#bx_appro_true').removeClass('hide');
+            $('#bx_appro_false').addClass('hide');
+            $('#bx_appro_dialog').modal('toggle');
+//            caiwu.baoxiaoAppro.updateInfo(data);
         },
         disAgree: function(event, id){
             var data = {};
@@ -533,6 +535,7 @@ var caiwu = {
             appendSelector:'#cw_bx_append',
             chat: true,
             chat_id: 'sh_btchat',
+            liIndex: 1
 //            onmessage: "caiwu.baoxiaoCheck.sh_onmessage",
         },
         pageData_dsp:{
@@ -559,7 +562,8 @@ var caiwu = {
 //            btnSelector: '#bx_msg_btn',
             media_li_selector: '#dcp_media_li',
             app_back: 'dcp_baoxiaoManager',
-            appendSelector:'#cw_dcp_append'
+            appendSelector:'#cw_dcp_append',
+            liIndex: 2
         },
         pageData_dhk:{
             url: 'caiwu/baoxiaoShenhe',
@@ -572,7 +576,8 @@ var caiwu = {
 //            btnSelector: '#bx_msg_btn',
             media_li_selector: '#dhk_media_li',
             app_back: 'dhk_baoxiaoManager',
-            appendSelector:'#cw_dhk_append'
+            appendSelector:'#cw_dhk_append',
+            liIndex: 3
         },
         pageData_yhk:{
             url: 'caiwu/baoxiaoShenhe',
@@ -583,7 +588,8 @@ var caiwu = {
             listSelector: '#yhk_list',
             media_li_selector: '#yhk_media_li',
             app_back: 'yhk_baoxiaoManager',
-            appendSelector:'#cw_yhk_append'
+            appendSelector:'#cw_yhk_append',
+            liIndex: 4
         },
         cpvalidator: function(dom){
             if(dom){
@@ -942,10 +948,22 @@ var caiwu = {
                 })
             })
         },
-        exportExcel: function(){
-            var data = $('#dhk_find').serializeJson()
+        /**
+         * 根据报销类型来导出excel表格
+         * @param type
+         * @param id
+         */
+        exportExcel: function(type, id){
+            var url = '';
+            id = id || "dhk_find";
+            if(100 === type){
+                url = "public/file/daihuikuanExport.action";
+            }else if(101 === type){
+                url = "public/file/yihuikuanExport.action";
+            }
+            var data = $('#' + id).serializeJson()
             data[data.type] = data.value;
-            app.downloadForm.download('public/file/daihuikuanExport.action', data);
+            app.downloadForm.download(url, data);
         },
         chupiao_add: function(e,obj){
             var dom = e ? e.closest('tr'):$('#cp_add_tr');
@@ -1335,8 +1353,9 @@ var caiwu = {
         var body = $("#" + pageData.source + "body");
         var data = $("#" + pageData.source + "body").data(app.getQueryParams());
         data.page +=1;
+        var liIndex = pageData.liIndex || 0;
         getBufferView(pageData.url, function (view) {
-            var li = $($(view).find('ul.media-list li')[0]);
+            var li = $($(view).find('ul.media-list li.media-bgcolor')[liIndex]);
             $.post(pageData.action, data, function (result) {
                 if (result.success) {
                     if(result.rows && result.rows.length<=0){

@@ -9,10 +9,13 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 import org.springframework.format.annotation.DateTimeFormat;
+
+import aj.org.objectweb.asm.Type;
 
 @Entity
 @Table(name = "合同情况", schema = "")
@@ -42,7 +45,7 @@ public class Contract implements Serializable{
 	private String agreementText;//合同内容
 	private String remarksText;//备注
 	private Float year;//年代
-	//private Float kaipiaoMoney;//开票金额
+	private Float kaipiaoMoney;//开票金额
 	private Date toCaiwuTime;//转财务时间
 	private String payMethod;//付款方式
 	private Integer cid;//用户单位表外键  用户编号
@@ -59,9 +62,9 @@ public class Contract implements Serializable{
 	private Integer MEDALINK;//MEDALINK
 	private Date terminateTime;//合同终止时间
 	private String xingzhi;//性质 (单位性质)
-	private String firstLevel;//一级 公司    
+	private String firstLevel;//一级 公司    (岗位性质,前场,中场,后场)
 	private String secondLevel;//二级  部门
-	private String thirdLevel;//三级 岗位
+	private String thirdLevel;//三级 岗位  (省份)
 	private String fourthLevel;//四级 小组
 	private String luku;//录库人
 	private Integer didNum;//单位编号
@@ -69,17 +72,22 @@ public class Contract implements Serializable{
 	/*private String company_property;//单位性质
 */	private String user_property;//用户性质
 	/*private String receivedAmount;//回款金额
-*/	private Integer expressCondition;//快递情况   1 已发 0 未发
-	private Integer dealConditon;//处理状态   -1 垃圾合同  0 未处理 1 审核未通过 2 审核已通过 3 合同完结 4 保存(暂存)        023不能修改  14能修改
+*///	private Integer expressCondition;//快递情况   1 已发 0 未发
+	private Integer dealConditon;//处理状态   -1 垃圾合同  0 未处理 1 审核未通过 2 审核已通过 3 合同完结 4 保存(暂存) 5 未处理(修改) 6 审核未通过(修改) 7 废弃合同      023不能修改  14能修改
 	@DateTimeFormat(pattern="yyyy-MM-dd")
 	private Date endTime;//项目预计结束时间(合同到期时间)
 /*	@DateTimeFormat(pattern="yyyy-MM-dd")
 	private Date receiveTime;//回款时间
 */	@DateTimeFormat(pattern="yyyy-MM-dd")
 	private Date submitTime;//提交时间
-	private String product;//所含产品
 	private String guidangNum;//归档份数
 	private String kuaijifenlei;//会计分类
+	private Integer copyId;//存的是某个合同的id,表示此合同副本,默认-1
+	private Integer type;//合同类型 1表示普通合同,2表示副本合同 ,数据库默认为1
+	/*private String receivedAmount;//回款金额
+	private Date receiveTime;//回款时间
+	private String product;//所含产品
+*/
 	@Id
 	@Column(name = "合同编号")
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -421,13 +429,13 @@ public class Contract implements Serializable{
 	public void setReceivedAmount(String receivedAmount) {
 		this.receivedAmount = receivedAmount;
 	}*/
-	@Column(name = "快递情况")
+	/*@Column(name = "快递情况")
 	public Integer getExpressCondition() {
 		return expressCondition;
 	}
 	public void setExpressCondition(Integer expressCondition) {
 		this.expressCondition = expressCondition;
-	}
+	}*/
 	@Column(name = "处理状态")
 	public Integer getDealConditon() {
 		return dealConditon;
@@ -456,13 +464,13 @@ public class Contract implements Serializable{
 	public void setSubmitTime(Date submitTime) {
 		this.submitTime = submitTime;
 	}
-	@Column(name = "所含产品")
+/*	@Column(name = "所含产品")
 	public String getProduct() {
 		return product;
 	}
 	public void setProduct(String product) {
 		this.product = product;
-	}
+	}*/
 	@Column(name = "归档份数")
 	public String getGuidangNum() {
 		return guidangNum;
@@ -476,6 +484,27 @@ public class Contract implements Serializable{
 	}
 	public void setKuaijifenlei(String kuaijifenlei) {
 		this.kuaijifenlei = kuaijifenlei;
+	}
+	@Column(name = "开票总金额")
+	public Float getKaipiaoMoney() {
+		return kaipiaoMoney;
+	}
+	public void setKaipiaoMoney(Float kaipiaoMoney) {
+		this.kaipiaoMoney = kaipiaoMoney;
+	}
+	@Column(name = "副本所属合同")
+	public Integer getCopyId() {
+		return copyId;
+	}
+	public void setCopyId(Integer copyId) {
+		this.copyId = copyId;
+	}
+	@Column(name = "合同类型")
+	public Integer getType() {
+		return type;
+	}
+	public void setType(Integer type) {
+		this.type = type;
 	}
 	
 }

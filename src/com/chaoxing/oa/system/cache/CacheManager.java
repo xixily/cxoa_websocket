@@ -33,6 +33,10 @@ public class CacheManager {
 		}
 	}
 	
+	private void test(){
+		
+	}
+	
 	/**
 	 * 单例初始化
 	 * @return CacheManager

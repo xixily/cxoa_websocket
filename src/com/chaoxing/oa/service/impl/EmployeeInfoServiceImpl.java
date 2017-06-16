@@ -72,14 +72,13 @@ import com.chaoxing.oa.entity.po.view.Yidong;
 import com.chaoxing.oa.entity.sqlpo.Contract;
 import com.chaoxing.oa.service.EmployeeInfoService;
 import com.chaoxing.oa.system.SysConfig;
-import com.chaoxing.oa.system.cache.CacheManager;
 import com.chaoxing.oa.util.system.DateUtil;
 import com.chaoxing.oa.util.system.ResourceUtil;
 import com.chaoxing.oa.util.system.SqlHelper;
 
 @Service("employeeInfoService")
 public class EmployeeInfoServiceImpl implements EmployeeInfoService {
-	private Logger logger = Logger.getLogger(this.getClass());
+//	private Logger logger = Logger.getLogger(this.getClass());
 	@Autowired
 	private BaseDaoI<RenshiUserName> userNameDao;
 	@Autowired
@@ -164,7 +163,7 @@ public class EmployeeInfoServiceImpl implements EmployeeInfoService {
 		Map<String, Object> params = new HashMap<String, Object>();
 		StringBuffer hql = new StringBuffer("from RenshiUserName t where 1=1 ");
 		addCondition(hql, queryForm, params);
-		SessionInfo userInfo = (SessionInfo) session.getAttribute(ResourceUtil.getSessionInfoName());
+//		SessionInfo userInfo = (SessionInfo) session.getAttribute(ResourceUtil.getSessionInfoName());
 //		if(userInfo.getRoleId() != 1 && !(userInfo.getRoleId()==100)){
 //			hql.append(" and t.renshiRight like :renshiRight ");
 //			params.put("renshiRight", "%" + userInfo.getUsername() + "%");
@@ -1483,6 +1482,9 @@ public class EmployeeInfoServiceImpl implements EmployeeInfoService {
 		}else if("214".equals(type)){
 			hql = new StringBuffer("from ShebaoAR t where t.bumentiaozhengReport like :datestr");
 			params.put("datestr",dateStr + "%");
+		}else if("318".equals(type)){
+			hql = new StringBuffer("from Yidong t where t.zhuanzhengDate like :datestr");
+			params.put("datestr",dateAfterStr.subSequence(0, 4) + "." + dateAfterStr.substring(4) + "%");
 		}
 		int intPage = 0;
 		int pageSize = 30000;//最多导出30000条数据
@@ -2129,6 +2131,11 @@ public class EmployeeInfoServiceImpl implements EmployeeInfoService {
 		List<PGongziHuiZong> pgongzihuizongs = new ArrayList<PGongziHuiZong>();
 		Map<String, Object> result = new HashMap<String, Object>();
 		StringBuffer hql = new StringBuffer("from GongziHuiZong t where 1=1");
+		if("fGongziZonge".equals(queryForm.getConfigurable()) && queryForm.getConfigurable_value()!=null){
+			hql.append(" and fGongziZonge=:fGongziZonge");
+			params.put("fGongziZonge", Float.valueOf(queryForm.getConfigurable_value()));
+			queryForm.setConfigurable(null);
+		}
 		addCondition(hql, queryForm, params);
 //		if(queryForm.getUsername()!=null && queryForm.getUsername()!=""){
 //			hql.append(" and (t.username like :username1 )");

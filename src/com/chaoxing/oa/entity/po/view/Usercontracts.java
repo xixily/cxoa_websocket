@@ -61,7 +61,7 @@ public class Usercontracts implements Serializable{
 	private Integer didNum;//单位编号
 	private String user_property;//用户性质
 	private String receivedAmount;//回款金额
-	private Integer expressCondition;//快递情况   1 已发 0 未发
+//	private Integer expressCondition;//快递情况   1 已发 0 未发
 	private Integer dealConditon;//处理状态   0 未处理 1 审核未通过 2 审核已通过 3 合同完结 4 保存
 	private Date endTime;//项目预计结束时间
 	private Date receiveTime;//回款时间
@@ -158,7 +158,7 @@ public class Usercontracts implements Serializable{
 	public Float getYear() {
 		return year;
 	}
-	@Transient
+	@Column(name = "开票总金额")
 	public Float getKaipiaoMoney() {
 		return kaipiaoMoney;
 	}
@@ -408,13 +408,13 @@ public class Usercontracts implements Serializable{
 	public void setReceivedAmount(String receivedAmount) {
 		this.receivedAmount = receivedAmount;
 	}
-	@Column(name = "快递情况")
+	/*@Column(name = "快递情况")
 	public Integer getExpressCondition() {
 		return expressCondition;
 	}
 	public void setExpressCondition(Integer expressCondition) {
 		this.expressCondition = expressCondition;
-	}
+	}*/
 	@Column(name = "处理状态")
 	public Integer getDealConditon() {
 		return dealConditon;
@@ -443,7 +443,7 @@ public class Usercontracts implements Serializable{
 	public void setSubmitTime(Date submitTime) {
 		this.submitTime = submitTime;
 	}
-	@Column(name = "所含产品")
+	@Transient
 	public String getProduct() {
 		return product;
 	}

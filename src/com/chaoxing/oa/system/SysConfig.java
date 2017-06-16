@@ -47,6 +47,12 @@ public class SysConfig {
 	 * 系统配置类型 -- 工资发放
 	 */
 	public final static String MONTHWAGE_FAFANG = "month_wages_fafang";
+	
+	/**
+	 * 出纳部门 id
+	 */
+	
+	public final static Integer CN_DEPART_ID = 298;
 	/**
 	 * 缓存 -- 公用
 	 */

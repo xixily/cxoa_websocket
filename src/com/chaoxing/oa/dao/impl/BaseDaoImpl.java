@@ -12,6 +12,7 @@ import org.hibernate.Query;
 import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.springframework.stereotype.Repository;
 
 import com.chaoxing.oa.dao.BaseDaoI;
@@ -287,7 +288,6 @@ public class BaseDaoImpl<T> implements BaseDaoI<T> {
 				}
 			} catch (Exception e) {
 //				tx.rollback();
-				return 0;
 			}
 			
 		}
@@ -330,10 +330,10 @@ public class BaseDaoImpl<T> implements BaseDaoI<T> {
 	    }
 	
 	@Override
-	 public <T> List<T> queryResultList(Class<T> className, Map<String,Object> varables){        
+	 public Integer queryResultList(Class<T> className, Map<String,Object> varables){        
 	        Session session = sessionFactory.getCurrentSession();
-	        List<T> valueList = selectStatement(className, varables, session).list();
-	        return valueList;       
+	        Long count = (Long)selectStatement(className, varables, session).iterate().next();
+	        return count.intValue();       
 	    }
 	
 	@Override
@@ -343,17 +343,19 @@ public class BaseDaoImpl<T> implements BaseDaoI<T> {
 	         * 通过className得到该实体类的字符串形式,
 	         */
 	        stringBuilder.append("from " + sessionFactory.getClassMetadata(className).getEntityName());
-	        stringBuilder.append(" where 1=1 ");
+	        stringBuilder.append(" where dealConditon!=4 ");
 	        /*
 	         * 动态的拼接sql语句,如果一个属性的值为"", 则不往条件中添加.
 	         */
 	        for(Entry<String, Object> entry : varables.entrySet()){
-	            if(!entry.getValue().equals("")){
-	                stringBuilder.append(" and " + entry.getKey()+" like:" + entry.getKey());
+	            if(!entry.getValue().equals("") && !entry.getKey().equals("cid")){
+	                stringBuilder.append(" and " + entry.getKey()+" like :" + entry.getKey());
+	            }else if(!entry.getValue().equals("") && entry.getKey().equals("cid")){
+	            	stringBuilder.append(" and " + entry.getKey()+" = :" + entry.getKey());
 	            }
-	        }
-
-	        Query query = session.createQuery(stringBuilder.toString());
+	        } 
+	        stringBuilder.append(" order by id desc ");
+	        Query query = session.createQuery(stringBuilder.toString());//查询语句
 	        /*
 	         * 动态的给条件赋值
 	         */
@@ -372,17 +374,19 @@ public class BaseDaoImpl<T> implements BaseDaoI<T> {
 	        /*
 	         * 通过className得到该实体类的字符串形式,
 	         */
-	        stringBuilder.append("from " + sessionFactory.getClassMetadata(className).getEntityName());
-	        stringBuilder.append(" where 1=1 ");
+	        stringBuilder.append("select count(*) from " + sessionFactory.getClassMetadata(className).getEntityName());
+			stringBuilder.append(" where dealConditon!=4 ");
 	        /*
 	         * 动态的拼接sql语句,如果一个属性的值为"", 则不往条件中添加.
 	         */
 	        for(Entry<String, Object> entry : varables.entrySet()){
-	            if(!entry.getValue().equals("")){
-	                stringBuilder.append(" and " + entry.getKey()+" like:" + entry.getKey());
+	            if(!entry.getValue().equals("") && !entry.getKey().equals("cid")){
+	                stringBuilder.append(" and " + entry.getKey()+" like :" + entry.getKey());
+	       }else if(!entry.getValue().equals("") && entry.getKey().equals("cid")){
+	            	stringBuilder.append(" and " + entry.getKey()+" = :" + entry.getKey());
 	            }
-	        }
-
+	        } 
+	   //     stringBuilder.append(" order by id desc ");
 	        Query query = session.createQuery(stringBuilder.toString());
 	        /*
 	         * 动态的给条件赋值
@@ -394,11 +398,4 @@ public class BaseDaoImpl<T> implements BaseDaoI<T> {
 	        }
 	        return query;
 	    }
-	
-	
-	
-	
-	
-	
-	
 }

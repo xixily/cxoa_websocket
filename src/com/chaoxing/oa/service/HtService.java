@@ -1,8 +1,10 @@
 package com.chaoxing.oa.service;
 
 import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import com.chaoxing.oa.entity.po.hetong.Contract;
 import com.chaoxing.oa.entity.po.hetong.ContractVO;
@@ -14,6 +16,8 @@ import com.chaoxing.oa.entity.po.hetong.ItemPrice;
 import com.chaoxing.oa.entity.po.view.RenshiUserName;
 import com.chaoxing.oa.entity.po.view.Usercontracts;
 import com.chaoxing.oa.entity.po.view.Usercontracts2;
+import com.chaoxing.oa.entity.po.commmon.OrganizationStructure;
+import com.chaoxing.oa.entity.po.employee.UserName;
 import com.chaoxing.oa.entity.po.hetong.Area;
 import com.chaoxing.oa.entity.po.hetong.CompanyInfo;
 
@@ -71,7 +75,7 @@ public interface HtService {
 	public void updateContractSave(Integer id, String gongsi, String depart, Integer cid, Integer didNum,
 			Float contractMoney, String agreementNumber, Date endTime, String agreementText, String remarksText,
 			String payMethod, Integer dealConditon, String gangweiXingzhi, String bumenmingcheng, String shengfen,
-			String xibaohe, Date submitTime, String danweixingzhi, String yonghuxingzhi, String productName);
+			String xibaohe, Date submitTime, String danweixingzhi, String yonghuxingzhi);
 
 	// -----------------------产品
 
@@ -93,12 +97,12 @@ public interface HtService {
 	// 更新合同信息
 	public void updateContract(Integer id, String company, String depart, Integer cid, Integer didNum,
 			Float contractMoney, String agreementNumber, Date endTime, String agreementText, String remarksText,
-			String payMethod);
+			String payMethod,  Integer dealConditon);
 
 	// 由暂存改为未处理
-	public void updateZanCunContract(Integer id, String company, String depart, Integer cid, Integer didNum,
+	/*public void updateZanCunContract(Integer id, String company, String depart, Integer cid, Integer didNum,
 			Float contractMoney, String agreementNumber, Date endTime, String agreementText, String remarksText,
-			String payMethod, Integer changeStatus);
+			String payMethod, Integer changeStatus);*/
 
 	// --------------------------------发票
 	// 获取该合同下的所有发票
@@ -137,11 +141,11 @@ public interface HtService {
 
 	// 更新快递信息(销售)
 	public void updateFahuo(String mailno, String d_contact, String d_tel, String d_address, String jDate,
-			String postMethod, String content, Integer fahuoId);
+			String postMethod, String content, Integer fahuoId, String postAddress);
 	
 	// 更新快递信息(行政)
 		public void updateFahuoXingzheng(String mailno, String d_contact, String d_tel, String d_address, String jDate,
-				String postMethod, String content,Integer fahuoId,Integer hetongCodeInt);
+				String postMethod, String content, Integer fahuoId, Integer hetongCodeInt, String postAddress);
 
 	// 根据合同ID查出该合同下的产品项
 	public List<ItemPrice> getItemPriceByContractId(int id);
@@ -159,7 +163,7 @@ public interface HtService {
 	// -----------------------------------销售
 
 	// 销售负责的合同列表
-	public List<Usercontracts> getContractListSale(String emial, int page, int size);
+	public List<Usercontracts2> getContractListSale(String emial, int page, int size);
 
 	// 销售负责的总合同数量
 	public int getTotalCountContractSale(String eamil);
@@ -265,7 +269,7 @@ public interface HtService {
 	public CustomerDepart getCustomerDepartByoperator(Integer cid);
 
 	// 根据销售本人ID查询出RenshiUserName对象
-	public RenshiUserName getRenshiUserName(int saleId);
+	public OrganizationStructure getOrgStructure(int saleId);
 
 	// 获取所有产品列表
 	public List<Object> getAllProduct();
@@ -301,8 +305,8 @@ public interface HtService {
 	// 获取归档最大编号
 	public String getguidangMaxNum(String code);
 
-	// 根据邮箱查出人事username对象
-	public RenshiUserName getTelephoneByEmail(String email);
+	// 根据邮箱查出username对象
+	public UserName getTelephoneByEmail(String email);
 
 	// 更新回款金额和日期
 	public void updateHuikuanAndDate(Integer contractId, String total, Date latestDate,Float totalKaiPiao);
@@ -328,8 +332,51 @@ public interface HtService {
 	//更新合同概要
 	public void updateContractGaiyao(Integer ctid, String htgaiyaofinal);
 
-	
+	//获取所属公司信息
+	public List<Object> getCompanyInfo();
 
-	
+	void updateDealConditon(int contractId, int dealConditon);
+
+	public Contract getCopyContract(int copyId);
+
+	void updateItemPrice(ItemPrice itemprice);
+
+	void updateFaPiao(FaPiao faPiao);
+
+	void updateFahuo(Fahuo fahuo);
+
+	List<Customer> getCustomerList();
+
+	void addCustomer(Customer customer);
+
+	void deleteCustomer(Integer customerId);
+
+	void updateCustomer(Customer customer);
+
+	Customer getCustomer(Integer id);
+
+	List<Customer> getCustomerList(Integer id, String remarks, String city, String province, String xingzhi,
+			String customerName, String charger, int page, int size);
+
+	int getTotalCountCustomer(Integer id, String remarks, String city, String province, String xingzhi,
+			String customerName, String charger);
+
+	public List<CustomerDepart> getCustomerDepartListByDid(Integer dId, int page, int size);
+
+	public int getTotalCountCustomerDepart(Integer dId);
+
+	public List<Object> getxingzhiList();
+
+	UserName getUseInfo(String email);
+
+	OrganizationStructure getOrgStructureById(int orgId);
+
+	void addCustomerDepart(CustomerDepart customerDepart);
+
+	void deleteCustomerDepart(Integer id);
+
+	void updateCustomerDepart(CustomerDepart customerDepart);
+
+	CustomerDepart getCustomerDepart(Integer id);
 
 }

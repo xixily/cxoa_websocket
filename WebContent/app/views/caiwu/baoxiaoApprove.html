@@ -2,7 +2,7 @@
     <ul class="nav nav-tabs" role="tablist" style="margin-top: 16px;">
         <li role="presentation" class="active"><a href="#bx_approving" data-toggle="tab" onclick="$('#sp_find_btn_').trigger('click');">未审批</a></li>
         <li role="presentation"><a href="#bx_approved" data-toggle="tab" onclick="caiwu.baoxiaoAppro.ypzInit()">已批准</a></li>
-        <div id="cw_cells_toggle" class="btn-group pull-right">
+        <div id="cw_cells_toggle" class="btn-group pull-right hide">
             <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">
                 <form id="cw_toggle_form">
                 <span app-data="now_name" id="bx_cellCores" target="text">
@@ -657,7 +657,7 @@
                                 <div class="col-xs-9 col-sm-10">
                                     <input type="hidden"name="id">
                                     <input type="hidden"name="agree">
-                                    <textarea name="approRemark" id="approRemark_" cols="30" rows="3" class="form-control" placeholder="领导意见..."></textarea>
+                                    <textarea name="approRemark" id="approRemark_" cols="30" rows="3" class="form-control" placeholder="领导意见（可以不填）..."></textarea>
                                 </div>
                             </div>
                         </fieldset>

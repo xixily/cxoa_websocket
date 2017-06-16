@@ -332,7 +332,9 @@ public class FileOperateController {
     			String realName = "211".equals(type)|| "311".equals(type)?"新员工入职人员登记表.xlsx":
     				"212".equals(type) || "312".equals(type)?"离职人员登记表.xlsx":
     					"213".equals(type)||"313".equals(type)?"员工转正人员登记表.xlsx":
-    						"214".equals(type)|| "314".equals(type)?"部门调整登记表.xlsx":"异动表.xlsx";  
+    						"214".equals(type)|| "314".equals(type)?"部门调整登记表.xlsx":
+    							"318".equals(type) ? "转正时间到期表.xlsx":"异动表.xlsx"
+    							;  
     			String contentType = "application/octet-stream";  
     			try {
     				FileOperateUtil.download(request, response, storeName, contentType,realName);

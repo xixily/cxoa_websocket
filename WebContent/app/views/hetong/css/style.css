@@ -55,7 +55,7 @@
 .location{ line-height:24px; border-bottom:solid #dcdcdc 1px;}
 .location a{ color:#33adff;}
 
-.contract .addbnt{ background:url(../images/icons.png) no-repeat 0 -20px; width:14px; height:14px; float:left; margin:3px 0 0 5px;}
+.contract .addbnt{ background:url(../images/icons.png) no-repeat 0 -20px; width:14px; height:14px; /* float:left; */ margin:3px 0 0 5px;}
 .tract_list{ padding:15px 0;}
 .tract_list td{ line-height:20px; padding:5px 0;}
 .tract_list .quy_tit{ float:left; width:84px; text-align:right;}

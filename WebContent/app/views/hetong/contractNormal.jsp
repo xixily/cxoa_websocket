@@ -11,9 +11,9 @@
 
 <body> -->
 <link href="/app/views/hetong/css/global.css" rel="stylesheet" type="text/css" />
-<link href="/app/views/hetong/css/style.css" rel="stylesheet" type="text/css" />
+<!-- <link href="/app/views/hetong/css/style.css" rel="stylesheet" type="text/css" />
 <link href="/app/views/hetong/css/space.css" rel="stylesheet" type="text/css" />
-<link href="/app/views/hetong/css/selectlist.css" rel="stylesheet" type="text/css" />
+<link href="/app/views/hetong/css/selectlist.css" rel="stylesheet" type="text/css" /> -->
 <style>
 .pop_product {
     height: 380px;
@@ -48,6 +48,22 @@ p {
 .courier_list li.li05 {
     width: 423px;
 }
+
+.tract_list .fidtext, .courier_list .fidtext {
+    border: solid #ccc 1px;
+}
+.courier_list textarea {
+    border: solid #ccc 1px;
+}
+.tareaTable textarea {
+    border: solid #ccc 1px;
+}
+a:hover{
+    text-decoration: none;
+}
+.main {
+    width: inherit;
+}
 </style>
 <div class="main">
 	<!-- <div class="location">首页 &gt; <a href="#">合同信息</a></div> -->
@@ -67,10 +83,6 @@ p {
 					<div class="quy_tit">单位ID：</div>
 					<input type="text" name="textfield" class="fidtext" disabled="disabled" value="${contract.didNum }"/>
 				</li>
-			<%-- 	<li>
-					<div class="quy_tit">项目名称：</div>
-					<input type="text" name="textfield" class="fidtext" value="${contract.id }"/>
-				</li> --%>
 				<li>
 					<div class="quy_tit">印花税情况：</div>
 					<select id="yinhuashui" name="yinhuashui" class="leftF">
@@ -94,7 +106,6 @@ p {
 					<input id="guidangDate" type="text"  name="textfield" class="fidtext" value="${contract.guidangDate }"></input>
 				</li>
 				 
-				
 				<li>
 					<div class="quy_tit">归档份数：</div>
 					<input id="guidangfenshu" type="text" name="textfield" class="fidtext" value="${contract.guidangNum }"/>
@@ -102,6 +113,11 @@ p {
 				<li>
 					<div class="quy_tit">合同份数：</div>
 					<input type="text" name="textfield" class="fidtext" disabled="disabled" value="${contract.agreementNumber }"/>
+					<%-- <a class="addbnt icons" href="javascript:void(0)"></a>
+					<div style="display:none" class="Modify">
+					<input id="agreementNumber" type="text" autocomplete="off" name="textfield" class="fidtext" />
+					</div>
+					<p class="text">${contractVO.agreementNumber }</p> --%>
 				</li>
 				<li>
 					<div class="quy_tit">归档编号：</div>
@@ -112,7 +128,7 @@ p {
 					<input type="text" name="textfield" class="fidtext" id="huaizhangAmount" value="${contract.year }"/>
 				</li>
 				<li>
-					<div class="quy_tit">登记时间:</div>
+					<div class="quy_tit">登记时间：</div>
 					<input type="text" name="textfield" class="fidtext" id="dengjiTime"  value="${contract.dengjiTime}"/>
 				</li>
 				
@@ -135,8 +151,7 @@ p {
 				<input id="company2" type="text" name="textfield" class="fidtext" disabled="disabled" value="${contract.company }"/>
 				<a class="addbnt icons" href="javascript:void(0)"></a>
 				<div style="display:none" class="Modify">
-				<input id="company" type="text" autocomplete="off" name="textfield" class="fidtext" />
-				<!-- <input type="button" name="button" value="确定" class="bnt" /> --></div>
+				<input id="company" type="text" autocomplete="off" name="textfield" class="fidtext" /></div>
 				<p class="text">${contractVO.company }</p>
 			</td>
 			<td valign="top" width="25%">
@@ -145,47 +160,31 @@ p {
 				 <a class="addbnt icons" href="javascript:void(0)"></a>
 				<div style="display:none" class="Modify">
 				<input id="danweiName" type="text" autocomplete="off" name="textfield" class="fidtext" />
-				<!-- <input type="button" name="button" value="确定" class="bnt" /> --></div>
+				</div>
 				<p class="text">${contractVO.depart }</p>
 			</td>
-			
-			
-			<!-- <td valign="top" width="25%">
-				<div class="quy_tit">岗位性质：</div>
-				<select id="gangwei" name="gangwei" class="leftF" value="sdfsdf">
-					<option value="0">前场</option>
-					<option value="1">后场</option>
-				</select>
-			</td> -->
-			
 			<td valign="top" width="25%">
 				<div class="quy_tit">岗位性质：</div>
-				<input type="text" name="textfield" class="fidtext"  disabled="disabled" value="${customerDepart.firstLevel }"/>
+				<input type="text" name="textfield" class="fidtext"  disabled="disabled" value="${orgStructure.firstLevel }"/>
 			</td>
-			
+			<td valign="top">
+				<div class="quy_tit">省份：</div>
+				<input type="text" name="textfield" class="fidtext" disabled="disabled" value="${customerDepart.province }"/>
+			</td>
 		  </tr>
 		  <tr>
-			<!-- <td valign="top">
-				<div class="quy_tit">部门名称：</div>
-				<select id="bumen" name="bumen" class="leftF">
-					<option value="0">教图湖北市场</option>
-					<option value="1">教图湖北市场</option>
-				</select>
-			</td> -->
-			
 			<td valign="top" width="25%">
-				<div class="quy_tit">部门名称:</div>
-				<input type="text" name="textfield" class="fidtext"  disabled="disabled" value="${customerDepart.secondLevel }"/>
+				<div class="quy_tit">部门名称：</div>
+				<input type="text" name="textfield" class="fidtext"  disabled="disabled" value="${orgStructure.secondLevel }"/>
 			</td>
 			
 			<td valign="top">
-				<div class="quy_tit">小组/细胞核:</div>
-				<input type="text" name="textfield" class="fidtext" disabled="disabled" value="${customerDepart.fourthLevel }"/>
+				<div class="quy_tit">小组/细胞核：</div>
+				<input type="text" name="textfield" class="fidtext" disabled="disabled" value="${orgStructure.fourthLevel }"/>
 			</td>
 			
-			
 			<td valign="top">
-				<div class="quy_tit">项目负责人:</div>
+				<div class="quy_tit">项目负责人：</div>
 				<input type="text" name="textfield" class="fidtext" disabled="disabled" value="${customerDepart.charger }"/>
 				<!-- <a class="addbnt icons" href="javascript:void(0)"></a> -->
 				<!-- <div style="display:none" class="Modify">
@@ -195,7 +194,7 @@ p {
 			</td>
 			<td valign="top">
 				<div class="quy_tit">联系方式：</div>
-				<input type="text" name="textfield" class="fidtext" disabled="disabled" value="${renshiUserName.phoneNumber }"/>
+				<input type="text" name="textfield" class="fidtext" disabled="disabled" value="${phoneNumber }"/>
 				<!-- <a class="addbnt icons" href="javascript:void(0)"></a> -->
 				<%-- <div style="display:none" class="Modify">
 				<input id="telphone" type="text" name="textfield" class="fidtext" />
@@ -219,21 +218,13 @@ p {
 				<a class="addbnt icons" href="javascript:void(0)"></a>
 				<div style="display:none" class="Modify">
 				<input id="endTime" type="text" autocomplete="off" name="textfield" class="fidtext" />
-				<!-- <input type="button" name="button" value="确定" class="bnt" /> --></div>
+				</div>
 				<p class="text">${contractVO.endTime }</p>
 			</td>
-			<!-- <td valign="top" width="25%">
-				<div class="quy_tit">省　　份：</div>
-				<select id="shengfen" name="shengfen" class="leftF">
-					<option value="0">全国</option>
-					<option value="1">北京</option>
-					<option value="2">上海</option>
-				</select>
-			</td> -->
-			<td valign="top">
+			<%-- <td valign="top">
 				<div class="quy_tit">省份：</div>
 				<input type="text" name="textfield" class="fidtext" disabled="disabled" value="${customerDepart.province }"/>
-			</td>
+			</td> --%>
 			
 			<input id="dealCondition" type="text" style="display:none" name="textfield" class="fidtext"  value="${contract.dealConditon }"/>
 			<td valign="top">&nbsp;</td>
@@ -241,7 +232,6 @@ p {
 		  </tr>
 		</table>
 		</div>
-		
 		
 		<div class="tareaTable">
 			<h3>产品信息：<a id="addProduct" class="product" href="javascript:void(0)">添加产品</a></h3>
@@ -271,7 +261,7 @@ p {
 			<a class="addbnt icons" href="javascript:void(0)"></a>
 			<div style="display:none" class="Modify">
 			<input id="productInfo" type="text" autocomplete="off" name="textfield" class="fidtext" />
-			<!-- <input type="button" name="button" value="确定" class="bnt" /> --></div>
+			</div>
 			<p class="text" style="color:red">${contractVO.productInfo }</p>
 			
 		</div>
@@ -287,11 +277,11 @@ p {
 				<th width="8%">发票类型</th>
 				<th width="8%">发票品名</th>
 				<th width="7%">金额</th>
-				<th width="7%">回款情况</th>
-				<!-- <th width="7%">申请人</th> -->
+				<th width="7%">预计回款时间</th>
+				<th width="7%">回款金额</th>
 				<th width="10%">回款日期</th>
 				<th width="7%">备注</th>
-				<th width="8%">合同编号</th>
+				<!-- <th width="8%">合同编号</th> -->
 				<th width="8%">资金类型</th>
 				<th width="8%">账户</th>
 				<th width="6%">操作</th>
@@ -306,34 +296,21 @@ p {
 				<td>${f.type}</td>
 				<td>${f.name}</td>
 				<td>${f.money}</td>
+				<td>${f.yujihuikuanDate}</td>
 				<td>${f.huiKuan}</td>
 				<td>${f.receivedpaymentsdate}</td>
 				<td>${f.remark}</td>
-				<td>${f.hetongNumber}</td>
+				<%-- <td>${f.hetongNumber}</td> --%>
 				<td>${f.fundType}</td>
 				<td>${f.account}</td>
 				<td><a id='${f.id}' class='dele' href='javascript:;' onclick='updateFapiaoXingzheng(${f.id},this)'>修改</a></td>
 			  </tr>
 			  </c:forEach>
-			  
-			
-			<!--   <tr>
-				<td bgcolor="#f5f6f6">1023</td>
-				<td bgcolor="#f5f6f6">2018-3-31</td>
-				<td bgcolor="#f5f6f6">世纪超星</td>
-				<td bgcolor="#f5f6f6">广西财经学院</td>
-				<td bgcolor="#f5f6f6">服务业发票</td>
-				<td bgcolor="#f5f6f6">超星中文发现</td>
-				<td bgcolor="#f5f6f6">20000元</td>
-				<td bgcolor="#f5f6f6">20000元</td>
-				<td bgcolor="#f5f6f6">王微微</td>
-				<td bgcolor="#f5f6f6">2017-3-31</td>
-			  </tr> -->
 			</table>
 			  <a class="addbnt icons" href="javascript:void(0)"></a>
 				<div style="display:none" class="Modify">
 				<input id="fapiaoCondition" type="text"  autocomplete="off" name="textfield" class="fidtext" />
-				<!-- <input type="button" name="button" value="确定" class="bnt" /> --></div>
+				</div>
 				<p class="text" style="color:red">${contractVO.fapiaoStatus }</p>
 		</div>
 		<div class="tareaTable">
@@ -345,13 +322,14 @@ p {
 				<!-- <th width="9%">收件单位</th> -->
 				<th width="12%">收件地址</th>
 				<th width="10%">联系电话</th>
-				<th width="8%">发件日期</th>
+				<!-- <th width="8%">发件日期</th> -->
 				<!-- <th width="7%">发件人</th> -->
 				<!-- <th width="13%">发件地址</th> -->
 				<th width="7%">快递内容</th>
 				<th width="8%">快递公司</th>
 				<th width="13%">快递单号</th>
-				<th width="7%">合同编号</th>
+				<!-- <th width="7%">合同编号</th> -->
+				<th width="7%">邮寄日期</th>
 				<th width="7%">操作</th>
 			  </tr>
 			  
@@ -362,45 +340,29 @@ p {
 				<%-- <td>${f.d_company}</td> --%>
 				<td>${f.d_address}</td>
 				<td>${f.d_tel}</td>
-				<td>${f.jDate}</td>
+				<%-- <td>${f.jDate}</td> --%>
 				<td>${f.content}</td>
 				<td>${f.postMethod}</td>
 				<td>${f.mailno}</td>
-				<td>${f.hetongCode}</td>
+				<%-- <td>${f.hetongCode}</td> --%>
+				<td>${f.jDate}</td>
 				<td><a id='${f.orderid}' class='dele' href='javascript:;' onclick='updateFahuoXinzheng(${f.orderid},this)'>修改</a></td>
 			  </tr>
 			  </c:forEach> 
-			
-			<!--   <tr>
-				<td bgcolor="#f5f6f6">1023</td>
-				<td bgcolor="#f5f6f6">王微微</td>
-				<td bgcolor="#f5f6f6">世纪超星</td>
-				<td bgcolor="#f5f6f6">上地七街</td>
-				<td bgcolor="#f5f6f6">17800000000</td>
-				<td bgcolor="#f5f6f6">2017-3-31</td>
-				<td bgcolor="#f5f6f6">李松宋</td>
-				<td bgcolor="#f5f6f6">上帝五街</td>
-				<td bgcolor="#f5f6f6">画册</td>
-				<td bgcolor="#f5f6f6">申通快递</td>
-				<td bgcolor="#f5f6f6">001290993021901</td>
-			  </tr> -->
-		
 			</table>
 			<a class="addbnt icons" href="javascript:void(0)"></a>
 			<div style="display:none" class="Modify">
 			<input id="kuaidiCondition" type="text" autocomplete="off" name="textfield" class="fidtext" />
-			<!-- <input type="button" name="button" value="确定" class="bnt" /> --></div>
+			</div>
 			<p class="text" style="color:red">${contractVO.youjiStatus }</p>
 		</div>
-		
 		
 		<div class="tareaTable">
 			<h3>合同概要：</h3>
 			<textarea id="contractContent" style="height:60px;" disabled="disabled">${contract.agreementText }</textarea>
 			<a class="addbnt icons" href="javascript:void(0)"></a>
 			<div style="display:none" class="Modify">
-			<input id="htgaiyao" type="text" autocomplete="off" name="textfield" class="fidtext" />
-			<!-- <input type="button" name="button" value="确定" class="bnt" /> --></div>
+			<input id="htgaiyao" type="text" autocomplete="off" name="textfield" class="fidtext" /></div>
 			<p class="text" style="color:red">${contractVO.agreementText }</p>
 		</div>
 		<div class="tareaTable">
@@ -408,8 +370,7 @@ p {
 			<textarea disabled="disabled">${contract.payMethod }</textarea>
 			<a class="addbnt icons" href="javascript:void(0)"></a>
 			<div style="display:none" class="Modify">
-			<input id="payMethod" type="text" autocomplete="off" name="textfield" class="fidtext" />
-			<!-- <input type="button" name="button" value="确定" class="bnt" /> --></div>
+			<input id="payMethod" type="text" autocomplete="off" name="textfield" class="fidtext" /></div>
 			<p class="text" style="color:red">${contractVO.payMethod }</p>
 		</div>
 		<div class="tareaTable">
@@ -419,11 +380,6 @@ p {
 			<div style="display:none" class="Modify"><input id="remark" type="text" name="textfield" class="fidtext" />
 			<input type="button" name="button" value="确定" class="bnt" /></div> -->
 		</div>
-		
-		<!-- <div class="tareaTable">
-			<h3>问题描述：</h3>
-			<textarea style="height:60px;"></textarea>
-		</div> -->
 	</form>
 	</div>
 	<div class="ract_bottom">
@@ -431,10 +387,8 @@ p {
 		<a id="noPass" class="bnt_er" href="javascript:void(0)">未通过</a>
 		<a id="cancel" class="bnt_sa" href="javascript:void(0)">取消</a>
 	</div>
-	
 <input id='saleEmail' type="text" name="textfield" style="display:none;" class="fidtext"  value='${email}'/>
 
-	
 <div class="maskLayer"></div>	
 <div id="popwindow pop_product" class="popwindow pop_product" style="display:none;">
     <h3>新增 / 编辑 / 添加产品</h3>
@@ -453,9 +407,12 @@ p {
       		<label>合同概要：</label>
 		    <textarea id="disanfangChanpin" placeholder="请输入单位名称、产品、金额、联系人电话" style="width:200px"></textarea>
        </li>
+       <li class="li06" id="otherLi" style="display:none;">    
+			<input id="other" placeholder="请输入产品名称" type="text" name="textfield" autocomplete="off" class="fidtext" style="width:120px;margin-left:80px"/>
+        </li>
          <li class="li06">
        		<label>产品金额：</label>
-			<input id="productMoney" type="number" autocomplete="off" name="textfield" class="fidtext" />
+			<input id="productMoney" type="text" autocomplete="off" name="textfield" class="fidtext" />
         </li> 
     	<li class="li06">
        		<label>时间/数量：</label>
@@ -482,11 +439,11 @@ p {
     
 </div>
 
-
 <div id="windowAboutFapiao2"class="popwindow pop_invoice" style="display:none;">
+	<div class="delete" style="position: absolute; top: 0; left: 0;  right: 0; bottom: 0; z-index:0;"></div>
     <h3>新增 / 编辑 / 查看发票</h3>
     <form id="formAboutFapiao" name="formAboutFapiao" method="post" action="">
-    <ul class="courier_list">
+    <ul class="courier_list" style="position: relative; z-index:1;">
         <li class="li01">
         	<label>合同编号：</label>
 			<input id="HtForFapiao" type="number" name="textfield" class="fidtext" />
@@ -494,7 +451,6 @@ p {
     	<li class="li01">
 			<label>申请时间：</label><div id="applicationTimeAboutFapiao"></div>
         </li>
-    	
     	<li class="li02">
        		<label>开票金额 ：</label>
 			<input id="kaipiaoAmount" type="text" name="textfield" class="fidtext" onBlur="validateFapiaoAmount()"/>
@@ -525,7 +481,7 @@ p {
 			</select>
         </li>
         
-        <li class="li09">
+        <li class="li09" style="width:313px;">
        		<label>发票品名：</label>
       	<div class="selectNav" id="nav">
               <p id="pinming" class="selectSet">点击选择栏目</p>
@@ -538,24 +494,20 @@ p {
           </div>
          </li>
         
-    	<li class="li02">
+    	<li class="li02" style="margin-left:110px;">
        		<label>开票日期：</label>
 			<input type="text" onClick="WdatePicker({dateFmt:'yyyy-MM-dd'})" id="kaipiaoDate" name="textfield" class="fidtext"></input>
 			
         </li>
-      
        <li class="li02">
        		<label>回款金额：</label>
 			<input id="huikuanAmount" type="text" name="textfield" class="fidtext"/>
         </li>
-        
       <li class="li02">
        		<label>回款日期：</label>
 			<input id="huikuanDate" type="text" name="textfield" class="fidtext" />
         </li>
-    	
     	<a id="btn_huikuanMailto" href="mailto:714757501@qq.com?body=邮件内容" style="width:60px;display:none;"  class="easyui-linkbutton">发送邮件</a>
-    	
     	<li class="li02">
        		<label>资金类型：</label>
 			<select id="zijin" name="zijin" class="leftF" >
@@ -573,7 +525,6 @@ p {
 				</c:forEach>
 			</select>
         </li> 
-        
     	<li class="li02">
        		<label>财务月份：</label>
 			<input id ="caiwuyuefen" type="text" name="textfield" class="fidtext"/>
@@ -615,22 +566,10 @@ p {
        		<label>联系电话：</label>
 			<input id="tel" type="text" name="textfield" class="fidtext" />
         </li>
-    	<!-- <li class="li01">
-       		<label>收件单位：</label>
-			<input id="receiveCom" type="text" name="textfield" class="fidtext" />
-        </li> -->
-    	<!-- <li class="li01">
-       		<label>邮　　编：</label>
-			<input id="email" type="text" name="textfield" class="fidtext" />
-        </li> -->
     	<li class="li03">
        		<label>收件地址：</label>
 			<input id="receiveAddress" type="text" name="textfield" class="fidtext" />
         </li>
-    	<!-- <li class="li02">
-       		<label>发 件 人：</label>
-			<input id="post" type="text" name="textfield" class="fidtext" />
-        </li> -->
     	<li class="li03">
        		<label>发 件 地：</label>
 			<input id="postAddress" type="text" name="textfield" class="fidtext" />
@@ -640,10 +579,6 @@ p {
 			<!-- <input id="postDate" type="text" name="textfield" class="fidtext" /> -->
 			<input type="text" onClick="WdatePicker({dateFmt:'yyyy-MM-dd'})" id="postDate" name="textfield" class="fidtext"></input>
         </li>
-    	<!-- <li class="li02">
-       		<label>快递公司：</label>
-			<input id="expressCom" type="text" name="textfield" class="fidtext" />
-        </li>  -->
         <li class="li02">
        		<label>快递公司：</label>
 			<select id="expressCom" name="xuanze" class="leftF" >
@@ -652,8 +587,6 @@ p {
 				  <option value="EMS">中铁快运</option>
 			</select>
         </li> 
-        
-        
     	<li class="li02">
        		<label>快递编号：</label>
 			<input id="expressNum" type="text" name="mailno" class="fidtext" />
@@ -678,7 +611,7 @@ p {
 
 <script type="text/javascript" src="/app/views/hetong/js/popwindow.js?i=1"></script>
 <script type="text/javascript" src="/app/views/hetong/js/selectlist.js"></script>
-<script type="text/javascript" src="/app/views/hetong/js/hetongAboutXingZheng.js?i=7"></script>
+<script type="text/javascript" src="/app/views/hetong/js/hetongAboutXingZheng.js"></script>
 <script  type="text/javascript" src="/app/views/hetong/My97DatePicker/WdatePicker.js"></script>
 <script  type="text/javascript">
 $(function(){

@@ -48,6 +48,7 @@ public class FaPiao implements Serializable{
 	private String caiwuMonth;//财务月份
 	@DateTimeFormat(pattern="yyyy-MM-dd")
 	private Date yujihuikuanDate;//开票预计回款时间
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "序号")
@@ -197,7 +198,4 @@ public class FaPiao implements Serializable{
 	public void setYujihuikuanDate(Date yujihuikuanDate) {
 		this.yujihuikuanDate = yujihuikuanDate;
 	}
-	
-	
-	
 }

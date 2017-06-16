@@ -16,6 +16,7 @@ import com.chaoxing.oa.entity.page.common.Page;
 import com.chaoxing.oa.entity.page.pub.caiwu.PBaoxiao;
 import com.chaoxing.oa.service.PubCaiwuService;
 import com.chaoxing.oa.service.PubFileOperatorService;
+import com.chaoxing.oa.system.SysConfig;
 import com.chaoxing.oa.util.io.FileOperateUtil;
 
 @Controller
@@ -42,6 +43,24 @@ public class PubfileOperateController {
     		} catch (Exception e) {
     			logger.error("文件下载失败：PubfileOperateController.exportDaihuikuan:" + e);
     		} 
+		}
+		return null;
+	}
+	
+	@RequestMapping(value="/yihuikuanExport")
+	public ModelAndView exportYihuikuan(PBaoxiao pbaoxiao, HttpServletRequest request, HttpServletResponse response){
+		pbaoxiao.setStatus(SysConfig.CW_BX_YIHUIKUAN);
+		Map<String, Object> results = publicCaiwuService.findBaoxiao(pbaoxiao, new Page(1, 30000));
+		List<PBaoxiao> pbs = (List<PBaoxiao>) results.get("rows");
+		if(pbs!=null){
+			String storeName = pubfileOpertor.getyihuikuanExcel(pbs);  
+			String realName = "已汇款报销信息.xlsx";  
+			String contentType = "application/octet-stream";  
+			try {
+				FileOperateUtil.download(request, response, storeName, contentType,realName);
+			} catch (Exception e) {
+				logger.error("文件下载失败：PubfileOperateController.exportDaihuikuan:" + e);
+			} 
 		}
 		return null;
 	}
