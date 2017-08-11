@@ -90,7 +90,8 @@ body{overflow: hidden;}
 		  <tr>
 			<td valign="top" width="25%">
 				<div class="quy_tit">合同编号：</div>
-				<div id="htNum" class="leftF">${contract.id }</div>
+				<div id="htNum3" class="leftF">${contract.id }</div>
+				<div id="htNum" style="display:none">${contractCopy.id }</div>
 				<!-- <p class="text">所属公司所属公司</p> -->
 			</td>
 			
@@ -99,7 +100,7 @@ body{overflow: hidden;}
 				<input id="company" type="text" name="textfield" class="fidtext" value="${contractCopy.company }" disabled="disabled"/>
 				<a class="addbnt icons" href="javascript:void(0)"></a>
 				<div style="display:none" class="Modify">
-				<input id="company" type="text" autocomplete="off" name="textfield" class="fidtext" /></div> 
+				<input id="companyVO" type="text" autocomplete="off" name="textfield" class="fidtext" /></div> 
 				<p class="text">${ContractVOCopy.company }</p> 
 			</td>
 			<td valign="top" width="25%">
@@ -497,83 +498,6 @@ body{overflow: hidden;}
 </div>
 
 <!-- --------------------------------------------------- -->
-<!-- <div class="maskLayer"></div>
-<div id="windowAboutFapiao4" class="popwindow pop_invoice" style="display:none;">
-    <h3>新增 / 编辑 / 查看发票</h3>
-    <form id="form1" name="form1" method="post" action="">
-    <ul class="courier_list">
-    	<li class="li01">
-        	<label>合同编号：</label><div id="HtForFapiao"></div>
-        </li>
-    	<li class="li01">
-			<label>申请时间：</label><div id="applicationTimeAboutFapiao"></div>
-        </li>
-    	
-    	<li class="li02">
-       		<label>开票金额 ：</label>
-			<input id="kaipiaoAmount" type="text" name="textfield" autocomplete="off" class="fidtext" onBlur="validateFapiaoAmount()"/>
-            <p id="kaipiaoAmountError" class="text"></p>
-        </li>
-    	<li class="li02">
-       		<label>大写金额：</label>
-			<input id="daxieAmount" type="text" name="textfield" class="fidtext" />
-        </li>
-        
-    	<li class="li02">
-       		<label>开票公司：</label>
-			<input id="kaipiaoCompany" type="text" name="textfield" class="fidtext" />
-        </li>
-    	<li class="li05">
-       		<label>开票单位：</label>
-			<input id="kaipiaodDanwei" type="text" name="textfield" class="fidtext" />
-        </li>
-    	<li class="li02">
-       		<label>发票类型：</label>
-			<input id="fapiaoType" type="text" name="textfield" class="fidtext" />
-        </li>
-		<li class="li02">
-      		<label>发票类型：</label>
-			<select id="fapiaoType" name="fapiaoType" class="fidtext">
-				<option value="0">普票</option>
-				<option value="1">增票</option>
-			</select>
-        </li>
-        
-        <li class="li09">
-       		<label>发票品名：</label>
-      	<div class="selectNav" id="nav">
-              <p id="pinming" class="selectSet">点击选择栏目</p>
-              <div class="selectNew">
-                  <div style="margin-left:6px;"><input id="pinmingSearch" type="text" name="textfield" class="fidtext" style="width:200px; float:none;" placeholder="搜索..." /></div>
-                  <ul id="pinmingUl">
-                     
-                  </ul>
-              </div>
-          </div>
-         </li>
-    	<li class="li02">
-       		<label>开票日期：</label>
-			<input id="kaipiaoDate" type="text" name="textfield" class="fidtext" />
-			<input type="text" onClick="WdatePicker({dateFmt:'yyyy-MM-dd'})" id="kaipiaoDate" name="textfield" class="fidtext"></input>
-        </li>
-        
-         <li class="li08">
-       		<label style="width:128px">开票预计回款时间：</label>
-			<input type="text" onClick="WdatePicker({dateFmt:'yyyy-MM-dd'})" id="yujihuikuanDate" name="textfield" class="fidtext"></input>
-        </li>
-    	
-    	<li class="li03">
-       		<label>备　　注：</label>
-			<textarea id="remarkAboutFapiao"></textarea>
-        </li>
-        <input style="display:none;" id="fapiaoId" type="text" name="textfield" class="fidtext" value=""/>
-    	<li class="li04"><input id="sureAboutFapiaoSale" type="button" name="button" value="确定" class="bnt" />
-    	<input id="updateFapiaoSale" type="button" name="button" value="修改" class="bnt" style="display:none;"/>
-    	<input id="deleteFapiao" type="button" name="button" value="删除" class="bnt" style="display:none;"/>
-    	<a class="bnt" href="#">取消</a></li>
-    </ul>
-    </form>
-</div> -->
 
 <script type="text/javascript" src="/app/views/hetong/js/popwindow.js"></script>
 <script type="text/javascript" src="/app/views/hetong/js/selectlist.js"></script>
@@ -601,7 +525,8 @@ $(".addbnt").click(function(){
 
 //  --未通过   更新合同状态  添加错误消息
 $("#noPass").click(function(){
-	var id = $("#htNum").text();
+	var id = $("#htNum").text();  //副本合同id
+	var id2 = $("#htNum2").text();
 	var company = $("#companyVO").val();//所属公司
 	var depart =$("#danweiNameVO").val();//单位名称
 	var contractMoney = $("#contractAmountVO").val();//合同金额
@@ -618,7 +543,7 @@ $("#noPass").click(function(){
 		
 	})
 	//更新合同状态
-	$.post('public/ht/notAllowUpdateContract.action',{"id":id},function(res){
+	$.post('public/ht/notAllowUpdateContract.action',{"id":id2},function(res){
 		if(res.success==true){
 			$.messager.alert('提示：',res.msg);
 			$.get('public/ht/contractList.action',function(result){
@@ -631,15 +556,15 @@ $("#noPass").click(function(){
 })
 
 $("#pass").click(function(){
-	var id = $("#htNum").text();
+	var id2 = $("#htNum2").text();
 	//更新合同状态
-	$.post('public/ht/allowUpdateContract.action',{"id":id},function(res){
+	$.post('public/ht/allowUpdateContract.action',{"id":id2},function(res){
 		if(res.success==true){
 			$.messager.alert('提示：',res.msg);
 			/* $.get('public/ht/contractList.action',function(result){
 				$('#container').html(result);
 			}) */
-			$.get('public/ht/contractDetail.action',{id:id},function(result){
+			$.get('public/ht/contractDetail.action',{id:id2},function(result){
 				$('#container').html(result);
 			})
 		}else{

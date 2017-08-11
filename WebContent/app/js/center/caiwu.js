@@ -1467,7 +1467,21 @@ var caiwu = {
                                 min:8
                             }
                         }
-                    }
+                    },
+                    tuipiao: {
+                        validators: {
+                            notEmpty: {
+                                message: '报销金额不能为空。'
+                            }
+                        }
+                    },
+                    tuikuan: {
+                        validators: {
+                            notEmpty: {
+                                message: '报销金额不能为空。'
+                            }
+                        }
+                    },
                 }
             })
         }

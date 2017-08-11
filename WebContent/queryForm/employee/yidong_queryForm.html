@@ -1,0 +1,34 @@
+<script type="text/javascript">
+$(document).ready(function() {
+	$('#yidong_form').keydown(function(e){
+		if(e.keyCode==13){
+		   $('#yidong_search').trigger('click');
+		}
+		});
+})
+</script>
+<form id="yidong_form" method="post" enctype="multipart/form-data">
+	<table>
+		<tr>
+			<td>姓名：</td>
+			<td><input type="text" class="easyui-textbox" name="username"/></td>
+			<td>细胞核邮箱：</td>
+			<td><input type="text" class="easyui-textbox" name="cellEmail"/></td>
+			<td></td>
+			<td><input id="yidong_checkbox" type="checkbox" name="confirm"ss/>:</td>
+			<td>显示已经确认</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<input id="yidong_search" class="easyui-linkbutton do_action" appaction="employee.yidongConfirm.query"  type="button" value="查找"
+					   style="width:46px;height:26px;" />
+			</td>
+			<td></td>
+			<td>
+				<input class="easyui-linkbutton"  type="button" value="重置" onclick="clearForm($(this))" style="width:46px;height:26px;" />
+			</td>
+
+		</tr>
+	</table>
+</form>

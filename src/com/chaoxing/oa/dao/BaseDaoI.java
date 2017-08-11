@@ -56,13 +56,17 @@ public interface BaseDaoI<T> {
 	
 	public void bigUpdate(List<T> objs);
 	
-	public <T> List<T> queryResultList(Class<T> className, Map<String,Object> varables,int page,int pageSize);
+	public List<T> queryResultList(Class<T> className, Map<String,Object> varables,int page,int pageSize);
 	
-	public <T> Query selectStatement(Class<T> className, Map<String,Object> varables, Session session,int page,int pageSize);
+	public Query selectStatement(Class<T> className, Map<String,Object> varables, Session session,int page,int pageSize);
 	
 	public Integer queryResultList(Class<T> className, Map<String,Object> varables);
 	
-	public <T> Query selectStatement(Class<T> className, Map<String,Object> varables, Session session);
+	public Query selectStatement(Class<T> className, Map<String,Object> varables, Session session);
+
+	public List<T> find(T valueObj, int offset, int pageSize);
+
+	public long count(T valueObj);
 	
 	
 }

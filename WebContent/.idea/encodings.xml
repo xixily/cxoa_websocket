@@ -12,5 +12,6 @@
     <file url="file://$PROJECT_DIR$/jslib/jquery-barcode.min.js" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/tabs/hetong/datagrid.json" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/test/treegrid_data0.json" charset="UTF-8" />
+    <file url="PROJECT" charset="UTF-8" />
   </component>
 </project>

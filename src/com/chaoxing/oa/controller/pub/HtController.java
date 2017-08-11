@@ -33,7 +33,6 @@ import com.chaoxing.oa.entity.po.hetong.FaPiao;
 import com.chaoxing.oa.entity.po.hetong.Fahuo;
 import com.chaoxing.oa.entity.po.hetong.ItemPrice;
 import com.chaoxing.oa.entity.po.hetong.PageBean;
-import com.chaoxing.oa.entity.po.view.Usercontracts;
 import com.chaoxing.oa.entity.po.view.Usercontracts2;
 import com.chaoxing.oa.service.HtService;
 import com.chaoxing.oa.util.data.SwitchMoneyUtil;
@@ -1317,7 +1316,12 @@ public class HtController {
 					}
 					contractList.get(i).setProduct(realproductName);
 			    }
+				
+		//		long startTime = System.currentTimeMillis();    //获取开始时间
+
 				int conditionCountContract = htService.getConditionCountContract(purchaseCom, gongsi, danwei, group,responsibility, userId, state);
+		//		long endTime = System.currentTimeMillis();    //获取结束时间
+		//		System.out.println("程序运行时间：" + (endTime - startTime) + "ms");    //输出程序运行时间
 				PageBean<Usercontracts2> pageBean = new PageBean<Usercontracts2>();
 				pageBean.init(size, conditionCountContract, page);
 				pageBean.setList(contractList);
@@ -1707,6 +1711,7 @@ public class HtController {
 				}
 				OrganizationStructure orgStructure = null;
 				if(userName!=null){
+					userName.setUserBank(null);
 					orgStructure = htService.getOrgStructureById(userName.getDepartmentId());
 				}
 				if(orgStructure!=null){
@@ -1731,14 +1736,24 @@ public class HtController {
 		public Json addorUpdateChildUnit(CustomerDepart customerDepart) {
 			Json json = new Json();
 			try {
-				if(customerDepart.getId()!=null){
-					htService.updateCustomerDepart(customerDepart);
+				if(customerDepart.getEmail()!=null&&customerDepart.getEmail().contains("@")){
+					UserName userName = htService.getUseInfo(customerDepart.getEmail());
+					if(userName!=null){
+						if(customerDepart.getId()!=null){
+							htService.updateCustomerDepart(customerDepart);
+						}else{
+							htService.addCustomerDepart(customerDepart);
+						}
+						json.setSuccess(true);
+						json.setMsg("操作成功");
+					}else{
+						json.setSuccess(false);
+						json.setMsg("不存在此销售邮箱");
+					}
 				}else{
-					htService.addCustomerDepart(customerDepart);
+					json.setSuccess(false);
+					json.setMsg("销售邮箱格式错误");
 				}
-				json.setSuccess(true);
-			//	json.setObj(customer);
-				json.setMsg("操作成功");
 			} catch (Exception e) {
 				e.printStackTrace();
 				json.setSuccess(false);

@@ -12,7 +12,6 @@ import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
-import org.apache.log4j.Logger;
 import org.hibernate.HibernateException;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,6 +38,7 @@ import com.chaoxing.oa.entity.page.employee.PShebao;
 import com.chaoxing.oa.entity.page.employee.PShebaoType;
 import com.chaoxing.oa.entity.page.employee.PWagesDate;
 import com.chaoxing.oa.entity.page.employee.PYidong;
+import com.chaoxing.oa.entity.page.employee.PYidongConfirm;
 import com.chaoxing.oa.entity.page.employee.PgridWage;
 import com.chaoxing.oa.entity.page.employee.PshebaoDetail;
 import com.chaoxing.oa.entity.page.employee.Pwages;
@@ -59,6 +59,7 @@ import com.chaoxing.oa.entity.po.employee.MonthWages;
 import com.chaoxing.oa.entity.po.employee.Shebao;
 import com.chaoxing.oa.entity.po.employee.UserName;
 import com.chaoxing.oa.entity.po.employee.WageDistribution;
+import com.chaoxing.oa.entity.po.employee.YidongConfirm;
 //import com.chaoxing.oa.entity.po.system.Struct;
 import com.chaoxing.oa.entity.po.system.SystemConfig;
 import com.chaoxing.oa.entity.po.view.CacuSalary;
@@ -129,6 +130,8 @@ public class EmployeeInfoServiceImpl implements EmployeeInfoService {
 	private BaseDaoI<CountStructure> cstDao;
 	@Autowired
 	private BaseDaoI<Contract> contractDao;
+	@Autowired
+	private BaseDaoI<YidongConfirm> yidongConfirmDao;
 	
 
 //	@Override
@@ -2463,11 +2466,103 @@ public class EmployeeInfoServiceImpl implements EmployeeInfoService {
 	}
 
 	@Override
-	public void updateTest() {
-		String sql = "update 保险公司  set iname='江西吉安' where iid=20";
-		objectDao.executeSql(sql);
+	public Integer addYidong(Integer uid, String ydStatus) {
+		if(null == uid) return 0;
+		RenshiUserName rusername = userNameDao.get(RenshiUserName.class, uid);
+		if(null != rusername){
+			YidongConfirm ydf = new YidongConfirm();
+			ydf.setUser(useDao.get(UserName.class, uid));
+			ydf.setUsername(rusername.getUsername());
+			ydf.setEmail(rusername.getEmail());
+			ydf.setCellEmail(rusername.getCellCoreEmail());
+			ydf.setGuidanceEmail(rusername.getGuidanceEmail());
+			ydf.setYdStatus(ydStatus);
+			ydf.setBaozhengjin(false);
+			ydf.setCaiwuJk(false);
+			ydf.setConfirm(false);
+			ydf.setRent(false);
+			ydf.setFapiaoNoback(false);
+			ydf.setContractDue(false);
+			ydf.setContractNoback(false);
+			ydf.setContractUser(false);
+			ydf.setFapiaoNoback(false);
+			ydf.setShebao(false);
+			try {
+				return (Integer) yidongConfirmDao.save(ydf);
+			} catch (Exception e) {
+				return 0;
+			}
+		}
+		return 0;
+	}
+
+	@Override
+	public int deleteYidong(Integer id) {
+		if(null != id){
+			try {
+				yidongConfirmDao.delete(yidongConfirmDao.get(YidongConfirm.class, id));
+				return 1;
+			} catch (Exception e) {
+			}
+		}
+		return 0;
+	}
+
+	@Override
+	public Map<String, Object> findYidongConfirm(PYidongConfirm pydconfirm, Page page) {
+		Map<String, Object> result = new HashMap<>();
+		if(null != pydconfirm){
+			YidongConfirm yd = new YidongConfirm();
+			BeanUtils.copyProperties(pydconfirm, yd);
+			Map<String, Object> params = new HashMap<>();
+			String hql = SqlHelper.prepareQuerySql(yd, params);
+			if(null == page.getPage()) page.setPage(1);
+			if(null == page.getRows()) page.setRows(10);
+			hql += getSort(page, "");
+			List<YidongConfirm> ydlis = yidongConfirmDao.find(hql, params, page.getPage(), page.getRows());
+			List<PYidongConfirm> pydlis = new ArrayList<>();
+			PYidongConfirm pyd = new PYidongConfirm();
+			for (YidongConfirm ydf : ydlis) {
+				pyd = new PYidongConfirm();
+				BeanUtils.copyProperties(ydf, pyd);
+//				copyY2py(ydf, pyd);
+				pydlis.add(pyd);
+			}
+			List<Object> counts = objectDao.find("select count(*) " + hql, params);
+			result.put("rows", pydlis);
+			result.put("total", counts.get(0));
+		}
+		return result;
+	}
+
+//	private void copyY2py(YidongConfirm ydf, PYidongConfirm pyd) {
+//		pyd.setId(ydf.getId());
+//		pyd.setUsername(ydf.getUsername());
+//		pyd.setEmail(ydf.getEmail());
+//		pyd.setCellEmail(ydf.getCellEmail());
+//		pyd.setGuidanceEmail(ydf.getGuidanceEmail());
+//		pyd.setYdStatus(ydf.getYdStatus());
+//		pyd.setConfirm(ydf.get);
+//	}
+
+	@Override
+	public int updateYidongConfirm(PYidongConfirm pyConfirm) {
+		Map<String, Object> params = new HashMap<>();
+		YidongConfirm yd = new YidongConfirm();
+		BeanUtils.copyProperties(pyConfirm, yd);
+		String hql = SqlHelper.prepareUpdateSql(yd, params, "id");
+		return yidongConfirmDao.executeHql(hql, params);
 	}
 	
-	
+	private String getSort(Page page, String alias){
+		String sort = "id";
+		alias = null != alias && !"".equals(alias) ? alias+"." : "";
+		String order = SysConfig.DESC;
+		if(null != page && null != page.getSort()){
+			sort = page.getSort();
+			order = null != page.getOrder() ? page.getOrder() : order;
+		}
+		return " order by " + alias + sort + " " + order;
+	}
 
 }

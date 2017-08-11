@@ -68,7 +68,7 @@ $(document).ready(function() {
 		<th data-options="field:'ruzhiReport',width:80,sortable:true">入职报表</th>
 		<th data-options="field:'lizhiReport',width:80,sortable:true">离职报表</th>
 		<th data-options="field:'zhuanzhengReport',width:80,sortable:true">转正报表</th>
-		<th data-options="field:'bumentiaozhengReport',width:80,sortable:true">部门调整报表</tsh>
+		<th data-options="field:'bumentiaozhengReport',width:80,sortable:true">部门调整报表</th>
 		<th data-options="field:'contract',width:80,sortable:true">合同</th>
 		</tr>
 		</thead>
@@ -91,5 +91,18 @@ $(document).ready(function() {
                 closed : true
             ">
            	<jsp:include page="../../components/employee/wages.jsp"></jsp:include>
+	</div>
+	<div id="create_yd_dlg" class="easyui-dialog" title="" style="width:250px;height:200px;padding:10px"
+		data-options="iconCls:'icon-save',resizable:true,modal:true,closed:true">
+		<form id="create_yd_form" method="post" style="margin-top: 30px;">
+			<div style="margin-bottom:20px">
+			<input type="hidden" name="id"/>
+			<input id="ydStatus_input" class="easyui-textbox" name="ydStatus" style="width:100%" data-options="label:'异动状态：',required:true">
+			</div>
+			<div style="text-align:center;padding:5px 0">
+			<a href="javascript:void(0)" class="easyui-linkbutton do_action" appaction="employee.yidongConfirm.addYidong" style="width:80px">添加</a>
+			<a href="javascript:void(0)" class="easyui-linkbutton" onclick="$('#create_yd_dlg').dialog('close')" style="width:80px">取消</a>
+			</div>
+		</form>
 	</div>
 </div>

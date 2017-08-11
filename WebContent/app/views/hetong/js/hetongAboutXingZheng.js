@@ -9,6 +9,12 @@ $(function(){
 	 		}else{
 	 			$("#disanfangLi").attr("style","display:none;");
 	 		} 
+	 		if(name=='其他'){
+	 			$("#otherLi").attr("style","display:block;");
+	 		}else{
+	 			$("#otherLi").attr("style","display:none;");
+	 			$("#other").val("");
+	 		}
 		} 
 	});	
 	
@@ -848,9 +854,9 @@ $("#saveXingzheng").click(function(){
 	 $.post('public/ht/updateContractXingzheng.action',{"id":id,"yinhuashui":yinhuashui,"huaizhangAmount":huaizhangAmount,"guidangNum":guidangNum,"kuaijifenlei":kuaijifenlei,"dengjiTime":dengjiTime},function(res){
 		 if(res.success==true){
 	    	$.messager.alert('提示：',res.msg);
-	    	$.get('public/ht/contractList.action',function(result){
+	    	/*$.get('public/ht/contractList.action',function(result){
 				$('#container').html(result);
-			})
+			})*/
 		 }else{
 			 $.messager.alert('提示：',res.msg);
 		 }

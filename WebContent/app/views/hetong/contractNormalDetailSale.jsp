@@ -5,10 +5,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head></head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-
 <title>销售人员创建合同</title> -->
 <link href="/app/views/hetong/css/global.css" rel="stylesheet" type="text/css" />
-
 <!-- <link href="/app/views/hetong/css/space.css" rel="stylesheet" type="text/css" />
 <link href="/app/views/hetong/css/selectlist.css" rel="stylesheet" type="text/css" /> -->
 <style>
@@ -54,6 +52,12 @@ p {
 }
 .main {
     width: inherit;
+}
+.courier_list textarea {
+    border: solid #ccc 1px;
+}
+.tareaTable textarea {
+    border: solid #ccc 1px;
 }
 </style>
 

@@ -20,6 +20,8 @@ onclick="confirmDialog.createDialog('您确定要删除吗？',employee.deleteEm
 <span class="btn-separator"></span> -->
 <a href="#" class="easyui-menubutton" data-options="menu:'#menu_employee_export',iconCls:'icon-excel'">导出报表</a>
 <!-- <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-copy',plain:true">复制</a> -->
+<span class="btn-separator"></span>
+<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-add',plain:true" onclick="employee.yidongConfirm.openAddYd()">添加异动确认</a>
 </div>
 <%
 Calendar cal = Calendar.getInstance();

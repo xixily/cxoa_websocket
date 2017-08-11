@@ -1,0 +1,74 @@
+<div id="yidong" title="异动确认" style="padding: 10px;" data-options="iconCls:'icon-man',closable:true">
+    <div class="easyui-panel" id="yidong_from_query" title="异动查询" style="width:98%;padding: 10px;margin-bottom: 10px;"
+            data-options="margin:'10px 0px',iconCls:'icon-search',collapsible:true,href:'queryForm/employee/yidong_queryForm.html',tools:[
+				{iconCls:'icon-reload',handler:function(){$('#yidong_from_query').panel('open').panel('refresh')}}]">
+    </div>
+	<div style="margin-bottom: 15px;"></div>
+	<table id="yidong_datagrid" class="easyui-datagrid" title="异动确认表" style="width:98%;height:400px;"
+		   data-options="
+		   		fitColumns:true,
+				singleSelect: true,
+				striped:true,
+				url: 'employee/queryYidong.action',
+				method:'get',
+				pagination:true,
+				rowStyler: function(index,row){
+					if(row.confirm === true || row.confirm=='√')
+					return  'background-color:#57cd7f;color:#fff;';
+				},
+				loadFilter: function(data){
+					$.each(data.rows,function(i, obj){
+						for(j in obj){
+							if(obj[j] === true){
+								obj[j] = '√'
+							}
+							if(obj[j] === false){
+								obj[j] = '×'
+							}
+						}
+					})
+					return data;
+				},
+				toolbar: [{
+					text:'删除',
+					iconCls: 'icon-remove',
+					handler: employee.yidongConfirm.remove
+				}],
+				onEndEdit: employee.yidongConfirm.onEndEdit
+			">
+		<thead>
+			<tr>
+				<th data-options="field:'confirm',width:60,align:'center',editor:{type:'checkbox',options:{on:'√',off:'×'}},sortable:true">人事确认</th>
+				<th data-options="field:'username',width:60">姓名</th>
+				<th data-options="field:'email',width:80">邮箱</th>
+				<th data-options="field:'cellEmail',width:80">细胞核邮箱</th>
+				<th data-options="field:'guidanceEmail',width:80">指导邮箱</th>
+				<th data-options="field:'ydStatus',width:55,sortable:true">异动状态</th>
+				<th data-options="field:'shebao',width:55,align:'center',editor:{type:'checkbox',options:{on:'√',off:'×'},sortable:true}">社保</th>
+				<th data-options="field:'cuishou',width:60,sortable:true,editor:{type:'datebox'}">催收时间</th>
+
+				<!--合同-->
+				<th data-options="field:'contractUser',width:55,align:'center',editor:{type:'checkbox',options:{on:'√',off:'×'},sortable:true}">用户合同</th>
+				<th data-options="field:'contractDue',width:55,align:'center',editor:{type:'checkbox',options:{on:'√',off:'×'}},sortable:true">合同应收</th>
+				<th data-options="field:'contractNoback',width:55,align:'center',editor:{type:'checkbox',options:{on:'√',off:'×'}},sortable:true">未回合同</th>
+				<th data-options="field:'contractRemarks',width:120,editor:'text',sortable:true">合同备注</th>
+
+				<!--保证金-->
+				<th data-options="field:'baozhengjin',width:55,align:'center',editor:{type:'checkbox',options:{on:'√',off:'×'}},sortable:true">保证金未回</th>
+				<th data-options="field:'bzjRemar',width:120,editor:'text',sortable:true">保证金备注</th>
+
+				<!--财务信息-->
+				<th data-options="field:'caiwuJk',width:55,align:'center',editor:{type:'checkbox',options:{on:'√',off:'×'}},sortable:true">财务借款</th>
+				<th data-options="field:'fapiaoNoback',width:55,align:'center',editor:{type:'checkbox',options:{on:'√',off:'×'}},sortable:true">发票未回</th>
+				<th data-options="field:'rent',width:55,align:'center',editor:{type:'checkbox',options:{on:'√',off:'×'}},sortable:true">房租</th>
+				<th data-options="field:'caiwuRemarks',width:120,editor:'text',sortable:true">财务备注</th>
+
+			</tr>
+		</thead>
+	</table>
+</div>
+<script type="text/javascript">
+	$(document).ready(function(){
+		$('#yidong_datagrid').datagrid().datagrid('enableCellEditing');
+	})
+</script>

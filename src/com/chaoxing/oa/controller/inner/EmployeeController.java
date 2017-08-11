@@ -3,14 +3,17 @@ package com.chaoxing.oa.controller.inner;
 import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -29,6 +32,7 @@ import com.chaoxing.oa.entity.page.employee.PMonthWages;
 import com.chaoxing.oa.entity.page.employee.PShebao;
 import com.chaoxing.oa.entity.page.employee.PShebaoType;
 import com.chaoxing.oa.entity.page.employee.PWagesDate;
+import com.chaoxing.oa.entity.page.employee.PYidongConfirm;
 import com.chaoxing.oa.entity.page.employee.PgridWage;
 import com.chaoxing.oa.entity.page.employee.PshebaoDetail;
 import com.chaoxing.oa.entity.page.employee.Pwage_;
@@ -1276,13 +1280,123 @@ public class EmployeeController {
 		return result;
 	}
 	
-	@RequestMapping("hello")
-	public String getBasePath(){
-		ModelAndView model = new ModelAndView("views/hello");
-		System.out.println("hello method!");
-		employeeInfoService.findTest();
-		employeeInfoService.updateTest();
-		return "app/app_index.html";
+//	@RequestMapping("hello")
+//	public String getBasePath(){
+//		ModelAndView model = new ModelAndView("views/hello");
+//		System.out.println("hello method!");
+//		employeeInfoService.findTest();
+//		employeeInfoService.updateTest();
+//		return "app/app_index.html";
+//	}
+	
+	@RequestMapping("/createYidong")
+	@ResponseBody
+	public Json createYiDong(@RequestParam(required=true) Integer id, String ydStatus){
+		Json result = new Json();
+		Integer yid = employeeInfoService.addYidong(id, ydStatus);
+		if(yid > 0 ){
+			result.setSuccess(true);
+			result.setMsg("添加成功！");
+		}
+		return result;
+	}
+	
+	@RequestMapping("/removeYidong")
+	@ResponseBody
+	public Json deleteYidong(@RequestParam(required=true)Integer id){
+		Json result = new Json();
+		if(employeeInfoService.deleteYidong(id)>0){
+			result.setSuccess(true);
+			result.setMsg("删除成功！~");
+		}
+		return result;
+	}
+	
+	@RequestMapping("/queryYidong")
+	@ResponseBody
+	public Map<String, Object> findYidong(PYidongConfirm pydconfirm, Page page){
+		if(null != pydconfirm.getConfirm() && pydconfirm.getConfirm().equals(true)){
+			pydconfirm.setConfirm(null);
+		}else{
+			pydconfirm.setConfirm(false);
+		}
+		Map<String, Object> pydconfrims = employeeInfoService.findYidongConfirm(pydconfirm, page);
+		return pydconfrims;
+	}
+	
+	
+	@RequestMapping("/edtiRenshiYd")
+	@ResponseBody
+	public Json updateRenshiYd(@RequestParam(required=true)Integer id,@RequestParam(defaultValue="false")Boolean confirm, Boolean shebao, @DateTimeFormat(pattern="yyyy.MM.dd")Date cuishou){
+		Json result = new Json();
+		confirm = null == confirm ? false : confirm;
+		PYidongConfirm pyConfirm = new PYidongConfirm();
+		pyConfirm.setId(id);
+		pyConfirm.setConfirm(confirm);
+		pyConfirm.setCuishou(cuishou);
+		pyConfirm.setShebao(shebao);
+		if(employeeInfoService.updateYidongConfirm(pyConfirm) > 0){
+			result.setSuccess(true);
+			result.setMsg("更新成功。");
+		}else{
+			result.setMsg("更新失败~~");
+		}
+		return result;
+	}
+	
+	@RequestMapping("/editHetongYd")
+	@ResponseBody
+	public Json updateHetongYd(@RequestParam(required=true)Integer id,Boolean contractUser,Boolean contractDue,Boolean contractNoback,String contractRemarks){
+		Json result = new Json();
+		PYidongConfirm pyConfirm = new PYidongConfirm();
+		pyConfirm.setId(id);
+		pyConfirm.setContractUser(contractUser);
+		pyConfirm.setContractDue(contractDue);
+		pyConfirm.setContractNoback(contractNoback);
+		pyConfirm.setContractRemarks(contractRemarks);
+		if(employeeInfoService.updateYidongConfirm(pyConfirm) > 0){
+			result.setSuccess(true);
+			result.setMsg("更新成功。");
+		}else{
+			result.setMsg("更新失败~~");
+		}
+		return result;
+	}
+	
+	@RequestMapping("/editCaiwuYd")
+	@ResponseBody
+	public Json updateCaiwuYd(@RequestParam(required=true)Integer id,Boolean caiwuJk,Boolean fapiaoNoback,Boolean rent,String caiwuRemarks){
+		Json result = new Json();
+		PYidongConfirm pyConfirm = new PYidongConfirm();
+		pyConfirm.setId(id);
+		pyConfirm.setCaiwuJk(caiwuJk);
+		pyConfirm.setFapiaoNoback(fapiaoNoback);
+		pyConfirm.setRent(rent);
+		pyConfirm.setCaiwuRemarks(caiwuRemarks);
+		if(employeeInfoService.updateYidongConfirm(pyConfirm) > 0){
+			result.setSuccess(true);
+			result.setMsg("更新成功。");
+		}else{
+			result.setMsg("更新失败~~");
+		}
+		return result;
+	}
+	
+	@RequestMapping("/editBzjYd")
+	@ResponseBody
+	public Json updateBzjYd(@RequestParam(required=true)Integer id,Boolean baozhengjin, String bzjRemar){
+		Json result = new Json();
+		PYidongConfirm pyConfirm = new PYidongConfirm();
+		pyConfirm.setId(id);
+		pyConfirm.setBaozhengjin(baozhengjin);
+		pyConfirm.setBzjRemar(bzjRemar);
+		if(employeeInfoService.updateYidongConfirm(pyConfirm) > 0){
+			result.setSuccess(true);
+			result.setMsg("更新成功。");
+		}else{
+			result.setMsg("更新失败~~");
+		}
+		return result;
 	}
 	
 }

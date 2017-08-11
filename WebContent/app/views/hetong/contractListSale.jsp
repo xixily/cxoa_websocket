@@ -208,7 +208,7 @@ $(".detail").click(function(){
 		$.get('public/ht/contractDetailForSale.action',{"id":id},function(result){
 			$('#container').html(result);
 		})
-	}else if(dealCondition=='未处理(修改)'||dealCondition=='审核未通过(修改)'){
+	}else if(dealCondition=='未处理(修改)'){
 		$.ajax({ 
 	          type : "post", 
 	           url : "public/ht/getCopyContract.action", 
@@ -217,6 +217,19 @@ $(".detail").click(function(){
 	            /* data = eval("(" + data + ")"); 
 	            aDataSet = data;  */
 	            $.get('public/ht/contractDetailForSale.action',{"id":data.obj.id},function(result){
+	    			$('#container').html(result);
+	    		})
+	          } 
+	    }); 
+	}else if(dealCondition=='审核未通过(修改)'){
+		$.ajax({ 
+	          type : "post", 
+	           url : "public/ht/getCopyContract.action", 
+	          data : "copyId=" + id,  
+	          success : function(data){ 
+	            /* data = eval("(" + data + ")"); 
+	            aDataSet = data;  */
+	            $.get('public/ht/contractDetailForSale2.action',{"id":data.obj.id},function(result){
 	    			$('#container').html(result);
 	    		})
 	          } 

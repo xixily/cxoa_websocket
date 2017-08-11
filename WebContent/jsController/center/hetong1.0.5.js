@@ -42,14 +42,15 @@ var hetong = {
 						if(data && data.hetongCode && data.mailno){
 							$.post('hetong/getEmailByCt.action', {id: data.hetongCode}, function(result){
 								result = eval("(" + result + ")");
-								if(result.success){
+								result.obj = result.obj ? result.obj : "";
+//								if(result.success){
 									var content = (data.d_company + "用户的" + data.content + "今日用顺丰邮寄，" +
 											"邮寄凭证号为 " + data.mailno + ",你可以通过www.sf-express.com 查询邮寄情况，及时和老师联系");
 									var href = "mailto:" + result.obj +"?subject="+encodeURI(content)+"&body="+encodeURI(content);
 									window.location.href = href;
-								}else{
-									$.messager.alert("提示：", result.msg);
-								}
+//								}else{
+//									$.messager.alert("提示：", result.msg);
+//								}
 							})
 						}else{
 							$.messager.alert("提示：", "获取负责人邮箱失败。");

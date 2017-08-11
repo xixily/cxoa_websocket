@@ -175,6 +175,7 @@ function getDataOfForm(form) {
                     }
                 } else {
                     value = ele[0].checked;
+//					value = ele[0].value || ele[0].checked;
                 }
             } else if (ele[0].type == 'radio') {
                 if (ele[0].checked)
@@ -1031,6 +1032,30 @@ $.ajaxSetup({
 	}
 });
 
+var idValidate = function(str){
+	var radix = [7,9,10,5,8,4,2,1,6,3,7,9,10,5,8,4,2];
+	var checkCode = ['1','0','X','9','8','7','6','5','4','3','2'];
+	var sum = 0;
+	var result = 0;
+	var getMultiply = function(c, j){
+		try{
+			return Number(c)* radix[j];
+		}catch(e){
+			console.log(c + " false with e:" + e);
+			return -1;
+		}
+	}
+	if(str.length == 18){
+		for (var i = 0; i < (str.length -1) ; i++) {
+			result = getMultiply(str[i], i);
+			if(result == -1) return false;
+			sum += result;
+		}
+		return str[17] == checkCode[sum%11];
+	}
+	return false;
+}
+
 /**
  * 扩展的基本校验规则，/i 忽略大小写
  */
@@ -1061,8 +1086,14 @@ $.extend($.fn.validatebox.defaults.rules, {
         message : '手机号码格式不正确'
     }, 
     idcard : {// 验证身份证 
-        validator : function(value) { 
-            return /(^[1-9]\d{5}[1,2]\d{3}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}([0-9]|X)$)|(^[A-Za-z][0-9A-Za-z]+$)/.test(value);
+        validator : function(value) {
+			if(/(^[1-9]\d{5}[1,2]\d{3}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}([0-9]|X)$)/.test(value)){
+				return idValidate(value);
+			}else if(/(^[\u62a4\u7167A-Za-z][0-9A-Za-z]+$)/.test(value)){
+				return true;
+			}
+			return false;
+//            return /(^[1-9]\d{5}[1,2]\d{3}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}([0-9]|X)$)|(^[A-Za-z][0-9A-Za-z]+$)/.test(value);
 //            return /^[1-9]\d{5}[1-9]\d{3}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}([0-9]|X)$/i.test(value);
         },
         message : '身份证号码格式不正确'
@@ -1301,6 +1332,74 @@ var isEmpty = function(e){
 	}
 	return true;
 }
+/**
+ * 扩展表格编辑
+ */
+$.extend($.fn.datagrid.methods, {
+	editCell: function(jq,param){
+//				debugger;
+		return jq.each(function(){
+			var opts = $(this).datagrid('options');
+			var fields = $(this).datagrid('getColumnFields',true).concat($(this).datagrid('getColumnFields'));
+			for(var i=0; i<fields.length; i++){
+				var col = $(this).datagrid('getColumnOption', fields[i]);
+				col.editor1 = col.editor;
+				if (fields[i] != param.field){
+					col.editor = null;
+				}
+			}
+			$(this).datagrid('beginEdit', param.index);
+			var ed = $(this).datagrid('getEditor', param);
+			if (ed){
+				if ($(ed.target).hasClass('textbox-f')){
+					$(ed.target).textbox('textbox').focus();
+				} else {
+					$(ed.target).focus();
+				}
+			}
+			for(var i=0; i<fields.length; i++){
+				var col = $(this).datagrid('getColumnOption', fields[i]);
+				col.editor = col.editor1;
+			}
+		});
+	},
+	enableCellEditing: function(jq){
+		return jq.each(function(){
+			var dg = $(this);
+			var opts = dg.datagrid('options');
+			opts.oldOnClickCell = opts.onClickCell;
+			opts.onDblClickCell = function(index, field){
+				if (opts.editIndex != undefined){
+					if (dg.datagrid('validateRow', opts.editIndex)){
+						dg.datagrid('endEdit', opts.editIndex);
+						opts.editIndex = undefined;
+					} else {
+						return;
+					}
+				}
+				dg.datagrid('selectRow', index).datagrid('editCell', {
+					index: index,
+					field: field
+				});
+				opts.editIndex = index;
+				opts.oldOnClickCell.call(this, index, field);
+			}
+			opts.onClickRow = function(index,row){
+				if(opts.editIndex == undefined) return true;
+				if(dg.datagrid('validateRow', opts.editIndex)){
+					dg.datagrid('endEdit', opts.editIndex);
+					opts.editIndex = undefined;
+					return true;
+				}else{
+					return false;
+				}
+			};
+//			opts.onEndEdit = function(index,row,changes){
+//				console.log(changes);
+//			}
+		});
+	}
+});
 //Object.prototype.isEmpty = function(){
 //	var obj;
 //	for(obj in this){

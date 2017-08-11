@@ -398,9 +398,9 @@ a:hover{
        		<label>选择产品：</label>
 			<select id="chooseProduct" name="xuanze" class="leftF" >
 			   <c:forEach var="p" items="${productList}">
-				  <option value="${p }">${p }</option>
-				  
+				  <option value="${p }">${p }</option>				  
 			   </c:forEach>
+			   <option value="其他">其他</option>
 			</select>
         </li>
          <li class="li06" id="disanfangLi" style="display:none;">
@@ -416,7 +416,7 @@ a:hover{
         </li> 
     	<li class="li06">
        		<label>时间/数量：</label>
-			<input id="productAmount" type="number" autocomplete="off" name="textfield" class="fidtext" />
+			<input id="productAmount" type="text" autocomplete="off" name="textfield" class="fidtext" />
         </li>
     	<li class="li06">
        		<label>生效日期：</label>
@@ -611,7 +611,7 @@ a:hover{
 
 <script type="text/javascript" src="/app/views/hetong/js/popwindow.js?i=1"></script>
 <script type="text/javascript" src="/app/views/hetong/js/selectlist.js"></script>
-<script type="text/javascript" src="/app/views/hetong/js/hetongAboutXingZheng.js"></script>
+<script type="text/javascript" src="/app/views/hetong/js/hetongAboutXingZheng.js?v=1"></script>
 <script  type="text/javascript" src="/app/views/hetong/My97DatePicker/WdatePicker.js"></script>
 <script  type="text/javascript">
 $(function(){

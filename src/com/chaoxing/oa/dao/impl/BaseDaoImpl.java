@@ -1,6 +1,7 @@
 package com.chaoxing.oa.dao.impl;
 
 import java.io.Serializable;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -12,12 +13,13 @@ import org.hibernate.Query;
 import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
 import org.springframework.stereotype.Repository;
 
 import com.chaoxing.oa.dao.BaseDaoI;
+import com.chaoxing.oa.util.system.SqlHelper;
 
 @Repository("baseDao")
+@SuppressWarnings("unchecked")
 public class BaseDaoImpl<T> implements BaseDaoI<T> {
 	@Resource(name="sessionFactory")
 	private SessionFactory sessionFactory;
@@ -74,7 +76,6 @@ public class BaseDaoImpl<T> implements BaseDaoI<T> {
 				q.setParameter(key, params.get(key));
 			}
 		}
-		String qq = q.toString();
 		List<T> l = q.list();
 		if (l != null && l.size() > 0) {
 			return l.get(0);
@@ -147,8 +148,6 @@ public class BaseDaoImpl<T> implements BaseDaoI<T> {
 				q.setParameter(key, params.get(key));
 			}
 		}
-		q.setFirstResult(0);
-		q.setMaxResults(30);
 		return q.setFirstResult((page - 1) * pageSize).setMaxResults(pageSize).list();
 	}
 
@@ -323,7 +322,7 @@ public class BaseDaoImpl<T> implements BaseDaoI<T> {
 	
 	
 	@Override
-	 public <T> List<T> queryResultList(Class<T> className, Map<String,Object> varables,int page,int pageSize){        
+	 public List<T> queryResultList(Class<T> className, Map<String,Object> varables,int page,int pageSize){        
 	        Session session = sessionFactory.getCurrentSession();
 	        List<T> valueList = selectStatement(className, varables, session,page,pageSize).list();
 	        return valueList;       
@@ -337,7 +336,7 @@ public class BaseDaoImpl<T> implements BaseDaoI<T> {
 	    }
 	
 	@Override
-	public <T> Query selectStatement(Class<T> className, Map<String,Object> varables, Session session,int page,int pageSize) {
+	public Query selectStatement(Class<T> className, Map<String,Object> varables, Session session,int page,int pageSize) {
 	        StringBuilder stringBuilder = new StringBuilder();
 	        /*
 	         * 通过className得到该实体类的字符串形式,
@@ -369,7 +368,7 @@ public class BaseDaoImpl<T> implements BaseDaoI<T> {
 	    }
 	
 	@Override
-	public <T> Query selectStatement(Class<T> className, Map<String,Object> varables, Session session) {
+	public Query selectStatement(Class<T> className, Map<String,Object> varables, Session session) {
 	        StringBuilder stringBuilder = new StringBuilder();
 	        /*
 	         * 通过className得到该实体类的字符串形式,
@@ -398,4 +397,33 @@ public class BaseDaoImpl<T> implements BaseDaoI<T> {
 	        }
 	        return query;
 	    }
+	
+	//service 层和dao层做更进一步的分离
+	
+	@Override
+	public List<T> find(T valueObj, int offset, int pageSize) {
+		Map<String, Object> params = new HashMap<String, Object>();
+		String hql = SqlHelper.prepareQuerySql(valueObj,params);
+		Query q = this.getCurrentSession().createQuery(hql);
+		if (params != null && !params.isEmpty()) {
+			for (String key : params.keySet()) {
+				q.setParameter(key, params.get(key));
+			}
+		}
+		return (List<T>)q.setFirstResult(offset).setMaxResults(pageSize).list();
+	}
+
+	@Override
+	public long count(T valueObj) {
+		Map<String, Object> params = new HashMap<String, Object>();
+		String hql = SqlHelper.prepareQuerySql(valueObj,params);
+		hql = "select count(*)" + hql;
+		Query q = this.getCurrentSession().createQuery(hql);
+		if (params != null && !params.isEmpty()) {
+			for (String key : params.keySet()) {
+				q.setParameter(key, params.get(key));
+			}
+		}
+		return (long) q.uniqueResult();
+	}
 }

@@ -23,7 +23,7 @@
 .main {
 	width: inherit;
 }
-
+.main ul,ol{list-style-type:none;} 
 .divtable {
 	width: inherit;
 }

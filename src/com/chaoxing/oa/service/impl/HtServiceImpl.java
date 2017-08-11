@@ -1051,7 +1051,7 @@ public class HtServiceImpl implements HtService {
 	@Override
 	public List<Customer> getCustomerList(Integer id, String remarks, String city, String province, String xingzhi, String customerName, String charger,int page, int size) {
 		Map<String, Object> params = new HashMap<String, Object>();
-		StringBuilder sql = new StringBuilder("select distinct b.自动编号, b.用户名称, b.曾用名称, b.代理公司, b.性质, b.省份, b.城市, b.备注  FROM 用户列表 b left join 用户单位 a on a.单位编号=b.自动编号  where 1=1 ");
+		StringBuilder sql = new StringBuilder("select distinct b.自动编号, b.用户名称, b.曾用名称, b.代理公司, b.性质, b.省份, b.城市, b.备注  FROM (用户列表 b left join 用户单位 a on a.单位编号=b.自动编号)  where 1=1 ");
 		if(id!=null){
 			sql.append("and b.自动编号=:id ");
 			params.put("id", id);
@@ -1080,11 +1080,14 @@ public class HtServiceImpl implements HtService {
 			sql.append("and a.负责人 like :charger ");
 			params.put("charger", "%"+charger+"%");
 		}
-		sql.append(" order by b.自动编号 desc limit :start, :size ");
+	//	sql.append(" order by b.自动编号 desc limit :start, :size ");
+	//	sql.append(" limit :start, :size ");
 		params.put("start", (page-1)*size);
 		params.put("size", size);
 	//	String hql = "select distinct b.* FROM 用户单位 a left join 用户列表 b on a.单位编号=b.自动编号  where b order by b.id desc limit :start, :size";
-		List<Customer> customerList = customerDao.findSql(sql.toString(), params);
+	//	String sql2 = "select c.自动编号,c.用户名称,c.曾用名称,c.代理公司,c.性质,c.省份,c.城市,c.备注 from (" +sql.toString() +")c ORDER BY c.自动编号 DESC limit :start, :size ";
+		String sql2 = sql.toString() +" GROUP BY b.自动编号 ORDER BY b.自动编号 DESC limit :start, :size ";
+		List<Customer> customerList = customerDao.findSql(sql2, params);
 		return customerList;
 	}
 	

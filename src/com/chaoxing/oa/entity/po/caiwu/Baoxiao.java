@@ -12,6 +12,7 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 
@@ -19,6 +20,7 @@ import org.hibernate.annotations.DynamicUpdate;
 @Table(name = "报销表", schema="")
 @DynamicInsert(true)
 @DynamicUpdate(true)
+//@Cache(region="READE_WRITE")
 public class Baoxiao implements Serializable{
 	private static final long serialVersionUID = -8310260669695764416L;
 	private Long id;

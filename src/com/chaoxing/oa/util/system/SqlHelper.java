@@ -4,6 +4,7 @@ import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.math.BigDecimal;
+import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -269,6 +270,138 @@ public class SqlHelper {
 		}
 		
 	}
+	
+	
+	
+	// 重新写的sqlhelper，精化了之前几个
+	
+	public static String prepareQuerySql(Object obj, Map<String, Object> params, String... except) {
+		return prepareQuerySql("", obj, params, except);
+	}
+	
+	/**
+	 * <strong style="red">注意：</strong>被修饰为<strong>public</strong>和<strong>static</strong>的属性不会做条件拼接，<br/>
+	 * 集合类型<strong>Collection</strong>和<strong>Map</strong>类型属性也不会拼接。
+	 * @param alias 表别名
+	 * @param obj 必须
+	 * @param params 必须
+	 * @param except 排除属性的属性名
+	 * @return String hql
+	 */
+	public static String prepareQuerySql(String alias, Object obj, Map<String, Object> params, String... except) {
+		alias = (null == alias || alias.equals("")) ? " " : " " + alias + ".";
+		if(null != obj && null != params){
+			Class<? extends Object> clazz = obj.getClass();
+			String clsName = clazz.getSimpleName();
+			Field[] fs = clazz.getDeclaredFields();
+			StringBuffer sb = new StringBuffer("from " + clsName + " " + alias +"where 1=1");
+			int mod = 0;//修饰符
+			Object value = null;
+			String type = null;
+			String name = null;
+			boolean ept = true;
+			boolean empty = true;
+			for (Field field : fs) {
+				ept = true;
+				mod = field.getModifiers();
+				name = field.getName();
+				type = field.getType().getSimpleName();
+				for (String expt : except) {
+					if(expt.equals(name)) ept = false; 
+				}
+				if((mod & 8) ==0 && (mod & 16) == 0 && ept){//修饰符为static 或者是 final 的属性做处理
+					field.setAccessible(true);
+					try {
+						value = field.get(obj);
+						if(empty && null != value) empty = false;
+						if(null != value && !(value instanceof Map) && !(value instanceof Collection)){
+							if("String".equals(type)){
+								sb.append(" and" + alias + name + " like :" + name);
+								value = "%" + value + "%";
+							}else if("Date".equals(type)){
+								sb.append(" and" + alias + name + ">= :" + name);
+							}else{
+								sb.append(" and" + alias + name + "=:" + name);
+							}
+							params.put(name, value);
+						}
+					} catch (IllegalArgumentException e) {
+						e.printStackTrace();
+					} catch (IllegalAccessException e) {
+						e.printStackTrace();
+					}
+				}
+			}
+			return (empty ? sb.toString() : sb.toString());
+		}
+		return "";
+	}
+	
+	public static String prepareUpdateSql(Object obj, Map<String, Object> params,String identity,String... except){
+		return prepareUpdateSql("", obj, params, identity, except);
+	}
+	
+	/**
+	 * <strong style="red">注意：</strong>被修饰为<strong>public</strong>和<strong>static</strong>的属性不会做条件拼接，<br/>
+	 * 集合类型<strong>Collection</strong>和<strong>Map</strong>类型属性也不会拼接。
+	 * @param alias 表别名
+	 * @param obj 必须
+	 * @param params 必须
+	 * @param identity 必须，表的id字段
+	 * @param except 排除属性的属性名
+	 * @return String hql
+	 */
+	public static String prepareUpdateSql(String alias,Object obj, Map<String, Object> params,String identity, String... except){
+		if(null != obj && null != params && null != identity){
+			Class<? extends Object> clazz = obj.getClass();
+			String clsName = clazz.getSimpleName();
+			Field[] fs = clazz.getDeclaredFields();
+			StringBuffer sb = new StringBuffer("update " + clsName + " " + alias + " set");
+			alias = (null == alias || alias.equals("")) ? " " : " " + alias + ".";
+			int mod = 0;//修饰符
+			Object value = null;
+			String name = null;
+			boolean ept = true;
+			boolean empty = true;
+			for (Field field : fs) {
+				ept = true;
+				mod = field.getModifiers();
+				name = field.getName();
+				for (String expt : except) {
+					if(expt.equals(name)) ept = false; 
+				}
+//				if(name.equals(identity)){
+//					params.put(identity, value);
+//					ept = false;
+//					name=null;
+//				}
+				if((mod & 8) ==0 && (mod & 16) == 0 && ept){//修饰符为static 或者是 final 的属性做处理
+					field.setAccessible(true);
+					try {
+						value = field.get(obj);
+						if(name.equals(identity)){
+							params.put(identity, value);
+							ept = false;
+							name=null;
+						}else{
+							if(empty && null != value) empty = false;
+							if(null != value && !(value instanceof Map) && !(value instanceof Collection)){
+								sb.append(alias + name + "=:" + name + ",");
+								params.put(name, value);
+							}
+						}
+					} catch (IllegalArgumentException e) {
+						e.printStackTrace();
+					} catch (IllegalAccessException e) {
+						e.printStackTrace();
+					}
+				}
+			}
+			return (empty ? "" : sb.substring(0, sb.length()-1) + " where" + alias + identity + "=:" + identity);
+		}
+		return "";
+	}
+	
 	public static void main(String[] args) {
 		Baoxiao bx = new Baoxiao();
 		bx.setId(12l);

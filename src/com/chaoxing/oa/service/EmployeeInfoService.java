@@ -19,6 +19,7 @@ import com.chaoxing.oa.entity.page.employee.PMonthWages;
 import com.chaoxing.oa.entity.page.employee.PShebao;
 import com.chaoxing.oa.entity.page.employee.PShebaoType;
 import com.chaoxing.oa.entity.page.employee.PWagesDate;
+import com.chaoxing.oa.entity.page.employee.PYidongConfirm;
 import com.chaoxing.oa.entity.page.employee.PgridWage;
 import com.chaoxing.oa.entity.page.employee.PshebaoDetail;
 import com.chaoxing.oa.entity.page.employee.Pwages;
@@ -187,7 +188,18 @@ public interface EmployeeInfoService {
 
 	public void findTest();
 
-	public void updateTest();
+	/**
+	 * 异动确认 service
+	 * @param uid
+	 * @return
+	 */
+	public Integer addYidong(Integer uid, String ydStatus);
+
+	public int deleteYidong(Integer id);
+
+	public Map<String, Object> findYidongConfirm(PYidongConfirm pydconfirm, Page page);
+
+	public int updateYidongConfirm(PYidongConfirm pyConfirm);
 
 //	public Json 
 

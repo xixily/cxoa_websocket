@@ -1,6 +1,6 @@
 <%@ page language="java" pageEncoding="UTF-8" contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<link href="/app/views/hetong/css/common.css" type="text/css" rel="stylesheet"> 
+<link href="/app/views/hetong/css/common.css?v=1" type="text/css" rel="stylesheet"> 
 <!-- <script src="js/jquery-1.7.2.min.js"></script> -->
 <script type="text/javascript" src="/app/views/hetong/js/publish2.js"></script>
 <script type="text/javascript" src="/app/views/hetong/js/pageUtil.js"></script>
@@ -10,7 +10,7 @@ a {
     text-decoration: none;
 }
 .tabList td a {
-    color: #428bca;
+    color: #428bca;mm
 }
 h1, .h1, h2, .h2, h3, .h3 {
     margin-top: initial;
@@ -293,6 +293,8 @@ $(".sure").click(function(){
 				$('#container').empty();
 				$('#container').html(result);
 			})
+			$(".addBg").hide();
+			$(".addJg").hide();	
 		  //  $.messager.alert('提示:','操作成功');
 		}else{
 			//如果出错加回disable
@@ -303,11 +305,9 @@ $(".sure").click(function(){
 			$("#fourthLevel").attr("disabled","disabled");
 			$("#cemail").attr("disabled","disabled");
 			$("#gemail").attr("disabled","disabled");
-			$.messager.alert('提示：','保存失败');
+			$.messager.alert('提示：',res.msg);
 	    }
     })
-	$(".addBg").hide();
-	$(".addJg").hide();	  
 })	
 $(".cancel").click(function(){
 	$(".addBg").hide();

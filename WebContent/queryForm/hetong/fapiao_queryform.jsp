@@ -3,7 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <script type="text/javascript">
 $(document).ready(function() {
-	$('#renshi_form').keydown(function(e){
+	$('#fahuoQuery_form').keydown(function(e){
 		if(e.keyCode==13){
 		   $('#fapiao_search').trigger('click');
 		}

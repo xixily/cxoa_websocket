@@ -4,7 +4,7 @@
 /*格式化样式*/
 /* *{margin:0;padding:0} */
 /* body{font:12px/1.5 MIcrosoft YaHei,Arial, Helvetica, sans-serif;color:#333} */
-/* table{width:100%; border-collapse:collapse;border:none;border-spacing:0} */
+.tabList>table{width:100%; border-collapse:collapse;border:none;border-spacing:0}
 /* a{color:#202020;text-decoration:none;} */
 /* img{border:none} */
 /* input{vertical-align:middle;outline:none}

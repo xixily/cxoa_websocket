@@ -2507,7 +2507,76 @@ shebaoSummary : {
 				}
 			});
 		}
-	}
+	},
+	yidongConfirm:{
+		query: function(data, src) {
+			$("#yidong_datagrid").datagrid({
+				queryParams : data
+			})
+		},
+		remove: function(){
+			var selected = $("#yidong_datagrid").datagrid('getSelected');
+			$.messager.confirm('删除确认','您确定要删除[' + selected.username + ']的异动确认记录？',function(r){
+				if(r){
+					$.post('employee/removeYidong.action',{id:selected.id},function(result){
+						$('#yidong_datagrid').datagrid('reload')
+						$.messager.alert('删除提示',result.msg);
+					})
+				}
+			});
+		},
+		onEndEdit : function(index,row,changes) {
+			var url = "";
+			changes.id = row.id;
+			for(i in changes){
+				if(changes[i] === '×'){
+					changes[i] = false;
+				}
+				if(changes[i] === '√'){
+					changes[i] = true;
+				}
+				if(i == "confirm" || i == "cuishou" || i == "ydStatus" || i == "shebao"){
+					url = "employee/edtiRenshiYd.action";
+				}
+				if(i == "contractUser" || i == "contractDue" || i == "contractNoback" || i == "contractRemarks"){
+					url = "employee/editHetongYd.action";
+				}
+				if(i == "baozhengjin" || i == "bzjRemar"){
+					url = "employee/editBzjYd.action";
+				}
+				if(i == "caiwuJk" || i == "fapiaoNoback" || i == "rent" || i == "caiwuRemarks"){
+					url = "employee/editCaiwuYd.action";
+				}
+			}
+			$.post(url, changes, function(result){
+				$('#yidong_datagrid').datagrid('reload')
+				$.messager.alert("更新提示",result.msg);
+			})
+		},
+		openAddYd: function(){
+			var selected = $('#employee_datas').datagrid('getSelected');
+			if(selected){
+				$('#create_yd_form').form('clear');
+				$('#create_yd_form').form('load',{
+					id: selected.id
+				});
+				$('#create_yd_dlg').dialog({
+					title:'添加[' + selected.username + "]的异动信息"
+				});
+				$('#create_yd_dlg').dialog('open');
+			}else{
+				$.messager.alert('提示：','请先选择职员！')
+			}
+		},
+		addYidong: function(data){
+			if(data){
+				$.post('employee/createYidong.action',data,function(result){
+					$.messager.alert("添加提示：", result.msg);
+				})
+			}
+			$('#create_yd_form').dialog('close');
+		}
+	},
 }
 var wagesDateAdd = undefined;
 var monthWagesAdd = undefined;
@@ -2517,3 +2586,4 @@ var shebaoCompanyEdit = undefined;
 var kaoqinEdit = undefined;
 var jiagouEdit = undefined;
 var jiagouAdd = undefined;
+var yidongEdit = undefined;
